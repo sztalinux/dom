@@ -52,7 +52,8 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
    **Bez podbicia wersji telefon i Cowork nie dostaną aktualizacji.**
 4. Dopisz wpis w `CHANGELOG.md` (wersja, data, lista HZ-n z jednym zdaniem każdy).
 5. `python3 tools/build.py` – musi przejść walidację, w tym kontrolę prywatności (wzorce + lista słów zakazanych
-   `.dom/zakazane-w-repo.txt` w folderze budowy; hook `.githooks/pre-commit` powtarza ją przy commicie).
+   `.dom/zakazane-w-repo.txt` w folderze budowy). Hooki w `.githooks/` powtarzają ją przy commicie (pliki, autor,
+   wiadomość) i przed pushem (każdy wysyłany commit). Zablokowany hook = popraw dane, nigdy `--no-verify`.
    Przejrzyj `git diff`: zero nazwisk, firm, adresów, działek, telefonów, e-maili, kwot i treści notatek.
    Jeśli wpis ze skrzynki zawiera takie dane – wdroż regułę w wersji ogólnej („Firma A”), a konkret zostaw w Notion.
 6. `git add -A && git commit -m "Harness <wersja>: HZ-… <skrót>" && git push`.

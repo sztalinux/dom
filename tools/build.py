@@ -15,6 +15,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 import zipfile
 from pathlib import Path
@@ -110,41 +111,108 @@ WZORCE = [
     (re.compile(r"\b(ul\.|ulica)\s+[A-ZĄĆĘŁŃÓŚŹŻ]", re.U), "adres"),
     (re.compile(r"PESEL\D{0,5}\d{11}", re.I), "PESEL"),
 ]
-DOZWOLONE = ["noreply@anthropic.com"]  # fragmenty dozwolone mimo dopasowania
+DOZWOLONE = [re.compile(r"noreply@anthropic\.com"),            # stopka Co-Authored-By
+             re.compile(r"[\w.+-]+@users\.noreply\.github\.com")]  # anonimowy adres GitHuba
+BINARNE = {".xlsx", ".xls", ".pdf", ".doc", ".docx", ".jpg", ".jpeg", ".png", ".heic", ".zip"}
+
+
+def zakazane_slowa() -> list:
+    """Lista słów zakazanych trzymana POZA repo (`.dom/zakazane-w-repo.txt` w folderze budowy;
+    sama lista w repo byłaby wyciekiem)."""
+    out = []
+    for lista in (ZAKAZANE, ROOT / "dane" / "prywatne.txt"):
+        if lista.exists():
+            out += [w.strip().lower() for w in lista.read_text(encoding="utf-8").splitlines()
+                    if w.strip() and not w.strip().startswith("#")]
+    if not out:
+        print(f"UWAGA: brak listy {ZAKAZANE} – sprawdzam tylko wzorce (telefon, e-mail, działka, kod, adres, PESEL)")
+    return out
+
+
+def sprawdz_tekst(etykieta: str, tekst: str, zakazane: list) -> list:
+    bledy = []
+    for rx in DOZWOLONE:
+        tekst = rx.sub("", tekst)
+    for nr, linia in enumerate(tekst.splitlines(), 1):
+        for rx, opis in WZORCE:
+            if rx.search(linia):
+                bledy.append(f"{etykieta}:{nr}: wygląda na {opis} – repo jest publiczne")
+        niskie = linia.lower()
+        if any(w in niskie for w in zakazane):
+            bledy.append(f"{etykieta}:{nr}: słowo z listy zakazanych – repo jest publiczne, usuń lub uogólnij")
+    return bledy
 
 
 def kontrola_prywatnosci() -> list:
-    """Dane osobowe/projektowe w plikach repo: wzorce + lista słów zakazanych trzymana POZA repo
-    (`.dom/zakazane-w-repo.txt` w folderze budowy; sama lista w repo byłaby wyciekiem)."""
-    bledy, zakazane = [], []
-    for lista in (ZAKAZANE, ROOT / "dane" / "prywatne.txt"):
-        if lista.exists():
-            zakazane += [w.strip().lower() for w in lista.read_text(encoding="utf-8").splitlines()
-                         if w.strip() and not w.strip().startswith("#")]
+    """Dane osobowe/projektowe w plikach roboczych repo."""
+    bledy, zakazane = [], zakazane_slowa()
     for f in sorted(ROOT.rglob("*")):
         rel = f.relative_to(ROOT)
         if not f.is_file() or set(rel.parts) & POMIJANE_KATALOGI or rel.as_posix().startswith(".claude/skills"):
             continue
-        if f.suffix.lower() in {".xlsx", ".xls", ".pdf", ".doc", ".docx", ".jpg", ".jpeg", ".png", ".heic", ".zip"}:
+        if f.suffix.lower() in BINARNE:
             bledy.append(f"{rel}: plik z danymi w repo – dokumenty trzymaj w folderze budowy")
             continue
         if f.suffix.lower() not in TEKSTOWE:
             continue
         try:
-            tekst = f.read_text(encoding="utf-8")
+            bledy += sprawdz_tekst(str(rel), f.read_text(encoding="utf-8"), zakazane)
         except UnicodeDecodeError:
             continue
-        for wzor in DOZWOLONE:
-            tekst = tekst.replace(wzor, "")
-        for nr, linia in enumerate(tekst.splitlines(), 1):
-            for rx, opis in WZORCE:
-                if rx.search(linia):
-                    bledy.append(f"{rel}:{nr}: wygląda na {opis} – repo jest publiczne")
-            niskie = linia.lower()
-            if any(w in niskie for w in zakazane):
-                bledy.append(f"{rel}:{nr}: słowo z listy zakazanych – repo jest publiczne, usuń lub uogólnij")
-    if not zakazane:
-        print(f"UWAGA: brak listy {ZAKAZANE} – sprawdzam tylko wzorce (telefon, e-mail, działka, kod, adres, PESEL)")
+    return bledy
+
+
+def git(*args) -> str:
+    return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, check=True).stdout
+
+
+def sprawdz_osobe(etykieta: str, imie: str, email: str, zakazane: list) -> list:
+    bledy = []
+    if not any(rx.fullmatch(email) for rx in DOZWOLONE):
+        bledy.append(f"{etykieta}: e-mail „{email}” trafi do publicznej historii – ustaw "
+                     "`git config user.email <id>+<login>@users.noreply.github.com`")
+    if any(w in imie.lower() for w in zakazane):
+        bledy.append(f"{etykieta}: imię/nazwisko „{imie}” jest na liście zakazanych – ustaw `git config user.name <login>`")
+    return bledy
+
+
+def kontrola_tozsamosci() -> list:
+    """Autor i commiter, którzy trafią do nowego commita (pre-commit)."""
+    zakazane, bledy = zakazane_slowa(), []
+    for rola, zmienna in (("autor", "GIT_AUTHOR_IDENT"), ("commiter", "GIT_COMMITTER_IDENT")):
+        m = re.match(r"(.*) <(.*)> \d+ [+-]\d+$", git("var", zmienna).strip())
+        if m:
+            bledy += sprawdz_osobe(rola, m.group(1), m.group(2), zakazane)
+    return bledy
+
+
+def kontrola_wiadomosci(plik: str) -> list:
+    """Treść wiadomości commita (commit-msg); linie komentarza git pomijane."""
+    tekst = "\n".join(l for l in Path(plik).read_text(encoding="utf-8").splitlines() if not l.startswith("#"))
+    return sprawdz_tekst("wiadomość commita", tekst, zakazane_slowa())
+
+
+def kontrola_commitow(zakres: list) -> list:
+    """Wszystko, co wychodzi na GitHub (pre-push): metadane, wiadomości i treść zmienionych plików
+    w każdym wysyłanym commicie – także tych zrobionych z pominięciem hooków (--no-verify)."""
+    zakazane, bledy = zakazane_slowa(), []
+    for sha in git("rev-list", *zakres).split():
+        k = sha[:7]
+        an, ae, cn, ce = git("show", "-s", "--format=%an%n%ae%n%cn%n%ce", sha).splitlines()[:4]
+        bledy += sprawdz_osobe(f"{k} autor", an, ae, zakazane) + sprawdz_osobe(f"{k} commiter", cn, ce, zakazane)
+        bledy += sprawdz_tekst(f"{k} wiadomość", git("show", "-s", "--format=%B", sha), zakazane)
+        for sciezka in git("diff-tree", "--no-commit-id", "-r", "--root", "--name-only",
+                           "--diff-filter=AMR", sha).splitlines():
+            if Path(sciezka).suffix.lower() in BINARNE:
+                bledy.append(f"{k} {sciezka}: plik z danymi w commicie")
+                continue
+            if Path(sciezka).suffix.lower() not in TEKSTOWE:
+                continue
+            try:
+                tresc = git("show", f"{sha}:{sciezka}")
+            except (subprocess.CalledProcessError, UnicodeDecodeError):
+                continue
+            bledy += sprawdz_tekst(f"{k} {sciezka}", tresc, zakazane)
     return bledy
 
 
@@ -194,7 +262,17 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tylko-walidacja", action="store_true")
     ap.add_argument("--kopiuj-dowiazania", action="store_true")
+    ap.add_argument("--tozsamosc", action="store_true", help="pre-commit: autor i commiter")
+    ap.add_argument("--wiadomosc", metavar="PLIK", help="commit-msg: treść wiadomości")
+    ap.add_argument("--commity", metavar="ZAKRES", help="pre-push: zakres dla git rev-list, np. 'a..b' lub 'sha --not --remotes'")
     a = ap.parse_args()
+    for flaga, kontrola in ((a.tozsamosc, kontrola_tozsamosci), (a.wiadomosc, lambda: kontrola_wiadomosci(a.wiadomosc)),
+                            (a.commity, lambda: kontrola_commitow(a.commity.split()))):
+        if flaga:
+            bledy = kontrola()
+            for b in bledy:
+                print("  ✗", b)
+            return 1 if bledy else 0
     if a.kopiuj_dowiazania:
         kopiuj_dowiazania()
     bledy = waliduj()

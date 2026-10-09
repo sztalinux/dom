@@ -1,13 +1,18 @@
 #!/bin/sh
-# Blokuje commit, jeśli w repo (publicznym!) są dane osobowe lub projektowe.
+# Blokuje commit, jeśli do publicznego repo trafiłyby dane osobowe lub projektowe.
 # Włączenie: git config core.hooksPath .githooks
 python3 tools/build.py --tylko-walidacja || {
   echo ""
-  echo "Commit zablokowany: popraw powyższe miejsca (dane trzymaj w Notion/Excelu)."
+  echo "Commit zablokowany: popraw powyższe miejsca (dane trzymaj w Notion/Excelu/folderze budowy)."
   exit 1
 }
-# Pliki z katalogu dane/ nigdy nie mogą trafić do commita
-if git diff --cached --name-only | grep -qE '^dane/|\.(xlsx|xls|pdf)$'; then
-  echo "Commit zablokowany: w commicie jest plik z dane/ albo arkusz/PDF."
+# Kto podpisze commit – imię i e-mail są publiczne w historii
+python3 tools/build.py --tozsamosc || {
+  echo "Commit zablokowany: tożsamość autora (wyżej) trafiłaby do publicznej historii."
+  exit 1
+}
+# Dokumenty i dane nigdy nie mogą trafić do commita
+if git diff --cached --name-only | grep -qiE '^dane/|\.(xlsx|xls|pdf|docx?|zip|jpe?g|png|heic)$'; then
+  echo "Commit zablokowany: w commicie jest plik z dane/ albo dokument (arkusz/PDF/zdjęcie)."
   exit 1
 fi

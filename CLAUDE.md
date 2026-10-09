@@ -8,7 +8,8 @@ a nie z pluginu zainstalowanego na koncie (ten jest tu celowo wyłączony w `.cl
 Zanim zajmiesz się czymkolwiek innym:
 
 0. Jednorazowo (jeśli `git config core.hooksPath` nie zwraca `.githooks`): `git config core.hooksPath .githooks`
-   – włącza blokadę commitów z danymi osobowymi.
+   – włącza hooki prywatności: `pre-commit` (pliki + autor), `commit-msg` (wiadomość), `pre-push` (każdy wysyłany commit).
+   Autor commitów w tym repo: `git config user.name sztalinux` i e-mail `…@users.noreply.github.com` (historia jest publiczna).
 1. `git pull` – żeby pracować na aktualnej wersji.
 2. Sprawdź skrzynkę **„Zmiany do harnessu”** w Notion (`collection://e217448a-60ec-4af6-8584-8f368315109c`),
    wpisy ze Statusem „Do wdrożenia”.

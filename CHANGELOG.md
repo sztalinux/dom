@@ -3,6 +3,15 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [0.4.3] – 2026-10-09
+
+Pełna kontrola prywatności przed GitHubem (prośba inwestora).
+- `.githooks/pre-commit`: oprócz plików sprawdza autora i commitera (imię z listy zakazanych, e-mail inny niż noreply).
+- `.githooks/commit-msg`: wiadomość commita bez danych osobowych/projektowych.
+- `.githooks/pre-push`: ostatnia kontrola każdego wysyłanego commita – metadane, wiadomość, treść zmienionych plików,
+  także commitów zrobionych z `--no-verify`. Logika w `tools/build.py` (`--tozsamosc`, `--wiadomosc`, `--commity`).
+- `rozwoj-harnessu`, `CLAUDE.md`, README: hooki i anonimowy autor commitów.
+
 ## [0.4.2] – 2026-10-09
 
 - `tools/dokumenty.py`: kontrola danych wrażliwych nie przepuszcza plików, gdy brak `pypdf`/`openpyxl`

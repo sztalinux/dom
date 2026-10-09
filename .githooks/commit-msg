@@ -1,0 +1,6 @@
+#!/bin/sh
+# Wiadomość commita też jest publiczna – bez nazwisk, adresów, kwot.
+python3 tools/build.py --wiadomosc "$1" || {
+  echo "Commit zablokowany: popraw wiadomość commita (wyżej)."
+  exit 1
+}
