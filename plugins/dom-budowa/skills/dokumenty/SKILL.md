@@ -31,9 +31,9 @@ Ty decydujesz, co to za dokument, czy trafia do paczki i co zastępuje. Bez Twoj
    geotechniczne, warunki i uzgodnienia, oferty i wyceny, umowy z wykonawcami, karty techniczne produktów,
    kosztorys Excel (najnowszy), ściąga projektu.
    Bez eksportu (`--bez-eksportu`, z opisem dlaczego): starsze wersje, pojedyncze arkusze zawarte w komplecie,
-   archiwa `.zip`, notatki pisane przez AI (to opinie, nie dokumenty), faktury, pliki niezwiązane z budową,
-   dokumenty z PESEL, numerem konta lub dowodu. Skrypt blokuje je sam, ale czyta tylko warstwę tekstową –
-   **skan** (zdjęcie, PDF bez tekstu) umowy czy pisma urzędowego oceń sam, zanim oznaczysz go do paczki.
+   archiwa `.zip`, notatki pisane przez AI (to opinie, nie dokumenty), faktury, pliki niezwiązane z budową.
+   Dane osobowe w dokumentach (nazwiska, adres, PESEL, numer konta) **nie wykluczają** z paczki – trafia ona tylko
+   do prywatnego projektu na claude.ai (decyzja inwestora). Skrypt raz informuje, co wykrył.
 4. Nowa wersja dokumentu z paczki: nadaj jej **tę samą** `--nazwa` co poprzedniej, a starą oznacz `--bez-eksportu`
    z opisem „starsza wersja – zastąpiona przez …”. Nazwy w paczce są stałe – dzięki temu inwestor podmienia plik,
    a nie dokłada drugiego.
@@ -50,12 +50,13 @@ Ty decydujesz, co to za dokument, czy trafia do paczki i co zastępuje. Bez Twoj
   (procedura `analiza-techniczna`) i aktualizację ściągi projektu (`Ściąga projektu.md` w folderze budowy)
   oraz Notion („Dane projektu (ściąga)”, Notatnik). Ściąga jest w paczce, więc telefon dostanie ją przy następnym wgraniu.
 - Oferta wykonawcy → procedura `oferta`.
-- Ostrzeżenia skryptu („dane wrażliwe”, „powyżej limitu”) przekaż inwestorowi jednym zdaniem z propozycją
+- Ostrzeżenia skryptu („powyżej limitu”, informacja o danych osobowych) przekaż inwestorowi jednym zdaniem z propozycją
   (np. zmniejszona kopia PDF obok oryginału, oznaczona do paczki zamiast niego).
 - Na koniec podaj listę „dodaj / podmień / usuń” z raportu. Po słowach „wgrałem”: `python3 tools/dokumenty.py wgrane`.
 
 ## Zasady
 
-- Paczka i folder budowy **nigdy** nie trafiają do repozytorium (repo jest publiczne).
+- Paczka i folder budowy **nigdy** nie trafiają do repozytorium (repo jest publiczne) – dane osobowe są dozwolone
+  w paczce, w repo nigdy.
 - Nie przepisuj treści dokumentów do harnessu – fakty idą do ściągi i Notion.
 - Gdy nie wiesz, czy plik jest nowszą wersją – zapytaj inwestora jednym pytaniem, zamiast zgadywać.

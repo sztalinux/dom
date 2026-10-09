@@ -3,6 +3,12 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [0.4.4] – 2026-10-09
+
+- `dokumenty` / `tools/dokumenty.py`: dane osobowe w paczce dla claude.ai są dozwolone (paczka trafia tylko do prywatnego
+  projektu – decyzja inwestora); kontrola PESEL/konta/kontaktów tylko informuje, raz na wersję pliku.
+  Repo publiczne – bez zmian: hooki blokują dane osobowe.
+
 ## [0.4.3] – 2026-10-09
 
 Pełna kontrola prywatności przed GitHubem (prośba inwestora).

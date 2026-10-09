@@ -147,7 +147,7 @@ def tekst(p: Path) -> str:
     """Tekst dokumentu do kontroli danych wrażliwych ('' gdy nie da się odczytać)."""
     suf = p.suffix.lower()
     if suf == ".pdf":
-        from pypdf import PdfReader  # noqa: PLC0415 – ImportError obsługuje dane_wrazliwe (blokada)
+        from pypdf import PdfReader  # noqa: PLC0415 – ImportError obsługuje dane_wrazliwe
     try:
         if suf == ".pdf":
             return "\n".join((s.extract_text() or "") for s in PdfReader(p).pages)
@@ -162,8 +162,8 @@ def tekst(p: Path) -> str:
 
 
 def dane_wrazliwe(p: Path) -> str:
-    """Powód blokady albo ''. Arkusze: kontakty; dokumenty: PESEL, numer konta.
-    Brak biblioteki do odczytu = blokada (nie przepuszczamy niesprawdzonego pliku)."""
+    """Jakie dane wrażliwe zawiera plik ('' gdy brak): arkusze – kontakty; dokumenty – PESEL, numer konta.
+    Informacja dla inwestora, nie blokada."""
     if p.suffix.lower() in (".xlsx", ".xlsm"):
         try:
             import openpyxl  # noqa: PLC0415
@@ -201,13 +201,14 @@ def zbuduj_paczke(ind: dict, dry: bool) -> list:
                          "zapisz mniejszą wersję (Podgląd → Eksportuj → Filtr kwarcowy: Zmniejsz rozmiar pliku) "
                          "obok oryginału i oznacz ją do paczki")
             continue
-        if w.get("kontrola_sha1") != w["sha1"]:  # kontrola tylko po zmianie pliku
+        # Paczka idzie tylko do prywatnego projektu na claude.ai – dane osobowe są tam dozwolone (decyzja inwestora).
+        # Kontrola tylko informuje, raz na wersję pliku; do repo dokumenty nie trafiają nigdy (hooki w .githooks/).
+        if w.get("kontrola_sha1") != w["sha1"]:
             w["wrazliwe"] = dane_wrazliwe(HUB / sciezka)
             if not w["wrazliwe"].startswith(NIESPRAWDZONE):  # niesprawdzonego nie zapamiętujemy
                 w["kontrola_sha1"] = w["sha1"]
-        if w["wrazliwe"]:
-            ostrz.append(f"{sciezka}: zawiera dane wrażliwe ({w['wrazliwe']}) – nie dodano do paczki")
-            continue
+                if w["wrazliwe"]:
+                    ostrz.append(f"{sciezka}: zawiera {w['wrazliwe']} – dodano do paczki (paczka jest prywatna)")
         plan[n] = sciezka
     if dry:
         return ostrz
