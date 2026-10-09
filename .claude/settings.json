@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git pull:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(python3 tools/build.py:*)",
+      "Bash(python3 tools/dokumenty.py:*)",
+      "Bash(git config core.hooksPath:*)",
+      "Bash(claude plugin validate:*)"
+    ]
+  },
+  "enabledPlugins": {
+    "dom-budowa@dom-budowa": false
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/tools/dokumenty.py\"",
+            "timeout": 120,
+            "statusMessage": "Sprawdzam dokumenty budowy…"
+          }
+        ]
+      }
+    ]
+  }
+}

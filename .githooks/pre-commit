@@ -1,0 +1,13 @@
+#!/bin/sh
+# Blokuje commit, jeśli w repo (publicznym!) są dane osobowe lub projektowe.
+# Włączenie: git config core.hooksPath .githooks
+python3 tools/build.py --tylko-walidacja || {
+  echo ""
+  echo "Commit zablokowany: popraw powyższe miejsca (dane trzymaj w Notion/Excelu)."
+  exit 1
+}
+# Pliki z katalogu dane/ nigdy nie mogą trafić do commita
+if git diff --cached --name-only | grep -qE '^dane/|\.(xlsx|xls|pdf)$'; then
+  echo "Commit zablokowany: w commicie jest plik z dane/ albo arkusz/PDF."
+  exit 1
+fi
