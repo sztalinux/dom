@@ -1,12 +1,14 @@
 ---
 name: przeglad-tygodnia
-description: Cotygodniowy przegląd budowy – co nowego doszło do wiedzy, otwarte sprzeczności czekające na decyzję, pytania do projektantów, zadania i terminy na najbliższe dni, informacje do ponownej weryfikacji. Używaj, gdy uruchamia go zaplanowane zadanie lub użytkownik pyta „co nowego”, „podsumuj tydzień”, „co czeka na mnie”, „przegląd”.
+description: Cotygodniowy przegląd budowy i porządki w Notion – co nowego doszło do wiedzy, otwarte sprzeczności czekające na decyzję, pytania do projektantów, zadania i terminy na najbliższe dni, informacje do ponownej weryfikacji. Używaj, gdy uruchamia go zaplanowane zadanie lub użytkownik pyta „co nowego”, „podsumuj tydzień”, „co czeka na mnie”, „przegląd”.
 ---
 
 # Przegląd tygodnia
 
 Cel: w 2 minuty inwestor wie, co doszło, co czeka na jego decyzję i co trzeba zrobić w tym tygodniu.
-Przegląd tylko czyta i podsumowuje – niczego nie rozstrzyga i nie zmienia statusów.
+Przegląd czyta i podsumowuje – niczego nie rozstrzyga. Statusy zmienia tylko w ramach porządków zatwierdzonych
+przez inwestora (sekcja „Porządki”). Kolejność i pierwszy plan wg zasady 10 w procedurze `budowa`:
+najpierw bieżący etap i pilne terminy, sprawy zamknięte i odległe tylko licznikiem.
 
 ## Dane (ID: `budowa/references/zrodla.md`, `wiedza/references/notion-wiedza.md`)
 
@@ -32,7 +34,19 @@ Pobierz w jak najmniejszej liczbie zapytań:
 **Do ponownej weryfikacji:** WI-x <cena/przepis z roku …>
 **Harness – czeka na wdrożenie:** HZ-x … (uruchom Claude Code)
 **Sugestia na ten tydzień:** 1–3 konkretne kroki.
+**Na później (n):** licznik spraw z dalszych etapów – bez listy.
+**Porządki (n):** propozycje z sekcji „Porządki” – do zatwierdzenia jednym „tak”.
 ```
+
+## Porządki (raz w tygodniu, max 10 pozycji)
+
+Znajdź i zaproponuj – nie wykonuj bez zgody; po „tak” wykonaj wsadowo (zasada 6):
+- duplikaty w Notatniku i TASKS (to samo zagadnienie dwa razy) → scal w starszy wpis;
+- wpisy bez Etapu lub Priorytetu → uzupełnij;
+- sprawy po terminie albo bez zmian od 30 dni → zamknąć, przesunąć termin czy zostawić (pytanie zbiorcze);
+- Informacje „Nowe” starsze niż 30 dni → „Przejrzane” albo „Nieaktualne”;
+- otwarte sprawy zakończonego etapu → przenieść do bieżącego albo zamknąć.
+Niczego nie usuwaj – porządek tylko statusami i scalaniem (z dopiskiem, co scalono).
 
 Zapis: dopisz przegląd na górze strony Notion „Przeglądy tygodniowe” (pod DOM) jako zwijany nagłówek
 z tytułem tygodnia – **jedno wywołanie**. W rozmowie podaj ten sam tekst.

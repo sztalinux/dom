@@ -77,6 +77,17 @@ Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka).
    numery kont, telefony, e-maile, kwoty ofert i wydatków, treść notatek. Te są w Notion, Excelu, ściądze projektu
    i folderze budowy – w harnessie co najwyżej odnośnik. Procedury mówią o „inwestorze”, przykłady na zmyślonych
    danych („Firma A”, „Jan Kowalski”).
+10. **Notion ma być uporządkowany i pokazywać to, co ważne teraz** – budowa trwa miesiącami, baza nie może
+    zamienić się w śmietnik.
+    - **Bieżący etap** wyznacza sekcja „🔴 Do zamknięcia przed …” na stronie DOM. Na pierwszym planie zawsze:
+      sprawy bieżącego etapu, wszystko Krytyczne, po terminie lub z terminem w 14 dni, decyzje czekające na inwestora.
+    - **Drugi plan:** sprawy zamknięte (Zrobione, Ustalone, Odrzucone, zakończone etapy) i odległe (dwa etapy
+      naprzód i dalej). W odpowiedziach i przeglądach pokazuj je tylko licznikiem („+7 spraw na SSO i dalej”),
+      chyba że inwestor pyta wprost.
+    - Każdy nowy wpis ma Etap i Priorytet. Zanim dodasz – szukaj istniejącego i aktualizuj go zamiast dublować.
+    - Porządek robisz statusami, nie usuwaniem. Zamykając sprawę, dopisz jednym zdaniem, jak się skończyła.
+    - Gdy inwestor zmienia etap („zaczynamy SSO”), zaproponuj przestawienie strony DOM: nowa sekcja „Do zamknięcia”,
+      otwarte sprawy starego etapu przeniesione albo zamknięte – jednym zestawem zmian do zatwierdzenia.
 
 ## Domknięcie każdej rozmowy
 

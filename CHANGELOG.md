@@ -3,6 +3,15 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [0.4.1] – 2026-10-09
+
+Porządek w Notion przy rosnącym projekcie (prośba inwestora z Claude Code).
+- `budowa`, zasada 10: na pierwszym planie bieżący etap (sekcja „Do zamknięcia przed …” na stronie DOM), sprawy
+  krytyczne, terminy 14 dni i decyzje; zamknięte i odległe – drugi plan (licznik). Każdy wpis z Etapem i Priorytetem,
+  aktualizacja zamiast dublowania, porządek statusami (bez usuwania), przestawienie strony DOM przy zmianie etapu.
+- `przeglad-tygodnia`: nowa sekcja „Porządki” (duplikaty, braki pól, sprawy bez ruchu, stara „Nowa” wiedza,
+  sprawy zakończonego etapu) – propozycje do zatwierdzenia jednym „tak”; wynik z „Na później” i „Porządki”.
+
 ## [0.4.0] – 2026-10-09
 
 Folder budowy jako centrum dokumentów + repo publiczne bez danych osobowych
