@@ -9,7 +9,10 @@ Zanim zajmiesz się czymkolwiek innym:
 
 0. Jednorazowo (jeśli `git config core.hooksPath` nie zwraca `.githooks`): `git config core.hooksPath .githooks`
    – włącza hooki prywatności: `pre-commit` (pliki + autor), `commit-msg` (wiadomość), `pre-push` (każdy wysyłany commit).
-   Autor commitów w tym repo: `git config user.name sztalinux` i e-mail `…@users.noreply.github.com` (historia jest publiczna).
+   Autor commitów: imię inwestora albo login – dozwolone; e-mail tylko `…@users.noreply.github.com` (historia jest publiczna).
+   W historii nigdy nie mogą się znaleźć dane innych osób (projektanci, wykonawcy, urzędy) – raz wypchniętych
+   nie da się skutecznie usunąć, więc kontrola musi zadziałać przed pushem. Nie przepisuj opublikowanej historii
+   (force push zostawia stare commity dostępne po SHA) – chyba że wyciekły dane; wtedy zatrzymaj się i zapytaj inwestora.
 1. `git pull` – żeby pracować na aktualnej wersji.
 2. Sprawdź skrzynkę **„Zmiany do harnessu”** w Notion (`collection://e217448a-60ec-4af6-8584-8f368315109c`),
    wpisy ze Statusem „Do wdrożenia”.

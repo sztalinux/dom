@@ -44,8 +44,8 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
 ## Start
 
 1. Repo sklonowane do `Dom/AI/dom` (folder budowy = dwa poziomy wyżej; inny – zmienna `DOM_HUB`),
-   `git config core.hooksPath .githooks`, `git config user.name <login>`,
-   `git config user.email <id>+<login>@users.noreply.github.com` (autor commitów jest publiczny). Lista słów zakazanych: `Dom/.dom/zakazane-w-repo.txt`
+   `git config core.hooksPath .githooks`, `git config user.email <id>+<login>@users.noreply.github.com`
+   (autor commitów jest publiczny; imię inwestora dozwolone, e-mail tylko noreply). Lista słów zakazanych: `Dom/.dom/zakazane-w-repo.txt`
    (nazwiska, firmy, miejscowość – po jednym w linii; plik poza repo).
 2. Python 3 + `pip3 install --user openpyxl pypdf` (kontrola danych wrażliwych w paczce).
 3. W `Dom/AI/dom` uruchom `claude`. `/mcp` – jeśli jest „claude.ai Notion”, gotowe.

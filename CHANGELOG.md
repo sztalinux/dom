@@ -3,6 +3,13 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [0.4.5] – 2026-10-10
+
+- Zasada prywatności doprecyzowana (decyzja inwestora): imię i nazwisko inwestora w historii gita dozwolone;
+  dane innych osób i e-maile – nigdy. Audyt całej historii publicznego repo (wszystkie obiekty): czysto.
+- `CLAUDE.md`: nie przepisuj opublikowanej historii (force push zostawia stare commity po SHA), chyba że wyciekły
+  dane – wtedy zatrzymaj się i zapytaj inwestora.
+
 ## [0.4.4] – 2026-10-09
 
 - `dokumenty` / `tools/dokumenty.py`: dane osobowe w paczce dla claude.ai są dozwolone (paczka trafia tylko do prywatnego
