@@ -43,6 +43,7 @@ KONTAKT = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+|(?<!\d)(\+48[\s-]?)?\d{3}[\s-]\d{
 WRAZLIWE_PESEL = re.compile(r"PESEL\D{0,5}\d{11}", re.I)
 WRAZLIWE_KONTO = re.compile(r"(?<!\d)(PL)?\d{2}(\s?\d{4}){6}(?!\d)")
 MAKS_LISTA = 15
+NIESPRAWDZONE = "nie sprawdzono – "
 LIMIT_MB = 30  # limit pojedynczego pliku na claude.ai
 logging.getLogger("pypdf").setLevel(logging.ERROR)
 warnings.filterwarnings("ignore")
@@ -145,9 +146,10 @@ def nazwa_w_paczce(sciezka: str, w: dict) -> str:
 def tekst(p: Path) -> str:
     """Tekst dokumentu do kontroli danych wrażliwych ('' gdy nie da się odczytać)."""
     suf = p.suffix.lower()
+    if suf == ".pdf":
+        from pypdf import PdfReader  # noqa: PLC0415 – ImportError obsługuje dane_wrazliwe (blokada)
     try:
         if suf == ".pdf":
-            from pypdf import PdfReader  # noqa: PLC0415
             return "\n".join((s.extract_text() or "") for s in PdfReader(p).pages)
         if suf in (".doc", ".docx", ".rtf", ".odt"):
             return subprocess.run(["textutil", "-convert", "txt", "-stdout", str(p)],
@@ -160,17 +162,21 @@ def tekst(p: Path) -> str:
 
 
 def dane_wrazliwe(p: Path) -> str:
-    """Powód blokady albo ''. Arkusze: kontakty; dokumenty: PESEL, numer konta."""
+    """Powód blokady albo ''. Arkusze: kontakty; dokumenty: PESEL, numer konta.
+    Brak biblioteki do odczytu = blokada (nie przepuszczamy niesprawdzonego pliku)."""
     if p.suffix.lower() in (".xlsx", ".xlsm"):
         try:
             import openpyxl  # noqa: PLC0415
         except ImportError:
-            return ""
+            return NIESPRAWDZONE + "brak openpyxl (pip3 install --user openpyxl)"
         wb = openpyxl.load_workbook(p, data_only=True, read_only=True)
         n = sum(1 for ws in wb.worksheets for r in ws.iter_rows(values_only=True)
                 for v in r if isinstance(v, str) and KONTAKT.search(v))
         return f"{n} komórek z e-mailem/telefonem" if n else ""
-    t = tekst(p)
+    try:
+        t = tekst(p)
+    except ImportError:
+        return NIESPRAWDZONE + "brak pypdf (pip3 install --user pypdf)"
     if WRAZLIWE_PESEL.search(t):
         return "PESEL"
     if WRAZLIWE_KONTO.search(t):
@@ -197,7 +203,8 @@ def zbuduj_paczke(ind: dict, dry: bool) -> list:
             continue
         if w.get("kontrola_sha1") != w["sha1"]:  # kontrola tylko po zmianie pliku
             w["wrazliwe"] = dane_wrazliwe(HUB / sciezka)
-            w["kontrola_sha1"] = w["sha1"]
+            if not w["wrazliwe"].startswith(NIESPRAWDZONE):  # niesprawdzonego nie zapamiętujemy
+                w["kontrola_sha1"] = w["sha1"]
         if w["wrazliwe"]:
             ostrz.append(f"{sciezka}: zawiera dane wrażliwe ({w['wrazliwe']}) – nie dodano do paczki")
             continue

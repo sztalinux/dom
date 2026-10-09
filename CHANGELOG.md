@@ -3,6 +3,11 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [0.4.2] – 2026-10-09
+
+- `tools/dokumenty.py`: kontrola danych wrażliwych nie przepuszcza plików, gdy brak `pypdf`/`openpyxl`
+  (blokada „nie sprawdzono”, bez zapamiętania wyniku); `dokumenty`: skany oceniaj samodzielnie (skrypt czyta tylko tekst).
+
 ## [0.4.1] – 2026-10-09
 
 Porządek w Notion przy rosnącym projekcie (prośba inwestora z Claude Code).

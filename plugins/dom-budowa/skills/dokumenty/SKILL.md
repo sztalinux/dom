@@ -32,7 +32,8 @@ Ty decydujesz, co to za dokument, czy trafia do paczki i co zastępuje. Bez Twoj
    kosztorys Excel (najnowszy), ściąga projektu.
    Bez eksportu (`--bez-eksportu`, z opisem dlaczego): starsze wersje, pojedyncze arkusze zawarte w komplecie,
    archiwa `.zip`, notatki pisane przez AI (to opinie, nie dokumenty), faktury, pliki niezwiązane z budową,
-   dokumenty z PESEL, numerem konta lub dowodu (skrypt i tak je zablokuje).
+   dokumenty z PESEL, numerem konta lub dowodu. Skrypt blokuje je sam, ale czyta tylko warstwę tekstową –
+   **skan** (zdjęcie, PDF bez tekstu) umowy czy pisma urzędowego oceń sam, zanim oznaczysz go do paczki.
 4. Nowa wersja dokumentu z paczki: nadaj jej **tę samą** `--nazwa` co poprzedniej, a starą oznacz `--bez-eksportu`
    z opisem „starsza wersja – zastąpiona przez …”. Nazwy w paczce są stałe – dzięki temu inwestor podmienia plik,
    a nie dokłada drugiego.
