@@ -50,6 +50,9 @@ Gdy etap jest w Excelu oznaczony „Sam” albo inwestor pyta „czy robić to s
 materiał brutto (23%) + sprzęt (zakup/wynajem) + czas (dni × realne tempo, `[szacunek]`) + ryzyko jakości i brak gwarancji
 vs oferta brutto (8% z materiałem) + termin. Podaj różnicę w zł i w dniach pracy; nie decyduj – to wybór inwestora
 (zapisz jako Decyzja w Notatniku). Instrukcja wykonania → `analiza-techniczna`, „Praca własna”.
+Kwoty podane tylko brutto przelicz na netto wg stawek (8 % usługa z materiałem, 23 % materiał własny). Wynik jako tabela:
+pozycja | ekipa | sam – netto, VAT, brutto, sprzęt, dni pracy – i na końcu różnica w zł oraz w dniach.
+Wartość własnego czasu w zł podaj tylko, jeśli inwestor ją podał.
 
 ## Po wyborze – zakres do umowy
 

@@ -18,6 +18,8 @@ Baza i pola: `references/notion-dziennik.md`. Zdjęcia: folder budowy `Zdjęcia/
    geotechnik; dostawa), co zrobiono (konkretnie: „ściany piwnicy – zbrojenie osi A–C”), pogoda (temperatura,
    opady – ważne przy betonie, murowaniu, zasypce), dostawy (co, ile, od kogo, dokument), problemy, ustalenia z ekipą.
    Brakujące dane → `?` i wymień w podsumowaniu (`budowa`, zasada 7). Nie dopowiadaj faktów.
+   Datę względną („dziś”, „wczoraj”) przelicz na datę. Zanim zapiszesz, sprawdź w bazie, czy wpis z tą datą już jest –
+   jeśli tak, zaktualizuj go.
 2. **Wyłuskaj to, co idzie dalej** (jedno wywołanie na bazę – `budowa`, zasada 6):
    | Co w relacji | Dokąd |
    |---|---|
@@ -29,7 +31,8 @@ Baza i pola: `references/notion-dziennik.md`. Zdjęcia: folder budowy `Zdjęcia/
    | wiedza od wykonawcy („mówi, że…”) | `wiedza` (Rozmowy i źródła), jeśli to coś więcej niż ustalenie na dziś |
 3. **Zdjęcia:** podaj docelowy folder i nazwy (`RRRR-MM-DD_<krok>_<co>.jpg`); we wpisie zapisz ścieżkę folderu i listę
    ujęć. Jeśli krok zakrywa coś na stałe (zbrojenie, izolacja, instalacje, trasy w zasypce) – sprawdź, czy są zdjęcia
-   z miarą; brak → przypomnij **zanim** będzie za późno (procedura `etap`, sekcja B).
+   z miarą; brak → przypomnij **zanim** będzie za późno (procedura `etap`, sekcja B). Pole „Przed zakryciem OK”
+   zaznacz tylko, gdy zdjęcia zakrywanych elementów są zrobione; inaczej zostaw odznaczone i wymień to w podsumowaniu.
 4. **Zapisz wpis** jednym wywołaniem (pola wg `references/notion-dziennik.md`), potwierdź linkiem i podaj,
    co przekazano do innych procedur.
 

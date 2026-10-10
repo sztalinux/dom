@@ -15,7 +15,7 @@ zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły �
 |---|---|
 | Kolejność prac i checklisty etapów | Notion → „Etapy budowy – przewodnik” (`budowa/references/zrodla.md`) |
 | Bramki stanu zero | Notion → „Stan zero – punkty bez odwrotu” (link na stronie DOM, sekcja „Do zamknięcia”) |
-| Otwarte sprawy etapu | Notatnik budowy: Etap = ten etap, Status Otwarte / Do omówienia (w tym Typ „Pamiętać” – to rzeczy do przypilnowania na budowie) |
+| Otwarte sprawy etapu | Notatnik budowy: Etap = ten etap, Status Otwarte / Do omówienia **oraz** wszystkie wpisy Typ „Pamiętać” niezależnie od Statusu (mają „Ustalone” – to rzeczy do przypilnowania na budowie, nie sprawy otwarte) |
 | Co i jak kontrolować | Baza wiedzy → Informacje: Rodzaj „Kontrola / odbiór”, „Błąd do uniknięcia”, „Kolejność prac” dla etapu; `references/odbiory.md` |
 | Parametry projektu | ściąga projektu (`budowa/references/projekt.md`) – grubości, klasy, rzędne, zbrojenie |
 | Kto robi (Sam / Ekipa), ilości | Excel: arkusze Etapy i Kosztorys (`koszty/references/arkusze.md`) |
@@ -41,11 +41,15 @@ zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły �
 1. Nazwij krok i co po nim jest nieodwracalne (jedno zdanie).
 2. Zbuduj checklistę: punkty bramki z Notion + sprawy Notatnika dla tego kroku + kontrole z `references/odbiory.md`
    + parametry z projektu. Każdy punkt ma mieć: **co**, **jak sprawdzić** (pomiar, dokument, zdjęcie), **kto**.
-3. Oznacz stan każdego punktu: ✅ zamknięte / ❌ otwarte / ⏭ świadomie pominięte (z powodem – zapisz jako Decyzja).
-4. Punkt ❌ o priorytecie Krytyczne → napisz wprost: **„Nie betonować / nie zasypywać, dopóki …”**.
-5. **Zdjęcia przed zakryciem:** lista ujęć z miarą (od stałych punktów), które mają powstać zanim krok zakryje
+3. Sprawdź też **poprzednie bramki** ze strony „Stan zero – punkty bez odwrotu”: niezamknięty punkt wcześniejszej bramki
+   to też blokada tego kroku.
+4. Oznacz stan każdego punktu: ✅ zamknięte / ❌ otwarte / ⏭ świadomie pominięte (z powodem – zapisz jako Decyzja).
+5. Punkt ❌ o priorytecie Krytyczne → napisz wprost: **„Nie betonować / nie zasypywać, dopóki …”**.
+6. **Pogoda na dzień kroku:** temperatura (dzień i noc) i opady – widełki z `references/odbiory.md` `[opinia]`;
+   jeśli prognoza nie pasuje, zaproponuj przesunięcie.
+7. **Zdjęcia przed zakryciem:** lista ujęć z miarą (od stałych punktów), które mają powstać zanim krok zakryje
    instalacje, zbrojenie, izolację – to jedyna dokumentacja na lata (procedura `dziennik`).
-6. Po bramce: odhacz punkty na stronie Notion, zamknij wpisy w Notatniku (status + dopisek), zapisz pominięcia jako Decyzje.
+8. Po bramce: odhacz punkty na stronie Notion, zamknij wpisy w Notatniku (status + dopisek), zapisz pominięcia jako Decyzje.
 
 ## C. Odbiór („ekipa skończyła płytę”, „odbieram hydroizolację”, „są usterki”)
 

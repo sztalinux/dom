@@ -40,6 +40,8 @@ wykonania, nie wykład. Format: **warunki wstępne** (co musi być gotowe, pogod
 **typowe błędy** (z Bazy wiedzy, Rodzaj „Błąd do uniknięcia”) → **BHP** (wykop, wysokość, prąd, pył, ciężary) →
 **kiedy przerwać i zapytać** (kierownik, konstruktor). Parametry z projektu cytuj z arkuszem; praktykę oznacz `[opinia]`.
 Czas pracy podaj w widełkach – wchodzi do porównania „sam czy ekipa” (`oferta`).
+Bez wymiarów (długość ścian, powierzchnie) podaj ilości na jednostkę (m, m²) i poproś o wymiary albo plik. Kontrole po
+każdym kroku bierz z `etap/references/odbiory.md`, a zdjęcia przed zakryciem – jak w `etap`, sekcja B.
 
 ## Umowy z wykonawcami
 

@@ -73,7 +73,9 @@ Zmień Status „Nowe” → „Przejrzane” dla wskazanych wierszy (albo wszys
 
 1. Znajdź temat(y) w Tematach (nazwa i „W skrócie”); pobierz ich Informacje (Status ≠ Nieaktualne) i wpisy Rejestru
    (Status ≠ Zastąpione) – jednym zapytaniem na bazę. Dodaj decyzje z Notatnika (Typ „Decyzja”) o tej branży.
-2. Odpowiedz w kolejności: **co obowiązuje u nas** (decyzje, rozstrzygnięcia SP, projekt – ze źródłem) → **stan wiedzy**
+   Gdy dwa tematy pokrywają ten sam zakres, nie łącz ich wiedzy po cichu – zgłoś to inwestorowi jako sprawę porządkową.
+2. Odpowiedz w kolejności: **co obowiązuje u nas** (decyzje z ich Statusem – „Do omówienia” to jeszcze nie ustalenie;
+   rozstrzygnięcia SP, projekt – ze źródłem) → **stan wiedzy**
    (punkty z WI-x, liczby z warunkami; przy rozbieżnych warunkach podaj oba) → **otwarte sprzeczności** (SP-n, od kiedy czekają)
    → **luki** (czego baza nie wie – zaproponuj, kogo zapytać lub jakie źródło przerobić).
 3. Nie dopisuj wiedzy z własnej pamięci do odpowiedzi jako „z bazy”. Własne uzupełnienie oznacz `[opinia]` i zaproponuj

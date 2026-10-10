@@ -3,6 +3,17 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.0.1] – 2026-10-10
+
+Poprawki po testach na sucho procedur 1.0.0.
+- `etap`: sprawy etapu obejmują też wpisy Typ „Pamiętać” niezależnie od Statusu („Ustalone”); bramka sprawdza poprzednie bramki
+  i pogodę na dzień kroku.
+- `dziennik`: data względna → data, sprawdzenie duplikatu wpisu z tego dnia, zasada pola „Przed zakryciem OK”.
+- `zakupy`: bez pliku Excela – prośba o plik i lista tego, co zostanie policzone.
+- `oferta`: „Sam czy ekipa” – przeliczenie brutto → netto i format wyniku (tabela ekipa vs sam, różnica w zł i dniach).
+- `wiedza`: tryb odczytu pokazuje Status decyzji i zgłasza nakładające się tematy.
+- `analiza-techniczna`: praca własna – ilości na jednostkę przy braku wymiarów, kontrole z `etap/references/odbiory.md`.
+
 ## [1.0.0] – 2026-10-10
 
 Pierwsza stabilna wersja – baza do dalszego rozwoju. Harness obejmuje teraz także fazę wykonywania budowy (budowa mieszana: część prac sam, część ekipy).
