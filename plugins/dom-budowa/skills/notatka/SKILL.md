@@ -25,8 +25,10 @@ branżą i adresatem, tak żeby dało się ją filtrować i zamknąć.
    | oferta / wycena | → procedura `oferta` | |
    | rozmowa z projektantem/wykonawcą, film, artykuł – „kto co powiedział” | → procedura `wiedza` (Rozmowy i źródła, Informacje, Tematy) | stąd tylko działania do Notatnika |
 
-2. **Sprawdź duplikaty:** wyszukaj w Notatniku 2–3 słowa kluczowe. Jeśli wpis istnieje –
-   zaktualizuj go (status, dopisek z datą) zamiast tworzyć nowy.
+2. **Sprawdź duplikaty:** wyszukaj w Notatniku 2–3 słowa kluczowe. Jeśli wpis istnieje – nie twórz drugiego
+   i nie linkuj wpisów do siebie: zostaje jedno źródło prawdy. Zaktualizuj istniejący (status, dopisek z datą);
+   nowy szczegół dopisz do jego Notatki, a gdy informacja pochodzi z innego źródła niż to w polu Źródło –
+   dodaj drugie źródło do Źródła (np. „…; pulpit DOM, 10.2026”).
 3. **Pokaż plan zapisu** jako tabelę (Nazwa | Typ | Etap | Branża | Do kogo | Priorytet | Status).
    Przy 1–3 oczywistych wpisach zapisz od razu; przy więcej lub przy niepewnej klasyfikacji – poproś o „ok”.
 4. **Zapisz jednym wywołaniem na bazę** (wiele stron w jednej operacji; zasada 6 z `budowa`), wartości pól dokładnie

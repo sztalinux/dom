@@ -56,7 +56,7 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
    wiadomość) i przed pushem (każdy wysyłany commit). Zablokowany hook = popraw dane, nigdy `--no-verify`.
    Przejrzyj `git diff`: zero nazwisk, firm, adresów, działek, telefonów, e-maili, kwot i treści notatek.
    Jeśli wpis ze skrzynki zawiera takie dane – wdroż regułę w wersji ogólnej („Firma A”), a konkret zostaw w Notion.
-6. `git add -A && git commit -m "Harness <wersja>: HZ-… <skrót>" && git push`.
+6. `git add <zmienione pliki> && git commit -m "Harness <wersja>: HZ-… <skrót>" && git push` – tylko pliki z tej sesji; obce zmiany zgłoś.
 7. W Notion oznacz wdrożone wpisy jednym przebiegiem: Status „Wdrożone”, Wdrożono w wersji, Data wdrożenia.
    Przy nowej procedurze lub zmianie zasad zaktualizuj też stronę „Asystent AI – harness budowy” (ID w `budowa/references/zrodla.md`):
    linia „Wersja” w ramce i tabela procedur – jednym wywołaniem; nowa procedura = nowa opcja w polu „Procedura” skrzynki.

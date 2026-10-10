@@ -1,6 +1,6 @@
 ---
 name: wiedza
-description: Zapis wiedzy do Notion (Baza wiedzy – Tematy, Informacje, Rozmowy i źródła) z transkrypcji filmów YouTube, podcastów, artykułów ekspertów oraz z rozmów z konstruktorem, architektem, wykonawcami; wykrywanie sprzeczności (Rejestr sprzeczności) i ich rozstrzyganie po decyzji inwestora. Używaj, gdy użytkownik wkleja transkrypcję, napisy, link do filmu, notatki z filmu/artykułu, mówi „przerób ten film”, „wrzuć do wiedzy”, „dzwoniłem do konstruktora, powiedział…”, albo odpowiada na sprzeczność („SP-3: …”).
+description: Zapis wiedzy do Notion (Baza wiedzy – Tematy, Informacje, Rozmowy i źródła) z transkrypcji filmów YouTube, podcastów, artykułów ekspertów oraz z rozmów z konstruktorem, architektem, wykonawcami; wykrywanie sprzeczności (Rejestr sprzeczności) i ich rozstrzyganie po decyzji inwestora. Używaj, gdy użytkownik wkleja transkrypcję, napisy, link do filmu, notatki z filmu/artykułu, mówi „przerób ten film”, „wrzuć do wiedzy”, „dzwoniłem do konstruktora, powiedział…”, albo odpowiada na sprzeczność („SP-3: …”), albo pyta „co wiemy o…”, „co mówi baza wiedzy o…”, „jakie mamy sprzeczności w temacie…”.
 ---
 
 # Wiedza – filmy, artykuły, rozmowy
@@ -68,3 +68,14 @@ Tylko po wyraźnej odpowiedzi; niejasna → dopytaj, nie zgaduj. Kroki: `referen
 ## D. „Przejrzałem nowe”
 
 Zmień Status „Nowe” → „Przejrzane” dla wskazanych wierszy (albo wszystkich z danego źródła/tematu).
+
+## E. Pytanie do bazy („co wiemy o drenażu?”)
+
+1. Znajdź temat(y) w Tematach (nazwa i „W skrócie”); pobierz ich Informacje (Status ≠ Nieaktualne) i wpisy Rejestru
+   (Status ≠ Zastąpione) – jednym zapytaniem na bazę. Dodaj decyzje z Notatnika (Typ „Decyzja”) o tej branży.
+2. Odpowiedz w kolejności: **co obowiązuje u nas** (decyzje, rozstrzygnięcia SP, projekt – ze źródłem) → **stan wiedzy**
+   (punkty z WI-x, liczby z warunkami; przy rozbieżnych warunkach podaj oba) → **otwarte sprzeczności** (SP-n, od kiedy czekają)
+   → **luki** (czego baza nie wie – zaproponuj, kogo zapytać lub jakie źródło przerobić).
+3. Nie dopisuj wiedzy z własnej pamięci do odpowiedzi jako „z bazy”. Własne uzupełnienie oznacz `[opinia]` i zaproponuj
+   zapis dopiero po potwierdzeniu źródłem.
+4. Nic nie zapisuj (tryb tylko do odczytu), chyba że inwestor poprosi o zanotowanie luki jako „Doczytać” (`notatka`).

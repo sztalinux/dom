@@ -1,9 +1,8 @@
-# Dziennik budowy w Notion – proponowany schemat (do utworzenia pod stroną DOM)
+# Dziennik budowy w Notion – schemat
 
-Stan: **propozycja** – baza jeszcze nie istnieje. Po utworzeniu wpisz jej `collection://` tutaj
-i w `budowa/references/zrodla.md`, a status tego pliku zmień na „obowiązuje”.
+Stan: obowiązuje od 1.0.0. Baza pod stroną DOM.
 
-## Baza „Dziennik budowy” – `collection://<do uzupełnienia>`
+## Baza „Dziennik budowy” – `collection://cc113d57-3eaa-4f52-80f6-e4b39a4b4c92`
 
 | Pole | Typ | Wartości / uwagi |
 |---|---|---|
@@ -28,9 +27,10 @@ i w `budowa/references/zrodla.md`, a status tego pliku zmień na „obowiązuje�
 
 ## Widoki na stronie DOM
 
-- „📓 Ostatnie 14 dni” (sortowanie po Dacie malejąco) – do przeglądu tygodnia.
-- „⚠️ Otwarte problemy” (Problemy niepuste, powiązane zadania nie DONE).
-- „🧮 Godziny własne” – suma per Etap (do porównania „sam vs ekipa”).
+- „📓 Ostatnie 7 dni” (filtr Data od tygodnia wstecz, sortowanie malejąco) – do przeglądu tygodnia.
+- „⚠️ Otwarte problemy” (Problemy / usterki niepuste, sortowanie po Dacie malejąco).
+- „🧮 Godziny własne” (suma per Etap, do porównania „sam vs ekipa”) – nie utworzony: narzędzie nie obsługuje
+  agregacji w widoku; sumę podaj w odpowiedzi z zapytania (procedura `dziennik`, sekcja C).
 
 ## Plan zapisu (minimum zatwierdzeń)
 

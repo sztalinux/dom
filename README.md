@@ -14,6 +14,7 @@ dokumenty w folderze budowy na komputerze.
 Dom/                              ← folder budowy (centrum dokumentów, poza gitem)
   _Przychodzące/                  ← tu wrzucasz nowe pliki od projektantów i wykonawców
   _Do claude.ai/                  ← paczka aktualnych dokumentów (generowana) → wiedza projektu „Dom” na claude.ai
+  Zdjęcia/                        ← zdjęcia z budowy (RRRR-MM-DD_<krok>/), poza indeksem i paczką
   Ściąga projektu.md              ← najważniejsze liczby i decyzje (trafia do paczki)
   .dom/                           ← indeks dokumentów, stan wgrania, lista słów zakazanych w repo
   … foldery tematyczne (projekt, konstrukcja, instalacje, wyceny…)
@@ -41,6 +42,23 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
                                   ◄── dokumenty: wgrywasz paczkę do projektu „Dom” (ręcznie)
 ```
 
+## Procedury
+
+| Procedura | Kiedy | Co robi |
+|---|---|---|
+| `budowa` | każda rozmowa o budowie | kontekst, zasady, mapa procedur, skrzynka zmian |
+| `oferta` | oferta / wycena / rozmowa z ekipą | rozbicie, zakres 01–13, zgodność z projektem, porównanie, pytania; „sam czy ekipa”; zakres do umowy |
+| `koszty` | Excel, wydatek, faktura, „ile wydaliśmy” | plan / umówione / wydane, wiersze do wklejenia, płatności i transze |
+| `notatka` | „zapisz”, „ustaliliśmy”, „decyzja” | Notatnik budowy, TASKS, „Do zamknięcia” |
+| `analiza-techniczna` | projekt, rysunek, umowa, pytanie techniczne, „jak to zrobić samemu” | [projekt]/[szacunek]/[opinia], pytania do projektanta, instrukcja pracy własnej |
+| `wiedza` | transkrypcja, artykuł, „dzwoniłem do…”, „SP-n: …”, „co wiemy o…” | Baza wiedzy, sprzeczności (ADR), odczyt stanu wiedzy |
+| `dokumenty` | nowe pliki, „wgrałem”, „gdzie jest…” | folder budowy, indeks, paczka dla claude.ai |
+| `etap` | „zaczynamy etap”, „jutro betonowanie”, odbiór, usterki | plan etapu, bramki „bez odwrotu”, protokół odbioru |
+| `dziennik` | „dziś na budowie…”, zdjęcia, godziny własne, roboty dodatkowe | Dziennik budowy w Notion, przekazanie kosztów/zadań |
+| `zakupy` | „co kupić na…”, „kiedy zamawiać”, oferta hurtowni, dostawa | lista z kosztorysu, wyprzedzenia, porównanie dostawców |
+| `przeglad-tygodnia` | poniedziałek / „co nowego” | decyzje, nowa wiedza, terminy, budowa, zamówienia, porządki |
+| `rozwoj-harnessu` | „zapamiętaj na przyszłość”, nowa procedura | skrzynka w Notion → wdrożenie do repo |
+
 ## Start
 
 1. Repo sklonowane do `Dom/AI/dom` (folder budowy = dwa poziomy wyżej; inny – zmienna `DOM_HUB`),
@@ -60,4 +78,6 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
 - Nowy plik od projektanta/wykonawcy → wrzuć do `Dom/_Przychodzące/` i uruchom `claude` w `Dom/AI/dom`.
   Asystent go posortuje i powie, co podmienić w projekcie „Dom” na claude.ai. Po wgraniu napisz „wgrałem”.
 - Poprawki „na przyszłość” z telefonu trafiają do skrzynki w Notion; Claude Code wdroży je przy starcie.
+- Dzień na budowie → powiedz asystentowi, co się działo (telefon wystarczy) – trafi do Dziennika budowy; zdjęcia wrzuć do `Dom/Zdjęcia/RRRR-MM-DD_<krok>/`.
+- Przed krokiem „bez odwrotu” (beton, zasypka, tynki) zapytaj „co sprawdzić przed …” – dostaniesz bramkę z listą zdjęć do zrobienia.
 - Każda zmiana w repo = podbita wersja w `plugins/dom-budowa/.claude-plugin/plugin.json` (inaczej claude.ai jej nie pobierze).

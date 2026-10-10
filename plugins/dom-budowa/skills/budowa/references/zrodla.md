@@ -17,7 +17,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 | Wiedza: tematy, informacje, rozmowy i filmy | Notion → DOM → Baza wiedzy (Tematy, Informacje, Rozmowy i źródła) | agent (`wiedza`), inwestor przegląda |
 | Sprzeczności i dylematy (ADR) | Notion → Baza wiedzy → Rejestr sprzeczności | agent zgłasza, **decyduje inwestor** |
 | Przeglądy tygodniowe | Notion → DOM → Przeglądy tygodniowe | agent (`przeglad-tygodnia`) |
-| Dziennik inwestora (dni na budowie, dostawy, usterki, godziny własne) | Notion → DOM → Dziennik budowy (**do utworzenia**, schemat: `dziennik/references/notion-dziennik.md`); zdjęcia w folderze budowy `Zdjęcia/` | inwestor + agent (`dziennik`) |
+| Dziennik inwestora (dni na budowie, dostawy, usterki, godziny własne) | Notion → DOM → Dziennik budowy (schemat: `dziennik/references/notion-dziennik.md`); zdjęcia w folderze budowy `Zdjęcia/` | inwestor + agent (`dziennik`) |
 | Bramki i odbiory etapów | Notion → „Etapy budowy – przewodnik”, „Stan zero – punkty bez odwrotu”; protokoły w folderze budowy | agent przygotowuje (`etap`), odbiera inwestor z kierownikiem |
 | Analizy dokumentów | Notion (strona pod DOM) lub dokument w projekcie Claude | agent (`analiza-techniczna`) |
 | Dokumenty: projekty, opinie, oferty, umowy (PDF, Excel) | folder budowy na komputerze inwestora; aktualne wersje w paczce `_Do claude.ai/` → wiedza projektu „Dom” na claude.ai (spis: `00_SPIS.md`) | inwestor wrzuca, agent klasyfikuje (`dokumenty`); oryginały tylko odczyt |
@@ -38,6 +38,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 | Przeglądy tygodniowe (strona) | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` |
 | Asystent AI – harness budowy (przewodnik) | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` |
 | Zmiany do harnessu (data source) | `collection://e217448a-60ec-4af6-8584-8f368315109c` |
+| Dziennik budowy (data source) | `collection://cc113d57-3eaa-4f52-80f6-e4b39a4b4c92` |
 
 Schematy baz budowy (pola i dozwolone wartości): `skills/notatka/references/notion-schematy.md`.
 Jeśli ID przestanie działać, wyszukaj stronę po nazwie i zaktualizuj tabelę.

@@ -13,6 +13,9 @@ Zanim zajmiesz się czymkolwiek innym:
    W historii nigdy nie mogą się znaleźć dane innych osób (projektanci, wykonawcy, urzędy) – raz wypchniętych
    nie da się skutecznie usunąć, więc kontrola musi zadziałać przed pushem. Nie przepisuj opublikowanej historii
    (force push zostawia stare commity dostępne po SHA) – chyba że wyciekły dane; wtedy zatrzymaj się i zapytaj inwestora.
+0a. **Jedna sesja Claude Code w tym repo naraz.** Przed startem: `ps -axo pid,command | grep "[c]laude"` –
+    jeśli działa inna sesja w tym katalogu, zapytaj inwestora, zanim cokolwiek zmienisz. Commituj tylko pliki,
+    które sam zmieniłeś w tej sesji (`git add <pliki>`, nie `git add -A`); obce zmiany w `git status` zostaw i zgłoś.
 1. `git pull` – żeby pracować na aktualnej wersji.
 2. Sprawdź skrzynkę **„Zmiany do harnessu”** w Notion (`collection://e217448a-60ec-4af6-8584-8f368315109c`),
    wpisy ze Statusem „Do wdrożenia”.

@@ -3,14 +3,14 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
-## [0.5.0] – 2026-10-10 (PROPOZYCJA – gałąź przeglad-2026-10, do zatwierdzenia przez inwestora)
+## [1.0.0] – 2026-10-10
 
-Przegląd harnessu pod kątem budowy systemem mieszanym (część prac sam, część ekipy).
+Pierwsza stabilna wersja – baza do dalszego rozwoju. Harness obejmuje teraz także fazę wykonywania budowy (budowa mieszana: część prac sam, część ekipy).
 - Nowa procedura `etap`: plan etapu (zależności sam/ekipa, blokady, ludzie, pogoda), bramki „bez odwrotu” z listą
   zdjęć przed zakryciem, odbiór z protokołem i płatnością dopiero po odbiorze; `references/odbiory.md` (co sprawdzać
   krok po kroku), `references/formalnosci.md` (urzędy, dziennik, kierownik, kto musi być obecny).
 - Nowa procedura `dziennik`: wpis z dnia na budowie (kto, co, pogoda, dostawy, godziny własne, problemy, zdjęcia),
-  roboty dodatkowe tylko na piśmie przed wykonaniem; proponowany schemat bazy Notion „Dziennik budowy” (do utworzenia).
+  roboty dodatkowe tylko na piśmie przed wykonaniem; schemat bazy Notion „Dziennik budowy” (`references/notion-dziennik.md`).
 - Nowa procedura `zakupy`: lista zakupów na etap z kosztorysu + drobnica + zapas, zapytania i porównanie ofert hurtowni,
   terminy zamówień; `references/wyprzedzenia.md` (wyprzedzenia, czasy technologiczne, okna pogodowe).
 - `oferta`: sekcje „Sam czy ekipa” i „Po wyborze – zakres do umowy”; `references/umowa.md` – lista kontrolna umowy z wykonawcą.
@@ -21,6 +21,11 @@ Przegląd harnessu pod kątem budowy systemem mieszanym (część prac sam, czę
 - `przeglad-tygodnia`: poprawiona numeracja źródeł; sekcje „Budowa w tym tygodniu” i „Zamówić / zapłacić do 14 dni”.
 - `rozwoj-harnessu`: po wdrożeniu aktualizacja strony przewodnika w Notion (wersja, tabela procedur).
 - `dokumenty` / `tools/dokumenty.py`: foldery `Zdjęcia*` pomijane (zdjęcia nie trafiają do indeksu ani paczki).
+- `wiedza`: tryb odczytu „co wiemy o…” (stan wiedzy, co obowiązuje u nas, otwarte sprzeczności, luki).
+- `notatka`: przy duplikacie nie powstaje drugi wpis ani link – zostaje jedno źródło prawdy; nowe źródło dopisuje się do pola Źródło.
+- `CLAUDE.md`, `rozwoj-harnessu`: jedna sesja Claude Code w repo naraz; commit tylko własnych plików.
+- Notion: baza „Dziennik budowy”, opcje `etap`/`dziennik`/`zakupy` w skrzynce, pulpit DOM i strona przewodnika zaktualizowane.
+- README: tabela procedur.
 
 ## [0.4.5] – 2026-10-10
 
@@ -117,6 +122,5 @@ Pierwszy szkielet harnessu.
 
 ## Do zrobienia
 
-- [ ] Utworzyć bazę „Dziennik budowy” w Notion wg `dziennik/references/notion-dziennik.md` i wpisać jej ID.
-- [ ] Dodać opcje `etap`, `dziennik`, `zakupy` w polu „Procedura” skrzynki „Zmiany do harnessu”.
 - [ ] Po ~10 filmach: przegląd jakości ekstrakcji (czy nic ważnego nie ginie, czy nie ma duplikatów) i korekta procedury `wiedza`.
+- [ ] Pierwszy przegląd tygodnia uruchomiony z claude.ai (zadanie zaplanowane) – sprawdzić format i czas.
