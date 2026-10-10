@@ -3,6 +3,12 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.0.3] – 2026-10-10
+
+- `rozwoj-harnessu/references/claude-ai-projekt.md`: sekcja „Wiedza projektu a kontekst” tylko opisuje działanie
+  (kontekst / RAG, wskaźnik pojemności) – o zawartości paczki decyduje wyłącznie `dokumenty` (usunięta sprzeczna reguła z 1.0.2).
+  Tekst instrukcji projektu bez zmian.
+
 ## [1.0.2] – 2026-10-10
 
 claude.ai na co dzień: instrukcje projektu zamiast `START.md`, ręczna aktualizacja pluginu.

@@ -19,9 +19,9 @@ usuń plugin, `python3 tools/build.py`, Add → Upload plugin → `dist/dom-budo
 
 ## Wiedza projektu a kontekst
 
-Dopóki pliki mieszczą się w kontekście, claude.ai dołącza je w całości do każdej rozmowy w projekcie (zużywa limit
-konta); powyżej progu sam przełącza się na wyszukiwanie fragmentów (RAG). Dlatego paczka zawiera tylko dokumenty
-potrzebne na bieżąco, w jednej wersji – rzadko używane dokumenty inwestor załącza do konkretnej rozmowy.
+Dopóki pliki mieszczą się w kontekście, claude.ai dołącza je w całości do każdej rozmowy w projekcie (szybciej zużywa
+limit konta); powyżej progu sam przełącza się na wyszukiwanie fragmentów (RAG). Zajętość widać we wskaźniku pojemności
+wiedzy projektu. Co trafia do paczki, decyduje procedura `dokumenty` (sekcja A) – zmiana tej zasady to zmiana tam.
 
 ## Tekst instrukcji
 
