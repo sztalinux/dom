@@ -1,0 +1,77 @@
+---
+name: etap
+description: Plan, bramki „bez odwrotu” i odbiór etapu budowy (stan zero, SSO, instalacje, wykończenie) – także przy pracach własnych. Używaj, gdy użytkownik mówi „zaczynamy etap”, „ekipa wchodzi w poniedziałek”, „jutro betonowanie / zasypka / tynki”, „co muszę mieć gotowe przed…”, „co sprawdzić zanim…”, „ekipa skończyła, co sprawdzić”, „odbiór”, „usterki”, „zmieniamy etap na SSO”, albo gdy inna procedura (dziennik, oferta, zakupy) sygnalizuje początek lub koniec etapu.
+---
+
+# Etap budowy – plan, bramki, odbiór
+
+Cel: żaden krok „bez odwrotu” (betonowanie, zasypka, tynki, wylewki) nie zaczyna się, zanim nie zostaną zamknięte
+decyzje, które potem kosztują kucie albo rozkopywanie; a każdy etap kończy się odbiorem z protokołem,
+zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły – odbiera inwestor z kierownikiem budowy.
+
+## Źródła (czytaj przed każdym trybem)
+
+| Co | Gdzie |
+|---|---|
+| Kolejność prac i checklisty etapów | Notion → „Etapy budowy – przewodnik” (`budowa/references/zrodla.md`) |
+| Bramki stanu zero | Notion → „Stan zero – punkty bez odwrotu” (link na stronie DOM, sekcja „Do zamknięcia”) |
+| Otwarte sprawy etapu | Notatnik budowy: Etap = ten etap, Status Otwarte / Do omówienia (w tym Typ „Pamiętać” – to rzeczy do przypilnowania na budowie) |
+| Co i jak kontrolować | Baza wiedzy → Informacje: Rodzaj „Kontrola / odbiór”, „Błąd do uniknięcia”, „Kolejność prac” dla etapu; `references/odbiory.md` |
+| Parametry projektu | ściąga projektu (`budowa/references/projekt.md`) – grubości, klasy, rzędne, zbrojenie |
+| Kto robi (Sam / Ekipa), ilości | Excel: arkusze Etapy i Kosztorys (`koszty/references/arkusze.md`) |
+| Zakres umowy z ekipą | Oferty „Wybrana” w Excelu + umowa w folderze budowy (`dokumenty`) |
+| Formalności i obecność osób | `references/formalnosci.md` |
+
+## A. Plan etapu („zaczynamy stan zero / SSO”, „ekipa wchodzi za 2 tygodnie”)
+
+1. Zbierz źródła z tabeli. Ustal, które kroki robi ekipa, a które inwestor sam (Excel → Etapy).
+2. Wypisz **kolejność kroków z zależnościami**: co musi być skończone (przez kogo) zanim wejdzie następny –
+   szczególnie styk praca własna → ekipa (np. „izolacja pozioma i pierwsza warstwa – sam, przed wejściem murarzy”).
+3. **Blokady:** otwarte decyzje i pytania z Notatnika, które muszą być zamknięte przed startem – z adresatem i terminem.
+4. **Ludzie i terminy:** kierownik budowy (odbiory zbrojenia, wpisy), geotechnik, geodeta, elektryk/hydraulik
+   (przepusty, uziom), dostawy betonu/stali – co trzeba umówić i z jakim wyprzedzeniem.
+5. **Materiały i sprzęt** do zamówienia na ten etap → procedura `zakupy` (lista z Kosztorysu + wyprzedzenia).
+6. **Formalności** (`references/formalnosci.md`) i **pogoda**: ograniczenia temperatury/opadów dla betonu, murowania,
+   zasypki, tynków – podaj widełki [opinia] i co zrobić, jeśli prognoza nie pasuje.
+7. Zapis: zadania z terminem → TASKS (procedura `notatka`); przy zmianie etapu zaproponuj przestawienie strony DOM
+   (`budowa`, zasada 10) jednym zestawem zmian.
+
+## B. Bramka („jutro betonowanie płyty”, „w czwartek zasypka”, „co sprawdzić zanim…”)
+
+1. Nazwij krok i co po nim jest nieodwracalne (jedno zdanie).
+2. Zbuduj checklistę: punkty bramki z Notion + sprawy Notatnika dla tego kroku + kontrole z `references/odbiory.md`
+   + parametry z projektu. Każdy punkt ma mieć: **co**, **jak sprawdzić** (pomiar, dokument, zdjęcie), **kto**.
+3. Oznacz stan każdego punktu: ✅ zamknięte / ❌ otwarte / ⏭ świadomie pominięte (z powodem – zapisz jako Decyzja).
+4. Punkt ❌ o priorytecie Krytyczne → napisz wprost: **„Nie betonować / nie zasypywać, dopóki …”**.
+5. **Zdjęcia przed zakryciem:** lista ujęć z miarą (od stałych punktów), które mają powstać zanim krok zakryje
+   instalacje, zbrojenie, izolację – to jedyna dokumentacja na lata (procedura `dziennik`).
+6. Po bramce: odhacz punkty na stronie Notion, zamknij wpisy w Notatniku (status + dopisek), zapisz pominięcia jako Decyzje.
+
+## C. Odbiór („ekipa skończyła płytę”, „odbieram hydroizolację”, „są usterki”)
+
+1. Wejście: relacja, zdjęcia, pomiary, protokół od ekipy, wpisy kierownika. Ustal, który etap i jaki zakres umowy.
+2. Lista kontrolna z `references/odbiory.md` dla tego etapu + wymagania z projektu + zakres z oferty „Wybrana”
+   (czy wykonano wszystko, co w cenie). Dla pracy własnej – ta sama lista, bez zakresu umowy.
+3. Protokół (tabela): element | wymaganie i źródło (`[projekt]` / norma / `[opinia]`) | wynik | usterka | termin usunięcia | kto.
+4. Zaproponuj wynik: **odebrane / odebrane warunkowo (lista usterek) / nieodebrane** – decyduje inwestor
+   z kierownikiem budowy; asystent nie odbiera.
+5. Zapis: usterki → Notatnik (Typ „Ryzyko” lub „Pytanie”, Do kogo = Ekipa, Kiedy = termin) i TASKS; wpis z odbioru →
+   procedura `dziennik`; dokumenty (WZ betonu, atesty stali, karty produktów, protokoły prób) → folder budowy (`dokumenty`).
+6. **Płatność za etap dopiero po odbiorze** – przekaż do `koszty` (transza wg umowy, zatrzymanie), z linkiem do protokołu.
+
+## Wynik w rozmowie
+
+```
+**<Etap / krok> – <tryb: plan / bramka / odbiór>** (<data>)
+Blokady ❌ (n): … – kto, do kiedy
+Do sprawdzenia na budowie: 1. … (jak, kto)  2. …
+Zdjęcia przed zakryciem: …
+Ludzie / dostawy do umówienia: …
+Zapisane: Notion … | Następny krok: …
+```
+
+## Czego nie robić
+
+- Nie odbieraj za kierownika budowy ani nie zatwierdzaj zmian konstrukcyjnych (`analiza-techniczna`, Granice).
+- Nie skracaj bramki, żeby „zdążyć przed betonem” – lepiej przesunąć betonowanie niż kuć płytę.
+- Nie wymyślaj tolerancji i wymagań – podawaj źródło albo oznacz `[opinia]` i „do potwierdzenia z kierownikiem”.

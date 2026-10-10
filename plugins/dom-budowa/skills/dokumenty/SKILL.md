@@ -59,4 +59,6 @@ Ty decydujesz, co to za dokument, czy trafia do paczki i co zastępuje. Bez Twoj
 - Paczka i folder budowy **nigdy** nie trafiają do repozytorium (repo jest publiczne) – dane osobowe są dozwolone
   w paczce, w repo nigdy.
 - Nie przepisuj treści dokumentów do harnessu – fakty idą do ściągi i Notion.
+- Zdjęcia z budowy leżą w `Zdjęcia/RRRR-MM-DD_<krok>/` (procedura `dziennik`); skrypt pomija foldery `Zdjęcia*`,
+  więc nie trafiają do indeksu ani do paczki. Rysunek czy skan jako obraz → do folderu tematycznego, nie do Zdjęć.
 - Gdy nie wiesz, czy plik jest nowszą wersją – zapytaj inwestora jednym pytaniem, zamiast zgadywać.

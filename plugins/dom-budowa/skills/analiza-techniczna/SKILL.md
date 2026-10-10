@@ -32,11 +32,21 @@ z listą rzeczy do wyjaśnienia z projektantem. Asystent nie zastępuje konstruk
 Użyj `references/szablon-analizy.md`. Dla krótkiego pytania technicznego: odpowiedź w 3–8 zdaniach
 + „Na czym to opieram” (1–3 źródła) + ewentualne „Do potwierdzenia z …”.
 
+## Praca własna – „jak to zrobić”
+
+Gdy inwestor ma wykonać coś sam („jak ułożyć izolację poziomą”, „jak murować pierwszą warstwę”): odpowiedz jako instrukcja
+wykonania, nie wykład. Format: **warunki wstępne** (co musi być gotowe, pogoda) → **materiały z ilościami i zapasem**
+(→ `zakupy`) → **narzędzia** (co kupić, co wynająć) → **kroki** z kontrolą po każdym (pomiar, tolerancja, zdjęcie) →
+**typowe błędy** (z Bazy wiedzy, Rodzaj „Błąd do uniknięcia”) → **BHP** (wykop, wysokość, prąd, pył, ciężary) →
+**kiedy przerwać i zapytać** (kierownik, konstruktor). Parametry z projektu cytuj z arkuszem; praktykę oznacz `[opinia]`.
+Czas pracy podaj w widełkach – wchodzi do porównania „sam czy ekipa” (`oferta`).
+
 ## Umowy z wykonawcami
 
 Sprawdź: zakres (lista etapów 01–14 / co NIE jest w cenie), ryczałt vs obmiar, harmonogram płatności
 po odbiorach, zatrzymanie 5–10%, kary umowne, gwarancja i rękojmia, odbiory częściowe z kierownikiem,
 roboty dodatkowe (stawki), kto zapewnia media i materiał. Wskaż ryzykowne zapisy i zaproponuj brzmienie.
+Pełna lista kontrolna: `oferta/references/umowa.md`.
 Na końcu dodaj, że to nie jest porada prawna i przy dużej kwocie warto, by umowę przejrzał prawnik.
 
 ## Granice

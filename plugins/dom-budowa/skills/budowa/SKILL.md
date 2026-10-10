@@ -1,14 +1,15 @@
 ---
 name: budowa
-description: Kontekst i zasady pracy przy budowie domu jednorodzinnego (dom z piwnicą, stan zero w przygotowaniu), w tym zasady zapisu do Notion. Używaj na początku każdej rozmowy o budowie, domu, wykonawcach, kosztorysie, projekcie, wiedzy z filmów, Notion „DOM” lub dokumentach budowy (projekty, PDF-y od projektantów i wykonawców), lub gdy pada „budowa”, „stan zero”, „piwnica”, „ekipa”, „kosztorys”. Kieruje do właściwej procedury.
+description: Kontekst i zasady pracy przy budowie domu jednorodzinnego (dom z piwnicą; bieżący etap wskazuje strona DOM w Notion), w tym zasady zapisu do Notion. Używaj na początku każdej rozmowy o budowie, domu, wykonawcach, kosztorysie, projekcie, wiedzy z filmów, Notion „DOM” lub dokumentach budowy (projekty, PDF-y od projektantów i wykonawców), lub gdy pada „budowa”, „stan zero”, „piwnica”, „ekipa”, „kosztorys”. Kieruje do właściwej procedury.
 ---
 
 # Budowa domu – kontekst i zasady
 
 ## Kim jest użytkownik i czego oczekuje
 
-Inwestor – programista, buduje dom systemem mieszanym (część prac sam, część ekipy).
-Oczekuje konkretu: liczby z jednostkami, tabele zamiast opisów, jasne „co dalej”.
+Inwestor – programista, buduje dom systemem mieszanym (część prac sam, część ekipy). Które etapy robi sam –
+Excel, arkusz Etapy (kolumna Wykonawca). Przy pracach własnych liczy się dla niego także czas, narzędzia i BHP,
+nie tylko cena materiału. Oczekuje konkretu: liczby z jednostkami, tabele zamiast opisów, jasne „co dalej”.
 Nie potrzebuje wyjaśniania podstaw, chyba że zapyta. Komunikacja po polsku.
 
 Szczegóły projektu (wymiary, materiały, decyzje, zespół) nie są w repo (jest publiczne) – gdzie ich szukać:
@@ -39,6 +40,9 @@ pobierz wpisy ze Statusem „Do wdrożenia” (jedno zapytanie) i:
 | wkleja transkrypcję filmu/artykuł; relacjonuje rozmowę („dzwoniłem do konstruktora…”); odpowiada „SP-n: …” | `wiedza` |
 | pyta „co nowego”, „co czeka na mnie”, „podsumuj tydzień” | `przeglad-tygodnia` |
 | dostał nowe pliki od projektanta/wykonawcy, pyta o dokument, „co wgrać do claude.ai”, „wgrałem” | `dokumenty` |
+| „zaczynamy etap”, „jutro betonowanie – co sprawdzić”, „ekipa skończyła”, odbiór, usterki | `etap` |
+| relacjonuje dzień na budowie, wysyła zdjęcia, podaje swoje godziny, „ekipa chce dopłatę za…” | `dziennik` |
+| „co kupić na…”, „ile zamówić”, „kiedy zamawiać okna”, oferta hurtowni, „przyjechała dostawa” | `zakupy` |
 | poprawia sposób pracy asystenta, chce nową procedurę | `rozwoj-harnessu` |
 
 Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka). Wykonuj je po kolei.
@@ -51,8 +55,9 @@ Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka).
    `[szacunek]` obliczenie z założeniami, `[opinia]` ocena/rekomendacja.
    Konstrukcja, posadowienie, hydroizolacja bez potwierdzenia w PT → „do potwierdzenia
    z konstruktorem/architektem”.
-3. **Kwoty:** zawsze netto/brutto jawnie. Robocizna firm 8% VAT (budownictwo
-   mieszkaniowe do 300 m²), materiały 23%. Ceny bez faktury traktuj osobno.
+3. **Kwoty:** zawsze netto/brutto jawnie. Usługa wykonawcy w budownictwie mieszkaniowym (dom do 300 m²) – 8% VAT,
+   **także gdy wykonawca dostarcza materiał w ramach usługi**; materiał kupowany przez inwestora – 23%.
+   Dlatego „ekipa z materiałem” vs „materiał sam” porównuj brutto do brutto. Ceny bez faktury traktuj osobno.
 4. **Trzy warstwy liczb:** PLAN = kosztorys; UMÓWIONE = oferty „Wybrana”;
    WYDANE = wydatki „Zrealizowane”. Nie mieszaj ich w jednej kolumnie.
 5. **Excel jest źródłem prawdy dla liczb** i prowadzi go inwestor. Asystent pracuje na pliku,

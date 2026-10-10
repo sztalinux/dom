@@ -44,6 +44,19 @@ jest wykonawcą lub której fazy dotyczy oferta – zapytaj jednym pytaniem.
    - aktualizuj sekcję „Co już wiem z rozmów i ofert” na stronie „Wybór wykonawcy” jednym wpisem.
    Zapisy do Notion grupuj wg zasady 6 z `budowa`.
 
+## Sam czy ekipa
+
+Gdy etap jest w Excelu oznaczony „Sam” albo inwestor pyta „czy robić to samemu”: zestaw ofertę z wykonaniem własnym –
+materiał brutto (23%) + sprzęt (zakup/wynajem) + czas (dni × realne tempo, `[szacunek]`) + ryzyko jakości i brak gwarancji
+vs oferta brutto (8% z materiałem) + termin. Podaj różnicę w zł i w dniach pracy; nie decyduj – to wybór inwestora
+(zapisz jako Decyzja w Notatniku). Instrukcja wykonania → `analiza-techniczna`, „Praca własna”.
+
+## Po wyborze – zakres do umowy
+
+Status „Wybrana” (decyzja inwestora) → przygotuj zakres do umowy wg `references/umowa.md`, sekcja „Zakres do umowy”:
+pozycje w cenie, „nie w cenie”, pytania na piśmie, transze powiązane z odbiorami (`etap`). Projekt umowy od wykonawcy
+sprawdza `analiza-techniczna`, sekcja „Umowy”.
+
 ## Wynik w rozmowie
 
 ```

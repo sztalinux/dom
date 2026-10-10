@@ -18,9 +18,14 @@ Pobierz w jak najmniejszej liczbie zapytań:
 3. **Rejestr sprzeczności**: Status „Czeka na decyzję” i „Do sprawdzenia u projektanta” (z datą zgłoszenia – najstarsze pierwsze).
 4. **Notatnik budowy**: Status „Otwarte” lub „Do omówienia” z Priorytetem Krytyczne/Ważne; wpisy z „Kiedy” w ciągu 14 dni lub po terminie.
 5. **TASKS (2)**: niezakończone z „When” w ciągu 7 dni lub po terminie.
+6. **Informacje**: „Wrażliwe na czas” z Datą informacji starszą niż 12 miesięcy, jeśli dotyczą bieżącego etapu.
 7. **Zmiany do harnessu** (`collection://e217448a-60ec-4af6-8584-8f368315109c`): wpisy „Do wdrożenia” starsze niż 7 dni
    – przypomnienie, żeby uruchomić Claude Code i je wdrożyć.
-6. **Informacje**: „Wrażliwe na czas” z Datą informacji starszą niż 12 miesięcy, jeśli dotyczą bieżącego etapu.
+8. **Dziennik budowy** (gdy baza istnieje – `dziennik/references/notion-dziennik.md`): wpisy z 7 dni – dni pracy ekipy
+   i własne, otwarte problemy, kroki zakryte bez zdjęć („Przed zakryciem OK” odznaczone).
+9. **Zamówienia z wyprzedzeniem**: pozycje na najbliższe dwa etapy, których termin zamówienia (`zakupy/references/wyprzedzenia.md`)
+   wypada w ciągu 14 dni; **płatności** – Wydatki „Planowane” z datą w 14 dni i transze po odbiorach, jeśli Excel jest
+   dostępny w tym miejscu (inaczej napisz, że to wymaga aktualnego pliku).
 
 ## Wynik
 
@@ -31,6 +36,8 @@ Pobierz w jak najmniejszej liczbie zapytań:
 **Dotyczy naszej budowy:** • …
 **Pytania do projektantów (n):** Konstruktor: …; Architekt: …
 **Terminy 7 dni:** <zadanie – data>; **Po terminie:** …
+**Budowa w tym tygodniu:** dni ekipy / własne, problemy otwarte, braki zdjęć przed zakryciem
+**Zamówić / zapłacić do 14 dni:** <pozycja – do kiedy – skąd>
 **Do ponownej weryfikacji:** WI-x <cena/przepis z roku …>
 **Harness – czeka na wdrożenie:** HZ-x … (uruchom Claude Code)
 **Sugestia na ten tydzień:** 1–3 konkretne kroki.

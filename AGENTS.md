@@ -18,6 +18,9 @@ Jest celowo krótki: cała wiedza i procedury są w `plugins/dom-budowa/skills/`
 | Projekt, rysunki, umowa, norma, pytanie techniczne | `plugins/dom-budowa/skills/analiza-techniczna/SKILL.md` |
 | Transkrypcja filmu, artykuł, relacja z rozmowy, sprzeczności „SP-n” | `plugins/dom-budowa/skills/wiedza/SKILL.md` |
 | Nowe pliki od projektanta/wykonawcy, paczka dokumentów dla claude.ai | `plugins/dom-budowa/skills/dokumenty/SKILL.md` |
+| Start etapu, „co sprawdzić przed betonowaniem”, odbiór, usterki | `plugins/dom-budowa/skills/etap/SKILL.md` |
+| Relacja z dnia na budowie, zdjęcia, godziny własne, roboty dodatkowe | `plugins/dom-budowa/skills/dziennik/SKILL.md` |
+| Lista zakupów na etap, oferty hurtowni, kiedy zamawiać, dostawa | `plugins/dom-budowa/skills/zakupy/SKILL.md` |
 | Przegląd tygodnia, „co nowego”, „co czeka na mnie” | `plugins/dom-budowa/skills/przeglad-tygodnia/SKILL.md` |
 | Zmiana samego harnessu (nowa procedura, poprawka) | `plugins/dom-budowa/skills/rozwoj-harnessu/SKILL.md` |
 

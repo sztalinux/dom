@@ -14,6 +14,7 @@ Domyślnie: dwa poziomy nad repozytorium (…/Dom/AI/dom → …/Dom), albo zmie
 Zasady:
 - Do paczki trafia tylko plik oznaczony --eksport (nowy plik nigdy nie trafia sam).
 - Skrypt usuwa pliki wyłącznie w folderze paczki; plików w hubie nie przenosi i nie usuwa.
+- Foldery `Zdjęcia*` / `Foto*` (zdjęcia z budowy, procedura `dziennik`) są pomijane w całości.
 - Lista „do wgrania” liczona jest względem ostatniego potwierdzenia „wgrane”, nie ostatniego uruchomienia.
 """
 import argparse
@@ -38,6 +39,7 @@ WGRANE = CONF / "stan-wgrania.json"
 PACZKA = HUB / "_Do claude.ai"
 PRZYCHODZACE = HUB / "_Przychodzące"
 SPIS = "00_SPIS.md"
+ZDJECIA = ("zdjęcia", "zdjecia", "foto", "photos")  # foldery ze zdjęciami z budowy – poza indeksem i paczką
 POMIN_KATALOGI = {PACZKA, REPO.parent if REPO.parent != HUB else REPO}
 KONTAKT = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+|(?<!\d)(\+48[\s-]?)?\d{3}[\s-]\d{3}[\s-]\d{3}(?!\d)")
 WRAZLIWE_PESEL = re.compile(r"PESEL\D{0,5}\d{11}", re.I)
@@ -84,7 +86,8 @@ def skanuj() -> dict:
     out = {}
     for korzen, katalogi, pliki in os.walk(HUB):
         k = Path(korzen)
-        katalogi[:] = [d for d in katalogi if not d.startswith(".") and (k / d).resolve() not in POMIN_KATALOGI]
+        katalogi[:] = [d for d in katalogi if not d.startswith(".") and (k / d).resolve() not in POMIN_KATALOGI
+                       and not nfc(d).lower().startswith(ZDJECIA)]
         for n in pliki:
             if n.startswith(".") or n.startswith("~$"):
                 continue
