@@ -3,6 +3,18 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.0.2] – 2026-10-10
+
+claude.ai na co dzień: instrukcje projektu zamiast `START.md`, ręczna aktualizacja pluginu.
+- Nowy `rozwoj-harnessu/references/claude-ai-projekt.md`: tekst instrukcji projektu „Dom” (przy każdej wiadomości skill
+  `budowa` → procedura, raz na rozmowę skrzynka „Zmiany do harnessu”, dane z Notion i wiedzy projektu, bez „/”;
+  gdy skille są niedostępne – powiedz to i nie zgaduj procedur), aktualizacja pluginu przez „Check for updates”,
+  wiedza projektu a kontekst. **Wklej instrukcje na nowo** (`dist/claude-ai-projekt/instrukcje.md`), usuń `START.md`.
+- `tools/build.py`: generuje `dist/claude-ai-projekt/instrukcje.md` z numerem wersji.
+- `rozwoj-harnessu`: po wdrożeniu przypomnienie o „Check for updates” (i o ponownym wklejeniu instrukcji, gdy się zmieniły).
+- README, `dostawcy.md`, `zrodla.md`: aktualizacja pluginu nie jest automatyczna (organizacja może blokować synchronizację);
+  hooki pluginu działają w Cowork i Claude Code, nie w czacie; `/` tylko do wymuszenia procedury.
+
 ## [1.0.1] – 2026-10-10
 
 Poprawki po testach na sucho procedur 1.0.0.

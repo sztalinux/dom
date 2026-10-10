@@ -37,7 +37,7 @@ Claude Code (komputer, start sesji) ◄─────────────�
    ├─ hook: skan folderu budowy → paczka `_Do claude.ai/` + lista „do wgrania”
    ├─ klasyfikuje nowe dokumenty (procedura `dokumenty`)
    └─ wdraża zmiany harnessu → wersja → commit → push ──► GitHub sztalinux/dom
-                                                               │ automatyczna synchronizacja
+                                                               │ „Check for updates” (ręcznie) lub synchronizacja
 claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ───────┘
                                   ◄── dokumenty: wgrywasz paczkę do projektu „Dom” (ręcznie)
 ```
@@ -68,10 +68,15 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
 2. Python 3 + `pip3 install --user openpyxl pypdf` (kontrola danych wrażliwych w paczce).
 3. W `Dom/AI/dom` uruchom `claude`. `/mcp` – jeśli jest „claude.ai Notion”, gotowe.
 4. claude.ai → Customize → Plugins → Add marketplace → `sztalinux/dom` → zainstaluj `dom-budowa`,
-   włącz „Sync automatically”. Usuń wcześniej wgrany z pliku plugin `dom-budowa`.
+   włącz „Sync automatically” (jeśli organizacja na to pozwala). Usuń wcześniej wgrany z pliku plugin `dom-budowa`.
+   Bez synchronizacji: po każdej nowej wersji Customize → Plugins → `dom-budowa` → „Check for updates”.
    Gdyby organizacja blokowała marketplace z GitHuba: `python3 tools/build.py` i wgraj `dist/dom-budowa.plugin`
-   przez „Upload plugin” (wtedy aktualizacje ręcznie).
-5. claude.ai → projekt „Dom” → wiedza projektu: wgraj zawartość `Dom/_Do claude.ai/`.
+   przez „Upload plugin” (wtedy każda aktualizacja to ponowne wgranie).
+5. claude.ai → projekt „Dom”:
+   - **Instructions:** `python3 tools/build.py` i wklej `dist/claude-ai-projekt/instrukcje.md` – dzięki temu każda
+     wiadomość w projekcie korzysta z harnessu i Notion bez wpisywania „/” (opis:
+     `plugins/dom-budowa/skills/rozwoj-harnessu/references/claude-ai-projekt.md`). Dawny `START.md` usuń.
+   - **Wiedza projektu:** wgraj zawartość `Dom/_Do claude.ai/`, potem `python3 tools/dokumenty.py wgrane`.
 
 ## Na co dzień
 
@@ -81,3 +86,5 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
 - Dzień na budowie → powiedz asystentowi, co się działo (telefon wystarczy) – trafi do Dziennika budowy; zdjęcia wrzuć do `Dom/Zdjęcia/RRRR-MM-DD_<krok>/`.
 - Przed krokiem „bez odwrotu” (beton, zasypka, tynki) zapytaj „co sprawdzić przed …” – dostaniesz bramkę z listą zdjęć do zrobienia.
 - Każda zmiana w repo = podbita wersja w `plugins/dom-budowa/.claude-plugin/plugin.json` (inaczej claude.ai jej nie pobierze).
+  Po pushu na claude.ai: Customize → Plugins → `dom-budowa` → „Check for updates” (o ile nie działa synchronizacja).
+- Procedury działają same – piszesz normalnie. `/` (np. `/oferta`, na claude.ai `dom-budowa:oferta`) tylko gdy chcesz wymusić procedurę.

@@ -9,6 +9,7 @@ Wynik w dist/:
     dom-budowa.plugin         – plugin dla Claude (Cowork / claude.ai)
     gemini-gem/instrukcje.md  – instrukcje do wklejenia w Gem
     gemini-gem/wiedza/*.md    – po jednym pliku na procedurę (pliki wiedzy Gema)
+    claude-ai-projekt/instrukcje.md – instrukcje projektu „Dom” na claude.ai
 """
 import argparse
 import json
@@ -246,6 +247,17 @@ def zbuduj_gem(wersja: str) -> Path:
     return gem
 
 
+def zbuduj_claude_projekt(wersja: str) -> Path:
+    zrodlo = (SKILLS / "rozwoj-harnessu/references/claude-ai-projekt.md").read_text(encoding="utf-8")
+    m = re.search(r"<!-- instrukcje-start -->\n(.*?)<!-- instrukcje-koniec -->", zrodlo, re.S)
+    if not m:
+        raise SystemExit("claude-ai-projekt.md: brak znaczników instrukcje-start / instrukcje-koniec")
+    out = DIST / "claude-ai-projekt" / "instrukcje.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(f"(Instrukcje projektu „Dom”, harness dom-budowa {wersja})\n\n{m.group(1)}", encoding="utf-8")
+    return out
+
+
 def kopiuj_dowiazania():
     for link in (ROOT / ".agents/skills", ROOT / ".claude/skills"):
         if link.is_symlink() or link.exists():
@@ -289,6 +301,7 @@ def main() -> int:
     DIST.mkdir(exist_ok=True)
     print("Zbudowano:", zbuduj_plugin(wersja).relative_to(ROOT))
     print("Zbudowano:", zbuduj_gem(wersja).relative_to(ROOT), "(instrukcje.md + wiedza/)")
+    print("Zbudowano:", zbuduj_claude_projekt(wersja).relative_to(ROOT), "(wklej w projekt „Dom” → Instructions)")
     return 0
 
 

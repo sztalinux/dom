@@ -8,7 +8,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 
 | Co | Gdzie | Kto edytuje |
 |---|---|---|
-| Procedury, zasady, szablony | publiczne repo GitHub `sztalinux/dom` → plugin `dom-budowa` na koncie Claude (synchronizacja automatyczna) | Claude Code (`rozwoj-harnessu`, sekcja B) |
+| Procedury, zasady, szablony | publiczne repo GitHub `sztalinux/dom` → plugin `dom-budowa` na koncie Claude (aktualizacja: „Check for updates” lub synchronizacja) | Claude Code (`rozwoj-harnessu`, sekcja B) |
 | Zgłoszone zmiany harnessu (obowiązują od razu) | Notion → Asystent AI → Zmiany do harnessu | dowolny asystent (`rozwoj-harnessu`, sekcja A) |
 | Liczby: kosztorys, wydatki, oferty, wykonawcy (z kontaktami) | Excel „Kosztorys_stan_zero.xlsx” – prowadzi inwestor | Inwestor; agent tylko na prośbę (`koszty`): w Claude Code plik z folderu budowy, w projekcie „Dom” na claude.ai kopia z paczki, poza nim plik załączony |
 | Notatki, decyzje, pytania, ryzyka naszej budowy | Notion → DOM → Notatnik budowy | Inwestor + agent (`notatka`) |
