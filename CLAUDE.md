@@ -23,9 +23,10 @@ Zanim zajmiesz się czymkolwiek innym:
    (zmiana plików → wersja → CHANGELOG → `python3 tools/build.py` → commit → push → oznaczenie wpisów jako „Wdrożone”).
    Jeśli wpis jest niejasny albo sprzeczny z inną procedurą – zapytaj inwestora, zanim go wdrożysz.
 4. Jeśli skrzynka jest pusta – napisz jedną linię „Harness aktualny (wersja X.Y.Z)”.
-5. Raport „[dokumenty]” z hooka startowego (`tools/dokumenty.py`): jeśli są nowe pliki do sklasyfikowania –
+5. Raport „[dokumenty]” z hooka startowego (`tools/dokumenty.py`): „Przewodnik zmieniony” → od razu przepisz stronę
+   przewodnika w Notion (`dokumenty`, sekcja C), bez pytania. Jeśli są nowe pliki do sklasyfikowania –
    zaproponuj ich obsługę wg `plugins/dom-budowa/skills/dokumenty/SKILL.md` (jedna linia); jeśli jest lista
-   „Do wgrania” – przypomnij o niej jedną linią. Potem przejdź do zadania.
+   „Kopia awaryjna” – nie przypominaj (wgrywanie opcjonalne). Potem przejdź do zadania.
 
 **Repo jest publiczne** – przed każdym commitem sprawdź, że nie ma w nim danych osobowych ani danych projektu
 (walidator i hook `pre-commit` pomagają, ale nie zastępują przejrzenia `git diff`).

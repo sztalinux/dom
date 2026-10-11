@@ -3,6 +3,22 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.3.0] – 2026-10-11
+
+Bez wgrywania plików na claude.ai; kolejność szukania odpowiedzi; wiedza zawsze ze źródłem.
+- Przewodnik po dokumentach i mapa Notion na stronie Notion „📑 Przewodnik po dokumentach i Notion” – Claude Code
+  aktualizuje ją sam (`tools/dokumenty.py` generuje `.dom/przewodnik-notion.md`, raport mówi, kiedy przepisać stronę;
+  `dokumenty.py notion-ok`). Claude Code nie może zapisywać plików w wiedzy projektu na claude.ai, ale Notion claude.ai
+  czyta na żywo. Paczka `_Do claude.ai/` – tylko kopia awaryjna. `CLAUDE.md`: synchronizacja na starcie sesji bez pytania.
+- `budowa`: przewodnik z Notion raz na rozmowę; nowa zasada 10 – kolejność szukania odpowiedzi: materiały inwestora →
+  sprawy nierozstrzygnięte (Notatnik, sprzeczności, rozmowy, dziennik, archiwum) → internet z oznaczeniem `[internet]`,
+  źródłem, datą, typem autora i oceną wiarygodności (zasady 10–11 przenumerowane; odwołania w `etap`, `przeglad-tygodnia`).
+- `wiedza`: każda informacja ma źródło (Źródła albo Notatnik); sekcja F – ustalenie z Notatnika → Informacja z relacją
+  do wpisu; sekcja G – notatki własne i archiwum jako źródło („Notatki własne”); odpowiedź „co wiemy” podaje źródła.
+- `notatka`: ustalenie z wiedzą techniczną → od razu także Informacja w Bazie wiedzy (krok 6).
+- Notion: Informacje ↔ Notatnik (relacja „Notatnik” / „Wiedza”), Forma „Notatki własne” w Rozmowach i źródłach.
+- **Instrukcje projektu zmienione – wklej ponownie** (`dist/claude-ai-projekt/instrukcje.md`); wiedza projektu może być pusta.
+
 ## [1.2.0] – 2026-10-11
 
 - Nowa procedura `przygotowanie`: karta przygotowania do spotkania, rozmowy lub decyzji (cel, 3 najważniejsze rzeczy,

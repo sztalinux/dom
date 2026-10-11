@@ -35,7 +35,10 @@ branżą i adresatem, tak żeby dało się ją filtrować i zamknąć.
    wg `references/notion-schematy.md`. Źródło = skąd to wiadomo (rozmowa z X dnia RRRR-MM-DD, PT KT.03, oferta Y).
 5. **Krytyczne sprawy przed etapem** (blokują start etapu) dodaj też jako checkbox w sekcji
    „🔴 Do zamknięcia przed stanem zero” na stronie DOM – i odhacz, gdy zamknięte.
-6. **Potwierdź:** lista utworzonych/zmienionych wpisów z linkami.
+6. **Ustalenie = wiedza:** wpis ze Statusem „Ustalone”/„Zrobione”, który niesie wiedzę techniczną (decyzja, parametr,
+   zasada wykonania, odpowiedź na pytanie) → w tym samym zestawie zapisów dodaj Informację w Bazie wiedzy z relacją
+   do tego wpisu (procedura `wiedza`, sekcja F). Tak Baza wiedzy zawsze pokazuje, co u nas obowiązuje i skąd to wiadomo.
+7. **Potwierdź:** lista utworzonych/zmienionych wpisów z linkami.
 
 ## Zasady
 

@@ -15,7 +15,7 @@ Jeden wpis = jedno źródło: film, artykuł, telefon, spotkanie, mail, wizyta n
 |---|---|---|
 | Rozmowa | tytuł | film: tytuł filmu; rozmowa: „Telefon – konstruktor – przerwa robocza” |
 | Data | data | data rozmowy / **data publikacji** filmu |
-| Forma | select | Telefon, Spotkanie, Na budowie, Mail / SMS, Artykuł / film |
+| Forma | select | Telefon, Spotkanie, Na budowie, Mail / SMS, Artykuł / film, Notatki własne |
 | Kto | tekst | imię / firma / kanał |
 | Z kim | select | Konstruktor, Architekt, Geotechnik, Kierownik budowy, Wykonawca, Instalator, Urząd / gestor, Internet / kurs, Rodzina / znajomi, Inne |
 | Najważniejsze | tekst | 3–5 punktów: główne tezy, dosłownie liczby i nazwy |
@@ -57,7 +57,8 @@ Temat ma być na tyle szeroki, by zebrać kilka-kilkanaście informacji.
 | Branża | multi-select | Konstrukcja, Grunt i woda, Hydroizolacja, Drenaż, Elektryka, Wod-kan, Ogrzewanie, Wentylacja, Dach, Okna i drzwi, Elewacja, Ściany, Wnętrza, Smart home, Ogród, Formalności, Energooszczędność, Organizacja |
 | Etap | select | Projekt i formalności, Stan zero, SSO, Deweloperski, Wykończenie, Teren i ogród, Cała budowa |
 | Tematy | relacja → Tematy | **ustawiaj zawsze** – tak informacja trafia „w dobre miejsce” |
-| Źródła | relacja → Rozmowy i źródła | |
+| Źródła | relacja → Rozmowy i źródła | **źródło obowiązkowe**: Źródła albo Notatnik (SKILL.md) |
+| Notatnik | relacja → Notatnik budowy (tam: „Wiedza”) | ustalenie/decyzja naszej budowy, z której wynika informacja (sekcja F) |
 | Sprzeczności | relacja → Rejestr | |
 | Potwierdzenia | rollup (liczba źródeł) | **tylko odczyt** |
 | Data informacji | rollup (najnowsza data źródła) | **tylko odczyt** |

@@ -20,7 +20,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 | Dziennik inwestora (dni na budowie, dostawy, usterki, godziny własne) | Notion → DOM → Dziennik budowy (schemat: `dziennik/references/notion-dziennik.md`); zdjęcia w folderze budowy `Zdjęcia/` | inwestor + agent (`dziennik`) |
 | Bramki i odbiory etapów | Notion → „Etapy budowy – przewodnik”, „Stan zero – punkty bez odwrotu”; protokoły w folderze budowy | agent przygotowuje (`etap`), odbiera inwestor z kierownikiem |
 | Analizy dokumentów | Notion (strona pod DOM) lub dokument w projekcie Claude | agent (`analiza-techniczna`) |
-| Dokumenty: projekty, opinie, oferty, umowy (PDF, Excel) | folder budowy na komputerze inwestora; w wiedzy projektu „Dom” na claude.ai tylko przewodnik `00_SPIS.md` (co jest w którym dokumencie) i ściąga; pełne dokumenty na prośbę | inwestor wrzuca, agent klasyfikuje (`dokumenty`); oryginały tylko odczyt |
+| Dokumenty: projekty, opinie, oferty, umowy (PDF, Excel) | folder budowy na komputerze inwestora; opis każdego dokumentu: strona Notion „📑 Przewodnik po dokumentach i Notion” (synchronizuje Claude Code); pełne dokumenty na prośbę | inwestor wrzuca, agent klasyfikuje (`dokumenty`); oryginały tylko odczyt |
 | Ściąga projektu (najważniejsze liczby i decyzje) | `Ściąga projektu.md` w folderze budowy (w paczce jako `01_Sciaga-projektu.md`) + Notion „Dane projektu (ściąga)” | agent po nowym dokumencie (`dokumenty`, `analiza-techniczna`) |
 
 ## Notion – identyfikatory (konto prywatne inwestora)

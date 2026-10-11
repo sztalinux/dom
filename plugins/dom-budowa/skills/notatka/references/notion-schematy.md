@@ -17,6 +17,7 @@ bazy (fetch data source) i zaktualizuj ten plik.
 | Kiedy | data | termin lub moment budowy |
 | Notatka | tekst | szczegóły, kontekst, co ustalono |
 | Źródło | tekst | skąd to wiem |
+| Wiedza | relacja → Informacje (Baza wiedzy) | informacje wynikające z tego ustalenia (`wiedza`, sekcja F) |
 
 ## TASKS (2) – `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e`
 

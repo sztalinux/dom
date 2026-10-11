@@ -7,7 +7,7 @@ description: Cotygodniowy przegląd budowy i porządki w Notion – co nowego do
 
 Cel: w 2 minuty inwestor wie, co doszło, co czeka na jego decyzję i co trzeba zrobić w tym tygodniu.
 Przegląd czyta i podsumowuje – niczego nie rozstrzyga. Statusy zmienia tylko w ramach porządków zatwierdzonych
-przez inwestora (sekcja „Porządki”). Kolejność i pierwszy plan wg zasady 10 w procedurze `budowa`:
+przez inwestora (sekcja „Porządki”). Kolejność i pierwszy plan wg zasady 11 w procedurze `budowa`:
 najpierw bieżący etap i pilne terminy, sprawy zamknięte i odległe tylko licznikiem.
 
 ## Dane (ID: `budowa/references/zrodla.md`, `wiedza/references/notion-wiedza.md`)

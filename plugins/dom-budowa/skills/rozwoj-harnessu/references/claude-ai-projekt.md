@@ -5,7 +5,12 @@ Projekt „Dom” na claude.ai (czat, telefon) ma dwie części:
 | Część | Co tam jest | Skąd |
 |---|---|---|
 | **Instructions** (instrukcje projektu) | krótki tekst z sekcji niżej – każe przy każdej wiadomości użyć harnessu | ten plik (wersjonowany w repo); gotowa kopia z numerem wersji: `dist/claude-ai-projekt/instrukcje.md` z `tools/build.py` |
-| **Wiedza projektu** (pliki) | `00_SPIS.md` (przewodnik po dokumentach) i `01_Sciaga-projektu.md` | paczka `_Do claude.ai/` (procedura `dokumenty`) |
+| **Wiedza projektu** (pliki) | może być pusta; opcjonalnie kopia awaryjna `00_SPIS.md` + `01_Sciaga-projektu.md` | paczka `_Do claude.ai/` (procedura `dokumenty`) |
+
+Przewodnik po dokumentach i mapę Notion asystent czyta ze strony Notion „📑 Przewodnik po dokumentach i Notion” –
+Claude Code aktualizuje ją sam (procedura `dokumenty`, sekcja C), więc po zmianach w dokumentach lub w strukturze Notion
+nic nie trzeba wgrywać. Claude Code nie może zapisywać plików w wiedzy projektu na claude.ai (brak takiej możliwości),
+ale może zapisywać w Notion, które claude.ai czyta na żywo.
 
 Instrukcje są celowo tylko odnośnikiem: zasady i zachowanie (np. prośba o dokument) są w skillach i przychodzą
 z pluginem, więc instrukcji nie trzeba wklejać na nowo przy każdej wersji – tylko gdy zmieni się tekst niżej
@@ -35,8 +40,10 @@ Jesteś asystentem budowy domu inwestora. Pracujesz według harnessu – pluginu
 1. Przy każdej wiadomości wczytaj skill `budowa` i według jego mapy procedur wczytaj właściwe skille
    (jedna wiadomość może wymagać kilku – po kolei). Nie czekaj, aż użytkownik wpisze „/”.
 2. Raz na rozmowę (przy pierwszej wiadomości) sprawdź w Notion skrzynkę „Zmiany do harnessu” – opis w skillu `budowa`.
-3. Dane naszej budowy są w Notion (strona DOM) i w wiedzy projektu: `01_Sciaga-projektu.md` oraz przewodnik
-   po dokumentach `00_SPIS.md`. Pełnych dokumentów tu nie ma – gdy są potrzebne, poproś o konkretny plik
-   (skill `dokumenty`, „Prośba o dokument”). Nie zgaduj.
+3. Dane naszej budowy są w Notion: strona DOM (ściąga „📐 Dane projektu”, „🔴 Do zamknięcia”) i strona
+   „📑 Przewodnik po dokumentach i Notion” (3f6f5982-09e7-81f5-bade-ec877d8d936a) – pobierz ją przy pierwszej
+   wiadomości. Pełnych dokumentów tu nie ma – gdy są potrzebne, poproś o konkretny plik (skill `dokumenty`).
+   Szukaj najpierw w moich materiałach, potem w sprawach otwartych, na końcu w internecie – zawsze ze źródłem
+   (skill `budowa`, zasada 10). Nie zgaduj.
 4. Jeśli skille dom-budowa są niedostępne, napisz to w pierwszym zdaniu i nie zgaduj procedur.
 <!-- instrukcje-koniec -->

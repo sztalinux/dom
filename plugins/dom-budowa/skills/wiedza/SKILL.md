@@ -12,6 +12,11 @@ Struktura Notion, ID baz, pola i plan zapisu: `references/notion-wiedza.md`.
 Ocena źródła: `references/ocena-zrodla.md`. Sprzeczności (ADR): `references/sprzecznosci.md`.
 Zapisy wsadowe: `budowa`, zasada 6.
 
+**Każda informacja ma źródło** – relację Źródła (wpis w Rozmowach i źródłach: film, rozmowa, dokument, notatki własne)
+albo relację Notatnik (ustalenie lub decyzja naszej budowy, sekcja F). Informacji bez źródła nie zapisuj. Źródło nieznane
+(np. stara notatka bez autora) → wpis „Notatki własne” z Wiarygodnością co najwyżej „3 – średnia” i Konfliktem „?”, a
+w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej informacji widać, skąd jest i ile jest warta.
+
 ## A. Nowe źródło
 
 1. **Metadane:** film/artykuł – tytuł, autor/kanał, link, data publikacji (z linku spróbuj odczytać tytuł i datę);
@@ -77,7 +82,30 @@ Zmień Status „Nowe” → „Przejrzane” dla wskazanych wierszy (albo wszys
 2. Odpowiedz w kolejności: **co obowiązuje u nas** (decyzje z ich Statusem – „Do omówienia” to jeszcze nie ustalenie;
    rozstrzygnięcia SP, projekt – ze źródłem) → **stan wiedzy**
    (punkty z WI-x, liczby z warunkami; przy rozbieżnych warunkach podaj oba) → **otwarte sprzeczności** (SP-n, od kiedy czekają)
-   → **luki** (czego baza nie wie – zaproponuj, kogo zapytać lub jakie źródło przerobić).
+   → **luki** (czego baza nie wie – zaproponuj, kogo zapytać lub jakie źródło przerobić). Inwestor chce odpowiedzi od razu →
+   wyszukaj w internecie i podaj osobno, z oznaczeniem `[internet]`, źródłem i oceną wiarygodności (`budowa`, zasada 10).
 3. Nie dopisuj wiedzy z własnej pamięci do odpowiedzi jako „z bazy”. Własne uzupełnienie oznacz `[opinia]` i zaproponuj
    zapis dopiero po potwierdzeniu źródłem.
 4. Nic nie zapisuj (tryb tylko do odczytu), chyba że inwestor poprosi o zanotowanie luki jako „Doczytać” (`notatka`).
+5. Przy każdej informacji podaj jej źródło (ZRD-x z typem autora i wiarygodnością albo „ustalenie w Notatniku”).
+
+## F. Ustalenie z Notatnika → wiedza
+
+Gdy wpis w Notatniku budowy ma Status „Ustalone” lub „Zrobione” i niesie wiedzę techniczną o naszej budowie
+(Typ „Decyzja”, „Pamiętać” z parametrem, zasadą wykonania, materiałem, kolejnością prac; zamknięte „Pytanie” z odpowiedzią):
+
+1. Sprawdź, czy taka informacja już jest (Informacje: Tematy + słowa kluczowe) – jest → podepnij Notatnik i ewentualnie
+   zaktualizuj „Dla naszej budowy”, bez nowego wiersza.
+2. Nowa → wiersz w Informacjach: samodzielne zdanie (co obowiązuje u nas), Dotyczy nas „Tak”, „Dla naszej budowy”,
+   Tematy, Branża, Etap, Status „Przejrzane” (ustalił inwestor), relacja **Notatnik** = ten wpis; Źródła = rozmowa
+   z Rozmów i źródeł, z której ustalenie wynika (jeśli jest – pole Źródło w Notatniku).
+3. Ustalenie zmienia „co obowiązuje dziś” w temacie → zaktualizuj „W skrócie” tematu. Sprzeczne z dotychczasową wiedzą →
+   procedura sprzeczności (sekcja A, krok 5), nie nadpisuj po cichu.
+4. Sprawy organizacyjne bez wiedzy technicznej (kto, kiedy, zamówić) zostają tylko w Notatniku.
+
+## G. Notatki własne i archiwum
+
+Stare notatki inwestora (np. Notion → Archiwum – stare notatki) przetwarzaj jak źródło (sekcja A): jedna podstrona = jeden
+wpis w Rozmowach i źródłach (Forma „Notatki własne”, Z kim wg pochodzenia – kurs/internet/rozmowa, jeśli wiadomo,
+Typ autora „Inny”, Wiarygodność „3 – średnia” lub niżej, Konflikt „?”). Informacje Status „Nowe” – inwestor je przejrzy.
+Rzeczy nieaktualne (wybór działki, wybór projektanta) pomiń; działania dla budowy → Notatnik (procedura `notatka`).

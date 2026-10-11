@@ -22,7 +22,7 @@ reszta niżej. Inwestor jest programistą, nie budowlańcem – pojęcia, które
    - Notatnik budowy: otwarte Pytania, Ryzyka, Decyzje dla tej osoby (pole „Do kogo”) i tego etapu, „Pamiętać” etapu;
    - Rejestr sprzeczności: otwarte w tym temacie; Baza wiedzy: tematy, których dotyczy rozmowa;
    - wybór wykonawcy: baza „Porównanie wykonawców” i strona „Wybór wykonawcy” (knock-out, Runda 1);
-   - ściąga projektu, przewodnik po dokumentach (`00_SPIS.md`) – po konkretny dokument sięgnij albo poproś
+   - ściąga projektu, przewodnik po dokumentach (strona Notion) – po konkretny dokument sięgnij albo poproś
      (procedura `dokumenty`, „Prośba o dokument”); ostatnie wpisy Dziennika budowy, jeśli budowa trwa.
 4. **Karta przygotowania** – format niżej. Pytania z Notatnika do tej osoby idą do karty **wszystkie** (z oznaczeniem
    „z Notatnika”), nowe dopisz pod nimi. Pytań obowiązkowych najwyżej 7 – resztę daj jako „jeśli starczy czasu”.

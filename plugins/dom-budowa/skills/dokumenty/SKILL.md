@@ -10,10 +10,11 @@ Wszystkie pliki od projektantów, wykonawców i urzędów leżą w **folderze bu
 Skrypt `tools/dokumenty.py` (uruchamiany automatycznie na starcie każdej sesji Claude Code) prowadzi indeks plików
 i buduje folder `_Do claude.ai/` – paczkę do wgrania w wiedzy projektu „Dom” na claude.ai.
 
-**Paczka jest lekka:** na stałe w wiedzy projektu są tylko `00_SPIS.md` – **przewodnik po dokumentach** (każdy aktualny
-dokument: co to jest, na jakie pytania odpowiada, gdzie leży) – i `01_Sciaga-projektu.md` (najważniejsze liczby
-i decyzje). Pełne dokumenty nie zajmują kontekstu każdej rozmowy: gdy odpowiedź wymaga ich treści, asystent prosi
+**Przewodnik po dokumentach** (każdy aktualny dokument: co to jest, na jakie pytania odpowiada, gdzie leży, plus mapa
+Notion) generuje skrypt; Claude Code przepisuje go na stronę Notion (sekcja C), skąd czyta go asystent na claude.ai –
+bez wgrywania czegokolwiek. Pełne dokumenty nie zajmują kontekstu: gdy odpowiedź wymaga ich treści, asystent prosi
 inwestora o konkretny plik. Excel też nie leży w projekcie – kopia szybko się starzeje, inwestor załącza aktualny.
+Paczka (`00_SPIS.md` + ściąga) to tylko kopia awaryjna.
 
 Podział pracy: skrypt wykrywa nowe/zmienione/przeniesione pliki, duplikaty i dane wrażliwe oraz kopiuje pliki do paczki.
 Ty decydujesz, co to za dokument, czy trafia do paczki i co zastępuje. Bez Twojej decyzji nowy plik do paczki nie trafi.
@@ -23,7 +24,7 @@ Ty decydujesz, co to za dokument, czy trafia do paczki i co zastępuje. Bez Twoj
 | Miejsce | Co robisz |
 |---|---|
 | Claude Code w repo (widzisz raport „[dokumenty]”) | klasyfikacja – sekcja A, aktualizacja paczki – sekcja B |
-| claude.ai (czat, telefon) | zacznij od `01_Sciaga-projektu.md`; czego tam nie ma – znajdź dokument w przewodniku `00_SPIS.md` i poproś o niego (niżej) |
+| claude.ai (czat, telefon) | ściąga: Notion DOM → „📐 Dane projektu”; przewodnik: strona Notion „📑 Przewodnik po dokumentach i Notion”; potrzebny dokument – poproś o niego (niżej) |
 | Gdzie indziej, bez plików | poproś o załączenie konkretnego dokumentu (nazwa z przewodnika) |
 
 **Prośba o dokument** (claude.ai, telefon, Cowork – wszędzie, gdzie nie ma dostępu do folderu budowy): gdy odpowiedź
@@ -58,7 +59,7 @@ co już wiadomo ze ściągi, z oznaczeniem źródła. W Claude Code nie proś �
    Raport startowy pokazuje „Bez opisu zawartości w przewodniku: N” – uzupełnij je tym samym poleceniem.
 7. Pliki z `_Przychodzące/`: przenieś do właściwego folderu tematycznego (istniejącego albo nowego, o czytelnej
    nazwie). Plików poza `_Przychodzące/` nie przenoś ani nie zmieniaj ich nazw. Nigdy nic nie usuwaj.
-8. Uruchom `python3 tools/dokumenty.py` – przebuduje paczkę i przewodnik i pokaże, co wgrać (zwykle tylko `00_SPIS.md`).
+8. Uruchom `python3 tools/dokumenty.py` – przebuduje przewodnik; gdy się zmienił, zsynchronizuj stronę Notion (sekcja C).
 
 ## B. Po klasyfikacji – wiedza i paczka
 
@@ -69,6 +70,17 @@ co już wiadomo ze ściągi, z oznaczeniem źródła. W Claude Code nie proś �
 - Ostrzeżenia skryptu („powyżej limitu”, informacja o danych osobowych) przekaż inwestorowi jednym zdaniem z propozycją
   (np. zmniejszona kopia PDF obok oryginału, oznaczona do paczki zamiast niego).
 - Na koniec podaj listę „dodaj / podmień / usuń” z raportu. Po słowach „wgrałem”: `python3 tools/dokumenty.py wgrane`.
+
+## C. Przewodnik w Notion (Claude Code, automatycznie)
+
+Strona Notion „📑 Przewodnik po dokumentach i Notion” (`3f6f5982-09e7-81f5-bade-ec877d8d936a`) jest głównym przewodnikiem
+dla asystenta na claude.ai – czyta go z Notion, więc inwestor niczego nie wgrywa. Treść generuje skrypt
+(`.dom/przewodnik-notion.md` w folderze budowy: dokumenty + mapa Notion z `budowa/references/notion-mapa.md`).
+
+1. Raport startowy pokazuje „Przewodnik zmieniony → przepisz stronę Notion…” → bez pytania zastąp całą treść strony
+   zawartością pliku (jedno wywołanie, plik już ma składnię Notion; nie zmieniaj jej ręcznie).
+2. Potem `python3 tools/dokumenty.py notion-ok`. Zgłoś jedną linią: „Przewodnik w Notion zaktualizowany”.
+3. Paczka `_Do claude.ai/` to tylko kopia awaryjna (np. gdy Notion jest niedostępny) – wgrywanie jest opcjonalne.
 
 ## Zasady
 

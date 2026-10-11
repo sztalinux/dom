@@ -10,11 +10,14 @@ Domyślnie: dwa poziomy nad repozytorium (…/Dom/AI/dom → …/Dom), albo zmie
     python3 tools/dokumenty.py ustaw "<ścieżka>" --bez-eksportu --opis "…" --zawartosc "…"
     python3 tools/dokumenty.py lista [--nowe]  # stan indeksu
     python3 tools/dokumenty.py wgrane          # potwierdź: paczka wgrana do projektu na claude.ai
+    python3 tools/dokumenty.py notion-ok       # potwierdź: przewodnik przepisany na stronę w Notion
 
 Zasady:
 - Do paczki trafia tylko plik oznaczony --eksport (nowy plik nigdy nie trafia sam).
 - `00_SPIS.md` w paczce to przewodnik po dokumentach: każdy plik z --eksport lub --zawartosc (co zawiera, gdzie jest).
   Dzięki niemu pełne dokumenty nie muszą leżeć w wiedzy projektu – agent prosi o konkretny plik, gdy go potrzebuje.
+- Ta sama treść w składni Notion: `.dom/przewodnik-notion.md` → strona „Przewodnik po dokumentach i Notion”
+  (zapisuje ją agent w Claude Code; skrypt tylko zgłasza, że trzeba, i pamięta, co już zsynchronizowano).
 - Skrypt usuwa pliki wyłącznie w folderze paczki; plików w hubie nie przenosi i nie usuwa.
 - Foldery `Zdjęcia*` / `Foto*` (zdjęcia z budowy, procedura `dziennik`) są pomijane w całości.
 - Lista „do wgrania” liczona jest względem ostatniego potwierdzenia „wgrane”, nie ostatniego uruchomienia.
@@ -38,6 +41,8 @@ HUB = Path(os.environ.get("DOM_HUB", REPO.parent.parent)).expanduser().resolve()
 CONF = HUB / ".dom"
 INDEKS = CONF / "indeks.json"
 WGRANE = CONF / "stan-wgrania.json"
+PRZEWODNIK_NOTION = CONF / "przewodnik-notion.md"
+STAN_NOTION = CONF / "stan-notion.json"
 PACZKA = HUB / "_Do claude.ai"
 PRZYCHODZACE = HUB / "_Przychodzące"
 SPIS = "00_SPIS.md"
@@ -262,12 +267,13 @@ def pisz_spis(ind: dict, plan: dict):
                   f"- **Gdzie:** {gdzie}"]
     naglowek = ["# Przewodnik po dokumentach budowy", "",
                 "Każdy aktualny dokument budowy: co zawiera i gdzie jest. Najważniejsze liczby i decyzje są w "
-                "`01_Sciaga-projektu.md`. Gdy odpowiedź wymaga treści dokumentu, którego nie ma w wiedzy projektu ani "
-                "w rozmowie – poproś inwestora o ten konkretny plik (nazwa, ścieżka, potrzebna strona/arkusz) "
+                "`01_Sciaga-projektu.md` i na stronie DOM w Notion (📐 Dane projektu). Gdy odpowiedź wymaga treści "
+                "dokumentu, którego nie ma w rozmowie – poproś inwestora o ten konkretny plik (nazwa, ścieżka, potrzebna strona/arkusz) "
                 "i nie odpowiadaj z pamięci ani z domysłów. Starsze wersje i pliki robocze zostają lokalnie."]
     if MAPA_NOTION.exists():  # bez nagłówka H1 i akapitu o utrzymaniu pliku – zostaje od mapy pulpitu
         mapa = MAPA_NOTION.read_text(encoding="utf-8").split("Pulpit **DOM**", 1)[-1]
         tresc += ["", "---", "", "# Notion – co gdzie jest", "", "Pulpit **DOM**" + mapa.rstrip()]
+    pisz_notion(naglowek[2:] + tresc)
     plik = PACZKA / SPIS
     stopka = ["", f"_Wygenerowano: {dt.date.today().isoformat()} przez `tools/dokumenty.py`._"]
     if plik.exists():
@@ -275,6 +281,30 @@ def pisz_spis(ind: dict, plan: dict):
         if stare[:-2] == naglowek + tresc:
             return
     plik.write_text("\n".join(naglowek + tresc + stopka) + "\n", encoding="utf-8")
+
+
+def pisz_notion(linie: list):
+    """Wersja przewodnika w składni Notion: tabele Markdown → <table>, nagłówki o poziom niżej (tytuł ma strona)."""
+    out = ['<callout icon="🤖" color="gray_bg">',
+           "\tStrona generowana przez Claude Code (`tools/dokumenty.py`, procedura `dokumenty`). "
+           "Nie edytuj ręcznie – zmiany zostaną nadpisane.", "</callout>"]
+    tabela = []
+    for linia in "\n".join(linie).splitlines() + [""]:
+        if linia.startswith("|"):
+            if not set(linia) <= set("|-: "):
+                tabela.append([k.strip() for k in linia.strip().strip("|").split("|")])
+            continue
+        if tabela:
+            out.append('<table header-row="true">')
+            for wiersz in tabela:
+                out += ["\t<tr>"] + [f"\t\t<td>{k}</td>" for k in wiersz] + ["\t</tr>"]
+            out.append("</table>")
+            tabela = []
+        if linia.startswith("#") and not linia.startswith("####"):
+            linia = "#" + linia
+        if linia:
+            out.append(linia)
+    PRZEWODNIK_NOTION.write_text("\n".join(out) + "\n", encoding="utf-8")
 
 
 def stan_paczki() -> dict:
@@ -331,8 +361,11 @@ def cmd_sprawdz(a):
             r.append(f"  {opis}: {len(zd[klucz])}")
     for o in ostrz:
         r.append(f"  ! {o}")
+    if PRZEWODNIK_NOTION.exists() and wczytaj(STAN_NOTION, {}).get("sha1") != sha1(PRZEWODNIK_NOTION):
+        r.append("  Przewodnik zmieniony → przepisz stronę Notion „Przewodnik po dokumentach i Notion” treścią "
+                 f"`{PRZEWODNIK_NOTION.relative_to(HUB)}` (procedura `dokumenty`, sekcja C), potem `python3 tools/dokumenty.py notion-ok`.")
     if any(wg.values()):
-        r.append(f"  Do wgrania w projekcie na claude.ai (folder „{PACZKA.name}”):")
+        r.append(f"  Kopia awaryjna dla wiedzy projektu na claude.ai (opcjonalnie, folder „{PACZKA.name}”):")
         for k, opis in (("dodaj", "dodaj"), ("podmien", "podmień"), ("usun", "usuń")):
             if wg[k]:
                 r.append(f"    {opis}: " + ", ".join(wg[k]))
@@ -388,6 +421,12 @@ def cmd_wgrane(_a):
     return 0
 
 
+def cmd_notion_ok(_a):
+    zapisz(STAN_NOTION, {"sha1": sha1(PRZEWODNIK_NOTION), "data": dt.date.today().isoformat()})
+    print("Zapisano: przewodnik zsynchronizowany z Notion.")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dry-run", action="store_true")
@@ -404,8 +443,9 @@ def main() -> int:
     lp = sub.add_parser("lista")
     lp.add_argument("--nowe", action="store_true")
     sub.add_parser("wgrane")
+    sub.add_parser("notion-ok")
     a = ap.parse_args()
-    return {"ustaw": cmd_ustaw, "lista": cmd_lista, "wgrane": cmd_wgrane}.get(a.cmd, cmd_sprawdz)(a)
+    return {"ustaw": cmd_ustaw, "lista": cmd_lista, "wgrane": cmd_wgrane, "notion-ok": cmd_notion_ok}.get(a.cmd, cmd_sprawdz)(a)
 
 
 if __name__ == "__main__":

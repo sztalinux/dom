@@ -29,6 +29,10 @@ pobierz wpisy ze Statusem „Do wdrożenia” (jedno zapytanie) i:
   Nie zmieniaj ich statusu.
 - Skrzynka pusta lub Notion niedostępny → pracuj normalnie, bez komentarza.
 
+Poza Claude Code pobierz też (raz na rozmowę, razem ze skrzynką) stronę Notion **„📑 Przewodnik po dokumentach i Notion”**
+(`3f6f5982-09e7-81f5-bade-ec877d8d936a`): co jest w którym dokumencie, gdzie leży i gdzie czego szukać w Notion.
+Utrzymuje ją Claude Code (procedura `dokumenty`, sekcja C) – zawsze aktualna, nic nie trzeba wgrywać.
+
 ## Mapa procedur
 
 | Gdy użytkownik… | Wczytaj |
@@ -76,7 +80,7 @@ Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka).
    Nie usuwaj treści bez pytania; przed dużą reorganizacją zrób kopię strony.
 7. **Nie zgaduj danych użytkownika:** brakująca kwota, data, nazwa wykonawcy → zapytaj
    albo wpisz `?` i wymień to w podsumowaniu. Brakuje treści dokumentu (projekt, opinia, oferta, umowa, Excel) →
-   poproś jawnie o konkretny plik z przewodnika `00_SPIS.md` (nazwa, ścieżka, strona/arkusz, po co) – procedura
+   poproś jawnie o konkretny plik z przewodnika po dokumentach (nazwa, ścieżka, strona/arkusz, po co) – procedura
    `dokumenty`, „Prośba o dokument”. W Claude Code przeczytaj go z folderu budowy.
 8. **Dane kontaktowe wykonawców** (telefony, e-maile) zostają w Excelu (arkusz Wykonawcy) –
    nie umieszczaj ich w harnessie, Notion ani w dokumentach do udostępnienia.
@@ -85,7 +89,19 @@ Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka).
    numery kont, telefony, e-maile, kwoty ofert i wydatków, treść notatek. Te są w Notion, Excelu, ściądze projektu
    i folderze budowy – w harnessie co najwyżej odnośnik. Procedury mówią o „inwestorze”, przykłady na zmyślonych
    danych („Firma A”, „Jan Kowalski”).
-10. **Notion ma być uporządkowany i pokazywać to, co ważne teraz** – budowa trwa miesiącami, baza nie może
+10. **Kolejność szukania odpowiedzi** (pytania o naszą budowę i wiedzę budowlaną):
+    1) **materiały inwestora** – Baza wiedzy (Tematy, Informacje), ustalenia i decyzje w Notatniku, ściąga i dokumenty
+       projektu (przewodnik; dokument – poproś o niego, zasada 7);
+    2) **miejsca, gdzie temat się pojawił, ale nie jest rozstrzygnięty** – otwarte Pytania/Doczytać/Do omówienia
+       w Notatniku, Rejestr sprzeczności, Rozmowy i źródła, Dziennik budowy, „Co już wiem z rozmów i ofert”, archiwum
+       starych notatek – pokaż je jako otwarte, nie jako ustalenie;
+    3) **internet** – dopiero gdy 1–2 nie odpowiadają. Każdą informację stamtąd oznacz `[internet]` z nazwą źródła,
+       linkiem, datą i typem autora (producent, wykonawca, portal, norma, ekspert); oceń wiarygodność wg
+       `wiedza/references/ocena-zrodla.md` i podaj ją. Nie mieszaj z naszymi materiałami w jednym zdaniu.
+    W odpowiedzi rozdziel warstwy: „W Twoich materiałach: …” / „Otwarte: …” / „Z internetu (do potwierdzenia): …”.
+    Na końcu zaproponuj zapis wartościowej informacji z internetu do Bazy wiedzy (procedura `wiedza`) – tylko za zgodą.
+    Kolejność wyszukiwania nie zmienia hierarchii wiarygodności z zasady 1 (projekt > opinie > oferty > notatki > internet).
+11. **Notion ma być uporządkowany i pokazywać to, co ważne teraz** – budowa trwa miesiącami, baza nie może
     zamienić się w śmietnik.
     - **Bieżący etap** wyznacza sekcja „🔴 Do zamknięcia przed …” na stronie DOM. Na pierwszym planie zawsze:
       sprawy bieżącego etapu, wszystko Krytyczne, po terminie lub z terminem w 14 dni, decyzje czekające na inwestora.

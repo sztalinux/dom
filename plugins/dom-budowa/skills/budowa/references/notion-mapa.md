@@ -1,7 +1,8 @@
 # Notion – co gdzie jest
 
 Mapa dla asystenta: gdzie szukać, zanim odpowiesz. Same struktury i identyfikatory – treść jest w Notion.
-Plik trafia też do przewodnika `00_SPIS.md` w projekcie „Dom” na claude.ai (`tools/dokumenty.py`).
+Plik trafia też do przewodnika (`tools/dokumenty.py`) – strona Notion „📑 Przewodnik po dokumentach i Notion”, którą Claude Code
+synchronizuje sam, więc asystent na claude.ai ma zawsze aktualną mapę.
 Zmiana struktury Notion (nowa baza, widok, pole) → zaktualizuj ten plik (procedura `rozwoj-harnessu`).
 
 Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – sekcje to rozwijane nagłówki:
@@ -17,12 +18,13 @@ DOM
 ├─ 🗂 Strony i materiały → Etapy budowy – przewodnik, Archiwum – stare notatki, linki
 ├─ 👥 Kontakty – kluczowe role (pełna lista wykonawców w Excelu) · 📁 Dokumenty i linki
 ├─ 🤖 Asystent AI → „Asystent AI – harness budowy” (+ baza Zmiany do harnessu)
-└─ podstrony: 🚧 Stan zero – punkty bez odwrotu · 🔌 Plan przepustów i tras instalacji
+└─ podstrony: 🚧 Stan zero – punkty bez odwrotu · 🔌 Plan przepustów i tras instalacji · 📑 Przewodnik po dokumentach i Notion
 ```
 
 | Czego szukasz | Gdzie (strona / baza → widok/sekcja) | ID | Najważniejsze pola |
 |---|---|---|---|
 | Parametry projektu | DOM → 📐 Dane projektu (ściąga) | `24af5982-09e7-806b-821a-e157ff33be42` | – |
+| Jakie mamy dokumenty, co w którym jest, gdzie leżą | 📑 Przewodnik po dokumentach i Notion (generowany – nie edytuj) | `3f6f5982-09e7-81f5-bade-ec877d8d936a` | – |
 | Co blokuje bieżący etap | DOM → 🔴 Do zamknięcia…; Notatnik → widok „🔴 Krytyczne i otwarte” | `view://3f3f5982-09e7-8125-a50b-000ce287ad48` | Status Otwarte/Do omówienia, Priorytet Krytyczne/Ważne |
 | Otwarte pytania do konstruktora, architekta, kierownika… | Notatnik → „❓ Pytania do projektantów” (wg Do kogo) | `collection://7423414a-707b-415f-8751-c6ab7ebb6753`, `view://3f3f5982-09e7-81d2-a527-000caeaed4ea` | Typ Pytanie/Decyzja, Status otwarte, **Do kogo** |
 | Co ustaliliśmy, decyzje | Notatnik → „✅ Ustalone i zrobione” | `view://3f3f5982-09e7-8172-a666-000cb0777dc1` | Status Ustalone/Zrobione/Odrzucone, Typ Decyzja |
@@ -32,7 +34,7 @@ DOM
 | Co mówili wykonawcy, na kogo czekamy | Wybór wykonawcy → „🗒 Co już wiem z rozmów i ofert” | jw. | – |
 | Kryteria wyboru ekipy, umowa | Wybór wykonawcy → Runda 1–3, 📄 Umowa, ⚖️ Kryteria i wagi | jw. | – |
 | Co wiemy o temacie X | Baza wiedzy → Tematy | `3f4f5982-09e7-8193-a68e-fd35c9265012`, `collection://718422ca-ed6f-4269-a38f-4e508eff286c` | W skrócie, Stan wiedzy, Etap, Branża |
-| Pojedyncze fakty ze źródeł | Baza wiedzy → Informacje; widok „🆕 Nowe informacje” | `collection://f78bb02d-6da5-46fb-bea9-c25e15f93117`, `view://3f4f5982-09e7-8124-95b3-000c5c02a4a2` | Status, Dotyczy nas, Etap, Potwierdzenia, Tematy |
+| Pojedyncze fakty ze źródeł | Baza wiedzy → Informacje; widok „🆕 Nowe informacje” | `collection://f78bb02d-6da5-46fb-bea9-c25e15f93117`, `view://3f4f5982-09e7-8124-95b3-000c5c02a4a2` | Status, Dotyczy nas, Etap, Potwierdzenia, Tematy, **Źródła** (ZRD) lub **Notatnik** (ustalenie) |
 | Kto i kiedy coś powiedział | Baza wiedzy → Rozmowy i źródła | `collection://35453d82-e38d-4797-840c-d19677c71b54` | Data, Forma, Z kim, Typ autora, Wiarygodność |
 | Sprzeczności do decyzji (SP-n) | Rejestr sprzeczności → „⏳ Czeka na Twoją decyzję” | `collection://7589d5f5-2d22-4b85-9138-72cd34d4a1f8`, `view://3f4f5982-09e7-8152-92b1-000c4785d478` | ID, Status, Priorytet, Tematy, Decyzja |
 | Co się działo na budowie | Dziennik budowy → „📓 Ostatnie 7 dni”, „⚠️ Otwarte problemy” | `collection://cc113d57-3eaa-4f52-80f6-e4b39a4b4c92`, `view://3f5f5982-09e7-8192-847e-000c8ff6aba3`, `view://3f5f5982-09e7-8122-8524-000cb554728c` | Data, Etap, Krok, Problemy / usterki, Roboty dodatkowe, Przed zakryciem OK |
