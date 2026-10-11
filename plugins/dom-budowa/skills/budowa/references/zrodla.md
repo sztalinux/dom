@@ -25,6 +25,8 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 
 ## Notion – identyfikatory (konto prywatne inwestora)
 
+Pełna mapa z perspektywy „czego szukasz” (widoki, pola, słowniki): `notion-mapa.md`.
+
 | Element | ID |
 |---|---|
 | Strona DOM (pulpit) | `24af5982-09e7-806b-821a-e157ff33be42` |

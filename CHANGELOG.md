@@ -3,6 +3,18 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.2.0] – 2026-10-11
+
+- Nowa procedura `przygotowanie`: karta przygotowania do spotkania, rozmowy lub decyzji (cel, 3 najważniejsze rzeczy,
+  co wiemy u nas, pytania z „dobrą odpowiedzią” i czerwonymi flagami, macierz decyzji przy wyborze, co zabrać,
+  czego nie obiecywać, słowniczek, zapis po spotkaniu); `references/sytuacje.md` – kierownik budowy, wybór wykonawcy
+  z finalistów (rozmowa finałowa, referencje), konstruktor/architekt, węzeł betoniarski, hurtownia, odbiór, urząd.
+  „Kogo wybrać” przechodzi z `oferta` do `przygotowanie` (liczby nadal z `oferta`).
+- Nowy `budowa/references/notion-mapa.md`: struktura Notion z perspektywy „czego szukasz” (strony, bazy, widoki, pola,
+  słowniki); `tools/dokumenty.py` dołącza ją do przewodnika `00_SPIS.md`, więc jest w kontekście każdej rozmowy
+  w projekcie „Dom”. `rozwoj-harnessu`: zmiana struktury Notion = aktualizacja mapy.
+- Instrukcje projektu bez zmian (nie trzeba wklejać ponownie); `00_SPIS.md` – wgraj nową wersję.
+
 ## [1.1.0] – 2026-10-11
 
 Lekki projekt „Dom” na claude.ai: przewodnik po dokumentach zamiast pełnych dokumentów w kontekście każdej rozmowy.

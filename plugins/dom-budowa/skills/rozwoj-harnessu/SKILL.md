@@ -61,6 +61,7 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
 7. W Notion oznacz wdrożone wpisy jednym przebiegiem: Status „Wdrożone”, Wdrożono w wersji, Data wdrożenia.
    Przy nowej procedurze lub zmianie zasad zaktualizuj też stronę „Asystent AI – harness budowy” (ID w `budowa/references/zrodla.md`):
    linia „Wersja” w ramce i tabela procedur – jednym wywołaniem; nowa procedura = nowa opcja w polu „Procedura” skrzynki.
+   Zmiana struktury Notion (baza, widok, pole) → zaktualizuj `budowa/references/notion-mapa.md` (trafia do przewodnika `00_SPIS.md`).
 8. Podsumuj w 2–4 liniach: wersja, co weszło, co odrzucone/odłożone i dlaczego. Dopisz przypomnienie:
    „odśwież plugin na claude.ai (`references/claude-ai-projekt.md`, sekcja „Aktualizacja pluginu”)”; jeśli zmienił się tekst instrukcji
    w `references/claude-ai-projekt.md` – także „wklej na nowo `dist/claude-ai-projekt/instrukcje.md` w projekt »Dom«”.

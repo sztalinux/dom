@@ -14,7 +14,7 @@ Nie potrzebuje wyjaśniania podstaw, chyba że zapyta. Komunikacja po polsku.
 
 Szczegóły projektu (wymiary, materiały, decyzje, zespół) nie są w repo (jest publiczne) – gdzie ich szukać:
 `references/projekt.md`. Oryginalne dokumenty: procedura `dokumenty`.
-Gdzie leżą dane i jak je zmieniać: `references/zrodla.md`.
+Gdzie leżą dane i jak je zmieniać: `references/zrodla.md`; gdzie czego szukać w Notion: `references/notion-mapa.md`.
 
 ## Na starcie: zmiany do harnessu z Notion
 
@@ -33,7 +33,8 @@ pobierz wpisy ze Statusem „Do wdrożenia” (jedno zapytanie) i:
 
 | Gdy użytkownik… | Wczytaj |
 |---|---|
-| wkleja ofertę, wycenę, notatkę z rozmowy z wykonawcą; pyta „kogo wybrać” | `oferta` |
+| wkleja ofertę, wycenę, notatkę z rozmowy z wykonawcą; „porównaj oferty” | `oferta` |
+| ma spotkanie, rozmowę lub decyzję: „jutro spotkanie z kierownikiem”, „o co zapytać”, „przygotuj mnie”, „kogo wybrać z kilku” | `przygotowanie` (liczby z `oferta`) |
 | podaje wydatek, fakturę, paragon; prosi o Excel, kosztorys, „ile wydaliśmy” | `koszty` |
 | dyktuje notatkę, ustalenie, decyzję, zadanie; „zapisz”, „dodaj do Notion” | `notatka` |
 | pyta o projekt, rysunek, umowę, normę, technologię, „czy to dobrze” | `analiza-techniczna` |

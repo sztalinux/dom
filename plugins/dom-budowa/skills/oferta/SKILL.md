@@ -1,6 +1,6 @@
 ---
 name: oferta
-description: Przyjęcie, rozbicie i ocena oferty wykonawcy budowy (stan zero, SSO i kolejne). Używaj, gdy użytkownik wkleja ofertę, wycenę, PDF, zdjęcie kosztorysu, notatkę z rozmowy telefonicznej z ekipą, pyta „co sądzisz o tej ofercie”, „porównaj wykonawców”, „kogo wybrać”, „jakie pytania zadać wykonawcy”.
+description: Przyjęcie, rozbicie i ocena oferty wykonawcy budowy (stan zero, SSO i kolejne). Używaj, gdy użytkownik wkleja ofertę, wycenę, PDF, zdjęcie kosztorysu, notatkę z rozmowy telefonicznej z ekipą, pyta „co sądzisz o tej ofercie”, „porównaj oferty / wykonawców”, „jakie pytania zadać wykonawcy o tę ofertę”. Ostateczny wybór i przygotowanie rozmowy finałowej – procedura `przygotowanie`.
 ---
 
 # Oferta wykonawcy

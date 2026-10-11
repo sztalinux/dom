@@ -41,6 +41,7 @@ WGRANE = CONF / "stan-wgrania.json"
 PACZKA = HUB / "_Do claude.ai"
 PRZYCHODZACE = HUB / "_Przychodzące"
 SPIS = "00_SPIS.md"
+MAPA_NOTION = REPO / "plugins/dom-budowa/skills/budowa/references/notion-mapa.md"  # dołączana do przewodnika
 ZDJECIA = ("zdjęcia", "zdjecia", "foto", "photos")  # foldery ze zdjęciami z budowy – poza indeksem i paczką
 POMIN_KATALOGI = {PACZKA, REPO.parent if REPO.parent != HUB else REPO}
 KONTAKT = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+|(?<!\d)(\+48[\s-]?)?\d{3}[\s-]\d{3}[\s-]\d{3}(?!\d)")
@@ -264,6 +265,9 @@ def pisz_spis(ind: dict, plan: dict):
                 "`01_Sciaga-projektu.md`. Gdy odpowiedź wymaga treści dokumentu, którego nie ma w wiedzy projektu ani "
                 "w rozmowie – poproś inwestora o ten konkretny plik (nazwa, ścieżka, potrzebna strona/arkusz) "
                 "i nie odpowiadaj z pamięci ani z domysłów. Starsze wersje i pliki robocze zostają lokalnie."]
+    if MAPA_NOTION.exists():  # bez nagłówka H1 i akapitu o utrzymaniu pliku – zostaje od mapy pulpitu
+        mapa = MAPA_NOTION.read_text(encoding="utf-8").split("Pulpit **DOM**", 1)[-1]
+        tresc += ["", "---", "", "# Notion – co gdzie jest", "", "Pulpit **DOM**" + mapa.rstrip()]
     plik = PACZKA / SPIS
     stopka = ["", f"_Wygenerowano: {dt.date.today().isoformat()} przez `tools/dokumenty.py`._"]
     if plik.exists():
