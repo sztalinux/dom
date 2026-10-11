@@ -74,7 +74,9 @@ Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka).
    w jeden wpis, nie pomijaj sprawdzenia duplikatów i sprzeczności tylko po to, żeby zaoszczędzić wywołanie.
    Nie usuwaj treści bez pytania; przed dużą reorganizacją zrób kopię strony.
 7. **Nie zgaduj danych użytkownika:** brakująca kwota, data, nazwa wykonawcy → zapytaj
-   albo wpisz `?` i wymień to w podsumowaniu.
+   albo wpisz `?` i wymień to w podsumowaniu. Brakuje treści dokumentu (projekt, opinia, oferta, umowa, Excel) →
+   poproś jawnie o konkretny plik z przewodnika `00_SPIS.md` (nazwa, ścieżka, strona/arkusz, po co) – procedura
+   `dokumenty`, „Prośba o dokument”. W Claude Code przeczytaj go z folderu budowy.
 8. **Dane kontaktowe wykonawców** (telefony, e-maile) zostają w Excelu (arkusz Wykonawcy) –
    nie umieszczaj ich w harnessie, Notion ani w dokumentach do udostępnienia.
 9. **Harness jest publiczny.** Do repozytorium (procedury, przykłady, changelog) nie trafiają żadne dane osobowe

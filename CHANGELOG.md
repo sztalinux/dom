@@ -3,6 +3,22 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.1.0] – 2026-10-11
+
+Lekki projekt „Dom” na claude.ai: przewodnik po dokumentach zamiast pełnych dokumentów w kontekście każdej rozmowy.
+- `tools/dokumenty.py`: nowe pole `--zawartosc` (na jakie pytania odpowiada dokument, gdzie szukać); `00_SPIS.md` to teraz
+  **przewodnik po dokumentach** – każdy dokument z opisem zawartości lub eksportem, z informacją, czy jest w wiedzy projektu,
+  czy tylko na komputerze; przepisywany tylko przy zmianie treści (wcześniej codziennie lądował na liście „podmień”);
+  raport startowy liczy dokumenty bez opisu zawartości.
+- `dokumenty`: paczka = przewodnik + ściąga; pełne dokumenty i Excel tylko na wyraźną prośbę inwestora (decyzja inwestora);
+  nowa sekcja „Prośba o dokument” – gdy brakuje treści, asystent jawnie prosi o konkretny plik (nazwa, ścieżka,
+  strona/arkusz, po co) i nie odpowiada z pamięci; w Claude Code czyta plik z folderu.
+- `budowa` (zasada 7), `projekt.md`, `zrodla.md`, `koszty`: to samo zachowanie; Excel na claude.ai zawsze załączany aktualny.
+- `claude-ai-projekt.md`: instrukcje projektu skrócone do odnośników (zasady są w skillach, więc rzadko trzeba je wklejać
+  ponownie). **Wklej instrukcje na nowo** (`dist/claude-ai-projekt/instrukcje.md`). Aktualizacja pluginu: opcja
+  odświeżenia marketplace'u, jeśli jest; inaczej usuń i dodaj marketplace ponownie (opcji „Check for updates” może nie być).
+- `marketplace.json`: opis pluginu zgodny z `plugin.json` (claude.ai pokazywał stary opis).
+
 ## [1.0.3] – 2026-10-10
 
 - `rozwoj-harnessu/references/claude-ai-projekt.md`: sekcja „Wiedza projektu a kontekst” tylko opisuje działanie

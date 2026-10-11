@@ -8,7 +8,12 @@ description: Porządek w dokumentach budowy (folder budowy na komputerze inwesto
 Wszystkie pliki od projektantów, wykonawców i urzędów leżą w **folderze budowy** na komputerze inwestora
 (katalog dwa poziomy nad repo harnessu; inny – zmienna `DOM_HUB`). Inwestor wrzuca je tam, najlepiej do `_Przychodzące/`.
 Skrypt `tools/dokumenty.py` (uruchamiany automatycznie na starcie każdej sesji Claude Code) prowadzi indeks plików
-i buduje folder `_Do claude.ai/` – paczkę **aktualnych** wersji do wgrania w wiedzy projektu „Dom” na claude.ai.
+i buduje folder `_Do claude.ai/` – paczkę do wgrania w wiedzy projektu „Dom” na claude.ai.
+
+**Paczka jest lekka:** na stałe w wiedzy projektu są tylko `00_SPIS.md` – **przewodnik po dokumentach** (każdy aktualny
+dokument: co to jest, na jakie pytania odpowiada, gdzie leży) – i `01_Sciaga-projektu.md` (najważniejsze liczby
+i decyzje). Pełne dokumenty nie zajmują kontekstu każdej rozmowy: gdy odpowiedź wymaga ich treści, asystent prosi
+inwestora o konkretny plik. Excel też nie leży w projekcie – kopia szybko się starzeje, inwestor załącza aktualny.
 
 Podział pracy: skrypt wykrywa nowe/zmienione/przeniesione pliki, duplikaty i dane wrażliwe oraz kopiuje pliki do paczki.
 Ty decydujesz, co to za dokument, czy trafia do paczki i co zastępuje. Bez Twojej decyzji nowy plik do paczki nie trafi.
@@ -18,31 +23,42 @@ Ty decydujesz, co to za dokument, czy trafia do paczki i co zastępuje. Bez Twoj
 | Miejsce | Co robisz |
 |---|---|
 | Claude Code w repo (widzisz raport „[dokumenty]”) | klasyfikacja – sekcja A, aktualizacja paczki – sekcja B |
-| claude.ai (czat, telefon) | dokumenty są w wiedzy projektu; zacznij od `00_SPIS.md` i `01_Sciaga-projektu.md` |
-| Gdzie indziej, bez plików | poproś o załączenie konkretnego dokumentu (nazwa ze spisu) |
+| claude.ai (czat, telefon) | zacznij od `01_Sciaga-projektu.md`; czego tam nie ma – znajdź dokument w przewodniku `00_SPIS.md` i poproś o niego (niżej) |
+| Gdzie indziej, bez plików | poproś o załączenie konkretnego dokumentu (nazwa z przewodnika) |
+
+**Prośba o dokument** (claude.ai, telefon, Cowork – wszędzie, gdzie nie ma dostępu do folderu budowy): gdy odpowiedź
+wymaga treści dokumentu, którego nie ma w rozmowie, napisz jawnie, czego potrzebujesz – nazwa z przewodnika, ścieżka
+na komputerze, strona/arkusz i po co, np. „Potrzebuję projektu konstrukcji (`Projekt/Konstrukcja.pdf`, arkusz KT.03,
+s. 3) – sprawdzę otulinę zbrojenia płyty”. Do czasu załączenia nie odpowiadaj z pamięci ani z domysłów; możesz podać,
+co już wiadomo ze ściągi, z oznaczeniem źródła. W Claude Code nie proś – przeczytaj plik z folderu budowy.
 
 ## A. Klasyfikacja nowych plików
 
 1. Lista: raport ze startu sesji albo `python3 tools/dokumenty.py lista --nowe`.
 2. Dla każdego pliku ustal: co to jest (nazwa, folder, w razie wątpliwości pierwsza strona), kategorię, czy jest
    nowszą wersją czegoś, co już jest w paczce.
-3. Do paczki (`--eksport`) – tylko dokumenty przydatne agentom, w **jednej, najnowszej** wersji:
-   projekty (architektura, konstrukcja, instalacje – najlepiej komplet w jednym PDF zamiast arkuszy), opinie
-   geotechniczne, warunki i uzgodnienia, oferty i wyceny, umowy z wykonawcami, karty techniczne produktów,
-   kosztorys Excel (najnowszy), ściąga projektu.
-   Bez eksportu (`--bez-eksportu`, z opisem dlaczego): starsze wersje, pojedyncze arkusze zawarte w komplecie,
-   archiwa `.zip`, notatki pisane przez AI (to opinie, nie dokumenty), faktury, pliki niezwiązane z budową.
-   Dane osobowe w dokumentach (nazwiska, adres, PESEL, numer konta) **nie wykluczają** z paczki – trafia ona tylko
-   do prywatnego projektu na claude.ai (decyzja inwestora). Skrypt raz informuje, co wykrył.
-4. Nowa wersja dokumentu z paczki: nadaj jej **tę samą** `--nazwa` co poprzedniej, a starą oznacz `--bez-eksportu`
-   z opisem „starsza wersja – zastąpiona przez …”. Nazwy w paczce są stałe – dzięki temu inwestor podmienia plik,
-   a nie dokłada drugiego.
-5. Zapisz decyzje (jedno wywołanie na plik):
-   `python3 tools/dokumenty.py ustaw "<ścieżka>" --eksport --nazwa "<NN_Krotka-nazwa.ext>" --kategoria "<NN Kategoria>" --opis "<co to jest, z datą/wersją>"`
+3. **Przewodnik (`--zawartosc`)** – każdy dokument przydatny agentom, w **jednej, najnowszej** wersji: projekty
+   (architektura, konstrukcja, instalacje – najlepiej komplet w jednym PDF), opinie geotechniczne, warunki
+   i uzgodnienia, oferty i wyceny, umowy, karty techniczne produktów, kosztorys Excel. Przeczytaj dokument (duże PDF-y
+   przejrzyj: spis treści, nagłówki, arkusze) i zapisz 2–4 zdania (do ~500 znaków): **na jakie pytania odpowiada
+   i gdzie w nim szukać** – sekcje/arkusze ze stronami, rodzaje parametrów, wersja i data. Nie przepisuj faktów ani kwot –
+   te idą do ściągi i Notion; przewodnik ma być krótki, bo jest w kontekście każdej rozmowy.
+   Poza przewodnikiem (bez `--zawartosc`, `--bez-eksportu` z opisem dlaczego): starsze wersje, pojedyncze arkusze
+   zawarte w komplecie, archiwa `.zip`, notatki pisane przez AI (to opinie, nie dokumenty), faktury, pliki niezwiązane z budową.
+4. **Do wiedzy projektu (`--eksport`)** – domyślnie nic poza ściągą (przewodnik dodaje skrypt). Pełny dokument
+   eksportuj tylko na wyraźną prośbę inwestora (np. na czas etapu, w którym jest potrzebny w prawie każdej rozmowie);
+   po etapie zaproponuj `--bez-eksportu`. Dane osobowe w dokumentach nie wykluczają eksportu – projekt na claude.ai
+   jest prywatny (decyzja inwestora); skrypt raz informuje, co wykrył.
+5. Nowa wersja dokumentu: nadaj jej **tę samą** `--nazwa` co poprzedniej i nową `--zawartosc`, a starej usuń
+   z przewodnika (`--zawartosc ""`, `--bez-eksportu`, opis „starsza wersja – zastąpiona przez …”). Nazwy są stałe –
+   w przewodniku i w projekcie dokument się podmienia, a nie dubluje.
+6. Zapisz decyzje (jedno wywołanie na plik):
+   `python3 tools/dokumenty.py ustaw "<ścieżka>" --bez-eksportu --nazwa "<NN_Krotka-nazwa.ext>" --kategoria "<NN Kategoria>" --opis "<co to jest, z datą/wersją>" --zawartosc "<na jakie pytania odpowiada, gdzie szukać>"`
    Prefiksy nazw: 00 podsumowanie, 1x projekty, 2x grunt, 3x media i formalności, 4x koszty, 5x oferty, 6x umowy.
-6. Pliki z `_Przychodzące/`: przenieś do właściwego folderu tematycznego (istniejącego albo nowego, o czytelnej
+   Raport startowy pokazuje „Bez opisu zawartości w przewodniku: N” – uzupełnij je tym samym poleceniem.
+7. Pliki z `_Przychodzące/`: przenieś do właściwego folderu tematycznego (istniejącego albo nowego, o czytelnej
    nazwie). Plików poza `_Przychodzące/` nie przenoś ani nie zmieniaj ich nazw. Nigdy nic nie usuwaj.
-7. Uruchom `python3 tools/dokumenty.py` – przebuduje paczkę i pokaże, co wgrać.
+8. Uruchom `python3 tools/dokumenty.py` – przebuduje paczkę i przewodnik i pokaże, co wgrać (zwykle tylko `00_SPIS.md`).
 
 ## B. Po klasyfikacji – wiedza i paczka
 

@@ -6,7 +6,7 @@ Poprawki zgłoszone z dowolnego miejsca czekają w Notion („Zmiany do harnessu
 | Narzędzie | Skąd bierze harness | Uwagi |
 |---|---|---|
 | Claude Code (komputer) | folder repo: `CLAUDE.md` → `AGENTS.md`, skille z `.claude/skills` (dowiązanie) | jedyne miejsce, które zapisuje zmiany do repo (commit + push) |
-| claude.ai – czat, telefon, Cowork | plugin z marketplace = repo GitHub; projekt „Dom”: Instructions + wiedza projektu (paczka `_Do claude.ai/`, procedura `dokumenty`) – `claude-ai-projekt.md` | nowa wersja: push z podbitym numerem, potem „Check for updates” (albo „Sync automatically”, jeśli organizacja pozwala); hooki pluginu nie działają w czacie, działają w Cowork |
+| claude.ai – czat, telefon, Cowork | plugin z marketplace = repo GitHub; projekt „Dom”: Instructions + wiedza projektu (paczka `_Do claude.ai/`, procedura `dokumenty`) – `claude-ai-projekt.md` | nowa wersja: push z podbitym numerem, potem ręczne odświeżenie pluginu (`claude-ai-projekt.md`) albo „Sync automatically”, jeśli organizacja pozwala; hooki pluginu nie działają w czacie, działają w Cowork |
 | Gemini CLI | `GEMINI.md` → `AGENTS.md`, `gemini-extension.json`, skille z `.agents/skills` | praca w katalogu repo; Notion jako serwer MCP w settings.json |
 | Gemini w przeglądarce (Gem) | `dist/gemini-gem/` z `tools/build.py` | ręczne wgranie plików; brak automatycznego doboru procedur |
 | Codex / inne zgodne z AGENTS.md | `AGENTS.md`, `.agents/skills` | praca w katalogu repo |

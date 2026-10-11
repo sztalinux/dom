@@ -7,12 +7,14 @@ Domyślnie: dwa poziomy nad repozytorium (…/Dom/AI/dom → …/Dom), albo zmie
     python3 tools/dokumenty.py                 # skan + przebudowa paczki + raport (uruchamia hook na starcie)
     python3 tools/dokumenty.py --dry-run       # to samo bez zapisu
     python3 tools/dokumenty.py ustaw "<ścieżka>" --eksport --nazwa "…" --opis "…" --kategoria "…"
-    python3 tools/dokumenty.py ustaw "<ścieżka>" --bez-eksportu --opis "…"
+    python3 tools/dokumenty.py ustaw "<ścieżka>" --bez-eksportu --opis "…" --zawartosc "…"
     python3 tools/dokumenty.py lista [--nowe]  # stan indeksu
     python3 tools/dokumenty.py wgrane          # potwierdź: paczka wgrana do projektu na claude.ai
 
 Zasady:
 - Do paczki trafia tylko plik oznaczony --eksport (nowy plik nigdy nie trafia sam).
+- `00_SPIS.md` w paczce to przewodnik po dokumentach: każdy plik z --eksport lub --zawartosc (co zawiera, gdzie jest).
+  Dzięki niemu pełne dokumenty nie muszą leżeć w wiedzy projektu – agent prosi o konkretny plik, gdy go potrzebuje.
 - Skrypt usuwa pliki wyłącznie w folderze paczki; plików w hubie nie przenosi i nie usuwa.
 - Foldery `Zdjęcia*` / `Foto*` (zdjęcia z budowy, procedura `dziennik`) są pomijane w całości.
 - Lista „do wgrania” liczona jest względem ostatniego potwierdzenia „wgrane”, nie ostatniego uruchomienia.
@@ -236,16 +238,39 @@ def zbuduj_paczke(ind: dict, dry: bool) -> list:
     return ostrz
 
 
+def w_przewodniku(w: dict) -> bool:
+    return bool(w.get("eksport") or w.get("zawartosc")) and w.get("kategoria") != "duplikat"
+
+
 def pisz_spis(ind: dict, plan: dict):
-    wiersze = ["# Spis dokumentów budowy", "",
-               f"Wygenerowano: {dt.date.today().isoformat()} przez `tools/dokumenty.py`. Tylko aktualne wersje – "
-               "starsze i robocze zostają lokalnie. Kolumna „Źródło” to ścieżka w folderze budowy na komputerze.", "",
-               "| Plik | Kategoria | Co to jest | Data pliku | Źródło |", "|---|---|---|---|---|"]
-    for n, sciezka in sorted(plan.items(), key=lambda x: (ind["pliki"][x[1]].get("kategoria", ""), x[0])):
-        w = ind["pliki"][sciezka]
+    """Przewodnik po dokumentach (00_SPIS.md). Przepisywany tylko przy zmianie treści – inaczej codziennie
+    trafiałby na listę „podmień”."""
+    w_paczce = {s: n for n, s in plan.items()}
+    tresc, kat = [], None
+    for s, w in sorted(((s, w) for s, w in ind["pliki"].items() if w_przewodniku(w)),
+                       key=lambda x: (x[1].get("kategoria", ""), nazwa_w_paczce(*x))):
+        if w.get("kategoria", "") != kat:
+            kat = w.get("kategoria", "")
+            tresc += ["", f"## {kat or 'Bez kategorii'}"]
         data = dt.date.fromtimestamp(w["mtime"]).isoformat()
-        wiersze.append(f"| {n} | {w.get('kategoria', '')} | {w.get('opis', '')} | {data} | {sciezka} |")
-    (PACZKA / SPIS).write_text("\n".join(wiersze) + "\n", encoding="utf-8")
+        gdzie = (f"w wiedzy projektu jako `{w_paczce[s]}`" if s in w_paczce
+                 else f"tylko na komputerze inwestora: `{s}` – gdy potrzebna treść, poproś o załączenie")
+        tresc += ["", f"### {Path(nazwa_w_paczce(s, w)).stem}",
+                  f"- **Co to jest:** {w.get('opis', '?')} (plik z {data})",
+                  f"- **Zawiera:** {w.get('zawartosc') or '— brak opisu zawartości (procedura `dokumenty`, sekcja A)'}",
+                  f"- **Gdzie:** {gdzie}"]
+    naglowek = ["# Przewodnik po dokumentach budowy", "",
+                "Każdy aktualny dokument budowy: co zawiera i gdzie jest. Najważniejsze liczby i decyzje są w "
+                "`01_Sciaga-projektu.md`. Gdy odpowiedź wymaga treści dokumentu, którego nie ma w wiedzy projektu ani "
+                "w rozmowie – poproś inwestora o ten konkretny plik (nazwa, ścieżka, potrzebna strona/arkusz) "
+                "i nie odpowiadaj z pamięci ani z domysłów. Starsze wersje i pliki robocze zostają lokalnie."]
+    plik = PACZKA / SPIS
+    stopka = ["", f"_Wygenerowano: {dt.date.today().isoformat()} przez `tools/dokumenty.py`._"]
+    if plik.exists():
+        stare = plik.read_text(encoding="utf-8").splitlines()
+        if stare[:-2] == naglowek + tresc:
+            return
+    plik.write_text("\n".join(naglowek + tresc + stopka) + "\n", encoding="utf-8")
 
 
 def stan_paczki() -> dict:
@@ -279,7 +304,12 @@ def cmd_sprawdz(a):
         zapisz(INDEKS, ind)
     wg = do_wgrania()
     eksport = sum(1 for w in ind["pliki"].values() if w.get("eksport"))
-    r = [f"[dokumenty] Folder budowy: {HUB} – {len(ind['pliki'])} plików, w paczce dla claude.ai: {eksport}."]
+    przew = [w for w in ind["pliki"].values() if w_przewodniku(w)]
+    r = [f"[dokumenty] Folder budowy: {HUB} – {len(ind['pliki'])} plików, w paczce dla claude.ai: {eksport}, "
+         f"w przewodniku: {len(przew)}."]
+    bez = sum(1 for w in przew if not w.get("zawartosc"))
+    if bez:
+        r.append(f"  Bez opisu zawartości w przewodniku: {bez} (`lista`, procedura `dokumenty`, sekcja A).")
     if zd["nowe"]:
         r.append(f"  Nowe pliki do sklasyfikowania ({len(zd['nowe'])}) – procedura `dokumenty`:")
         r += lista(zd["nowe"])
@@ -323,11 +353,11 @@ def cmd_ustaw(a):
         return 1
     if a.eksport is not None:
         w["eksport"] = a.eksport
-    for pole in ("nazwa", "opis", "kategoria"):
+    for pole in ("nazwa", "opis", "kategoria", "zawartosc"):
         if getattr(a, pole) is not None:
             w[pole] = getattr(a, pole)
-    if w.get("eksport") and not w.get("opis"):
-        print("Plik w paczce musi mieć --opis (trafia do spisu).")
+    if (w.get("eksport") or w.get("zawartosc")) and not w.get("opis"):
+        print("Plik w paczce lub w przewodniku musi mieć --opis.")
         return 1
     w["status"] = "sklasyfikowany"
     zapisz(INDEKS, ind)
@@ -343,7 +373,8 @@ def cmd_lista(a):
             continue
         znak = "E" if w.get("eksport") else ("?" if w["status"] == "nowy" else "-")
         print(f"{znak} {s}" + (f"  →  {nazwa_w_paczce(s, w)}" if w.get("eksport") else "")
-              + (f"  [{w.get('kategoria')}] {w.get('opis', '')}" if w.get("kategoria") else ""))
+              + (f"  [{w.get('kategoria')}] {w.get('opis', '')}" if w.get("kategoria") else "")
+              + ("" if not w_przewodniku(w) else ("  (zawartość: tak)" if w.get("zawartosc") else "  (zawartość: BRAK)")))
     return 0
 
 
@@ -365,6 +396,7 @@ def main() -> int:
     u.add_argument("--nazwa")
     u.add_argument("--opis")
     u.add_argument("--kategoria")
+    u.add_argument("--zawartosc", help="2–4 zdania do przewodnika: na jakie pytania odpowiada dokument")
     lp = sub.add_parser("lista")
     lp.add_argument("--nowe", action="store_true")
     sub.add_parser("wgrane")

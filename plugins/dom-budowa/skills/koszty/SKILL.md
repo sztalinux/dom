@@ -15,9 +15,9 @@ Układ arkuszy i kolumn: `references/arkusze.md`.
 ## Gdzie jest plik
 
 - **Claude Code:** plik leży w folderze budowy (dwa poziomy nad repo); aktualną wersję wskazuje indeks dokumentów
-  (`python3 tools/dokumenty.py lista`, plik oznaczony do paczki jako `40_Kosztorys-stan-zero.xlsx`). Nigdy nie kopiuj go do repo.
-- **claude.ai w projekcie „Dom”:** `40_Kosztorys-stan-zero.xlsx` w wiedzy projektu – stan z ostatniego wgrania paczki;
-  jeśli liczby mają być bieżące, poproś o załączenie aktualnego pliku.
+  (`python3 tools/dokumenty.py lista`, wpis `40_Kosztorys-stan-zero.xlsx` w przewodniku). Nigdy nie kopiuj go do repo.
+- **claude.ai w projekcie „Dom”:** Excela nie ma w wiedzy projektu (kopia szybko się starzeje) – poproś o załączenie
+  aktualnego pliku; z przewodnika `00_SPIS.md` wiesz, które arkusze są potrzebne.
 - **Czat / telefon / Cowork poza projektem:** plik załączony w bieżącej rozmowie.
 
 ## A. Pytanie o liczby („ile wydaliśmy”, „porównaj oferty”, „co przekracza plan”)

@@ -13,7 +13,7 @@ dokumenty w folderze budowy na komputerze.
 ```
 Dom/                              ← folder budowy (centrum dokumentów, poza gitem)
   _Przychodzące/                  ← tu wrzucasz nowe pliki od projektantów i wykonawców
-  _Do claude.ai/                  ← paczka aktualnych dokumentów (generowana) → wiedza projektu „Dom” na claude.ai
+  _Do claude.ai/                  ← paczka (generowana): przewodnik po dokumentach + ściąga → wiedza projektu „Dom” na claude.ai
   Zdjęcia/                        ← zdjęcia z budowy (RRRR-MM-DD_<krok>/), poza indeksem i paczką
   Ściąga projektu.md              ← najważniejsze liczby i decyzje (trafia do paczki)
   .dom/                           ← indeks dokumentów, stan wgrania, lista słów zakazanych w repo
@@ -37,7 +37,7 @@ Claude Code (komputer, start sesji) ◄─────────────�
    ├─ hook: skan folderu budowy → paczka `_Do claude.ai/` + lista „do wgrania”
    ├─ klasyfikuje nowe dokumenty (procedura `dokumenty`)
    └─ wdraża zmiany harnessu → wersja → commit → push ──► GitHub sztalinux/dom
-                                                               │ „Check for updates” (ręcznie) lub synchronizacja
+                                                               │ ręczne odświeżenie pluginu (claude-ai-projekt.md)
 claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ───────┘
                                   ◄── dokumenty: wgrywasz paczkę do projektu „Dom” (ręcznie)
 ```
@@ -69,22 +69,22 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
 3. W `Dom/AI/dom` uruchom `claude`. `/mcp` – jeśli jest „claude.ai Notion”, gotowe.
 4. claude.ai → Customize → Plugins → Add marketplace → `sztalinux/dom` → zainstaluj `dom-budowa`,
    włącz „Sync automatically” (jeśli organizacja na to pozwala). Usuń wcześniej wgrany z pliku plugin `dom-budowa`.
-   Bez synchronizacji: po każdej nowej wersji Customize → Plugins → `dom-budowa` → „Check for updates”.
-   Gdyby organizacja blokowała marketplace z GitHuba: `python3 tools/build.py` i wgraj `dist/dom-budowa.plugin`
-   przez „Upload plugin” (wtedy każda aktualizacja to ponowne wgranie).
+   Bez synchronizacji – jak pobrać nową wersję: `plugins/dom-budowa/skills/rozwoj-harnessu/references/claude-ai-projekt.md`.
 5. claude.ai → projekt „Dom”:
    - **Instructions:** `python3 tools/build.py` i wklej `dist/claude-ai-projekt/instrukcje.md` – dzięki temu każda
      wiadomość w projekcie korzysta z harnessu i Notion bez wpisywania „/” (opis:
      `plugins/dom-budowa/skills/rozwoj-harnessu/references/claude-ai-projekt.md`). Dawny `START.md` usuń.
-   - **Wiedza projektu:** wgraj zawartość `Dom/_Do claude.ai/`, potem `python3 tools/dokumenty.py wgrane`.
+   - **Wiedza projektu:** wgraj zawartość `Dom/_Do claude.ai/` (przewodnik `00_SPIS.md` + ściąga), potem
+     `python3 tools/dokumenty.py wgrane`. Pełne dokumenty asystent pobiera na prośbę – załączasz je do rozmowy.
 
 ## Na co dzień
 
 - Nowy plik od projektanta/wykonawcy → wrzuć do `Dom/_Przychodzące/` i uruchom `claude` w `Dom/AI/dom`.
-  Asystent go posortuje i powie, co podmienić w projekcie „Dom” na claude.ai. Po wgraniu napisz „wgrałem”.
+  Asystent go posortuje, opisze w przewodniku `00_SPIS.md` i powie, co podmienić w projekcie „Dom” (zwykle sam przewodnik).
+  Po wgraniu napisz „wgrałem”. Gdy na telefonie asystent poprosi o dokument – załącz wskazany plik.
 - Poprawki „na przyszłość” z telefonu trafiają do skrzynki w Notion; Claude Code wdroży je przy starcie.
 - Dzień na budowie → powiedz asystentowi, co się działo (telefon wystarczy) – trafi do Dziennika budowy; zdjęcia wrzuć do `Dom/Zdjęcia/RRRR-MM-DD_<krok>/`.
 - Przed krokiem „bez odwrotu” (beton, zasypka, tynki) zapytaj „co sprawdzić przed …” – dostaniesz bramkę z listą zdjęć do zrobienia.
 - Każda zmiana w repo = podbita wersja w `plugins/dom-budowa/.claude-plugin/plugin.json` (inaczej claude.ai jej nie pobierze).
-  Po pushu na claude.ai: Customize → Plugins → `dom-budowa` → „Check for updates” (o ile nie działa synchronizacja).
+  Po pushu odśwież plugin na claude.ai (o ile nie działa synchronizacja) – `rozwoj-harnessu/references/claude-ai-projekt.md`.
 - Procedury działają same – piszesz normalnie. `/` (np. `/oferta`, na claude.ai `dom-budowa:oferta`) tylko gdy chcesz wymusić procedurę.

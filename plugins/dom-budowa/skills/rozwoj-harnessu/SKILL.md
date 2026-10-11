@@ -6,7 +6,7 @@ description: Zgłaszanie i wdrażanie zmian w harnessie budowy (procedury, zasad
 # Rozwój harnessu
 
 Źródło harnessu: **publiczne** repozytorium GitHub `sztalinux/dom` (marketplace z pluginem `dom-budowa`). Claude na koncie (czat, telefon, Cowork)
-pobiera z niego plugin – po nowej wersji przez „Check for updates” (albo synchronizację, jeśli organizacja pozwala).
+pobiera z niego plugin – po nowej wersji inwestor odświeża go ręcznie (albo synchronizacja, jeśli organizacja pozwala).
 Konfiguracja projektu „Dom” na claude.ai (instrukcje, wiedza): `references/claude-ai-projekt.md`. Zmiany trafiają do repo dwiema drogami:
 
 | Gdzie jesteś | Co robisz |
@@ -62,7 +62,7 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
    Przy nowej procedurze lub zmianie zasad zaktualizuj też stronę „Asystent AI – harness budowy” (ID w `budowa/references/zrodla.md`):
    linia „Wersja” w ramce i tabela procedur – jednym wywołaniem; nowa procedura = nowa opcja w polu „Procedura” skrzynki.
 8. Podsumuj w 2–4 liniach: wersja, co weszło, co odrzucone/odłożone i dlaczego. Dopisz przypomnienie:
-   „claude.ai → Customize → Plugins → dom-budowa → Check for updates”; jeśli zmienił się tekst instrukcji
+   „odśwież plugin na claude.ai (`references/claude-ai-projekt.md`, sekcja „Aktualizacja pluginu”)”; jeśli zmienił się tekst instrukcji
    w `references/claude-ai-projekt.md` – także „wklej na nowo `dist/claude-ai-projekt/instrukcje.md` w projekt »Dom«”.
 
 Zmiany, o które inwestor prosi bezpośrednio w Claude Code, wdrażasz od razu tymi samymi krokami 2–8 (bez skrzynki).
