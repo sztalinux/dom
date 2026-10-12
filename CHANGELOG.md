@@ -3,6 +3,12 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.7.1] – 2026-10-12
+
+- `inbox`: trzy strefy – na wierzchu tylko nowe wpisy, niejasne z pytaniem przenoszone do „❓ Czeka na Twoją odpowiedź”
+  (tam odpowiedź pod pytaniem), załatwione do „Przetworzone”; linia „🤖” z ostatniego przebiegu jest zastępowana, nie dopisywana.
+  Strona DOM: nowy zwijany nagłówek „❓ Czeka na Twoją odpowiedź” i nowa podpowiedź „Jak używać”.
+
 ## [1.7.0] – 2026-10-12
 
 - Notion, Informacje: pola **Istotność** (Kluczowe / Ważne / Ciekawostka) i **Mój komentarz** (pole inwestora); na stronie

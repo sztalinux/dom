@@ -11,27 +11,31 @@ do inwestora z pytaniami, nie trafiają dalej. Dzięki temu w Notatniku i Bazie 
 
 Miejsce: strona **DOM** (`24af5982-09e7-806b-821a-e157ff33be42`) → rozwijany nagłówek **„📥 Inbox”** (pierwszy na stronie).
 Inwestor pisze tam jak w notesie – punkt pod punktem, bez pól i statusów; źródło w nawiasie, jeśli je zna.
-Pod spodem zwijany nagłówek **„Przetworzone”** – tam asystent przenosi załatwione wpisy. Układ:
+Trzy strefy, żeby nowe wpisy nie mieszały się ze starymi – **na wierzchu zawsze tylko to, czego asystent jeszcze nie widział**:
 
 ```
 ## 📥 Inbox {toggle}
-	- wpis inwestora (źródło, data – jeśli podał)
-	- wpis niejasny
-		- ❓ asystent (12.10): pytanie 1; pytanie 2 – propozycja interpretacji
-		- odpowiedź inwestora (dopisana pod spodem albo poprawiony wpis)
+	<details> Jak używać </details>
+	🤖 13.10: przetworzono 3, czeka na Ciebie 2          ← jedna linia z ostatniego przebiegu (zastępowana, nie dopisywana)
+	- nowy wpis inwestora (źródło, data – jeśli podał)  ← NOWE: pierwszy poziom
+	### ❓ Czeka na Twoją odpowiedź {toggle}
+		- wpis niejasny
+			- ❓ asystent (12.10): pytanie 1; pytanie 2 – propozycja interpretacji
+			- odpowiedź inwestora (pod pytaniem)
 	### Przetworzone {toggle}
 		- ~~wpis~~ → Notatnik: <link> (12.10)
 ```
-**Wpis = każdy blok pierwszego poziomu pod „📥 Inbox”** – akapit albo punkt (inwestor pisze różnie, np. akapit
-zaczynający się od daty), z wyjątkiem rozwijanego „Jak używać”, pustych linii i „Przetworzone”. Jeden blok może zawierać
-kilka spraw – rozłóż je osobno. Bloki zagnieżdżone pod wpisem to dialog (pytania „❓ asystent (data):” i odpowiedzi
-inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i przenoś do „Przetworzone”.
+**Nowy wpis = każdy blok pierwszego poziomu pod „📥 Inbox”** – akapit albo punkt (inwestor pisze różnie, np. akapit
+zaczynający się od daty), z wyjątkiem „Jak używać”, linii „🤖”, pustych linii i dwóch zwijanych nagłówków (także gdy
+inwestor dopisze coś pod nimi na pierwszym poziomie – to też nowy wpis). Jeden blok może zawierać kilka spraw – rozłóż je
+osobno. W „❓ Czeka na Twoją odpowiedź” bloki zagnieżdżone pod wpisem to dialog (pytania „❓ asystent (data):” i odpowiedzi
+inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
 
 ## Procedura
 
-1. **Pobierz** stronę DOM i weź wszystkie wpisy z „📥 Inbox” (definicja wyżej); wpis
-   z punktem „❓ asystent” bez odpowiedzi pod spodem – pomiń (czeka na inwestora), z odpowiedzią – oceń ponownie.
-   Brak wpisów → jedna linia „Inbox pusty” (+ liczba czekających na Twoją odpowiedź).
+1. **Pobierz** stronę DOM i weź: nowe wpisy (pierwszy poziom, definicja wyżej) oraz wpisy z „❓ Czeka na Twoją
+   odpowiedź”, pod których ostatnim pytaniem inwestor coś dopisał (albo poprawił wpis) – te oceń ponownie. Wpisy w „❓”
+   bez odpowiedzi – pomiń (czekają na inwestora). Brak obu → jedna linia „Inbox pusty” (+ liczba czekających w „❓”).
 2. **Dla każdego wpisu ustal** (razem z dialogiem pod nim):
    - **Co to jest** – jedna z klas: ustalenie/decyzja, pytanie do kogoś, ryzyko, zadanie z terminem, relacja z dnia
      na budowie, wiedza ogólna (coś, co zobaczył/usłyszał), wydatek/koszt, oferta, dokument do posortowania,
@@ -42,8 +46,8 @@ inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i 
    - **Czy ma źródło** – dla wiedzy ogólnej i ustaleń: kto powiedział / skąd (pole Źródło albo treść). Własne
      przemyślenie inwestora to też źródło („własne”), ale musi być nazwane.
    - **Czy to duplikat** – szukaj w docelowej bazie (Notatnik, Informacje, TASKS) 2–3 słów kluczowych.
-3. **Niejednoznaczny albo bez źródła → nie przetwarzaj.** Dopisz pod wpisem punkt zagnieżdżony
-   „❓ asystent (data): …” z 1–3 konkretnymi pytaniami (co dokładnie, skąd, kiedy, czego dotyczy – zaproponuj
+3. **Niejednoznaczny albo bez źródła → nie przetwarzaj.** Przenieś wpis do „❓ Czeka na Twoją odpowiedź” i dopisz pod nim
+   punkt zagnieżdżony „❓ asystent (data): …” z 1–3 konkretnymi pytaniami (co dokładnie, skąd, kiedy, czego dotyczy – zaproponuj
    interpretację do potwierdzenia: „Czy chodzi o X?”). Inwestor odpowiada pod spodem albo poprawia wpis.
    Wpis z odpowiedzią – połącz wpis + odpowiedź i oceń ponownie; nadal niejasny → kolejne pytanie, ale wskaż, co już wiadomo.
    W rozmowie powtórz pytania (inwestor może odpowiedzieć od razu – wtedy dokończ w tym samym przebiegu).
@@ -61,13 +65,14 @@ inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i 
    | „dostałem plik” | `dokumenty` | w Claude Code – klasyfikacja; gdzie indziej – przypomnienie, żeby wrzucić do `_Przychodzące/` |
    | „asystent ma zawsze…” | `rozwoj-harnessu` (A) | skrzynka „Zmiany do harnessu” |
    | „pomysł: …” na asystenta, Notion, Excel, zdjęcia, automatyzację | `rozwoj-harnessu` (C) | baza „Pomysły na rozwój”, od razu z analizą |
-5. **Zamknij wpis:** przenieś go (z dialogiem) do „Przetworzone” jako `~~wpis~~ → <gdzie>: <link> (data)`
+5. **Zamknij wpis:** przenieś go (z dialogiem, z pierwszego poziomu albo z „❓”) do „Przetworzone” jako `~~wpis~~ → <gdzie>: <link> (data)`
    (albo „→ wiersz do Excela: …”). Zdublowane / nieprzydatne → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
 6. **Zapisy wsadowo** (`budowa`, zasada 6): najpierw wszystkie odczyty, potem jedno wywołanie na bazę docelową,
-   na końcu **jedna** edycja strony DOM (pytania pod wpisami + przeniesienia do „Przetworzone”). Edytuj tylko sekcję
+   na końcu **jedna** edycja strony DOM (przeniesienia do „❓” z pytaniami, do „Przetworzone”, linia „🤖”).
+   Po niej na pierwszym poziomie Inboxu nie zostaje żaden wpis, który asystent widział. Edytuj tylko sekcję
    „📥 Inbox” – reszta strony DOM nietknięta. Przy > 3 wpisach pokaż plan (tabela: wpis | klasa | gdzie trafi |
    pytanie?) i poproś o „ok”, chyba że inwestor powiedział „bez pytania”.
-7. **Podsumuj:** przetworzone (wpis → gdzie), do wyjaśnienia (wpis: pytania), pominięte. Zmienione / Otwarte / Następny krok.
+7. **Podsumuj** (także przy ręcznym przebiegu zaktualizuj linię „🤖”): przetworzone (wpis → gdzie), do wyjaśnienia (wpis: pytania), pominięte. Zmienione / Otwarte / Następny krok.
    „Przetworzone” czyści przegląd tygodnia (wpisy starsze niż 14 dni, po zgodzie) – linki są już w docelowych miejscach.
 
 ## Tryb wieczorny (zaplanowane zadanie, bez inwestora)
@@ -78,8 +83,8 @@ Inbox może przerabiać zaplanowane zadanie (np. codziennie o 20:00 na claude.ai
   sprzeczności (SP) ani zmianą w Excelu: takie wpisy zostaw z pytaniem „❓ asystent: potwierdź, że to decyzja”;
 - nie zmieniaj Harmonogramu (terminy kroków) – zaproponuj zmianę pytaniem pod wpisem; zadania i „czekam na” zapisuj;
 - potem przeanalizuj nowe pomysły w bazie „Pomysły na rozwój” (Status Nowy lub pusty) – `rozwoj-harnessu`, sekcja C;
-- na końcu dopisz na górze Inboxu jedną linię: „🤖 <data>: przetworzono n, pytania przy m; pomysły przeanalizowane: k”
-  – inwestor widzi to rano.
+- na końcu ustaw pod „Jak używać” jedną linię (zastąp poprzednią): „🤖 <data>: przetworzono n, czeka na Ciebie m
+  (rozwiń ❓); pomysły przeanalizowane: k” – inwestor widzi to rano, a na wierzchu ma tylko nowe wpisy.
 
 ## Zasady
 

@@ -30,7 +30,7 @@ Pobierz w jak najmniejszej liczbie zapytań:
    bez analizy (przeanalizuj je – `rozwoj-harnessu`, sekcja C) i „Pytania do mnie”; nie namawiaj do wdrażania.
 8. **Dziennik budowy** (ID: `dziennik/references/notion-dziennik.md`): wpisy z 7 dni – dni pracy ekipy
    i własne, otwarte problemy, kroki zakryte bez zdjęć („Przed zakryciem OK” odznaczone).
-9. **Inbox** (strona DOM → „📥 Inbox”): liczba wpisów do przetworzenia i tych z pytaniem „❓ asystent” bez odpowiedzi
+9. **Inbox** (strona DOM → „📥 Inbox”): liczba nowych wpisów (pierwszy poziom) i wpisów w „❓ Czeka na Twoją odpowiedź” bez odpowiedzi
    (wymień wpis i pytanie); „Przetworzone” starsze niż 14 dni → do wyczyszczenia (Porządki).
 10. **Spójność** (inwestor edytuje Notion ręcznie – wychwyć rozjazdy, nie naprawiaj bez zgody):
     - Notatnik „Ustalone”/„Zrobione” z wiedzą techniczną bez relacji „Wiedza” → kandydaci do `wiedza`, sekcja F;
