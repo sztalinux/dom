@@ -3,6 +3,11 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.4.2] – 2026-10-12
+
+- Strona DOM: Inbox i Zadania jako rozwijane nagłówki, reszta w zakładkach (Do zamknięcia, Notatnik, Dziennik, Wiedza,
+  Wykonawcy, Projekt ze ściągą, Rzadko) – mapa Notion zaktualizowana.
+
 ## [1.4.1] – 2026-10-12
 
 - `inbox`: Inbox to sekcja „📥 Inbox” (toggle, wolny tekst) na stronie DOM, nie baza – inwestor pisze punkt pod punktem;

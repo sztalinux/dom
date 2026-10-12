@@ -5,30 +5,32 @@ Plik trafia też do przewodnika (`tools/dokumenty.py`) – strona Notion „📑
 synchronizuje sam, więc asystent na claude.ai ma zawsze aktualną mapę.
 Zmiana struktury Notion (nowa baza, widok, pole) → zaktualizuj ten plik (procedura `rozwoj-harnessu`).
 
-Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – sekcje to rozwijane nagłówki:
+Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – na górze dwa rozwijane nagłówki, pod nimi zakładki:
 
 ```
 DOM
-├─ 📥 Inbox (toggle, wolny tekst) – luźne wpisy inwestora punkt pod punktem; asystent przetwarza („przerób inbox”), pytania dopisuje pod wpisem
-├─ ✅ Zadania → TASKS (2) (baza)
-├─ 📐 Dane projektu (ściąga) – parametry budynku, fundament, ściany, grunt, instalacje – JEDYNE źródło ściągi
-├─ 🔴 Do zamknięcia przed <etap> – checklista + linki do Notatnika; bramki → „Stan zero – punkty bez odwrotu”
-├─ 📚 Baza wiedzy → Tematy, Informacje, Rozmowy i źródła, Rejestr sprzeczności
-├─ 📅 Przeglądy tygodniowe (najnowszy na górze)
-├─ 👷 Wybór wykonawcy → „Wybór wykonawcy – stan zero” (rundy, zakres, wagi) + baza Porównanie wykonawców
-├─ 📒 Notatnik budowy (baza) · 📓 Dziennik budowy (baza)
-├─ 🗂 Strony i materiały → Etapy budowy – przewodnik, Archiwum – stare notatki, linki
-├─ 👥 Kontakty – kluczowe role (pełna lista wykonawców w Excelu) · 📁 Dokumenty i linki
-├─ 🤖 Asystent AI → krótka strona z wersją harnessu + baza Zmiany do harnessu (procedury są w pluginie, nie w Notion)
-└─ podstrony: 🚧 Stan zero – punkty bez odwrotu · 🔌 Plan przepustów i tras instalacji · 📑 Przewodnik po dokumentach i Notion
+├─ 📥 Inbox (toggle, wolny tekst) – luźne wpisy inwestora punkt pod punktem; asystent przetwarza („przerób inbox”),
+│     pytania dopisuje pod wpisem; w środku „Przetworzone” (ślad)
+├─ ✅ Zadania (toggle) → TASKS (2) (baza)
+└─ zakładki:
+   ├─ 🔴 Do zamknięcia – checklista przed bieżącym etapem + link do „Stan zero – punkty bez odwrotu”
+   ├─ 📒 Notatnik → Notatnik budowy (baza)
+   ├─ 📓 Dziennik → Dziennik budowy (baza)
+   ├─ 📚 Wiedza → strona Baza wiedzy (Tematy, Informacje, Rozmowy i źródła, Rejestr sprzeczności)
+   ├─ 👷 Wykonawcy → „Wybór wykonawcy – stan zero” (rundy, zakres, wagi) + baza Porównanie wykonawców
+   ├─ 📐 Projekt → „Dane projektu (ściąga)” – JEDYNE źródło ściągi; Etapy budowy – przewodnik, Stan zero – punkty bez odwrotu,
+   │     Plan przepustów i tras instalacji
+   └─ 🗂 Rzadko → Dokumenty (+ 📑 Przewodnik po dokumentach i Notion), Kontakty – kluczowe role (pełna lista w Excelu),
+         Przeglądy tygodniowe, Archiwum – stare notatki, Asystent AI (wersja harnessu + skrzynka Zmiany do harnessu)
 ```
+
 
 | Czego szukasz | Gdzie (strona / baza → widok/sekcja) | ID | Najważniejsze pola |
 |---|---|---|---|
 | Luźne wpisy do przetworzenia; pytania asystenta do inwestora | DOM → „📥 Inbox” (toggle): punkty 1. poziomu = wpisy, „❓ asystent” pod wpisem = pytanie; „Przetworzone” = ślad | `24af5982-09e7-806b-821a-e157ff33be42` | – (wolny tekst) |
-| Parametry projektu | DOM → 📐 Dane projektu (ściąga) | `24af5982-09e7-806b-821a-e157ff33be42` | – |
+| Parametry projektu | DOM → zakładka 📐 Projekt → Dane projektu (ściąga) | `24af5982-09e7-806b-821a-e157ff33be42` | – |
 | Jakie mamy dokumenty, co w którym jest, gdzie leżą | 📑 Przewodnik po dokumentach i Notion (generowany – nie edytuj) | `3f6f5982-09e7-81f5-bade-ec877d8d936a` | – |
-| Co blokuje bieżący etap | DOM → 🔴 Do zamknięcia…; Notatnik → widok „🔴 Krytyczne i otwarte” | `view://3f3f5982-09e7-8125-a50b-000ce287ad48` | Status Otwarte/Do omówienia, Priorytet Krytyczne/Ważne |
+| Co blokuje bieżący etap | DOM → zakładka 🔴 Do zamknięcia; Notatnik → widok „🔴 Krytyczne i otwarte” | `view://3f3f5982-09e7-8125-a50b-000ce287ad48` | Status Otwarte/Do omówienia, Priorytet Krytyczne/Ważne |
 | Otwarte pytania do konstruktora, architekta, kierownika… | Notatnik → „❓ Pytania do projektantów” (wg Do kogo) | `collection://7423414a-707b-415f-8751-c6ab7ebb6753`, `view://3f3f5982-09e7-81d2-a527-000caeaed4ea` | Typ Pytanie/Decyzja, Status otwarte, **Do kogo** |
 | Co ustaliliśmy, decyzje | Notatnik → „✅ Ustalone i zrobione” | `view://3f3f5982-09e7-8172-a666-000cb0777dc1` | Status Ustalone/Zrobione/Odrzucone, Typ Decyzja |
 | Notatki wg etapu / branży | Notatnik → „🏗 Wg etapu”, „🔧 Wg branży” | `view://3f3f5982-09e7-81f8-9782-000c7f49c705`, `view://3f3f5982-09e7-81e7-bfd0-000c9c2a8e8c` | Etap, Branża, Temat, Dziennik budowy |
