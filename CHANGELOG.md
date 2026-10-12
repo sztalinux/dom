@@ -3,6 +3,13 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.8.1] – 2026-10-12
+
+- `przeglad-tygodnia`: przypomnienie przed krokiem już po 7 dniach (w tygodniu tuż przed krokiem); pod koniec etapu
+  (następny za ≤ 8 tygodni) do „Wiedzy na teraz” wchodzi następny etap, a widok „🎯 Na teraz” obejmuje oba.
+- Notion, Baza wiedzy: blok „🗂 Wiedza wg etapu” z zakładką na każdy etap.
+- `budowa`, zasada 6: limit zapytań SQL w Notion – czytaj widokami (tryb view), przy limicie przejdź na view.
+
 ## [1.8.0] – 2026-10-12
 
 - `wiedza`: Etap informacji = **kiedy wiedza będzie potrzebna** (najwcześniejszy etap decyzji / zamówienia / przewidzenia),

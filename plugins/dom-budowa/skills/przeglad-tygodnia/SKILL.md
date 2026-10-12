@@ -17,9 +17,15 @@ Pobierz w jak najmniejszej liczbie zapytań:
 2. **Informacje**: Status „Nowe” (wszystkie) – pogrupuj po Tematach; pokazuj Kluczowe i Ważne, Ciekawostki tylko liczbą.
    Osobno: Informacje z „Moim komentarzem” zmienionym w 7 dniach – sprzeciw/wątpliwość → propozycja działania (`wiedza`, sekcja H).
 2a. **Wiedza na teraz** – nie tylko nowa, ale bez powtórek z tygodnia na tydzień. Pula: Etap = bieżący etap albo „Cała
-   budowa”, Status ≠ Nieaktualne, Dotyczy nas ≠ Nie, Istotność ≠ Ciekawostka (widok „🎯 Na teraz”). Wybierz **max 6**:
+   budowa”, Status ≠ Nieaktualne, Dotyczy nas ≠ Nie, Istotność ≠ Ciekawostka (widok „🎯 Na teraz”).
+   **Pod koniec etapu dołącz następny**: gdy pierwszy krok następnego etapu startuje w Harmonogramie za ≤ 8 tygodni (bez
+   harmonogramu – gdy bieżący etap jest w końcówce wg strony DOM), do puli wchodzi następny etap – najpierw to, co trzeba
+   zamówić, zdecydować albo przewidzieć z wyprzedzeniem (okna, dach, instalacje). Wtedy zmień też widok „🎯 Na teraz”
+   (nazwa „… – <etap> + <następny>”, filtr Etap o następny) – to nie decyzja, wolno w zaplanowanym przeglądzie.
+   Wybierz **max 6**:
    - najpierw **przed krokiem** – informacje pasujące (Tematy/Branża) do kroków Harmonogramu startujących w 14 dni i do
-     otwartych decyzji z Notatnika; mogą wrócić drugi raz, ale tylko jeśli Pokazano jest starsze niż 30 dni;
+     otwartych decyzji z Notatnika; w tygodniu tuż przed krokiem (start ≤ 7 dni) mogą wrócić jako przypomnienie,
+     jeśli Pokazano jest starsze niż 7 dni;
    - potem **jeszcze niepokazane** (Pokazano puste): Kluczowe → Ważne → bez oceny, nowsze pierwsze.
    Po przeglądzie ustaw im Pokazano = dzisiejsza data (to nie decyzja – wolno też w zaplanowanym przeglądzie).
    Reszta tylko licznikiem: „na ten etap jeszcze n niepokazanych” i „na później: SSO n, Deweloperski n, …”.

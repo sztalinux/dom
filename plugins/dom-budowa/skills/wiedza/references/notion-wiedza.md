@@ -2,7 +2,8 @@
 
 Strona główna: **📚 Baza wiedzy** `3f4f5982-09e7-8193-a68e-fd35c9265012` (DOM → toggle „Baza wiedzy”).
 Na niej: „⏳ Czeka na decyzję”, informacje z zakładkami „🆕 Do przejrzenia” (Nowe, wg Istotności), „⭐ Kluczowe i ważne”,
-„💬 Z moim komentarzem”, „🎯 Na teraz – <etap>” (bieżący etap + Cała budowa) i „🗂 Wg etapu”, bazy Tematy i Rozmowy i źródła,
+„💬 Z moim komentarzem”, „🎯 Na teraz – <etap>” (bieżący etap + Cała budowa, pod koniec etapu także następny); blok
+„🗂 Wiedza wg etapu” (zakładka na każdy etap, stałe filtry); bazy Tematy i Rozmowy i źródła,
 podstrona „Bazy: Informacje i Rejestr sprzeczności”. Jeśli zapis zwróci błąd pola – pobierz schemat bazy i zaktualizuj ten plik.
 
 Cztery warstwy: **Tematy** (co wiemy teraz) ← **Informacje** (pojedyncze fakty) ← **Rozmowy i źródła** (kto, kiedy, skąd)

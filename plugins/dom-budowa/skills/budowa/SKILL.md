@@ -82,6 +82,10 @@ Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka).
    Jakość ma pierwszeństwo: nie skracaj treści, nie pomijaj pól, nie łącz niepowiązanych informacji
    w jeden wpis, nie pomijaj sprawdzenia duplikatów i sprzeczności tylko po to, żeby zaoszczędzić wywołanie.
    Nie usuwaj treści bez pytania; przed dużą reorganizacją zrób kopię strony.
+   **Odczyt baz a limit Notion:** zapytania SQL (`query_data_sources`, tryb sql) mają w planie Notion inwestora wspólny
+   limit dla całego workspace'u; tryb **view** (zapisany widok bazy) go nie ma. Gdy jest widok z potrzebnym filtrem –
+   czytaj nim; SQL tylko do zliczeń i złożonych warunków. Błąd „usage limit” → przejdź na tryb view (widok domyślny
+   bazy z `fetch`, filtrowanie po swojej stronie) i wspomnij o limicie raz, bez ponawiania SQL.
 7. **Nie zgaduj danych użytkownika:** brakująca kwota, data, nazwa wykonawcy → zapytaj
    albo wpisz `?` i wymień to w podsumowaniu. Brakuje treści dokumentu (projekt, opinia, oferta, umowa, Excel) →
    poproś jawnie o konkretny plik z przewodnika po dokumentach (nazwa, ścieżka, strona/arkusz, po co) – procedura
