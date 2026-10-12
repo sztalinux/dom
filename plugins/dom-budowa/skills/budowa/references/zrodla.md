@@ -10,6 +10,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 |---|---|---|
 | Procedury, zasady, szablony | publiczne repo GitHub `sztalinux/dom` → plugin `dom-budowa` na koncie Claude (aktualizacja: ręczne odświeżenie lub synchronizacja – `rozwoj-harnessu/references/claude-ai-projekt.md`) | Claude Code (`rozwoj-harnessu`, sekcja B) |
 | Zgłoszone zmiany harnessu (obowiązują od razu) | Notion → Asystent AI → Zmiany do harnessu | dowolny asystent (`rozwoj-harnessu`, sekcja A) |
+| Luźne wpisy inwestora do rozłożenia | Notion → DOM → Inbox | inwestor wpisuje, agent przetwarza (`inbox`) |
 | Liczby: kosztorys, wydatki, oferty, wykonawcy (z kontaktami) | Excel „Kosztorys_stan_zero.xlsx” – prowadzi inwestor | Inwestor; agent tylko na prośbę (`koszty`): w Claude Code plik z folderu budowy, na claude.ai plik załączony w rozmowie (w wiedzy projektu go nie ma) |
 | Notatki, decyzje, pytania, ryzyka naszej budowy | Notion → DOM → Notatnik budowy | Inwestor + agent (`notatka`) |
 | Zadania z terminem | Notion → DOM → TASKS (2) | Inwestor + agent (`notatka`) |
@@ -21,7 +22,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 | Bramki i odbiory etapów | Notion → „Etapy budowy – przewodnik”, „Stan zero – punkty bez odwrotu”; protokoły w folderze budowy | agent przygotowuje (`etap`), odbiera inwestor z kierownikiem |
 | Analizy dokumentów | Notion (strona pod DOM) lub dokument w projekcie Claude | agent (`analiza-techniczna`) |
 | Dokumenty: projekty, opinie, oferty, umowy (PDF, Excel) | folder budowy na komputerze inwestora; opis każdego dokumentu: strona Notion „📑 Przewodnik po dokumentach i Notion” (synchronizuje Claude Code); pełne dokumenty na prośbę | inwestor wrzuca, agent klasyfikuje (`dokumenty`); oryginały tylko odczyt |
-| Ściąga projektu (najważniejsze liczby i decyzje) | `Ściąga projektu.md` w folderze budowy (w paczce jako `01_Sciaga-projektu.md`) + Notion „Dane projektu (ściąga)” | agent po nowym dokumencie (`dokumenty`, `analiza-techniczna`) |
+| Ściąga projektu (najważniejsze liczby i decyzje) | **Notion → DOM → „📐 Dane projektu (ściąga)” – jedyne źródło**; `Ściąga projektu.md` w folderze budowy to kopia do paczki awaryjnej (Claude Code odświeża ją po zmianie w Notion) | agent po nowym dokumencie (`dokumenty`, `analiza-techniczna`), inwestor ręcznie |
 
 ## Notion – identyfikatory (konto prywatne inwestora)
 
@@ -41,6 +42,8 @@ Pełna mapa z perspektywy „czego szukasz” (widoki, pola, słowniki): `notion
 | Asystent AI – harness budowy (przewodnik) | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` |
 | Zmiany do harnessu (data source) | `collection://e217448a-60ec-4af6-8584-8f368315109c` |
 | Dziennik budowy (data source) | `collection://cc113d57-3eaa-4f52-80f6-e4b39a4b4c92` |
+| Inbox (data source) | `collection://16e53396-89ca-4053-8bd2-97061a1065c0` |
+| Przewodnik po dokumentach i Notion (strona, generowana) | `3f6f5982-09e7-81f5-bade-ec877d8d936a` |
 
 Schematy baz budowy (pola i dozwolone wartości): `skills/notatka/references/notion-schematy.md`.
 Jeśli ID przestanie działać, wyszukaj stronę po nazwie i zaktualizuj tabelę.

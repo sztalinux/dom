@@ -64,8 +64,8 @@ co już wiadomo ze ściągi, z oznaczeniem źródła. W Claude Code nie proś �
 ## B. Po klasyfikacji – wiedza i paczka
 
 - Dokument, który zmienia fakty (nowa rewizja projektu, opinia, umowa, wybrana oferta): zaproponuj analizę
-  (procedura `analiza-techniczna`) i aktualizację ściągi projektu (`Ściąga projektu.md` w folderze budowy)
-  oraz Notion („Dane projektu (ściąga)”, Notatnik). Ściąga jest w paczce, więc telefon dostanie ją przy następnym wgraniu.
+  (procedura `analiza-techniczna`) i aktualizację ściągi: Notion → „📐 Dane projektu (ściąga)” (jedyne źródło), Notatnik;
+  po zmianie w Notion przepisz tę samą treść do `Ściąga projektu.md` w folderze budowy (kopia do paczki awaryjnej).
 - Oferta wykonawcy → procedura `oferta`.
 - Ostrzeżenia skryptu („powyżej limitu”, informacja o danych osobowych) przekaż inwestorowi jednym zdaniem z propozycją
   (np. zmniejszona kopia PDF obok oryginału, oznaczona do paczki zamiast niego).

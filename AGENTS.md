@@ -21,6 +21,7 @@ Jest celowo krótki: cała wiedza i procedury są w `plugins/dom-budowa/skills/`
 | Start etapu, „co sprawdzić przed betonowaniem”, odbiór, usterki | `plugins/dom-budowa/skills/etap/SKILL.md` |
 | Relacja z dnia na budowie, zdjęcia, godziny własne, roboty dodatkowe | `plugins/dom-budowa/skills/dziennik/SKILL.md` |
 | Lista zakupów na etap, oferty hurtowni, kiedy zamawiać, dostawa | `plugins/dom-budowa/skills/zakupy/SKILL.md` |
+| Luźne wpisy z bazy „Inbox” w Notion: „przerób inbox”, kilka notatek naraz | `plugins/dom-budowa/skills/inbox/SKILL.md` |
 | Spotkanie, rozmowa, decyzja: „jutro mam spotkanie z…”, „o co zapytać”, „jak wybrać z kilku” | `plugins/dom-budowa/skills/przygotowanie/SKILL.md` |
 | Przegląd tygodnia, „co nowego”, „co czeka na mnie” | `plugins/dom-budowa/skills/przeglad-tygodnia/SKILL.md` |
 | Zmiana samego harnessu (nowa procedura, poprawka) | `plugins/dom-budowa/skills/rozwoj-harnessu/SKILL.md` |

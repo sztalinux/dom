@@ -59,8 +59,8 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
    Jeśli wpis ze skrzynki zawiera takie dane – wdroż regułę w wersji ogólnej („Firma A”), a konkret zostaw w Notion.
 6. `git add <zmienione pliki> && git commit -m "Harness <wersja>: HZ-… <skrót>" && git push` – tylko pliki z tej sesji; obce zmiany zgłoś.
 7. W Notion oznacz wdrożone wpisy jednym przebiegiem: Status „Wdrożone”, Wdrożono w wersji, Data wdrożenia.
-   Przy nowej procedurze lub zmianie zasad zaktualizuj też stronę „Asystent AI – harness budowy” (ID w `budowa/references/zrodla.md`):
-   linia „Wersja” w ramce i tabela procedur – jednym wywołaniem; nowa procedura = nowa opcja w polu „Procedura” skrzynki.
+   Zaktualizuj linię „Wersja” na stronie „Asystent AI – harness budowy” (ID w `budowa/references/zrodla.md`; strona jest
+   tylko ramką nad skrzynką – opis procedur jest w README repo); nowa procedura = nowa opcja w polu „Procedura” skrzynki.
    Zmiana struktury Notion (baza, widok, pole) → zaktualizuj `budowa/references/notion-mapa.md` (trafia do przewodnika w Notion przy następnym `tools/dokumenty.py` – zsynchronizuj go, `dokumenty`, sekcja C).
 8. Podsumuj w 2–4 liniach: wersja, co weszło, co odrzucone/odłożone i dlaczego. Dopisz przypomnienie:
    „odśwież plugin na claude.ai (`references/claude-ai-projekt.md`, sekcja „Aktualizacja pluginu”)”; jeśli zmienił się tekst instrukcji

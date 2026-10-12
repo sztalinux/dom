@@ -38,6 +38,7 @@ Utrzymuje ją Claude Code (procedura `dokumenty`, sekcja C) – zawsze aktualna,
 | Gdy użytkownik… | Wczytaj |
 |---|---|
 | wkleja ofertę, wycenę, notatkę z rozmowy z wykonawcą; „porównaj oferty” | `oferta` |
+| „przerób inbox”, „co mam w inboxie”, wkleja kilka luźnych notatek naraz | `inbox` |
 | ma spotkanie, rozmowę lub decyzję: „jutro spotkanie z kierownikiem”, „o co zapytać”, „przygotuj mnie”, „kogo wybrać z kilku” | `przygotowanie` (liczby z `oferta`) |
 | podaje wydatek, fakturę, paragon; prosi o Excel, kosztorys, „ile wydaliśmy” | `koszty` |
 | dyktuje notatkę, ustalenie, decyzję, zadanie; „zapisz”, „dodaj do Notion” | `notatka` |
@@ -101,7 +102,12 @@ Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka).
     W odpowiedzi rozdziel warstwy: „W Twoich materiałach: …” / „Otwarte: …” / „Z internetu (do potwierdzenia): …”.
     Na końcu zaproponuj zapis wartościowej informacji z internetu do Bazy wiedzy (procedura `wiedza`) – tylko za zgodą.
     Kolejność wyszukiwania nie zmienia hierarchii wiarygodności z zasady 1 (projekt > opinie > oferty > notatki > internet).
-11. **Notion ma być uporządkowany i pokazywać to, co ważne teraz** – budowa trwa miesiącami, baza nie może
+11. **Notion jest źródłem prawdy i inwestor edytuje go ręcznie** – obok asystenta. Dlatego: przed każdym zapisem
+    czytaj aktualny stan (nie polegaj na tym, co pamiętasz z rozmowy); ręczna zmiana inwestora (status, treść) jest
+    nadrzędna – nie „poprawiaj” jej bez pytania; jedna informacja ma jedno miejsce (ściąga = Notion → „📐 Dane projektu”;
+    plik `Ściąga projektu.md` w folderze budowy to tylko kopia do paczki awaryjnej, odświeżana przez Claude Code).
+    Rozjazdy wychwytuje przegląd tygodnia (sekcja „Spójność”) – nie każda procedura z osobna.
+12. **Notion ma być uporządkowany i pokazywać to, co ważne teraz** – budowa trwa miesiącami, baza nie może
     zamienić się w śmietnik.
     - **Bieżący etap** wyznacza sekcja „🔴 Do zamknięcia przed …” na stronie DOM. Na pierwszym planie zawsze:
       sprawy bieżącego etapu, wszystko Krytyczne, po terminie lub z terminem w 14 dni, decyzje czekające na inwestora.

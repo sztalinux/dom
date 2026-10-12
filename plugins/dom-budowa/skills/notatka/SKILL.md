@@ -23,6 +23,7 @@ branżą i adresatem, tak żeby dało się ją filtrować i zamknąć.
    | relacja z dnia na budowie, dostawa, usterka, roboty dodatkowe | → procedura `dziennik` | stąd ustalenia i zadania wracają tu |
    | koszt / płatność | → procedura `koszty` | nie zapisuj kwot tylko w Notion |
    | oferta / wycena | → procedura `oferta` | |
+   | kilka luźnych, niejasnych wpisów naraz / „przerób inbox” | → procedura `inbox` | wyjaśnia, potem wraca tu |
    | rozmowa z projektantem/wykonawcą, film, artykuł – „kto co powiedział” | → procedura `wiedza` (Rozmowy i źródła, Informacje, Tematy) | stąd tylko działania do Notatnika |
 
 2. **Sprawdź duplikaty:** wyszukaj w Notatniku 2–3 słowa kluczowe. Jeśli wpis istnieje – nie twórz drugiego

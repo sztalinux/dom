@@ -7,7 +7,7 @@ description: Cotygodniowy przegląd budowy i porządki w Notion – co nowego do
 
 Cel: w 2 minuty inwestor wie, co doszło, co czeka na jego decyzję i co trzeba zrobić w tym tygodniu.
 Przegląd czyta i podsumowuje – niczego nie rozstrzyga. Statusy zmienia tylko w ramach porządków zatwierdzonych
-przez inwestora (sekcja „Porządki”). Kolejność i pierwszy plan wg zasady 11 w procedurze `budowa`:
+przez inwestora (sekcja „Porządki”). Kolejność i pierwszy plan wg zasady 12 w procedurze `budowa`:
 najpierw bieżący etap i pilne terminy, sprawy zamknięte i odległe tylko licznikiem.
 
 ## Dane (ID: `budowa/references/zrodla.md`, `wiedza/references/notion-wiedza.md`)
@@ -23,7 +23,15 @@ Pobierz w jak najmniejszej liczbie zapytań:
    – przypomnienie, żeby uruchomić Claude Code i je wdrożyć.
 8. **Dziennik budowy** (ID: `dziennik/references/notion-dziennik.md`): wpisy z 7 dni – dni pracy ekipy
    i własne, otwarte problemy, kroki zakryte bez zdjęć („Przed zakryciem OK” odznaczone).
-9. **Zamówienia z wyprzedzeniem**: pozycje na najbliższe dwa etapy, których termin zamówienia (`zakupy/references/wyprzedzenia.md`)
+9. **Inbox** (`collection://16e53396-89ca-4053-8bd2-97061a1065c0`): liczba „Do przetworzenia” i „Do wyjaśnienia”
+   (te drugie czekają na odpowiedź inwestora – wymień ID i pytania).
+10. **Spójność** (inwestor edytuje Notion ręcznie – wychwyć rozjazdy, nie naprawiaj bez zgody):
+    - Notatnik „Ustalone”/„Zrobione” z wiedzą techniczną bez relacji „Wiedza” → kandydaci do `wiedza`, sekcja F;
+    - Informacje bez Tematów albo bez Źródeł i bez Notatnika; Tematy, których „W skrócie” przeczy nowszym Informacjom
+      lub decyzjom; Informacje „Sporne” bez wpisu w Rejestrze;
+    - checkboxy w „🔴 Do zamknięcia” odhaczone, a wpis w Notatniku nadal „Otwarte” (i odwrotnie);
+    - Dziennik: problemy bez wpisu w Notatniku/TASKS; TASKS „DONE”, a powiązany wpis Notatnika otwarty.
+11. **Zamówienia z wyprzedzeniem**: pozycje na najbliższe dwa etapy, których termin zamówienia (`zakupy/references/wyprzedzenia.md`)
    wypada w ciągu 14 dni; **płatności** – Wydatki „Planowane” z datą w 14 dni i transze po odbiorach, jeśli Excel jest
    dostępny w tym miejscu (inaczej napisz, że to wymaga aktualnego pliku).
 
@@ -39,6 +47,7 @@ Pobierz w jak najmniejszej liczbie zapytań:
 **Budowa w tym tygodniu:** dni ekipy / własne, problemy otwarte, braki zdjęć przed zakryciem
 **Zamówić / zapłacić do 14 dni:** <pozycja – do kiedy – skąd>
 **Do ponownej weryfikacji:** WI-x <cena/przepis z roku …>
+**Inbox:** n do przetworzenia („przerób inbox”), m czeka na Twoją odpowiedź: IN-x – <pytanie>
 **Harness – czeka na wdrożenie:** HZ-x … (uruchom Claude Code)
 **Sugestia na ten tydzień:** 1–3 konkretne kroki.
 **Na później (n):** licznik spraw z dalszych etapów – bez listy.
@@ -52,7 +61,8 @@ Znajdź i zaproponuj – nie wykonuj bez zgody; po „tak” wykonaj wsadowo (za
 - wpisy bez Etapu lub Priorytetu → uzupełnij;
 - sprawy po terminie albo bez zmian od 30 dni → zamknąć, przesunąć termin czy zostawić (pytanie zbiorcze);
 - Informacje „Nowe” starsze niż 30 dni → „Przejrzane” albo „Nieaktualne”;
-- otwarte sprawy zakończonego etapu → przenieść do bieżącego albo zamknąć.
+- otwarte sprawy zakończonego etapu → przenieść do bieżącego albo zamknąć;
+- rozjazdy z punktu „Spójność” → dopisać relację Wiedza / Informację (`wiedza`, F), uzgodnić statusy, poprawić „W skrócie”.
 Niczego nie usuwaj – porządek tylko statusami i scalaniem (z dopiskiem, co scalono).
 
 Zapis: dopisz przegląd na górze strony Notion „Przeglądy tygodniowe” (pod DOM) jako zwijany nagłówek

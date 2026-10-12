@@ -9,7 +9,8 @@ Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – sekcje to rozwijane na
 
 ```
 DOM
-├─ 📐 Dane projektu (ściąga) – parametry budynku, fundament, ściany, grunt, instalacje
+├─ 📥 Inbox (baza) – luźne wpisy inwestora; asystent przetwarza („przerób inbox”)
+├─ 📐 Dane projektu (ściąga) – parametry budynku, fundament, ściany, grunt, instalacje – JEDYNE źródło ściągi
 ├─ 🔴 Do zamknięcia przed <etap> – checklista + linki do Notatnika; bramki → „Stan zero – punkty bez odwrotu”
 ├─ 📚 Baza wiedzy → Tematy, Informacje, Rozmowy i źródła, Rejestr sprzeczności
 ├─ 📅 Przeglądy tygodniowe (najnowszy na górze)
@@ -17,12 +18,13 @@ DOM
 ├─ 📒 Notatnik budowy (baza) · ✅ Zadania → TASKS (2) (baza) · 📓 Dziennik budowy (baza)
 ├─ 🗂 Strony i materiały → Etapy budowy – przewodnik, Archiwum – stare notatki, linki
 ├─ 👥 Kontakty – kluczowe role (pełna lista wykonawców w Excelu) · 📁 Dokumenty i linki
-├─ 🤖 Asystent AI → „Asystent AI – harness budowy” (+ baza Zmiany do harnessu)
+├─ 🤖 Asystent AI → krótka strona z wersją harnessu + baza Zmiany do harnessu (procedury są w pluginie, nie w Notion)
 └─ podstrony: 🚧 Stan zero – punkty bez odwrotu · 🔌 Plan przepustów i tras instalacji · 📑 Przewodnik po dokumentach i Notion
 ```
 
 | Czego szukasz | Gdzie (strona / baza → widok/sekcja) | ID | Najważniejsze pola |
 |---|---|---|---|
+| Luźne wpisy do przetworzenia; pytania asystenta do inwestora | Inbox (Status „Do przetworzenia” / „Do wyjaśnienia”) | `collection://16e53396-89ca-4053-8bd2-97061a1065c0` | Status, Źródło, Pytania asystenta, Odpowiedź, Trafiło do |
 | Parametry projektu | DOM → 📐 Dane projektu (ściąga) | `24af5982-09e7-806b-821a-e157ff33be42` | – |
 | Jakie mamy dokumenty, co w którym jest, gdzie leżą | 📑 Przewodnik po dokumentach i Notion (generowany – nie edytuj) | `3f6f5982-09e7-81f5-bade-ec877d8d936a` | – |
 | Co blokuje bieżący etap | DOM → 🔴 Do zamknięcia…; Notatnik → widok „🔴 Krytyczne i otwarte” | `view://3f3f5982-09e7-8125-a50b-000ce287ad48` | Status Otwarte/Do omówienia, Priorytet Krytyczne/Ważne |

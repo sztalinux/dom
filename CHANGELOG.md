@@ -3,6 +3,20 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.4.0] – 2026-10-12
+
+Inbox, spójność przy ręcznych zmianach w Notion, mniej miejsc z tą samą informacją.
+- Nowa procedura `inbox` + baza Notion „Inbox” (DOM): luźne wpisy inwestora; asystent przetwarza je na „przerób inbox” –
+  wpis niejednoznaczny albo bez źródła wraca z pytaniami (Status „Do wyjaśnienia”, pola Pytania asystenta / Odpowiedź),
+  jednoznaczny trafia przez właściwą procedurę do Notatnika / Bazy wiedzy / Dziennika / TASKS / Excela („Trafiło do”).
+- `budowa`, zasada 11 (dawna 11 → 12): Notion jest źródłem prawdy i inwestor edytuje go ręcznie – czytaj przed zapisem,
+  nie poprawiaj ręcznych zmian bez pytania; ściąga ma jedno źródło: Notion „📐 Dane projektu” (plik w folderze = kopia).
+- `przeglad-tygodnia`: liczniki Inboxu (w tym pytania czekające na inwestora) i sekcja „Spójność” – rozjazdy między
+  Notatnikiem, Bazą wiedzy, checklistą „Do zamknięcia”, Dziennikiem i TASKS, proponowane w „Porządkach”.
+- Notion: strona „Asystent AI – harness budowy” skrócona do ramki z wersją + skrzynka (opis procedur jest w README repo);
+  opcja `inbox` w polu Procedura skrzynki; mapa Notion z Inboxem.
+- `rozwoj-harnessu`: krok 7 aktualizuje tylko linię „Wersja”.
+
 ## [1.3.0] – 2026-10-11
 
 Bez wgrywania plików na claude.ai; kolejność szukania odpowiedzi; wiedza zawsze ze źródłem.

@@ -15,7 +15,7 @@ Dom/                              ← folder budowy (centrum dokumentów, poza g
   _Przychodzące/                  ← tu wrzucasz nowe pliki od projektantów i wykonawców
   _Do claude.ai/                  ← paczka (generowana): przewodnik po dokumentach + ściąga → wiedza projektu „Dom” na claude.ai
   Zdjęcia/                        ← zdjęcia z budowy (RRRR-MM-DD_<krok>/), poza indeksem i paczką
-  Ściąga projektu.md              ← najważniejsze liczby i decyzje (trafia do paczki)
+  Ściąga projektu.md              ← kopia ściągi z Notion („📐 Dane projektu”) do paczki awaryjnej
   .dom/                           ← indeks dokumentów, stan wgrania, lista słów zakazanych w repo
   … foldery tematyczne (projekt, konstrukcja, instalacje, wyceny…)
   AI/dom/                         ← to repozytorium
@@ -56,6 +56,7 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
 | `etap` | „zaczynamy etap”, „jutro betonowanie”, odbiór, usterki | plan etapu, bramki „bez odwrotu”, protokół odbioru |
 | `dziennik` | „dziś na budowie…”, zdjęcia, godziny własne, roboty dodatkowe | Dziennik budowy w Notion, przekazanie kosztów/zadań |
 | `zakupy` | „co kupić na…”, „kiedy zamawiać”, oferta hurtowni, dostawa | lista z kosztorysu, wyprzedzenia, porównanie dostawców |
+| `inbox` | „przerób inbox”, luźne notatki naraz | wyjaśnia niejasne (pytania w Inboxie), rozkłada do Notatnika / wiedzy / dziennika / zadań |
 | `przygotowanie` | „jutro spotkanie z…”, „o co zapytać”, „kogo wybrać z kilku” | karta przygotowania: pytania, czerwone flagi, macierz decyzji, zapis po spotkaniu |
 | `przeglad-tygodnia` | poniedziałek / „co nowego” | decyzje, nowa wiedza, terminy, budowa, zamówienia, porządki |
 | `rozwoj-harnessu` | „zapamiętaj na przyszłość”, nowa procedura | skrzynka w Notion → wdrożenie do repo |
@@ -84,6 +85,8 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
 - Nowy plik od projektanta/wykonawcy → wrzuć do `Dom/_Przychodzące/` i uruchom `claude` w `Dom/AI/dom`.
   Asystent go posortuje, opisze w przewodniku i sam zaktualizuje stronę przewodnika w Notion – nic nie wgrywasz.
   Gdy na telefonie asystent poprosi o dokument – załącz wskazany plik.
+- Luźne myśli i informacje wpisuj do bazy **Inbox** w Notion (telefon wystarczy). „Przerób inbox” – asystent rozłoży je po
+  właściwych miejscach, a niejasne odeśle z pytaniami (status „Do wyjaśnienia”). Przegląd tygodnia przypomni o zaległych.
 - Poprawki „na przyszłość” z telefonu trafiają do skrzynki w Notion; Claude Code wdroży je przy starcie.
 - Dzień na budowie → powiedz asystentowi, co się działo (telefon wystarczy) – trafi do Dziennika budowy; zdjęcia wrzuć do `Dom/Zdjęcia/RRRR-MM-DD_<krok>/`.
 - Przed krokiem „bez odwrotu” (beton, zasypka, tynki) zapytaj „co sprawdzić przed …” – dostaniesz bramkę z listą zdjęć do zrobienia.
