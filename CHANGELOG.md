@@ -3,6 +3,11 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.8.2] – 2026-10-12
+
+- `budowa`, zasada 6: odczyt baz najpierw trybem rows (filtr strukturalny – działa mimo wyczerpanego limitu SQL), potem
+  view, SQL tylko do zliczeń/łączeń; rollupy w rows/view to odnośniki – pobieraj strony albo zaznacz brak.
+
 ## [1.8.1] – 2026-10-12
 
 - `przeglad-tygodnia`: przypomnienie przed krokiem już po 7 dniach (w tygodniu tuż przed krokiem); pod koniec etapu
