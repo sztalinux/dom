@@ -59,6 +59,9 @@ Wartość własnego czasu w zł podaj tylko, jeśli inwestor ją podał.
 Status „Wybrana” (decyzja inwestora) → przygotuj zakres do umowy wg `references/umowa.md`, sekcja „Zakres do umowy”:
 pozycje w cenie, „nie w cenie”, pytania na piśmie, transze powiązane z odbiorami (`etap`). Projekt umowy od wykonawcy
 sprawdza `analiza-techniczna`, sekcja „Umowy”.
+Po podpisaniu → wiersz w Notion **Umowy i gwarancje** (`collection://60c06f30-7867-435d-8f2e-1e025a3daa5c`): Rodzaj, Strona, Zakres,
+Etap, Podpisano, Status „Podpisana”, Dokument (plik w folderze budowy), relacja Kroki (Harmonogram); kwoty i transze – Excel
+(arkusz Płatności, `koszty` D); terminy z umowy → `harmonogram`.
 
 ## Wynik w rozmowie
 

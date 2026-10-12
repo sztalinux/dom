@@ -50,7 +50,8 @@ i odpowiedzi inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisu
    | Klasa | Procedura | Uwaga |
    |---|---|---|
    | ustalenie, decyzja, pytanie, ryzyko, pomysł, doczytać | `notatka` | ustalenie z wiedzą techniczną → także `wiedza`, sekcja F |
-   | zadanie z terminem | `notatka` (TASKS) | |
+   | zadanie z terminem, „do piątku dam znać…” | `harmonogram` (D) → TASKS, Kto = Ja | |
+   | ktoś ma coś zrobić / przyjść / dostarczyć w dniu X | `harmonogram` (D) → TASKS WAITING; krok budowy → Harmonogram | |
    | relacja z budowy, dostawa, usterka, godziny własne | `dziennik` | |
    | wiedza ogólna (usłyszał, przeczytał, obejrzał) | `wiedza` | Źródło z pola Źródło → Rozmowy i źródła; brak = krok 3 |
    | wydatek, faktura, koszt | `koszty` | wiersz do Excela – w Inboxie zostaje do czasu wpisania przez inwestora |
@@ -65,6 +66,15 @@ i odpowiedzi inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisu
    pytanie?) i poproś o „ok”, chyba że inwestor powiedział „bez pytania”.
 7. **Podsumuj:** przetworzone (wpis → gdzie), do wyjaśnienia (wpis: pytania), pominięte. Zmienione / Otwarte / Następny krok.
    „Przetworzone” czyści przegląd tygodnia (wpisy starsze niż 14 dni, po zgodzie) – linki są już w docelowych miejscach.
+
+## Tryb wieczorny (zaplanowane zadanie, bez inwestora)
+
+Inbox może przerabiać zaplanowane zadanie (np. codziennie o 20:00 na claude.ai). Wtedy nie ma kogo zapytać w rozmowie:
+- przetwarzaj tylko wpisy jednoznaczne ze źródłem; niejasne → pytanie „❓ asystent” pod wpisem (krok 3), bez czekania;
+- nie pokazuj planu do akceptacji (krok 6) – ale nie zapisuj niczego, co jest decyzją inwestora, rozstrzygnięciem
+  sprzeczności (SP) ani zmianą w Excelu: takie wpisy zostaw z pytaniem „❓ asystent: potwierdź, że to decyzja”;
+- nie zmieniaj Harmonogramu (terminy kroków) – zaproponuj zmianę pytaniem pod wpisem; zadania i „czekam na” zapisuj;
+- na końcu dopisz na górze Inboxu jedną linię: „🤖 <data>: przetworzono n, pytania przy m” – inwestor widzi to rano.
 
 ## Zasady
 

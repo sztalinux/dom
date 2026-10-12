@@ -20,6 +20,7 @@ Jest celowo krótki: cała wiedza i procedury są w `plugins/dom-budowa/skills/`
 | Nowe pliki od projektanta/wykonawcy, paczka dokumentów dla claude.ai | `plugins/dom-budowa/skills/dokumenty/SKILL.md` |
 | Start etapu, „co sprawdzić przed betonowaniem”, odbiór, usterki | `plugins/dom-budowa/skills/etap/SKILL.md` |
 | Relacja z dnia na budowie, zdjęcia, godziny własne, roboty dodatkowe | `plugins/dom-budowa/skills/dziennik/SKILL.md` |
+| Harmonogram, terminy, przesunięcia, „czekam na”, „co mnie czeka” | `plugins/dom-budowa/skills/harmonogram/SKILL.md` |
 | Lista zakupów na etap, oferty hurtowni, kiedy zamawiać, dostawa | `plugins/dom-budowa/skills/zakupy/SKILL.md` |
 | Luźne wpisy z sekcji „📥 Inbox” na stronie DOM: „przerób inbox”, kilka notatek naraz | `plugins/dom-budowa/skills/inbox/SKILL.md` |
 | Spotkanie, rozmowa, decyzja: „jutro mam spotkanie z…”, „o co zapytać”, „jak wybrać z kilku” | `plugins/dom-budowa/skills/przygotowanie/SKILL.md` |

@@ -3,6 +3,22 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.5.0] – 2026-10-12
+
+Planowanie i obsługa budowy: harmonogram, „czekam na”, zamówienia, umowy i gwarancje, płatności.
+- Nowa procedura `harmonogram`: ułożenie harmonogramu (kroki z numerami etapów jak w Excelu, Kto, zależności, „bez odwrotu”,
+  pewność terminu), terminy pochodne (zamówienia z wyprzedzeniem, zadanie bramki, umówienie kierownika/geotechnika,
+  pogoda, transza), przesunięcia z przeliczeniem zależnych kroków, „czekam na”, „co mnie czeka”.
+- Notion: bazy Harmonogram (widok „📅 Oś czasu”), Zamówienia i dostawy („🛒 Do zamówienia”), Umowy i gwarancje
+  („🛡 Gwarancje”); TASKS: pole „Kto”, relacja Harmonogram, widoki „⏳ Czekam na” i „📆 Kalendarz”. Strona DOM:
+  Harmonogram i Zamówienia w zakładce Etap, Umowy w zakładce Wykonawcy.
+- `zakupy`: lista i dostawy w bazie Zamówienia; `oferta`: po podpisaniu wiersz w Umowach; `etap`: po odbiorze krok
+  „Zrobione”, daty gwarancji/rękojmi; `dziennik`: status kroku, przesunięcia → `harmonogram`; `notatka`: TASKS z „Kto”.
+- `koszty`: arkusz Płatności (proponowany układ w `references/arkusze.md`, dodaje inwestor) zamiast Wydatków „Planowane”.
+- `inbox`: zadania i cudze terminy → `harmonogram`; tryb wieczorny (zaplanowane zadanie bez inwestora: tylko jednoznaczne
+  wpisy, decyzje i terminy kroków zostają z pytaniem).
+- `przeglad-tygodnia`: harmonogram 14 dni, „bez odwrotu”, czekam na, zamówienia, gwarancje 60 dni.
+
 ## [1.4.4] – 2026-10-12
 
 - `inbox`: Notion nie zapisuje daty dopisania punktu – data zdarzenia tylko z wpisu (`@today` albo data tekstem);

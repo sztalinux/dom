@@ -49,9 +49,10 @@ Jeśli dostępna jest procedura/skill do plików xlsx – użyj jej do techniczn
 
 ## D. Płatności, transze, kredyt
 
-1. Harmonogram płatności z umowy (zaliczka, transze po odbiorach, zatrzymanie – `oferta/references/umowa.md`) → wiersze
-   Wydatków „Planowane” z datą i opisem „transza N – po odbiorze <etap>”; po odbiorze (`etap`, sekcja C) i fakturze →
-   „Zrealizowane” z nr FV. Przed każdą transzą sprawdź, czy jest protokół odbioru – bez niego powiedz to wprost.
+1. Harmonogram płatności z umowy (zaliczka, transze po odbiorach, zatrzymanie – `oferta/references/umowa.md`) → arkusz
+   **Płatności** (układ: `references/arkusze.md`); po odbiorze (`etap`, sekcja C) i fakturze → Status „Zapłacona” i wiersz
+   Wydatków „Zrealizowane” z nr FV. Przed każdą transzą sprawdź, czy jest protokół odbioru – bez niego powiedz to wprost.
+   Plik bez arkusza Płatności → zaproponuj go (inwestor dodaje sam) i do tego czasu używaj Wydatków „Planowane”.
 2. Roboty dodatkowe (`dziennik`, sekcja B) → osobny wiersz Oferty i Wydatku, nigdy „w transzy”.
 3. Kredyt: jeśli wypłata jest w transzach po etapach – na pytanie „co do banku” zestaw: etap, stan wg Excela (Realizacja),
    dokumenty (faktury, zdjęcia, wpisy kierownika), termin kontroli. Szczegóły wymagań banku są w umowie kredytowej

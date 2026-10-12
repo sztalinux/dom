@@ -26,3 +26,25 @@ Parametry · Cennik · Porównanie · Zestawienie.
 
 ## Trzy warstwy liczb
 PLAN = Kosztorys/Etapy; UMÓWIONE = Oferty „Wybrana”; WYDANE = Wydatki „Zrealizowane” („Planowane” = zobowiązania).
+
+## Płatności (arkusz proponowany – dodaje inwestor)
+
+Harmonogram płatności z umów: jedna transza = jeden wiersz. Kolumny:
+
+| Kol. | Nazwa | Zawartość |
+|---|---|---|
+| A | Umowa / wykonawca | lista z Wykonawcy!A |
+| B | Etap | lista z Etapy!A |
+| C | Transza | „zaliczka”, „transza 1 – po odbiorze płyty”, „zatrzymanie 5% do końca gwarancji” |
+| D | Warunek | co musi się stać: protokół odbioru <krok>, FV, zgłoszenie |
+| E | Netto | |
+| F | VAT % | 8 (usługa z materiałem w budownictwie mieszkaniowym) / 23 (materiał kupowany przez inwestora) |
+| G | Brutto | `=E*(1+F/100)` |
+| H | Termin | data wymagalności (z umowy albo planowana data odbioru + dni z umowy) |
+| I | Status | Planowana / Do zapłaty (warunek spełniony) / Zapłacona |
+| J | Data zapłaty | |
+| K | Nr FV / protokół | odwołanie do dokumentu w folderze budowy |
+| L | Uwagi | |
+
+Zapłacona → wiersz w Wydatkach „Zrealizowane” (WYDANE); niezapłacone to zobowiązania. Formuła kontrolna w Podsumowaniu:
+`=SUMIFS(Płatności!G:G;Płatności!I:I;"<>Zapłacona")` – ile jeszcze do zapłaty z umów.

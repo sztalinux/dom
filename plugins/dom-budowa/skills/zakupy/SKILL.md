@@ -30,6 +30,10 @@ Wyprzedzenia zamówień: `references/wyprzedzenia.md`. Układ Excela: `koszty/re
 6. Wynik: tabela (pozycja | ilość + jednostka handlowa | zapas | kiedy na budowie | zamówić do | skąd / cena orientacyjna
    netto i brutto | uwagi) + zadania „zamówić X do <data>” → TASKS (`notatka`).
 
+**Zapis listy:** pozycje do zamówienia → baza Notion **Zamówienia i dostawy** (`collection://a9854c6c-43ec-4bc1-8ef0-273fb02261c7`):
+Pozycja, Ilość, Etap, Krok (relacja do Harmonogramu), Zamówić do, Kto zamawia, Status „Do zapytania” – jednym wywołaniem;
+kwoty tylko w Excelu. Terminy „Zamówić do” liczy procedura `harmonogram` (sekcja B), gdy krok ma datę.
+
 ## B. Zapytanie i porównanie ofert dostawców
 
 1. Zapytanie ofertowe: lista pozycji z ilościami i jednostkami, producent/klasa (np. klasa betonu komórkowego, gatunek stali,
@@ -44,6 +48,8 @@ Wyprzedzenia zamówień: `references/wyprzedzenia.md`. Układ Excela: `koszty/re
    gotowe do wklejenia (`koszty`, sekcja B).
 
 ## C. Dostawa („przyjechało”, „brakuje”)
+
+Aktualizuj wiersz w Zamówieniach: Status (Zamówione → Potwierdzone → Dostarczone / Problem), Dostawa, Rozładunek.
 
 1. Sprawdź z zamówieniem: ilość, asortyment, uszkodzenia, dokumenty (WZ, deklaracja właściwości) → folder budowy (`dokumenty`).
 2. Wydatek → `koszty` (Zrealizowane, nr FV); wpis w `dziennik` (dostawy).

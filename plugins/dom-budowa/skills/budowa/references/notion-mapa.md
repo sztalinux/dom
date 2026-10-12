@@ -13,12 +13,13 @@ DOM
 │     pytania dopisuje pod wpisem; w środku „Przetworzone” (ślad)
 ├─ ✅ Zadania (toggle) → TASKS (2) (baza)
 ├─ zakładki:
-│  ├─ 🏗 Etap → nagłówek „🔴 Do zamknięcia przed stanem zero” (checklista bieżącego etapu) + strony:
-│  │     Stan zero – punkty bez odwrotu (bramki), Plan przepustów i tras instalacji, Etapy budowy – przewodnik
+│  ├─ 🏗 Etap → baza Harmonogram (widok „📅 Oś czasu”), nagłówek „🔴 Do zamknięcia przed stanem zero” (checklista
+│  │     bieżącego etapu), strony: Stan zero – punkty bez odwrotu (bramki), Plan przepustów i tras instalacji,
+│  │     Etapy budowy – przewodnik; baza Zamówienia i dostawy
 │  ├─ 📒 Notatnik → Notatnik budowy (baza): pytania, decyzje, ryzyka, „pamiętać” – bez daty zdarzenia
 │  ├─ 📓 Dziennik → Dziennik budowy (baza): co się działo na budowie danego dnia
 │  ├─ 📚 Wiedza → strona Baza wiedzy (Tematy, Informacje, Rozmowy i źródła, Rejestr sprzeczności)
-│  ├─ 👷 Wykonawcy → „Wybór wykonawcy – stan zero” (rundy, zakres, wagi) + baza Porównanie wykonawców
+│  ├─ 👷 Wykonawcy → „Wybór wykonawcy – stan zero” (rundy, zakres, wagi) + baza Porównanie wykonawców; baza Umowy i gwarancje
 │  └─ 🗂 Więcej → Przeglądy tygodniowe, Kontakty – kluczowe role (pełna lista w Excelu), zdjęcia i linki, Archiwum – stare notatki
 └─ 🤖 Dla asystenta (toggle) → 📑 Przewodnik po dokumentach i Notion, Asystent AI – harness (wersja + skrzynka
       Zmiany do harnessu), nagłówek „📐 Dane projektu (ściąga)” – JEDYNE źródło ściągi
@@ -33,7 +34,11 @@ DOM
 | Otwarte pytania do konstruktora, architekta, kierownika… | Notatnik → „❓ Pytania do projektantów” (wg Do kogo) | `collection://7423414a-707b-415f-8751-c6ab7ebb6753`, `view://3f3f5982-09e7-81d2-a527-000caeaed4ea` | Typ Pytanie/Decyzja, Status otwarte, **Do kogo** |
 | Co ustaliliśmy, decyzje | Notatnik → „✅ Ustalone i zrobione” | `view://3f3f5982-09e7-8172-a666-000cb0777dc1` | Status Ustalone/Zrobione/Odrzucone, Typ Decyzja |
 | Notatki wg etapu / branży | Notatnik → „🏗 Wg etapu”, „🔧 Wg branży” | `view://3f3f5982-09e7-81f8-9782-000c7f49c705`, `view://3f3f5982-09e7-81e7-bfd0-000c9c2a8e8c` | Etap, Branża, Temat, Dziennik budowy |
-| Zadania z terminem | TASKS (2) → „Today”, „ToDo/Doing”; terminy także w Notatniku (Kiedy) | `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e`, `view://2a9f5982-09e7-81b5-8a7d-000c3a8c8d35`, `view://2a9f5982-09e7-81ee-b1e2-000cb63e2408` | When, PLANNED (status), Priority, Kategoria |
+| Kroki budowy w czasie, kto, zależności | Harmonogram → widok „📅 Oś czasu” | `collection://d7a479ab-1e23-453f-8f59-55f4097f7d04`, `view://3f7f5982-09e7-814f-bb28-000c12b8d4f1` | Krok, Nr etapu (= Excel Etapy), Termin, Kto, Status, Pewność terminu, Bez odwrotu, Zależy od/Blokuje, Zadania, Zamówienia, Umowa |
+| Co inni mają zrobić i do kiedy („czekam na”) | TASKS → widok „⏳ Czekam na” (PLANNED = WAITING) | `view://3f7f5982-09e7-8126-9825-000cc472cb4d` | Kto, When, Desc, Harmonogram |
+| Co zamówić i kiedy, dostawy | Zamówienia i dostawy → widok „🛒 Do zamówienia” | `collection://a9854c6c-43ec-4bc1-8ef0-273fb02261c7`, `view://3f7f5982-09e7-813b-8e74-000c6cb595e9` | Zamówić do, Dostawa, Status, Kto zamawia, Krok |
+| Umowy, odbiory, gwarancje | Umowy i gwarancje → widok „🛡 Gwarancje” | `collection://60c06f30-7867-435d-8f2e-1e025a3daa5c`, `view://3f7f5982-09e7-81a0-9f52-000c2fddf3d0` | Rodzaj, Strona, Status, Odbiór, Gwarancja do, Rękojmia do, Zgłaszanie usterek, Kroki |
+| Zadania z terminem | TASKS (2) → „Today”, „ToDo/Doing”, „📆 Kalendarz”; terminy także w Notatniku (Kiedy) | `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e`, `view://2a9f5982-09e7-81b5-8a7d-000c3a8c8d35`, `view://2a9f5982-09e7-81ee-b1e2-000cb63e2408` | When, PLANNED (status), **Kto**, Priority, Kategoria, Harmonogram |
 | Porównanie ofert wykonawców | Wybór wykonawcy – stan zero → tabela porównawcza (karta = wykonawca) | `3f3f5982-09e7-81e8-b361-c7bee2e3847d`, `collection://f7ca5f38-8fc3-46e7-8345-8a32cc8b5215` | Status (… Finał – spotkanie/Wybrany/Odpada), Knock-out OK, Zgodny z projektem, Ocena, Do dopytania |
 | Co mówili wykonawcy, na kogo czekamy | Wybór wykonawcy → „🗒 Co już wiem z rozmów i ofert” | jw. | – |
 | Kryteria wyboru ekipy, umowa | Wybór wykonawcy → Runda 1–3, 📄 Umowa, ⚖️ Kryteria i wagi | jw. | – |

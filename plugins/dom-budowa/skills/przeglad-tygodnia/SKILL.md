@@ -17,7 +17,12 @@ Pobierz w jak najmniejszej liczbie zapytań:
 2. **Informacje**: Status „Nowe” (wszystkie) – pogrupuj po Tematach; osobno „Dotyczy nas = Tak”.
 3. **Rejestr sprzeczności**: Status „Czeka na decyzję” i „Do sprawdzenia u projektanta” (z datą zgłoszenia – najstarsze pierwsze).
 4. **Notatnik budowy**: Status „Otwarte” lub „Do omówienia” z Priorytetem Krytyczne/Ważne; wpisy z „Kiedy” w ciągu 14 dni lub po terminie.
-5. **TASKS (2)**: niezakończone z „When” w ciągu 7 dni lub po terminie.
+5. **TASKS (2)**: niezakończone z „When” w ciągu 7 dni lub po terminie; osobno **czekam na** (PLANNED „WAITING”, Kto ≠ Ja) – po terminie = „przypomnij się”.
+5a. **Harmonogram** (`collection://d7a479ab-1e23-453f-8f59-55f4097f7d04`): kroki startujące / kończące się w 14 dni, kroki po terminie
+    bez statusu „Zrobione”, kroki „Bez odwrotu” w 14 dni (czy jest zadanie bramki), terminy „Szacunek” na najbliższe 14 dni
+    (do potwierdzenia u wykonawcy).
+5b. **Zamówienia i dostawy**: „Zamówić do” w 14 dni lub po terminie bez statusu „Zamówione”; dostawy w 7 dni.
+5c. **Umowy i gwarancje**: Gwarancja do / Rękojmia do w ciągu 60 dni (przegląd przed upływem, zgłoszenie usterek).
 6. **Informacje**: „Wrażliwe na czas” z Datą informacji starszą niż 12 miesięcy, jeśli dotyczą bieżącego etapu.
 7. **Zmiany do harnessu** (`collection://e217448a-60ec-4af6-8584-8f368315109c`): wpisy „Do wdrożenia” starsze niż 7 dni
    – przypomnienie, żeby uruchomić Claude Code i je wdrożyć.
@@ -43,7 +48,10 @@ Pobierz w jak najmniejszej liczbie zapytań:
 **Nowa wiedza (n z m źródeł):** <Temat>: 1–2 najważniejsze punkty z WI-x; … (max 8 punktów)
 **Dotyczy naszej budowy:** • …
 **Pytania do projektantów (n):** Konstruktor: …; Architekt: …
+**Harmonogram 14 dni:** <krok – od–do – kto>; **Bez odwrotu:** <krok – data – bramka gotowa?>
 **Terminy 7 dni:** <zadanie – data>; **Po terminie:** …
+**Czekam na:** <kto – co – termin> (po terminie: przypomnij się)
+**Gwarancje (60 dni):** <umowa – do kiedy>
 **Budowa w tym tygodniu:** dni ekipy / własne, problemy otwarte, braki zdjęć przed zakryciem
 **Zamówić / zapłacić do 14 dni:** <pozycja – do kiedy – skąd>
 **Do ponownej weryfikacji:** WI-x <cena/przepis z roku …>

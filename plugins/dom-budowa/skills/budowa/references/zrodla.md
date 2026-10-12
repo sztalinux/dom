@@ -10,6 +10,8 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 |---|---|---|
 | Procedury, zasady, szablony | publiczne repo GitHub `sztalinux/dom` → plugin `dom-budowa` na koncie Claude (aktualizacja: ręczne odświeżenie lub synchronizacja – `rozwoj-harnessu/references/claude-ai-projekt.md`) | Claude Code (`rozwoj-harnessu`, sekcja B) |
 | Zgłoszone zmiany harnessu (obowiązują od razu) | Notion → Asystent AI → Zmiany do harnessu | dowolny asystent (`rozwoj-harnessu`, sekcja A) |
+| Terminy: harmonogram, zadania, czekam na, zamówienia | Notion → Harmonogram, TASKS, Zamówienia i dostawy (daty); kwoty i płatności – Excel (arkusz Płatności) | agent (`harmonogram`, `zakupy`), inwestor |
+| Umowy, odbiory, gwarancje | Notion → Umowy i gwarancje; skany – folder budowy | agent (`oferta`, `etap`), inwestor |
 | Luźne wpisy inwestora do rozłożenia | Notion → DOM → sekcja „📥 Inbox” (wolny tekst) | inwestor wpisuje, agent przetwarza (`inbox`) |
 | Liczby: kosztorys, wydatki, oferty, wykonawcy (z kontaktami) | Excel „Kosztorys_stan_zero.xlsx” – prowadzi inwestor | Inwestor; agent tylko na prośbę (`koszty`): w Claude Code plik z folderu budowy, na claude.ai plik załączony w rozmowie (w wiedzy projektu go nie ma) |
 | Notatki, decyzje, pytania, ryzyka naszej budowy | Notion → DOM → Notatnik budowy | Inwestor + agent (`notatka`) |
@@ -43,6 +45,9 @@ Pełna mapa z perspektywy „czego szukasz” (widoki, pola, słowniki): `notion
 | Zmiany do harnessu (data source) | `collection://e217448a-60ec-4af6-8584-8f368315109c` |
 | Dziennik budowy (data source) | `collection://cc113d57-3eaa-4f52-80f6-e4b39a4b4c92` |
 | Przewodnik po dokumentach i Notion (strona, generowana) | `3f6f5982-09e7-81f5-bade-ec877d8d936a` |
+| Harmonogram (data source) | `collection://d7a479ab-1e23-453f-8f59-55f4097f7d04` |
+| Zamówienia i dostawy (data source) | `collection://a9854c6c-43ec-4bc1-8ef0-273fb02261c7` |
+| Umowy i gwarancje (data source) | `collection://60c06f30-7867-435d-8f2e-1e025a3daa5c` |
 
 Schematy baz budowy (pola i dozwolone wartości): `skills/notatka/references/notion-schematy.md`.
 Jeśli ID przestanie działać, wyszukaj stronę po nazwie i zaktualizuj tabelę.
