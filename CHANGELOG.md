@@ -3,6 +3,15 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.7.0] – 2026-10-12
+
+- Notion, Informacje: pola **Istotność** (Kluczowe / Ważne / Ciekawostka) i **Mój komentarz** (pole inwestora); na stronie
+  Baza wiedzy zakładki „🆕 Do przejrzenia” (wg Istotności), „⭐ Kluczowe i ważne”, „💬 Z moim komentarzem”.
+- `wiedza`: propozycja Istotności przy zapisie (po przejrzeniu decyduje inwestor), Ciekawostki w odpowiedziach tylko
+  licznikiem, komentarz inwestora pokazywany przy informacji; sekcja H – sprzeciw/wątpliwość w komentarzu → jedno
+  proponowane działanie (pytanie do projektanta, SP, „Nieaktualne”). „Przejrzałem nowe” przyjmuje ocenę i komentarz.
+- `przeglad-tygodnia`: nowa wiedza bez ciekawostek, Twoje komentarze z ostatnich 7 dni.
+
 ## [1.6.0] – 2026-10-12
 
 - Notion: baza „💡 Pomysły na rozwój” na stronie DOM (rozwijana sekcja nad „Dla asystenta”, widok „💡 Tablica”) –

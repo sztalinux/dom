@@ -1,7 +1,8 @@
 # Wiedza w Notion – identyfikatory, pola, plan zapisu (stan: 2026-10-09)
 
 Strona główna: **📚 Baza wiedzy** `3f4f5982-09e7-8193-a68e-fd35c9265012` (DOM → toggle „Baza wiedzy”).
-Na niej: widoki „⏳ Czeka na decyzję” i „🆕 Nowe informacje”, bazy Tematy i Rozmowy i źródła,
+Na niej: „⏳ Czeka na decyzję”, informacje z zakładkami „🆕 Do przejrzenia” (Nowe, wg Istotności), „⭐ Kluczowe i ważne”,
+„💬 Z moim komentarzem”, bazy Tematy i Rozmowy i źródła,
 podstrona „Bazy: Informacje i Rejestr sprzeczności”. Jeśli zapis zwróci błąd pola – pobierz schemat bazy i zaktualizuj ten plik.
 
 Cztery warstwy: **Tematy** (co wiemy teraz) ← **Informacje** (pojedyncze fakty) ← **Rozmowy i źródła** (kto, kiedy, skąd)
@@ -66,6 +67,8 @@ Temat ma być na tyle szeroki, by zebrać kilka-kilkanaście informacji.
 | Dotyczy nas | select | Tak, Częściowo, Nie, Do oceny |
 | Dla naszej budowy | tekst | 1–2 zdania |
 | Status | select | Nowe, Przejrzane, Sporne, Nieaktualne |
+| Istotność | select | Kluczowe, Ważne, Ciekawostka – przy „Nowe” propozycja asystenta, po przejrzeniu ocena inwestora (SKILL.md) |
+| Mój komentarz | tekst | **pole inwestora** – nie nadpisuj; sprzeciw/wątpliwość → SKILL.md, sekcja H |
 | Wrażliwe na czas | checkbox | ceny, przepisy, dotacje, dostępność produktów |
 | Dodano / Zmieniono | czas | auto |
 

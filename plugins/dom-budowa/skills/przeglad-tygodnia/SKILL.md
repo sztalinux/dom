@@ -14,7 +14,8 @@ najpierw bieżący etap i pilne terminy, sprawy zamknięte i odległe tylko licz
 
 Pobierz w jak najmniejszej liczbie zapytań:
 1. **Rozmowy i źródła** dodane w ostatnich 7 dniach.
-2. **Informacje**: Status „Nowe” (wszystkie) – pogrupuj po Tematach; osobno „Dotyczy nas = Tak”.
+2. **Informacje**: Status „Nowe” (wszystkie) – pogrupuj po Tematach; pokazuj Kluczowe i Ważne, Ciekawostki tylko liczbą.
+   Osobno: Informacje z „Moim komentarzem” zmienionym w 7 dniach – sprzeciw/wątpliwość → propozycja działania (`wiedza`, sekcja H).
 3. **Rejestr sprzeczności**: Status „Czeka na decyzję” i „Do sprawdzenia u projektanta” (z datą zgłoszenia – najstarsze pierwsze).
 4. **Notatnik budowy**: Status „Otwarte” lub „Do omówienia” z Priorytetem Krytyczne/Ważne; wpisy z „Kiedy” w ciągu 14 dni lub po terminie.
 5. **TASKS (2)**: niezakończone z „When” w ciągu 7 dni lub po terminie; osobno **czekam na** (PLANNED „WAITING”, Kto ≠ Ja) – po terminie = „przypomnij się”.
@@ -46,7 +47,8 @@ Pobierz w jak najmniejszej liczbie zapytań:
 ```
 ## Przegląd budowy – tydzień <RRRR-Www> (<data>)
 **Do decyzji (n):** SP-x <dylemat> – od <n> dni … (najstarsze/krytyczne pierwsze)
-**Nowa wiedza (n z m źródeł):** <Temat>: 1–2 najważniejsze punkty z WI-x; … (max 8 punktów)
+**Nowa wiedza (n z m źródeł; k kluczowych, c ciekawostek):** <Temat>: 1–2 najważniejsze punkty z WI-x; … (max 8 punktów)
+**Twoje komentarze do wiedzy:** WI-x – <komentarz> → proponuję: …
 **Dotyczy naszej budowy:** • …
 **Pytania do projektantów (n):** Konstruktor: …; Architekt: …
 **Harmonogram 14 dni:** <krok – od–do – kto>; **Bez odwrotu:** <krok – data – bramka gotowa?>

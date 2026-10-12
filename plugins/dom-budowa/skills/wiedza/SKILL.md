@@ -17,6 +17,14 @@ albo relację Notatnik (ustalenie lub decyzja naszej budowy, sekcja F). Informac
 (np. stara notatka bez autora) → wpis „Notatki własne” z Wiarygodnością co najwyżej „3 – średnia” i Konfliktem „?”, a
 w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej informacji widać, skąd jest i ile jest warta.
 
+**Istotność i komentarz inwestora** – żeby przy dużej liczbie kursów i podcastów nie utonąć w informacjach:
+- **Istotność:** **Kluczowe** = wpływa na decyzję, zamówienie, wykonanie lub odbiór u nas (błąd = koszt albo rzecz nie do
+  cofnięcia); **Ważne** = dotyczy nas, warto pamiętać lub sprawdzić, ale nic nie blokuje; **Ciekawostka** = kontekst, inne
+  warunki niż u nas, „dobrze wiedzieć”. Przy zapisie ustaw **propozycję** (Status „Nowe”); po przejrzeniu („Przejrzane”)
+  to ocena inwestora – nie zmieniaj jej bez jego prośby. W razie wątpliwości wybierz niższą – Kluczowe ma zostać krótką listą.
+- **Mój komentarz:** pole inwestora (zgadzam się / nie zgadzam, bo… / sprawdzić u…). Nigdy go nie nadpisuj ani nie
+  skracaj; czytaj przy każdej odpowiedzi o tej informacji (sekcja E) i reaguj wg sekcji H.
+
 ## A. Nowe źródło
 
 1. **Metadane:** film/artykuł – tytuł, autor/kanał, link, data publikacji (z linku spróbuj odczytać tytuł i datę);
@@ -47,7 +55,7 @@ w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej inform
    | ZGODNE / SPRZECZNE Z ROZSTRZYGNIĘCIEM | nie otwieraj sporu ponownie, chyba że źródło wnosi nowy argument – wtedy nowy SP z odwołaniem do starego |
    Różne zalecenia dla **różnych warunków** (inny grunt, inna technologia) to nie sprzeczność – zapisz warunek w treści.
 6. **Dla naszej budowy:** oceń „Dotyczy nas” i w 1–2 zdaniach napisz, co to znaczy u nas (parametry budynku, gruntu i instalacji:
-   `budowa/references/projekt.md`). Wymaga działania (pytanie do konstruktora, ryzyko,
+   `budowa/references/projekt.md`); ustaw propozycję **Istotności** (wyżej – „Dotyczy nas = Nie” to zwykle Ciekawostka). Wymaga działania (pytanie do konstruktora, ryzyko,
    rzecz do pilnowania na budowie) → wpis w Notatniku budowy (procedura `notatka`, Źródło = „ZRD-x <tytuł>, <minuta>”).
 7. **Zapis do Notion** – kolejność i grupowanie wg „Plan zapisu” w `references/notion-wiedza.md` (zwykle 4–6 zatwierdzeń).
    Wiedza bez konfliktu zapisuje się od razu.
@@ -58,8 +66,8 @@ w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej inform
 
 ```
 **ZRD-x „<tytuł>”** – <autor>, <data> | wiarygodność <n>/5 | konflikt interesów: <…>
-Zapisano: <n> nowych, <n> potwierdzeń, <n> uzupełnień → tematy: <lista>
-Najważniejsze dla nas: • … • … (3–5 punktów, z WI-x)
+Zapisano: <n> nowych (<k> kluczowych, <w> ważnych, <c> ciekawostek), <n> potwierdzeń, <n> uzupełnień → tematy: <lista>
+Najważniejsze dla nas: • … • … (3–5 punktów z Kluczowych i Ważnych, z WI-x)
 ⚠️ Sprzeczności – czekają na Twoją odpowiedź:
   SP-n <dylemat>: A) <stanowisko + źródło> vs B) <stanowisko + źródło>. Rekomenduję <…>, bo <…>.
   ❓ <pytanie> – odpowiedz np. „SP-n: B” albo „SP-n: zapytam konstruktora”.
@@ -72,14 +80,19 @@ Tylko po wyraźnej odpowiedzi; niejasna → dopytaj, nie zgaduj. Kroki: `referen
 
 ## D. „Przejrzałem nowe”
 
-Zmień Status „Nowe” → „Przejrzane” dla wskazanych wierszy (albo wszystkich z danego źródła/tematu).
+Zmień Status „Nowe” → „Przejrzane” dla wskazanych wierszy (albo wszystkich z danego źródła/tematu). Gdy inwestor przy tym
+podaje ocenę albo uwagę („WI-12 ciekawostka”, „do WI-20: nie zgadzam się, bo…”) – zapisz Istotność i **Mój komentarz**
+(dosłownie, jego słowami) w tym samym przebiegu, potem sekcja H. Bez oceny – propozycja asystenta zostaje.
 
 ## E. Pytanie do bazy („co wiemy o drenażu?”)
 
 1. Znajdź temat(y) w Tematach (nazwa i „W skrócie”); pobierz ich Informacje (Status ≠ Nieaktualne) i wpisy Rejestru
    (Status ≠ Zastąpione) – jednym zapytaniem na bazę. Dodaj decyzje z Notatnika (Typ „Decyzja”) o tej branży.
    Gdy dwa tematy pokrywają ten sam zakres, nie łącz ich wiedzy po cichu – zgłoś to inwestorowi jako sprawę porządkową.
-2. Odpowiedz w kolejności: **co obowiązuje u nas** (decyzje z ich Statusem – „Do omówienia” to jeszcze nie ustalenie;
+2. Kolejność w obrębie stanu wiedzy: Kluczowe → Ważne → nieocenione; Ciekawostki tylko jako licznik („+ n ciekawostek –
+   pokazać?”), chyba że pytanie dotyczy właśnie ich. Przy informacji z **Moim komentarzem** podaj go obok („Twoja uwaga: …”);
+   komentarz sprzeciwu oznacz – to nie jest wiedza „obowiązująca u nas”, dopóki sprawa nie jest rozstrzygnięta.
+   Odpowiedz w kolejności: **co obowiązuje u nas** (decyzje z ich Statusem – „Do omówienia” to jeszcze nie ustalenie;
    rozstrzygnięcia SP, projekt – ze źródłem) → **stan wiedzy**
    (punkty z WI-x, liczby z warunkami; przy rozbieżnych warunkach podaj oba) → **otwarte sprzeczności** (SP-n, od kiedy czekają)
    → **luki** (czego baza nie wie – zaproponuj, kogo zapytać lub jakie źródło przerobić). Inwestor chce odpowiedzi od razu →
@@ -96,7 +109,8 @@ Gdy wpis w Notatniku budowy ma Status „Ustalone” lub „Zrobione” i niesie
 
 1. Sprawdź, czy taka informacja już jest (Informacje: Tematy + słowa kluczowe) – jest → podepnij Notatnik i ewentualnie
    zaktualizuj „Dla naszej budowy”, bez nowego wiersza.
-2. Nowa → wiersz w Informacjach: samodzielne zdanie (co obowiązuje u nas), Dotyczy nas „Tak”, „Dla naszej budowy”,
+2. Nowa → wiersz w Informacjach: samodzielne zdanie (co obowiązuje u nas), Dotyczy nas „Tak”, Istotność (zwykle Kluczowe
+   albo Ważne), „Dla naszej budowy”,
    Tematy, Branża, Etap, Status „Przejrzane” (ustalił inwestor), relacja **Notatnik** = ten wpis; Źródła = rozmowa
    z Rozmów i źródeł, z której ustalenie wynika (jeśli jest – pole Źródło w Notatniku).
 3. Ustalenie zmienia „co obowiązuje dziś” w temacie → zaktualizuj „W skrócie” tematu. Sprzeczne z dotychczasową wiedzą →
@@ -109,3 +123,12 @@ Stare notatki inwestora (np. Notion → Archiwum – stare notatki) przetwarzaj 
 wpis w Rozmowach i źródłach (Forma „Notatki własne”, Z kim wg pochodzenia – kurs/internet/rozmowa, jeśli wiadomo,
 Typ autora „Inny”, Wiarygodność „3 – średnia” lub niżej, Konflikt „?”). Informacje Status „Nowe” – inwestor je przejrzy.
 Rzeczy nieaktualne (wybór działki, wybór projektanta) pomiń; działania dla budowy → Notatnik (procedura `notatka`).
+
+## H. Komentarz inwestora do informacji
+
+Gdy w „Moim komentarzu” jest sprzeciw, wątpliwość albo „sprawdzić” (zauważysz go w odpowiedzi, przeglądzie lub sekcji D) –
+zaproponuj **jedno** działanie, nic nie zmieniaj bez zgody:
+- informacja dotyczy nas i kłóci się ze zdaniem inwestora → pytanie do projektanta/kierownika w Notatniku (`notatka`, Do kogo)
+  albo wpis w Rejestrze („Źródło vs nasza decyzja”), gdy inwestor ma już stanowisko;
+- inwestor uważa ją za błędną lub nieaktualną → Status „Nieaktualne” (komentarz zostaje jako uzasadnienie);
+- komentarz uzupełnia (np. własne doświadczenie) → nic; przy kolejnych pytaniach traktuj go jako opinię inwestora, nie źródło.
