@@ -3,6 +3,12 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.4.3] – 2026-10-12
+
+- Strona DOM uproszczona: Inbox i Zadania u góry; zakładki Etap (checklista „Do zamknięcia” + bramki, plan przepustów,
+  etapy budowy), Notatnik, Dziennik, Wiedza, Wykonawcy, Więcej; na dole zwinięta sekcja „🤖 Dla asystenta” (przewodnik,
+  harness, ściąga „📐 Dane projektu”). Nazwy sekcji używane w procedurach bez zmian; mapa Notion i `projekt.md` zaktualizowane.
+
 ## [1.4.2] – 2026-10-12
 
 - Strona DOM: Inbox i Zadania jako rozwijane nagłówki, reszta w zakładkach (Do zamknięcia, Notatnik, Dziennik, Wiedza,
