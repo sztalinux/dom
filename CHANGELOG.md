@@ -3,6 +3,11 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.5.1] – 2026-10-12
+
+- `inbox`: wpis = każdy blok pierwszego poziomu pod „📥 Inbox” (akapit lub punkt, także zaczynający się od daty),
+  poza „Jak używać” i „Przetworzone”; jeden blok może zawierać kilka spraw.
+
 ## [1.5.0] – 2026-10-12
 
 Planowanie i obsługa budowy: harmonogram, „czekam na”, zamówienia, umowy i gwarancje, płatności.

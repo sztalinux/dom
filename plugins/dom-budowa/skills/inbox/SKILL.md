@@ -22,12 +22,14 @@ Pod spodem zwijany nagłówek **„Przetworzone”** – tam asystent przenosi z
 	### Przetworzone {toggle}
 		- ~~wpis~~ → Notatnik: <link> (12.10)
 ```
-Wpis = punkt pierwszego poziomu; jego punkty zagnieżdżone to dialog (pytania asystenta „❓ asystent (data):”
-i odpowiedzi inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i przenoś do „Przetworzone”.
+**Wpis = każdy blok pierwszego poziomu pod „📥 Inbox”** – akapit albo punkt (inwestor pisze różnie, np. akapit
+zaczynający się od daty), z wyjątkiem rozwijanego „Jak używać”, pustych linii i „Przetworzone”. Jeden blok może zawierać
+kilka spraw – rozłóż je osobno. Bloki zagnieżdżone pod wpisem to dialog (pytania „❓ asystent (data):” i odpowiedzi
+inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i przenoś do „Przetworzone”.
 
 ## Procedura
 
-1. **Pobierz** stronę DOM i weź wszystkie punkty pierwszego poziomu z „📥 Inbox” (poza „Przetworzone”); wpis
+1. **Pobierz** stronę DOM i weź wszystkie wpisy z „📥 Inbox” (definicja wyżej); wpis
    z punktem „❓ asystent” bez odpowiedzi pod spodem – pomiń (czeka na inwestora), z odpowiedzią – oceń ponownie.
    Brak wpisów → jedna linia „Inbox pusty” (+ liczba czekających na Twoją odpowiedź).
 2. **Dla każdego wpisu ustal** (razem z dialogiem pod nim):
