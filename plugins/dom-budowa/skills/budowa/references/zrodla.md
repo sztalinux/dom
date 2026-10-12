@@ -10,6 +10,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 |---|---|---|
 | Procedury, zasady, szablony | publiczne repo GitHub `sztalinux/dom` → plugin `dom-budowa` na koncie Claude (aktualizacja: ręczne odświeżenie lub synchronizacja – `rozwoj-harnessu/references/claude-ai-projekt.md`) | Claude Code (`rozwoj-harnessu`, sekcja B) |
 | Zgłoszone zmiany harnessu (obowiązują od razu) | Notion → Asystent AI → Zmiany do harnessu | dowolny asystent (`rozwoj-harnessu`, sekcja A) |
+| Pomysły na rozwój (do analizy; wdrożenie tylko na polecenie) | Notion → DOM → 💡 Pomysły na rozwój | inwestor wpisuje, asystent analizuje (`rozwoj-harnessu`, sekcja C) |
 | Terminy: harmonogram, zadania, czekam na, zamówienia | Notion → Harmonogram, TASKS, Zamówienia i dostawy (daty); kwoty i płatności – Excel (arkusz Płatności) | agent (`harmonogram`, `zakupy`), inwestor |
 | Umowy, odbiory, gwarancje | Notion → Umowy i gwarancje; skany – folder budowy | agent (`oferta`, `etap`), inwestor |
 | Luźne wpisy inwestora do rozłożenia | Notion → DOM → sekcja „📥 Inbox” (wolny tekst) | inwestor wpisuje, agent przetwarza (`inbox`) |
@@ -43,6 +44,7 @@ Pełna mapa z perspektywy „czego szukasz” (widoki, pola, słowniki): `notion
 | Przeglądy tygodniowe (strona) | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` |
 | Asystent AI – harness budowy (przewodnik) | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` |
 | Zmiany do harnessu (data source) | `collection://e217448a-60ec-4af6-8584-8f368315109c` |
+| Pomysły na rozwój (data source) | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` |
 | Dziennik budowy (data source) | `collection://cc113d57-3eaa-4f52-80f6-e4b39a4b4c92` |
 | Przewodnik po dokumentach i Notion (strona, generowana) | `3f6f5982-09e7-81f5-bade-ec877d8d936a` |
 | Harmonogram (data source) | `collection://d7a479ab-1e23-453f-8f59-55f4097f7d04` |

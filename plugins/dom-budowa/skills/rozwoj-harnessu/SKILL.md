@@ -1,6 +1,6 @@
 ---
 name: rozwoj-harnessu
-description: Zgłaszanie i wdrażanie zmian w harnessie budowy (procedury, zasady, szablony w repozytorium harnessu) przez skrzynkę „Zmiany do harnessu” w Notion. Używaj, gdy użytkownik poprawia sposób pracy asystenta („zawsze rób X”, „nie rób Y”, „źle to zapisałeś”, „zapamiętaj na przyszłość”), chce nową procedurę, zmienia strukturę Notion/Excela, mówi „wdróż zmiany”, „zaktualizuj harness”, albo pyta o przeniesienie harnessu do innego AI.
+description: Zgłaszanie i wdrażanie zmian w harnessie budowy (procedury, zasady, szablony w repozytorium harnessu) przez skrzynkę „Zmiany do harnessu” w Notion oraz analiza pomysłów na rozwój setupu (baza „Pomysły na rozwój”). Używaj, gdy użytkownik poprawia sposób pracy asystenta („zawsze rób X”, „nie rób Y”, „źle to zapisałeś”, „zapamiętaj na przyszłość”), chce nową procedurę, zmienia strukturę Notion/Excela, mówi „wdróż zmiany”, „zaktualizuj harness”, „mam pomysł na…”, „przeanalizuj pomysły”, „zrób POM-3”, albo pyta o przeniesienie harnessu do innego AI.
 ---
 
 # Rozwój harnessu
@@ -13,6 +13,9 @@ Konfiguracja projektu „Dom” na claude.ai (instrukcje, wiedza): `references/c
 |---|---|
 | Czat, telefon, Cowork, inne AI (bez repo) | **Zgłoszenie** do skrzynki w Notion – sekcja A |
 | Claude Code w folderze repo | **Wdrożenie** skrzynki do plików + push – sekcja B (robisz to też na starcie każdej sesji) |
+| Większy pomysł na rozwój (nowa funkcja, automatyzacja, zdjęcia, Excel) | **Pomysł** do bazy „Pomysły na rozwój” → analiza → wdrożenie na polecenie – sekcja C |
+
+Skrzynka = konkretna reguła, wchodzi od razu. Pomysł = coś do przemyślenia; nic nie wchodzi samo, decyduje inwestor.
 
 Skrzynka: Notion → „Zmiany do harnessu”, `collection://e217448a-60ec-4af6-8584-8f368315109c`.
 Pola: Zmiana (tytuł), Status (Do wdrożenia / Wdrożone / Odrzucone), Procedura, Rodzaj (Nowa zasada, Poprawka,
@@ -67,6 +70,42 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
    w `references/claude-ai-projekt.md` – także „wklej na nowo `dist/claude-ai-projekt/instrukcje.md` w projekt »Dom«”.
 
 Zmiany, o które inwestor prosi bezpośrednio w Claude Code, wdrażasz od razu tymi samymi krokami 2–8 (bez skrzynki).
+
+## C. Pomysły na rozwój
+
+Baza: Notion → DOM → „💡 Pomysły na rozwój”, `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` (widok „💡 Tablica”).
+Pola: Pomysł (tytuł), Status (Nowy / Pytania do mnie / Przeanalizowany / Do zrobienia / Zrobione / Odłożone / Odrzucone;
+**pusty = Nowy**), Obszar, Nakład (S/M/L), Wymaga ode mnie, Przeanalizowano, Zrobiono w wersji, ID (POM-n).
+Treść strony: pomysł inwestora (nie zmieniaj), pod nim sekcja „Analiza” pisana przez asystenta.
+
+**Zapis pomysłu** („mam pomysł…”, wpis w Inboxie „pomysł: …” o asystencie, Notion, Excelu, plikach, automatyzacji):
+sprawdź, czy podobny już jest (uzupełnij zamiast dublować); nowy wiersz – tytuł, Obszar, w treści „## Pomysł (kto, data)”
+i słowa inwestora. Status pusty/Nowy. Poprawka sposobu pracy (jedna reguła) to nie pomysł – sekcja A.
+
+**Analiza** (wpisy Nowy lub pusty; w trybie wieczornym `inbox` automatycznie, inaczej na prośbę i na starcie Claude Code):
+1. Przeczytaj pomysł i przejrzyj, co już jest: procedury (`budowa` – mapa procedur, odpowiednie `SKILL.md`), mapa Notion
+   (`budowa/references/notion-mapa.md`), inne pomysły (zależności, duplikaty).
+2. Niejasne, co inwestor chce → dopisz „### ❓ Pytania (data)” z 1–3 pytaniami i propozycją interpretacji, Status
+   „Pytania do mnie”. Odpowiedź inwestora pod pytaniami → przy następnym przebiegu analizuj dalej.
+3. Jasne → dopisz pod pomysłem sekcję (nie nadpisuj wcześniejszych):
+   ```
+   ## Analiza (asystent, data)
+   **Co rozumiem:** 1–2 zdania.
+   **Co już jest:** procedury / bazy / pola, które to częściowo robią; czego brakuje.
+   **Co trzeba zrobić:** Harness (pliki procedur) · Notion (bazy, pola, widoki) · Excel · narzędzia w repo · Ty (decyzje,
+     aplikacje, konta) – lista numerowana, kolejność wdrożenia dla Claude Code.
+   **Ograniczenia:** czego się nie da / co wymaga zgody (np. connector do nowej usługi → najpierw zgłoszenie IT
+     w organizacji inwestora; nie proponuj obejść), koszty usług, prywatność (repo publiczne).
+   **Nakład:** S (jedna sesja) / M (kilka) / L (projekt). **Zależności:** POM-n.
+   **Do decyzji przed startem:** … **Rekomendacja:** zrobić teraz / przed <etapem> / odłożyć – dlaczego.
+   ```
+   Ustaw: Status „Przeanalizowany”, Nakład, Obszar, „Wymaga ode mnie” (krótko), Przeanalizowano = data.
+4. Analiza to plan, nie wdrożenie: nie zmieniaj procedur, baz ani plików. Bez dostępu do repo (claude.ai) opieraj się
+   na skillach z pluginu – Claude Code i tak sprawdzi pliki przed wdrożeniem.
+
+**Wdrożenie** – tylko gdy inwestor powie w Claude Code „zrób POM-n” (albo ustawi „Do zrobienia” i poprosi o to):
+przeczytaj stronę pomysłu z analizą, potwierdź decyzje z „Do decyzji przed startem”, potem kroki B.2–B.8. Na końcu Status
+„Zrobione”, „Zrobiono w wersji”, w treści linia „Wdrożone w <wersja> (data): co weszło, co pominięto”.
 
 ## Nowa procedura – minimum
 

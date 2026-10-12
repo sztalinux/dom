@@ -3,6 +3,15 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.6.0] – 2026-10-12
+
+- Notion: baza „💡 Pomysły na rozwój” na stronie DOM (rozwijana sekcja nad „Dla asystenta”, widok „💡 Tablica”) –
+  pomysły na harness i cały setup (Notion, Excel, zdjęcia, automatyzacje), ID POM-n.
+- `rozwoj-harnessu`, sekcja C: zapis pomysłu, analiza (co jest, co trzeba zrobić, ograniczenia i zgody, nakład,
+  zależności, decyzje, rekomendacja; niejasne → „Pytania do mnie”), wdrożenie tylko na polecenie „zrób POM-n”.
+- `inbox`: „pomysł: …” → baza pomysłów; tryb wieczorny analizuje też nowe pomysły. `przeglad-tygodnia`: licznik pomysłów.
+- Claude Code na starcie: jedna linia o pomysłach (nowe do analizy, „Do zrobienia”), bez wdrażania.
+
 ## [1.5.1] – 2026-10-12
 
 - `inbox`: wpis = każdy blok pierwszego poziomu pod „📥 Inbox” (akapit lub punkt, także zaczynający się od daty),

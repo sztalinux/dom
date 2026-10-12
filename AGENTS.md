@@ -25,7 +25,7 @@ Jest celowo krótki: cała wiedza i procedury są w `plugins/dom-budowa/skills/`
 | Luźne wpisy z sekcji „📥 Inbox” na stronie DOM: „przerób inbox”, kilka notatek naraz | `plugins/dom-budowa/skills/inbox/SKILL.md` |
 | Spotkanie, rozmowa, decyzja: „jutro mam spotkanie z…”, „o co zapytać”, „jak wybrać z kilku” | `plugins/dom-budowa/skills/przygotowanie/SKILL.md` |
 | Przegląd tygodnia, „co nowego”, „co czeka na mnie” | `plugins/dom-budowa/skills/przeglad-tygodnia/SKILL.md` |
-| Zmiana samego harnessu (nowa procedura, poprawka) | `plugins/dom-budowa/skills/rozwoj-harnessu/SKILL.md` |
+| Zmiana samego harnessu (nowa procedura, poprawka), pomysł na rozwój setupu, „zrób POM-n” | `plugins/dom-budowa/skills/rozwoj-harnessu/SKILL.md` |
 
 ## Zasady, które obowiązują zawsze
 

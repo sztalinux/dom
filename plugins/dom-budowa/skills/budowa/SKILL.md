@@ -28,6 +28,8 @@ pobierz wpisy ze Statusem „Do wdrożenia” (jedno zapytanie) i:
   pierwszeństwo przed treścią procedur, jeśli są sprzeczne (są nowsze i zatwierdzone przez inwestora).
   Nie zmieniaj ich statusu.
 - Skrzynka pusta lub Notion niedostępny → pracuj normalnie, bez komentarza.
+- **Pomysły na rozwój** (`collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`) nie są zasadami i nie wchodzą same. W Claude Code dopisz na starcie jedną linię:
+  „Pomysły: n nowych do analizy, m »Do zrobienia«” (pomiń, gdy obie liczby = 0); analiza i wdrożenie – `rozwoj-harnessu`, sekcja C.
 
 Poza Claude Code pobierz też (raz na rozmowę, razem ze skrzynką) stronę Notion **„📑 Przewodnik po dokumentach i Notion”**
 (`3f6f5982-09e7-81f5-bade-ec877d8d936a`): co jest w którym dokumencie, gdzie leży i gdzie czego szukać w Notion.
@@ -50,7 +52,7 @@ Utrzymuje ją Claude Code (procedura `dokumenty`, sekcja C) – zawsze aktualna,
 | relacjonuje dzień na budowie, wysyła zdjęcia, podaje swoje godziny, „ekipa chce dopłatę za…” | `dziennik` |
 | „co kupić na…”, „ile zamówić”, „kiedy zamawiać okna”, oferta hurtowni, „przyjechała dostawa” | `zakupy` |
 | „ekipa wchodzi…”, „przesuwamy…”, „ułóż harmonogram”, „do piątku mam…”, „czekam na…”, „co mnie czeka” | `harmonogram` |
-| poprawia sposób pracy asystenta, chce nową procedurę | `rozwoj-harnessu` |
+| poprawia sposób pracy asystenta, chce nową procedurę, „mam pomysł na…” (setup, automatyzacja), „zrób POM-n” | `rozwoj-harnessu` |
 
 Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka). Wykonuj je po kolei.
 

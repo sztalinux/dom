@@ -5,7 +5,7 @@ Plik trafia też do przewodnika (`tools/dokumenty.py`) – strona Notion „📑
 synchronizuje sam, więc asystent na claude.ai ma zawsze aktualną mapę.
 Zmiana struktury Notion (nowa baza, widok, pole) → zaktualizuj ten plik (procedura `rozwoj-harnessu`).
 
-Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – u góry dwa rozwijane nagłówki, pod nimi zakładki, na dole sekcja dla AI:
+Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – u góry dwa rozwijane nagłówki, pod nimi zakładki, na dole pomysły i sekcja dla AI:
 
 ```
 DOM
@@ -21,6 +21,7 @@ DOM
 │  ├─ 📚 Wiedza → strona Baza wiedzy (Tematy, Informacje, Rozmowy i źródła, Rejestr sprzeczności)
 │  ├─ 👷 Wykonawcy → „Wybór wykonawcy – stan zero” (rundy, zakres, wagi) + baza Porównanie wykonawców; baza Umowy i gwarancje
 │  └─ 🗂 Więcej → Przeglądy tygodniowe, Kontakty – kluczowe role (pełna lista w Excelu), zdjęcia i linki, Archiwum – stare notatki
+├─ 💡 Pomysły na rozwój (toggle) → baza Pomysły na rozwój (widok „💡 Tablica”): pomysły inwestora na harness i setup + analizy
 └─ 🤖 Dla asystenta (toggle) → 📑 Przewodnik po dokumentach i Notion, Asystent AI – harness (wersja + skrzynka
       Zmiany do harnessu), nagłówek „📐 Dane projektu (ściąga)” – JEDYNE źródło ściągi
 ```
@@ -53,6 +54,7 @@ DOM
 | Ostatni przegląd tygodnia | Przeglądy tygodniowe | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` | – |
 | Zasady asystenta, wersja harnessu | Asystent AI – harness budowy | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
 | Zgłoszone poprawki harnessu | Zmiany do harnessu | `collection://e217448a-60ec-4af6-8584-8f368315109c` | Status, Procedura, Rodzaj |
+| Pomysły na rozwój harnessu i setupu (do analizy, nie wchodzą same) | DOM → „💡 Pomysły na rozwój” → „💡 Tablica” | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`, `view://3f7f5982-09e7-81f6-97bf-000cb7996ef0` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie; analiza w treści strony |
 | Stare notatki sprzed systemu | Archiwum – stare notatki (tylko do wglądu; przydatne rzeczy są w Notatniku) | `3f3f5982-09e7-817c-bab8-f439d883e6ce` | – (nie zapisuj tam) |
 
 **Słowniki.** Etap: Projekt i formalności / Stan zero / SSO / Deweloperski / Wykończenie / Teren i ogród / Cała budowa.

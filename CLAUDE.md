@@ -23,6 +23,9 @@ Zanim zajmiesz się czymkolwiek innym:
    (zmiana plików → wersja → CHANGELOG → `python3 tools/build.py` → commit → push → oznaczenie wpisów jako „Wdrożone”).
    Jeśli wpis jest niejasny albo sprzeczny z inną procedurą – zapytaj inwestora, zanim go wdrożysz.
 4. Jeśli skrzynka jest pusta – napisz jedną linię „Harness aktualny (wersja X.Y.Z)”.
+4a. Baza **„Pomysły na rozwój”** (`collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`): dopisz jedną linię „Pomysły: n nowych do analizy,
+    m »Do zrobienia«” (pomiń przy zerach). Niczego z niej nie wdrażaj bez polecenia „zrób POM-n”
+    (`rozwoj-harnessu`, sekcja C).
 5. Raport „[dokumenty]” z hooka startowego (`tools/dokumenty.py`): „Przewodnik zmieniony” → od razu przepisz stronę
    przewodnika w Notion (`dokumenty`, sekcja C), bez pytania. Jeśli są nowe pliki do sklasyfikowania –
    zaproponuj ich obsługę wg `plugins/dom-budowa/skills/dokumenty/SKILL.md` (jedna linia); jeśli jest lista

@@ -59,7 +59,8 @@ inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i 
    | wydatek, faktura, koszt | `koszty` | wiersz do Excela – w Inboxie zostaje do czasu wpisania przez inwestora |
    | oferta, wycena | `oferta` | |
    | „dostałem plik” | `dokumenty` | w Claude Code – klasyfikacja; gdzie indziej – przypomnienie, żeby wrzucić do `_Przychodzące/` |
-   | „asystent ma zawsze…” | `rozwoj-harnessu` | skrzynka „Zmiany do harnessu” |
+   | „asystent ma zawsze…” | `rozwoj-harnessu` (A) | skrzynka „Zmiany do harnessu” |
+   | „pomysł: …” na asystenta, Notion, Excel, zdjęcia, automatyzację | `rozwoj-harnessu` (C) | baza „Pomysły na rozwój”, od razu z analizą |
 5. **Zamknij wpis:** przenieś go (z dialogiem) do „Przetworzone” jako `~~wpis~~ → <gdzie>: <link> (data)`
    (albo „→ wiersz do Excela: …”). Zdublowane / nieprzydatne → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
 6. **Zapisy wsadowo** (`budowa`, zasada 6): najpierw wszystkie odczyty, potem jedno wywołanie na bazę docelową,
@@ -76,7 +77,9 @@ Inbox może przerabiać zaplanowane zadanie (np. codziennie o 20:00 na claude.ai
 - nie pokazuj planu do akceptacji (krok 6) – ale nie zapisuj niczego, co jest decyzją inwestora, rozstrzygnięciem
   sprzeczności (SP) ani zmianą w Excelu: takie wpisy zostaw z pytaniem „❓ asystent: potwierdź, że to decyzja”;
 - nie zmieniaj Harmonogramu (terminy kroków) – zaproponuj zmianę pytaniem pod wpisem; zadania i „czekam na” zapisuj;
-- na końcu dopisz na górze Inboxu jedną linię: „🤖 <data>: przetworzono n, pytania przy m” – inwestor widzi to rano.
+- potem przeanalizuj nowe pomysły w bazie „Pomysły na rozwój” (Status Nowy lub pusty) – `rozwoj-harnessu`, sekcja C;
+- na końcu dopisz na górze Inboxu jedną linię: „🤖 <data>: przetworzono n, pytania przy m; pomysły przeanalizowane: k”
+  – inwestor widzi to rano.
 
 ## Zasady
 

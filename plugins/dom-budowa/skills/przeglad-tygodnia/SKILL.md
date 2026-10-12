@@ -25,7 +25,8 @@ Pobierz w jak najmniejszej liczbie zapytań:
 5c. **Umowy i gwarancje**: Gwarancja do / Rękojmia do w ciągu 60 dni (przegląd przed upływem, zgłoszenie usterek).
 6. **Informacje**: „Wrażliwe na czas” z Datą informacji starszą niż 12 miesięcy, jeśli dotyczą bieżącego etapu.
 7. **Zmiany do harnessu** (`collection://e217448a-60ec-4af6-8584-8f368315109c`): wpisy „Do wdrożenia” starsze niż 7 dni
-   – przypomnienie, żeby uruchomić Claude Code i je wdrożyć.
+   – przypomnienie, żeby uruchomić Claude Code i je wdrożyć. **Pomysły na rozwój** (`collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`): liczba nowych
+   bez analizy (przeanalizuj je – `rozwoj-harnessu`, sekcja C) i „Pytania do mnie”; nie namawiaj do wdrażania.
 8. **Dziennik budowy** (ID: `dziennik/references/notion-dziennik.md`): wpisy z 7 dni – dni pracy ekipy
    i własne, otwarte problemy, kroki zakryte bez zdjęć („Przed zakryciem OK” odznaczone).
 9. **Inbox** (strona DOM → „📥 Inbox”): liczba wpisów do przetworzenia i tych z pytaniem „❓ asystent” bez odpowiedzi
@@ -57,6 +58,7 @@ Pobierz w jak najmniejszej liczbie zapytań:
 **Do ponownej weryfikacji:** WI-x <cena/przepis z roku …>
 **Inbox:** n do przetworzenia („przerób inbox”), m czeka na Twoją odpowiedź: <wpis> – <pytanie>
 **Harness – czeka na wdrożenie:** HZ-x … (uruchom Claude Code)
+**Pomysły:** n przeanalizowanych, m z pytaniami do Ciebie: POM-x – <pytanie>
 **Sugestia na ten tydzień:** 1–3 konkretne kroki.
 **Na później (n):** licznik spraw z dalszych etapów – bez listy.
 **Porządki (n):** propozycje z sekcji „Porządki” – do zatwierdzenia jednym „tak”.
