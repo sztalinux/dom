@@ -3,6 +3,15 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.4.1] – 2026-10-12
+
+- `inbox`: Inbox to sekcja „📥 Inbox” (toggle, wolny tekst) na stronie DOM, nie baza – inwestor pisze punkt pod punktem;
+  pytania asystenta jako punkt „❓ asystent (data)” pod wpisem, odpowiedź pod spodem; załatwione wpisy przenoszone do
+  „Przetworzone” (ślad z linkiem), które czyści przegląd tygodnia. Baza Inbox z 1.4.0 usunięta (decyzja inwestora).
+- Strona DOM: kolejność Inbox → Zadania → reszta bez zmian; sekcja „📐 Dane projektu” wróciła na poziom główny
+  (była zagnieżdżona pod „Asystent AI”); podstrony Stan zero i Plan przepustów w „Strony i materiały”; prototypy układu usunięte.
+- `przeglad-tygodnia`, `notion-mapa.md`, `zrodla.md`, README: zgodnie z powyższym.
+
 ## [1.4.0] – 2026-10-12
 
 Inbox, spójność przy ręcznych zmianach w Notion, mniej miejsc z tą samą informacją.

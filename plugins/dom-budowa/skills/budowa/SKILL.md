@@ -38,7 +38,7 @@ Utrzymuje ją Claude Code (procedura `dokumenty`, sekcja C) – zawsze aktualna,
 | Gdy użytkownik… | Wczytaj |
 |---|---|
 | wkleja ofertę, wycenę, notatkę z rozmowy z wykonawcą; „porównaj oferty” | `oferta` |
-| „przerób inbox”, „co mam w inboxie”, wkleja kilka luźnych notatek naraz | `inbox` |
+| „przerób inbox”, „co mam w inboxie” (sekcja „📥 Inbox” na stronie DOM), wkleja kilka luźnych notatek naraz | `inbox` |
 | ma spotkanie, rozmowę lub decyzję: „jutro spotkanie z kierownikiem”, „o co zapytać”, „przygotuj mnie”, „kogo wybrać z kilku” | `przygotowanie` (liczby z `oferta`) |
 | podaje wydatek, fakturę, paragon; prosi o Excel, kosztorys, „ile wydaliśmy” | `koszty` |
 | dyktuje notatkę, ustalenie, decyzję, zadanie; „zapisz”, „dodaj do Notion” | `notatka` |

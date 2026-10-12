@@ -23,8 +23,8 @@ Pobierz w jak najmniejszej liczbie zapytań:
    – przypomnienie, żeby uruchomić Claude Code i je wdrożyć.
 8. **Dziennik budowy** (ID: `dziennik/references/notion-dziennik.md`): wpisy z 7 dni – dni pracy ekipy
    i własne, otwarte problemy, kroki zakryte bez zdjęć („Przed zakryciem OK” odznaczone).
-9. **Inbox** (`collection://16e53396-89ca-4053-8bd2-97061a1065c0`): liczba „Do przetworzenia” i „Do wyjaśnienia”
-   (te drugie czekają na odpowiedź inwestora – wymień ID i pytania).
+9. **Inbox** (strona DOM → „📥 Inbox”): liczba wpisów do przetworzenia i tych z pytaniem „❓ asystent” bez odpowiedzi
+   (wymień wpis i pytanie); „Przetworzone” starsze niż 14 dni → do wyczyszczenia (Porządki).
 10. **Spójność** (inwestor edytuje Notion ręcznie – wychwyć rozjazdy, nie naprawiaj bez zgody):
     - Notatnik „Ustalone”/„Zrobione” z wiedzą techniczną bez relacji „Wiedza” → kandydaci do `wiedza`, sekcja F;
     - Informacje bez Tematów albo bez Źródeł i bez Notatnika; Tematy, których „W skrócie” przeczy nowszym Informacjom
@@ -47,7 +47,7 @@ Pobierz w jak najmniejszej liczbie zapytań:
 **Budowa w tym tygodniu:** dni ekipy / własne, problemy otwarte, braki zdjęć przed zakryciem
 **Zamówić / zapłacić do 14 dni:** <pozycja – do kiedy – skąd>
 **Do ponownej weryfikacji:** WI-x <cena/przepis z roku …>
-**Inbox:** n do przetworzenia („przerób inbox”), m czeka na Twoją odpowiedź: IN-x – <pytanie>
+**Inbox:** n do przetworzenia („przerób inbox”), m czeka na Twoją odpowiedź: <wpis> – <pytanie>
 **Harness – czeka na wdrożenie:** HZ-x … (uruchom Claude Code)
 **Sugestia na ten tydzień:** 1–3 konkretne kroki.
 **Na później (n):** licznik spraw z dalszych etapów – bez listy.
@@ -62,6 +62,7 @@ Znajdź i zaproponuj – nie wykonuj bez zgody; po „tak” wykonaj wsadowo (za
 - sprawy po terminie albo bez zmian od 30 dni → zamknąć, przesunąć termin czy zostawić (pytanie zbiorcze);
 - Informacje „Nowe” starsze niż 30 dni → „Przejrzane” albo „Nieaktualne”;
 - otwarte sprawy zakończonego etapu → przenieść do bieżącego albo zamknąć;
+- „Przetworzone” w Inboxie starsze niż 14 dni → usunąć (linki są już w docelowych miejscach);
 - rozjazdy z punktu „Spójność” → dopisać relację Wiedza / Informację (`wiedza`, F), uzgodnić statusy, poprawić „W skrócie”.
 Niczego nie usuwaj – porządek tylko statusami i scalaniem (z dopiskiem, co scalono).
 

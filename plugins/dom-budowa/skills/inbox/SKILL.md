@@ -1,6 +1,6 @@
 ---
 name: inbox
-description: Przetwarzanie luźnych wpisów inwestora z bazy „Inbox” w Notion (myśli, informacje, ustalenia wpisane w biegu, z telefonu) – wyjaśnienie niejasnych, dopytanie o źródło, rozłożenie do Notatnika, Bazy wiedzy, Dziennika, zadań, Excela. Używaj, gdy użytkownik mówi „przerób inbox”, „ogarnij inbox”, „co mam w inboxie”, „odpowiedziałem w inboxie”, gdy przegląd tygodnia pokazuje wpisy do przetworzenia, albo gdy użytkownik wkleja kilka luźnych notatek naraz i prosi o „wrzuć gdzie trzeba”.
+description: Przetwarzanie luźnych wpisów inwestora z sekcji „📥 Inbox” na stronie DOM w Notion (myśli, informacje, ustalenia wpisane w biegu, z telefonu) – wyjaśnienie niejasnych, dopytanie o źródło, rozłożenie do Notatnika, Bazy wiedzy, Dziennika, zadań, Excela. Używaj, gdy użytkownik mówi „przerób inbox”, „ogarnij inbox”, „co mam w inboxie”, „odpowiedziałem w inboxie”, gdy przegląd tygodnia pokazuje wpisy do przetworzenia, albo gdy użytkownik wkleja kilka luźnych notatek naraz i prosi o „wrzuć gdzie trzeba”.
 ---
 
 # Inbox → właściwe miejsca
@@ -9,15 +9,28 @@ Cel: inwestor wpisuje luźne rzeczy do jednej bazy, bez zastanawiania się, gdzi
 po właściwych miejscach **dopiero wtedy, gdy wpis jest jednoznaczny i ma źródło** – enigmatyczne wpisy wracają
 do inwestora z pytaniami, nie trafiają dalej. Dzięki temu w Notatniku i Bazie wiedzy nie ma zagadek.
 
-Baza: Notion → DOM → **Inbox** (`collection://16e53396-89ca-4053-8bd2-97061a1065c0`).
-Pola: Wpis (tytuł), Status (Do przetworzenia / Do wyjaśnienia / Przetworzone / Odrzucone), Źródło, Pytania asystenta,
-Odpowiedź, Trafiło do, Dodano, ID (IN-n). Treść strony wpisu = dłuższy tekst, zdjęcia, wklejki.
+Miejsce: strona **DOM** (`24af5982-09e7-806b-821a-e157ff33be42`) → rozwijany nagłówek **„📥 Inbox”** (pierwszy na stronie).
+Inwestor pisze tam jak w notesie – punkt pod punktem, bez pól i statusów; źródło w nawiasie, jeśli je zna.
+Pod spodem zwijany nagłówek **„Przetworzone”** – tam asystent przenosi załatwione wpisy. Układ:
+
+```
+## 📥 Inbox {toggle}
+	- wpis inwestora (źródło, data – jeśli podał)
+	- wpis niejasny
+		- ❓ asystent (12.10): pytanie 1; pytanie 2 – propozycja interpretacji
+		- odpowiedź inwestora (dopisana pod spodem albo poprawiony wpis)
+	### Przetworzone {toggle}
+		- ~~wpis~~ → Notatnik: <link> (12.10)
+```
+Wpis = punkt pierwszego poziomu; jego punkty zagnieżdżone to dialog (pytania asystenta „❓ asystent (data):”
+i odpowiedzi inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i przenoś do „Przetworzone”.
 
 ## Procedura
 
-1. **Pobierz** wpisy ze Statusem „Do przetworzenia” oraz „Do wyjaśnienia”, które mają wypełnioną Odpowiedź
-   (jedno zapytanie). Brak wpisów → jedna linia „Inbox pusty”.
-2. **Dla każdego wpisu ustal** (czytaj też treść strony):
+1. **Pobierz** stronę DOM i weź wszystkie punkty pierwszego poziomu z „📥 Inbox” (poza „Przetworzone”); wpis
+   z punktem „❓ asystent” bez odpowiedzi pod spodem – pomiń (czeka na inwestora), z odpowiedzią – oceń ponownie.
+   Brak wpisów → jedna linia „Inbox pusty” (+ liczba czekających na Twoją odpowiedź).
+2. **Dla każdego wpisu ustal** (razem z dialogiem pod nim):
    - **Co to jest** – jedna z klas: ustalenie/decyzja, pytanie do kogoś, ryzyko, zadanie z terminem, relacja z dnia
      na budowie, wiedza ogólna (coś, co zobaczył/usłyszał), wydatek/koszt, oferta, dokument do posortowania,
      pomysł/do doczytania, poprawka sposobu pracy asystenta.
@@ -27,11 +40,11 @@ Odpowiedź, Trafiło do, Dodano, ID (IN-n). Treść strony wpisu = dłuższy tek
    - **Czy ma źródło** – dla wiedzy ogólnej i ustaleń: kto powiedział / skąd (pole Źródło albo treść). Własne
      przemyślenie inwestora to też źródło („własne”), ale musi być nazwane.
    - **Czy to duplikat** – szukaj w docelowej bazie (Notatnik, Informacje, TASKS) 2–3 słów kluczowych.
-3. **Niejednoznaczny albo bez źródła → nie przetwarzaj.** Wpisz w „Pytania asystenta” 1–3 konkretne pytania
-   (co dokładnie, skąd, kiedy, czego dotyczy – zaproponuj interpretację do potwierdzenia: „Czy chodzi o X?”),
-   Status „Do wyjaśnienia”. Jedna aktualizacja na wpis, wszystkie w jednym przebiegu.
-   Wpis z Odpowiedzią inwestora – połącz Wpis + Odpowiedź w jedno i oceń ponownie; nadal niejasny → kolejne pytanie,
-   ale wskaż, co już wiadomo.
+3. **Niejednoznaczny albo bez źródła → nie przetwarzaj.** Dopisz pod wpisem punkt zagnieżdżony
+   „❓ asystent (data): …” z 1–3 konkretnymi pytaniami (co dokładnie, skąd, kiedy, czego dotyczy – zaproponuj
+   interpretację do potwierdzenia: „Czy chodzi o X?”). Inwestor odpowiada pod spodem albo poprawia wpis.
+   Wpis z odpowiedzią – połącz wpis + odpowiedź i oceń ponownie; nadal niejasny → kolejne pytanie, ale wskaż, co już wiadomo.
+   W rozmowie powtórz pytania (inwestor może odpowiedzieć od razu – wtedy dokończ w tym samym przebiegu).
 4. **Jednoznaczny ze źródłem → przekaż do właściwej procedury** i wykonaj jej kroki (łącznie z duplikatami
    i polami); kilka klas w jednym wpisie → kilka procedur:
    | Klasa | Procedura | Uwaga |
@@ -44,20 +57,22 @@ Odpowiedź, Trafiło do, Dodano, ID (IN-n). Treść strony wpisu = dłuższy tek
    | oferta, wycena | `oferta` | |
    | „dostałem plik” | `dokumenty` | w Claude Code – klasyfikacja; gdzie indziej – przypomnienie, żeby wrzucić do `_Przychodzące/` |
    | „asystent ma zawsze…” | `rozwoj-harnessu` | skrzynka „Zmiany do harnessu” |
-5. **Zamknij wpis:** „Trafiło do” = linki do utworzonych/zaktualizowanych stron (albo „wiersz do Excela: …”),
-   Status „Przetworzone”. Nieprzydatne lub zdublowane (już było w Notatniku) → „Odrzucone” z jednym zdaniem dlaczego
-   w „Trafiło do”. Nie usuwaj wpisów.
+5. **Zamknij wpis:** przenieś go (z dialogiem) do „Przetworzone” jako `~~wpis~~ → <gdzie>: <link> (data)`
+   (albo „→ wiersz do Excela: …”). Zdublowane / nieprzydatne → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
 6. **Zapisy wsadowo** (`budowa`, zasada 6): najpierw wszystkie odczyty, potem jedno wywołanie na bazę docelową,
-   na końcu jedna aktualizacja statusów w Inboxie. Przy > 3 wpisach pokaż plan (tabela: IN-n | klasa | gdzie trafi |
+   na końcu **jedna** edycja strony DOM (pytania pod wpisami + przeniesienia do „Przetworzone”). Edytuj tylko sekcję
+   „📥 Inbox” – reszta strony DOM nietknięta. Przy > 3 wpisach pokaż plan (tabela: wpis | klasa | gdzie trafi |
    pytanie?) i poproś o „ok”, chyba że inwestor powiedział „bez pytania”.
-7. **Podsumuj:** przetworzone (IN-n → gdzie), do wyjaśnienia (IN-n: pytania), odrzucone. Zmienione / Otwarte / Następny krok.
+7. **Podsumuj:** przetworzone (wpis → gdzie), do wyjaśnienia (wpis: pytania), pominięte. Zmienione / Otwarte / Następny krok.
+   „Przetworzone” czyści przegląd tygodnia (wpisy starsze niż 14 dni, po zgodzie) – linki są już w docelowych miejscach.
 
 ## Zasady
 
 - Nigdy nie zgaduj znaczenia skrótowego wpisu i nie zapisuj go dalej „na wszelki wypadek” – lepiej jedno pytanie
   niż zagadka w Notatniku. Wyjątek: wpis jest skrótem, ale w Notatniku/Bazie wiedzy jest już wpis, który go wyjaśnia –
   wtedy dopisz go tam jako uzupełnienie (z linkiem w „Trafiło do”).
-- Źródło przepisuj dosłownie do pola Źródło w Notatniku / Rozmów i źródeł; data wpisu (Dodano) to nie data zdarzenia –
-  jeśli zdarzenie ma datę, zapytaj albo weź z treści.
+- Źródło przepisuj dosłownie do pola Źródło w Notatniku / Rozmów i źródeł; wpis nie ma daty – jeśli zdarzenie ma datę,
+  weź ją z treści albo zapytaj.
 - Zdjęcia we wpisie: relacja z budowy → `dziennik` (zdjęcia do folderu `Zdjęcia/`), dokument → `dokumenty`.
-- Inbox to skrzynka wejściowa, nie archiwum: przetworzone wpisy zostają (historia), ale nic się do nich nie wraca.
+- Inbox to skrzynka wejściowa, nie archiwum: po przetworzeniu wpis żyje w docelowym miejscu, „Przetworzone” to tylko ślad na kilka dni.
+- Inwestor woli pisać niż wypełniać pola – nie proponuj zamiany Inboxu na bazę.

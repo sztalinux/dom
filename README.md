@@ -85,8 +85,8 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
 - Nowy plik od projektanta/wykonawcy → wrzuć do `Dom/_Przychodzące/` i uruchom `claude` w `Dom/AI/dom`.
   Asystent go posortuje, opisze w przewodniku i sam zaktualizuje stronę przewodnika w Notion – nic nie wgrywasz.
   Gdy na telefonie asystent poprosi o dokument – załącz wskazany plik.
-- Luźne myśli i informacje wpisuj do bazy **Inbox** w Notion (telefon wystarczy). „Przerób inbox” – asystent rozłoży je po
-  właściwych miejscach, a niejasne odeśle z pytaniami (status „Do wyjaśnienia”). Przegląd tygodnia przypomni o zaległych.
+- Luźne myśli i informacje wpisuj pod „📥 Inbox” na stronie DOM w Notion – punkt pod punktem, jak w notesie (telefon wystarczy).
+  „Przerób inbox” – asystent rozłoży je po właściwych miejscach, a pod niejasnymi dopisze pytania. Przegląd tygodnia przypomni o zaległych.
 - Poprawki „na przyszłość” z telefonu trafiają do skrzynki w Notion; Claude Code wdroży je przy starcie.
 - Dzień na budowie → powiedz asystentowi, co się działo (telefon wystarczy) – trafi do Dziennika budowy; zdjęcia wrzuć do `Dom/Zdjęcia/RRRR-MM-DD_<krok>/`.
 - Przed krokiem „bez odwrotu” (beton, zasypka, tynki) zapytaj „co sprawdzić przed …” – dostaniesz bramkę z listą zdjęć do zrobienia.
