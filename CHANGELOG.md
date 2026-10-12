@@ -3,6 +3,16 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.8.0] – 2026-10-12
+
+- `wiedza`: Etap informacji = **kiedy wiedza będzie potrzebna** (najwcześniejszy etap decyzji / zamówienia / przewidzenia),
+  nie etap tematu; po przetworzeniu źródła podział „Na teraz” (bieżący etap) i „Na później” (liczniki etapów).
+- Notion, Informacje: pole „Pokazano”; zakładki „🎯 Na teraz – Stan zero” (bieżący etap + Cała budowa) i „🗂 Wg etapu”.
+  Przegląd etapów istniejących informacji: 15 przeniesionych do etapu, w którym trzeba działać.
+- `przeglad-tygodnia`: sekcja „Wiedza na teraz” – max 6 informacji, najpierw pod kroki z 14 dni i otwarte decyzje,
+  potem niepokazane; „Pokazano” zapobiega powtórkom z tygodnia na tydzień, reszta licznikiem.
+- `etap`: przy zmianie etapu przestawienie widoku „🎯 Na teraz”; wiedza etapu wpleciona w plan.
+
 ## [1.7.1] – 2026-10-12
 
 - `inbox`: trzy strefy – na wierzchu tylko nowe wpisy, niejasne z pytaniem przenoszone do „❓ Czeka na Twoją odpowiedź”

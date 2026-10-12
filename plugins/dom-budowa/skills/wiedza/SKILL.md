@@ -43,6 +43,10 @@ w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej inform
    trafiło do jakiejś jednostki albo zostało świadomie pominięte (w odpowiedzi podaj, co pominięto i dlaczego).
 4. **Tematy:** każdą jednostkę przypnij do 1–2 tematów z bazy Tematy (najpierw istniejące; nowy temat tylko gdy nic nie pasuje)
    oraz nadaj Branżę i Etap. Film o jednym temacie, który zahacza o inne – każda informacja idzie do swojego tematu.
+   **Etap = kiedy ta wiedza będzie potrzebna**, czyli najwcześniejszy etap, w którym trzeba coś zdecydować, zamówić,
+   przewidzieć albo sprawdzić – nie etap, którego dotyczy temat. Np. pion ciepłej wody → Stan zero (otwór w stropie P-1),
+   odpływ skroplin klimatyzacji → Stan zero (kanalizacja podposadzkowa), membrana dachowa → SSO, gładzie → Deweloperski.
+   „Cała budowa” tylko dla zasad bez konkretnego momentu (organizacja, budżet, umowy).
 5. **Porównanie z tym, co wiemy** – dla każdej jednostki przeszukaj: Informacje (te same Tematy + słowa kluczowe),
    „W skrócie” tematów, Rejestr sprzeczności (także rozstrzygnięte), decyzje w Notatniku budowy, ściągę projektu
    (`budowa/references/projekt.md`). Sklasyfikuj:
@@ -67,7 +71,8 @@ w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej inform
 ```
 **ZRD-x „<tytuł>”** – <autor>, <data> | wiarygodność <n>/5 | konflikt interesów: <…>
 Zapisano: <n> nowych (<k> kluczowych, <w> ważnych, <c> ciekawostek), <n> potwierdzeń, <n> uzupełnień → tematy: <lista>
-Najważniejsze dla nas: • … • … (3–5 punktów z Kluczowych i Ważnych, z WI-x)
+Na teraz (<bieżący etap>): • … • … (3–5 punktów z Kluczowych i Ważnych bieżącego etapu, z WI-x)
+Na później: SSO <n> · Deweloperski <n> · Wykończenie <n> · … – wrócą w przeglądzie, gdy przyjdzie ich etap
 ⚠️ Sprzeczności – czekają na Twoją odpowiedź:
   SP-n <dylemat>: A) <stanowisko + źródło> vs B) <stanowisko + źródło>. Rekomenduję <…>, bo <…>.
   ❓ <pytanie> – odpowiedz np. „SP-n: B” albo „SP-n: zapytam konstruktora”.

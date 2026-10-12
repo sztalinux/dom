@@ -34,7 +34,10 @@ zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły �
 6. **Formalności** (`references/formalnosci.md`) i **pogoda**: ograniczenia temperatury/opadów dla betonu, murowania,
    zasypki, tynków – podaj widełki [opinia] i co zrobić, jeśli prognoza nie pasuje.
 7. Zapis: zadania z terminem → TASKS (procedura `notatka`); przy zmianie etapu zaproponuj przestawienie strony DOM
-   (`budowa`, zasada 12) jednym zestawem zmian.
+   (`budowa`, zasada 12) jednym zestawem zmian – razem z widokiem Informacji „🎯 Na teraz – <etap>”
+   (`view://3f7f5982-09e7-81bf-a377-000c19ce62cc`: nazwa i filtr Etap = nowy etap lub „Cała budowa”).
+8. **Wiedza na ten etap:** z Informacji (Etap = ten etap, Kluczowe i Ważne, Status ≠ Nieaktualne) wybierz to, co zmienia
+   plan, bramki albo zamówienia, i wpleć w punkty 2–6 z WI-x – nie jako osobną listę do czytania.
 
 ## B. Bramka („jutro betonowanie płyty”, „w czwartek zasypka”, „co sprawdzić zanim…”)
 

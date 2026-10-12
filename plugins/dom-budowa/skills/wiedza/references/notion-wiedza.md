@@ -2,7 +2,7 @@
 
 Strona główna: **📚 Baza wiedzy** `3f4f5982-09e7-8193-a68e-fd35c9265012` (DOM → toggle „Baza wiedzy”).
 Na niej: „⏳ Czeka na decyzję”, informacje z zakładkami „🆕 Do przejrzenia” (Nowe, wg Istotności), „⭐ Kluczowe i ważne”,
-„💬 Z moim komentarzem”, bazy Tematy i Rozmowy i źródła,
+„💬 Z moim komentarzem”, „🎯 Na teraz – <etap>” (bieżący etap + Cała budowa) i „🗂 Wg etapu”, bazy Tematy i Rozmowy i źródła,
 podstrona „Bazy: Informacje i Rejestr sprzeczności”. Jeśli zapis zwróci błąd pola – pobierz schemat bazy i zaktualizuj ten plik.
 
 Cztery warstwy: **Tematy** (co wiemy teraz) ← **Informacje** (pojedyncze fakty) ← **Rozmowy i źródła** (kto, kiedy, skąd)
@@ -56,7 +56,7 @@ Temat ma być na tyle szeroki, by zebrać kilka-kilkanaście informacji.
 | Szczegóły | tekst | warunki, wyjątki, produkty, uzasadnienie; „uzupełnia WI-x” |
 | Rodzaj | select | Zasada wykonania, Parametr / liczba, Błąd do uniknięcia, Kolejność prac, Materiał / produkt, Koszt / cena, Przepis / norma, Kontrola / odbiór, Inne |
 | Branża | multi-select | Konstrukcja, Grunt i woda, Hydroizolacja, Drenaż, Elektryka, Wod-kan, Ogrzewanie, Wentylacja, Dach, Okna i drzwi, Elewacja, Ściany, Wnętrza, Smart home, Ogród, Formalności, Energooszczędność, Organizacja |
-| Etap | select | Projekt i formalności, Stan zero, SSO, Deweloperski, Wykończenie, Teren i ogród, Cała budowa |
+| Etap | select | Projekt i formalności, Stan zero, SSO, Deweloperski, Wykończenie, Teren i ogród, Cała budowa – **kiedy wiedza będzie potrzebna** (SKILL.md, A.4) |
 | Tematy | relacja → Tematy | **ustawiaj zawsze** – tak informacja trafia „w dobre miejsce” |
 | Źródła | relacja → Rozmowy i źródła | **źródło obowiązkowe**: Źródła albo Notatnik (SKILL.md) |
 | Notatnik | relacja → Notatnik budowy (tam: „Wiedza”) | ustalenie/decyzja naszej budowy, z której wynika informacja (sekcja F) |
@@ -69,6 +69,7 @@ Temat ma być na tyle szeroki, by zebrać kilka-kilkanaście informacji.
 | Status | select | Nowe, Przejrzane, Sporne, Nieaktualne |
 | Istotność | select | Kluczowe, Ważne, Ciekawostka – przy „Nowe” propozycja asystenta, po przejrzeniu ocena inwestora (SKILL.md) |
 | Mój komentarz | tekst | **pole inwestora** – nie nadpisuj; sprzeciw/wątpliwość → SKILL.md, sekcja H |
+| Pokazano | data | kiedy ostatnio w przeglądzie tygodnia w „Wiedza na teraz” – ustawia przegląd, żeby się nie powtarzała |
 | Wrażliwe na czas | checkbox | ceny, przepisy, dotacje, dostępność produktów |
 | Dodano / Zmieniono | czas | auto |
 

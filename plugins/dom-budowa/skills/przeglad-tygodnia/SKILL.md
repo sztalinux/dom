@@ -16,6 +16,13 @@ Pobierz w jak najmniejszej liczbie zapytań:
 1. **Rozmowy i źródła** dodane w ostatnich 7 dniach.
 2. **Informacje**: Status „Nowe” (wszystkie) – pogrupuj po Tematach; pokazuj Kluczowe i Ważne, Ciekawostki tylko liczbą.
    Osobno: Informacje z „Moim komentarzem” zmienionym w 7 dniach – sprzeciw/wątpliwość → propozycja działania (`wiedza`, sekcja H).
+2a. **Wiedza na teraz** – nie tylko nowa, ale bez powtórek z tygodnia na tydzień. Pula: Etap = bieżący etap albo „Cała
+   budowa”, Status ≠ Nieaktualne, Dotyczy nas ≠ Nie, Istotność ≠ Ciekawostka (widok „🎯 Na teraz”). Wybierz **max 6**:
+   - najpierw **przed krokiem** – informacje pasujące (Tematy/Branża) do kroków Harmonogramu startujących w 14 dni i do
+     otwartych decyzji z Notatnika; mogą wrócić drugi raz, ale tylko jeśli Pokazano jest starsze niż 30 dni;
+   - potem **jeszcze niepokazane** (Pokazano puste): Kluczowe → Ważne → bez oceny, nowsze pierwsze.
+   Po przeglądzie ustaw im Pokazano = dzisiejsza data (to nie decyzja – wolno też w zaplanowanym przeglądzie).
+   Reszta tylko licznikiem: „na ten etap jeszcze n niepokazanych” i „na później: SSO n, Deweloperski n, …”.
 3. **Rejestr sprzeczności**: Status „Czeka na decyzję” i „Do sprawdzenia u projektanta” (z datą zgłoszenia – najstarsze pierwsze).
 4. **Notatnik budowy**: Status „Otwarte” lub „Do omówienia” z Priorytetem Krytyczne/Ważne; wpisy z „Kiedy” w ciągu 14 dni lub po terminie.
 5. **TASKS (2)**: niezakończone z „When” w ciągu 7 dni lub po terminie; osobno **czekam na** (PLANNED „WAITING”, Kto ≠ Ja) – po terminie = „przypomnij się”.
@@ -49,6 +56,8 @@ Pobierz w jak najmniejszej liczbie zapytań:
 **Do decyzji (n):** SP-x <dylemat> – od <n> dni … (najstarsze/krytyczne pierwsze)
 **Nowa wiedza (n z m źródeł; k kluczowych, c ciekawostek):** <Temat>: 1–2 najważniejsze punkty z WI-x; … (max 8 punktów)
 **Twoje komentarze do wiedzy:** WI-x – <komentarz> → proponuję: …
+**Wiedza na teraz (<etap>):** • WI-x <informacja w jednym zdaniu> – dlaczego teraz (krok / decyzja) … (max 6)
+  Na ten etap jeszcze n niepokazanych (widok „🎯 Na teraz”) · na później: SSO n, Deweloperski n, Wykończenie n
 **Dotyczy naszej budowy:** • …
 **Pytania do projektantów (n):** Konstruktor: …; Architekt: …
 **Harmonogram 14 dni:** <krok – od–do – kto>; **Bez odwrotu:** <krok – data – bramka gotowa?>
