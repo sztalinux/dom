@@ -3,6 +3,11 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.4.4] – 2026-10-12
+
+- `inbox`: Notion nie zapisuje daty dopisania punktu – data zdarzenia tylko z wpisu (`@today` albo data tekstem);
+  „dziś/wczoraj” bez daty → pytanie z propozycją daty, nie zgadywanie. Podpowiedź w Inboxie na stronie DOM.
+
 ## [1.4.3] – 2026-10-12
 
 - Strona DOM uproszczona: Inbox i Zadania u góry; zakładki Etap (checklista „Do zamknięcia” + bramki, plan przepustów,

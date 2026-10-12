@@ -71,8 +71,12 @@ i odpowiedzi inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisu
 - Nigdy nie zgaduj znaczenia skrótowego wpisu i nie zapisuj go dalej „na wszelki wypadek” – lepiej jedno pytanie
   niż zagadka w Notatniku. Wyjątek: wpis jest skrótem, ale w Notatniku/Bazie wiedzy jest już wpis, który go wyjaśnia –
   wtedy dopisz go tam jako uzupełnienie (z linkiem w „Trafiło do”).
-- Źródło przepisuj dosłownie do pola Źródło w Notatniku / Rozmów i źródeł; wpis nie ma daty – jeśli zdarzenie ma datę,
-  weź ją z treści albo zapytaj.
+- **Daty.** Notion nie zapisuje, kiedy dopisano pojedynczy punkt (widać tylko ostatnią edycję całej strony), więc data
+  przetwarzania to nie data wpisu. Data zdarzenia = wzmianka daty we wpisie (`@today` w Notion wstawia datę jednym
+  ruchem) albo data wpisana tekstem. Słowa względne („dziś”, „wczoraj”, „w piątek”, „za tydzień”) licz od tej daty.
+  Słowo względne bez daty we wpisie → nie zgaduj: przy zdarzeniu z budowy, terminie albo kosztach zapytaj
+  („❓ asystent: czy »wczoraj« to 11.10?”), przy wiedzy ogólnej bez znaczenia daty – pomiń datę.
+- Źródło przepisuj dosłownie do pola Źródło w Notatniku / Rozmów i źródeł.
 - Zdjęcia we wpisie: relacja z budowy → `dziennik` (zdjęcia do folderu `Zdjęcia/`), dokument → `dokumenty`.
 - Inbox to skrzynka wejściowa, nie archiwum: po przetworzeniu wpis żyje w docelowym miejscu, „Przetworzone” to tylko ślad na kilka dni.
 - Inwestor woli pisać niż wypełniać pola – nie proponuj zamiany Inboxu na bazę.
