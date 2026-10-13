@@ -16,7 +16,7 @@ Trzy strefy, żeby nowe wpisy nie mieszały się ze starymi – **na wierzchu za
 ```
 ## 📥 Inbox {toggle}
 	<details> Jak używać </details>
-	🤖 13.10: przetworzono 3, czeka na Ciebie 2          ← jedna linia z ostatniego przebiegu (zastępowana, nie dopisywana)
+	🤖 13.10 wieczór: inbox – przetworzono 3, …          ← linia z ostatniego przeglądu dnia (zastępowana, nie dopisywana)
 	- nowy wpis inwestora (źródło, data – jeśli podał)  ← NOWE: pierwszy poziom
 	### ❓ Czeka na Twoją odpowiedź {toggle}
 		- wpis niejasny
@@ -75,16 +75,10 @@ inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i 
 7. **Podsumuj** (także przy ręcznym przebiegu zaktualizuj linię „🤖”): przetworzone (wpis → gdzie), do wyjaśnienia (wpis: pytania), pominięte. Zmienione / Otwarte / Następny krok.
    „Przetworzone” czyści przegląd tygodnia (wpisy starsze niż 14 dni, po zgodzie) – linki są już w docelowych miejscach.
 
-## Tryb wieczorny (zaplanowane zadanie, bez inwestora)
+## Bez inwestora
 
-Inbox może przerabiać zaplanowane zadanie (np. codziennie o 20:00 na claude.ai). Wtedy nie ma kogo zapytać w rozmowie:
-- przetwarzaj tylko wpisy jednoznaczne ze źródłem; niejasne → pytanie „❓ asystent” pod wpisem (krok 3), bez czekania;
-- nie pokazuj planu do akceptacji (krok 6) – ale nie zapisuj niczego, co jest decyzją inwestora, rozstrzygnięciem
-  sprzeczności (SP) ani zmianą w Excelu: takie wpisy zostaw z pytaniem „❓ asystent: potwierdź, że to decyzja”;
-- nie zmieniaj Harmonogramu (terminy kroków) – zaproponuj zmianę pytaniem pod wpisem; zadania i „czekam na” zapisuj;
-- potem przeanalizuj nowe pomysły w bazie „Pomysły na rozwój” (Status Nowy lub pusty) – `rozwoj-harnessu`, sekcja C;
-- na końcu ustaw pod „Jak używać” jedną linię (zastąp poprzednią): „🤖 <data>: przetworzono n, czeka na Ciebie m
-  (rozwiń ❓); pomysły przeanalizowane: k” – inwestor widzi to rano, a na wierzchu ma tylko nowe wpisy.
+Codziennie wieczorem Inbox przerabia zaplanowany **przegląd dnia** (`przeglad-dnia`) – bez pytań w rozmowie, z wyjątkami
+od kroków 3 i 6 opisanymi tam; on też ustawia linię „🤖”.
 
 ## Zasady
 

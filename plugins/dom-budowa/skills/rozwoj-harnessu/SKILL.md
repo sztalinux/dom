@@ -82,7 +82,7 @@ Treść strony: pomysł inwestora (nie zmieniaj), pod nim sekcja „Analiza” p
 sprawdź, czy podobny już jest (uzupełnij zamiast dublować); nowy wiersz – tytuł, Obszar, w treści „## Pomysł (kto, data)”
 i słowa inwestora. Status pusty/Nowy. Poprawka sposobu pracy (jedna reguła) to nie pomysł – sekcja A.
 
-**Analiza** (wpisy Nowy lub pusty; w trybie wieczornym `inbox` automatycznie, inaczej na prośbę i na starcie Claude Code):
+**Analiza** (wpisy Nowy lub pusty; w przeglądzie dnia `przeglad-dnia` automatycznie, inaczej na prośbę i na starcie Claude Code):
 1. Przeczytaj pomysł i przejrzyj, co już jest: procedury (`budowa` – mapa procedur, odpowiednie `SKILL.md`), mapa Notion
    (`budowa/references/notion-mapa.md`), inne pomysły (zależności, duplikaty).
 2. Niejasne, co inwestor chce → dopisz „### ❓ Pytania (data)” z 1–3 pytaniami i propozycją interpretacji, Status

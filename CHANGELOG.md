@@ -3,6 +3,14 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.9.0] – 2026-10-13
+
+- Nowa procedura `przeglad-dnia` (codzienny wieczorny przegląd bez inwestora): Inbox bez pytań w rozmowie (przeniesione
+  z „trybu wieczornego” w `inbox`), analiza nowych pomysłów (max 3 na wieczór), „na jutro” (zadania, kroki, dostawy,
+  zamówienia), linia „🤖” z licznikami i punktami „jutro”; sekcja „Rozszerzanie” na kolejne codzienne kroki.
+- `inbox`: zamiast trybu wieczornego – odesłanie do `przeglad-dnia`. Zaplanowane zadanie na claude.ai: nowe polecenie
+  „Przegląd dnia (skill przeglad-dnia)”.
+
 ## [1.8.2] – 2026-10-12
 
 - `budowa`, zasada 6: odczyt baz najpierw trybem rows (filtr strukturalny – działa mimo wyczerpanego limitu SQL), potem
