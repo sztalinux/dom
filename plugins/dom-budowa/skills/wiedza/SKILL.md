@@ -71,6 +71,7 @@ w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej inform
 ```
 **ZRD-x „<tytuł>”** – <autor>, <data> | wiarygodność <n>/5 | konflikt interesów: <…>
 Zapisano: <n> nowych (<k> kluczowych, <w> ważnych, <c> ciekawostek), <n> potwierdzeń, <n> uzupełnień → tematy: <lista>
+W pigułce: • <teza> (WI-x) • … (najważniejsze tezy całego źródła, ze wszystkich etapów – zasady niżej)
 Na teraz (<bieżący etap>): • … • … (3–5 punktów z Kluczowych i Ważnych bieżącego etapu, z WI-x)
 Na później: SSO <n> · Deweloperski <n> · Wykończenie <n> · … – wrócą w przeglądzie, gdy przyjdzie ich etap
 ⚠️ Sprzeczności – czekają na Twoją odpowiedź:
@@ -78,6 +79,11 @@ Na później: SSO <n> · Deweloperski <n> · Wykończenie <n> · … – wrócą
   ❓ <pytanie> – odpowiedz np. „SP-n: B” albo „SP-n: zapytam konstruktora”.
 Do Notatnika: <wpisy> | Pominięto: <co i dlaczego> | Do uzupełnienia: <np. data publikacji>
 ```
+
+**W pigułce** – żeby inwestor w kilku zdaniach wiedział, co doszło do bazy, bez otwierania Notion: gdy źródło dało
+≥ 3 nowe informacje lub uzupełnienia, wypisz 3–8 najważniejszych tez z całego źródła (nie tylko bieżącego etapu),
+każda jednym zdaniem z liczbą lub warunkiem i numerem WI-x; najpierw Kluczowe, potem Ważne, Ciekawostki tylko gdy
+niosą główną myśl materiału. Mniej niż 3 informacje – pomiń blok (wszystko jest w „Zapisano” i „Na teraz”).
 
 ## C. Rozstrzygnięcie sprzeczności (po odpowiedzi inwestora)
 

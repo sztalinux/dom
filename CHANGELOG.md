@@ -3,6 +3,11 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.9.1] – 2026-10-13
+
+- `wiedza`, sekcja B: blok „W pigułce” w odpowiedzi po przetworzeniu źródła – 3–8 najważniejszych tez z całego
+  materiału (wszystkie etapy, z WI-x), gdy źródło dało ≥ 3 informacje; inwestor wie, co doszło, bez otwierania Notion.
+
 ## [1.9.0] – 2026-10-13
 
 - Nowa procedura `przeglad-dnia` (codzienny wieczorny przegląd bez inwestora): Inbox bez pytań w rozmowie (przeniesione
