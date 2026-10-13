@@ -30,6 +30,8 @@ w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej inform
 1. **Metadane:** film/artykuł – tytuł, autor/kanał, link, data publikacji (z linku spróbuj odczytać tytuł i datę);
    rozmowa – z kim, forma, data. Czego nie da się ustalić – wpisz „?” i dopisz do „Do uzupełnienia” w odpowiedzi
    (nie blokuj pracy). Sprawdź w Rozmowach i źródłach, czy to źródło już było – jeśli tak, zapytaj, czy przetworzyć ponownie.
+   **Jedno źródło = jedna lekcja, artykuł, odcinek albo rozmowa** – kilka wklejonych naraz to kilka wpisów ZRD. W polu Kto
+   zapisz autora i jego powiązania (np. współautor kursu ZRD-x), żeby było widać, które źródła nie są od siebie niezależne.
 2. **Ocena źródła** wg `references/ocena-zrodla.md`: typ autora, konflikt interesów, wiarygodność 1–5.
    Nasz konstruktor/architekt = „Nasz projektant / wykonawca” – jego ustalenia dotyczą naszej budowy wprost.
 3. **Ekstrakcja** – przeczytaj całość (długą transkrypcję w częściach, nic nie pomijaj w czytaniu):
@@ -58,6 +60,9 @@ w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej inform
    | SPRZECZNOŚĆ | nowy wiersz ze Statusem „Sporne” + wpis w Rejestrze („Czeka na decyzję”) |
    | ZGODNE / SPRZECZNE Z ROZSTRZYGNIĘCIEM | nie otwieraj sporu ponownie, chyba że źródło wnosi nowy argument – wtedy nowy SP z odwołaniem do starego |
    Różne zalecenia dla **różnych warunków** (inny grunt, inna technologia) to nie sprzeczność – zapisz warunek w treści.
+   **Ten sam autor to nie potwierdzenie:** gdy istniejący wiersz pochodzi tylko od tego samego autora lub z tego samego
+   kursu/bloga/podcastu (także ze starych notatek z niego), nie podpinaj go pod nowe źródło – Potwierdzenia liczą niezależne
+   źródła. Powtórzenie wpisz w „Najważniejsze” nowego źródła („powtarza WI-x”), nowy szczegół – jako UZUPEŁNIENIE.
 6. **Dla naszej budowy:** oceń „Dotyczy nas” i w 1–2 zdaniach napisz, co to znaczy u nas (parametry budynku, gruntu i instalacji:
    `budowa/references/projekt.md`); ustaw propozycję **Istotności** (wyżej – „Dotyczy nas = Nie” to zwykle Ciekawostka). Wymaga działania (pytanie do konstruktora, ryzyko,
    rzecz do pilnowania na budowie) → wpis w Notatniku budowy (procedura `notatka`, Źródło = „ZRD-x <tytuł>, <minuta>”).

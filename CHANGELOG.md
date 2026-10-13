@@ -3,6 +3,12 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.9.2] – 2026-10-13
+
+- HZ-1 `wiedza`, sekcja A: jedno źródło (ZRD) na lekcję, artykuł, odcinek lub rozmowę, z powiązaniami autora w polu Kto;
+  materiały tego samego autora (kurs, blog, podcast, stare notatki z nich) nie liczą się jako potwierdzenia – powtórzenie
+  trafia do „Najważniejsze”, nowy szczegół jako uzupełnienie.
+
 ## [1.9.1] – 2026-10-13
 
 - `wiedza`, sekcja B: blok „W pigułce” w odpowiedzi po przetworzeniu źródła – 3–8 najważniejszych tez z całego
