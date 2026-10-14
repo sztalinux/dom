@@ -16,17 +16,17 @@ Trzy strefy, żeby nowe wpisy nie mieszały się ze starymi – **na wierzchu za
 ```
 ## 📥 Inbox {toggle}
 	<details> Jak używać </details>
-	🤖 13.10 wieczór: inbox – przetworzono 3, …          ← linia z ostatniego przeglądu dnia (zastępowana, nie dopisywana)
-	- nowy wpis inwestora (źródło, data – jeśli podał)  ← NOWE: pierwszy poziom
+	- nowy wpis inwestora (źródło, data – jeśli podał)  ← NOWE: pierwszy poziom; po przebiegu pusto (tylko puste linie do pisania)
 	### ❓ Czeka na Twoją odpowiedź {toggle}
 		- wpis niejasny
 			- ❓ asystent (12.10): pytanie 1; pytanie 2 – propozycja interpretacji
 			- odpowiedź inwestora (pod pytaniem)
 	### Przetworzone {toggle}
+		🤖 13.10 wieczór: inbox – przetworzono 3, …        ← linia z ostatniego przebiegu (zastępowana, nie dopisywana)
 		- ~~wpis~~ → Notatnik: <link> (12.10)
 ```
 **Nowy wpis = każdy blok pierwszego poziomu pod „📥 Inbox”** – akapit albo punkt (inwestor pisze różnie, np. akapit
-zaczynający się od daty), z wyjątkiem „Jak używać”, linii „🤖”, pustych linii i dwóch zwijanych nagłówków (także gdy
+zaczynający się od daty), z wyjątkiem „Jak używać”, pustych linii i dwóch zwijanych nagłówków (także gdy
 inwestor dopisze coś pod nimi na pierwszym poziomie – to też nowy wpis). Jeden blok może zawierać kilka spraw – rozłóż je
 osobno. W „❓ Czeka na Twoją odpowiedź” bloki zagnieżdżone pod wpisem to dialog (pytania „❓ asystent (data):” i odpowiedzi
 inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
@@ -69,10 +69,11 @@ inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i 
    (albo „→ wiersz do Excela: …”). Zdublowane / nieprzydatne → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
 6. **Zapisy wsadowo** (`budowa`, zasada 6): najpierw wszystkie odczyty, potem jedno wywołanie na bazę docelową,
    na końcu **jedna** edycja strony DOM (przeniesienia do „❓” z pytaniami, do „Przetworzone”, linia „🤖”).
-   Po niej na pierwszym poziomie Inboxu nie zostaje żaden wpis, który asystent widział. Edytuj tylko sekcję
+   Po niej **pierwszy poziom Inboxu jest pusty** – poza „Jak używać”, dwoma zwijanymi nagłówkami i 1–2 pustymi liniami do
+   pisania nie zostaje tam nic: ani wpis, który asystent widział, ani linia „🤖” (ta idzie na górę „Przetworzone”). Edytuj tylko sekcję
    „📥 Inbox” – reszta strony DOM nietknięta. Przy > 3 wpisach pokaż plan (tabela: wpis | klasa | gdzie trafi |
    pytanie?) i poproś o „ok”, chyba że inwestor powiedział „bez pytania”.
-7. **Podsumuj** (także przy ręcznym przebiegu zaktualizuj linię „🤖”): przetworzone (wpis → gdzie), do wyjaśnienia (wpis: pytania), pominięte. Zmienione / Otwarte / Następny krok.
+7. **Podsumuj** (także przy ręcznym przebiegu zaktualizuj linię „🤖” na górze „Przetworzone”): przetworzone (wpis → gdzie), do wyjaśnienia (wpis: pytania), pominięte. Zmienione / Otwarte / Następny krok.
    „Przetworzone” czyści przegląd tygodnia (wpisy starsze niż 14 dni, po zgodzie) – linki są już w docelowych miejscach.
 
 ## Bez inwestora

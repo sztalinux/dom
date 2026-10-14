@@ -3,6 +3,14 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.9.3] – 2026-10-14
+
+- HZ-2 `inbox`, `przeglad-dnia`: po przebiegu pierwszy poziom Inboxu jest pusty (gotowy na wpisy następnego dnia) –
+  linia „🤖” idzie na górę „Przetworzone”, nie pod „Jak używać”.
+- `przeglad-dnia`, nowy krok 5: wpis w „📆 Przeglądy dzienne” (najnowszy pierwszy); ręczny przebieg = osobny wpis z tą samą
+  datą i dopiskiem „(ręczne)”, „(ręczne 2)”…, bez nadpisywania wcześniejszych; sprostowanie starszego wpisu = linia
+  z odesłaniem. Cel przeglądu: „krótkie podsumowanie” zamiast „jednej linii”. Strona dodana do mapy Notion.
+
 ## [1.9.2] – 2026-10-13
 
 - HZ-1 `wiedza`, sekcja A: jedno źródło (ZRD) na lekcję, artykuł, odcinek lub rozmowę, z powiązaniami autora w polu Kto;

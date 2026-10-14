@@ -60,7 +60,7 @@ claude.ai (telefon, czat, Cowork) ◄── plugin dom-budowa ──────
 | `inbox` | „przerób inbox”, luźne notatki naraz | wyjaśnia niejasne (pytania w Inboxie), rozkłada do Notatnika / wiedzy / dziennika / zadań |
 | `przygotowanie` | „jutro spotkanie z…”, „o co zapytać”, „kogo wybrać z kilku” | karta przygotowania: pytania, czerwone flagi, macierz decyzji, zapis po spotkaniu |
 | `przeglad-tygodnia` | poniedziałek / „co nowego” | decyzje, nowa wiedza, terminy, budowa, zamówienia, porządki |
-| `przeglad-dnia` | codziennie wieczorem (zaplanowane) / „przegląd dnia” | Inbox bez pytań w rozmowie, analiza pomysłów, jutro – linia „🤖” w Inboxie |
+| `przeglad-dnia` | codziennie wieczorem (zaplanowane) / „przegląd dnia” | Inbox bez pytań w rozmowie, analiza pomysłów, jutro – linia „🤖” w Inboxie, wpis w „Przeglądach dziennych” (ręczny = „(ręczne)”) |
 | `rozwoj-harnessu` | „zapamiętaj na przyszłość”, nowa procedura, „mam pomysł…”, „zrób POM-n” | skrzynka w Notion → wdrożenie do repo; pomysły → analiza → wdrożenie na polecenie |
 
 ## Start

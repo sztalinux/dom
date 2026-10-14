@@ -1,11 +1,11 @@
 ---
 name: przeglad-dnia
-description: Codzienny wieczorny przegląd bez inwestora (zaplanowane zadanie, np. 20:00 na claude.ai) – przerobienie Inboxu bez pytań w rozmowie, analiza nowych pomysłów na rozwój, krótka zapowiedź jutra; wynik jako linia „🤖” na górze Inboxu na stronie DOM. Używaj, gdy uruchamia go zaplanowane zadanie albo użytkownik mówi „przegląd dnia”, „wieczorny przegląd”, „ogarnij dzisiejsze”, „zrób codzienny przegląd”.
+description: Codzienny wieczorny przegląd bez inwestora (zaplanowane zadanie, np. 20:00 na claude.ai) – przerobienie Inboxu bez pytań w rozmowie, analiza nowych pomysłów na rozwój, krótka zapowiedź jutra; wynik jako linia „🤖” w Inboxie na stronie DOM (na górze „Przetworzone”). Używaj, gdy uruchamia go zaplanowane zadanie albo użytkownik mówi „przegląd dnia”, „wieczorny przegląd”, „ogarnij dzisiejsze”, „zrób codzienny przegląd”.
 ---
 
 # Przegląd dnia
 
-Cel: co wieczór, bez inwestora, porządek w tym, co wpadło w ciągu dnia – żeby rano zobaczył jedną linię: co zrobione,
+Cel: co wieczór, bez inwestora, porządek w tym, co wpadło w ciągu dnia – żeby rano zobaczył krótkie podsumowanie: co zrobione,
 co czeka na niego, co jutro. Krótko i tanio: tylko to, co nowe od wczoraj. Szerokie podsumowania, wiedza „na teraz”
 i porządki – w `przeglad-tygodnia`.
 
@@ -29,14 +29,20 @@ i porządki – w `przeglad-tygodnia`.
 3. **Na jutro** (tylko odczyt): TASKS z When = jutro (moje i „czekam na”), kroki Harmonogramu startujące jutro (krok
    „bez odwrotu” → czy jest zadanie bramki), dostawy jutro, Zamówienia z „Zamówić do” = jutro lub po terminie.
    Nic nie ma → pomiń.
-4. **Linia „🤖”** – w tej samej, jednej edycji strony DOM co krok 1: pod „Jak używać” zastąp poprzednią linię (z jej
-   punktami) nową:
+4. **Linia „🤖”** – w tej samej, jednej edycji strony DOM co krok 1: na górze „Przetworzone” zastąp poprzednią linię
+   (z jej punktami) nową. Pierwszy poziom Inboxu zostaje pusty – gotowy na wpisy następnego dnia (`inbox`, krok 6):
    ```
    🤖 13.10 wieczór: inbox – przetworzono 3, czeka na Ciebie 2 (rozwiń ❓) · pomysły – przeanalizowano 1 · jutro: 2
    	- jutro: <sprawa – kto – kiedy>      ← max 3 punkty zagnieżdżone, tylko gdy są
    ```
    Pusty dzień → „🤖 13.10 wieczór: nic nowego”. Punkty pod linią „🤖” to nie wpisy Inboxu.
-5. **Odpowiedź** (log zadania): treść linii „🤖” + lista zapisów (gdzie, link) i błędów.
+5. **Wpis w „📆 Przeglądy dzienne”** (strona w zakładce „Więcej” na DOM, `3f8f5982-09e7-815e-8b03-eacaa74db190`), gdy przebieg
+   ma tam coś do dopisania (dziś / jutro, „rozkminka”, o którą inwestor prosi w Inboxie): zwijany nagłówek
+   „Przegląd dnia – <dzień tygodnia> <data>” na górze strony (najnowszy pierwszy). **Ręczny przebieg** (inwestor prosi
+   w rozmowie o przegląd albo o jego ponowne sprawdzenie) = **osobny wpis** z tą samą datą i dopiskiem „(ręczne)”,
+   kolejne tego dnia „(ręczne 2)”, „(ręczne 3)”. Nigdy nie nadpisuj wcześniejszego wpisu – sprostowanie do starszego wpisu
+   to jedna linia kursywą na jego górze z odesłaniem do nowego. Zakres treści wpisu i czas przechowywania – POM-7.
+6. **Odpowiedź** (log zadania): treść linii „🤖” + lista zapisów (gdzie, link) i błędów.
 
 ## Rozszerzanie
 
