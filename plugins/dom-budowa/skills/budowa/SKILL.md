@@ -126,6 +126,10 @@ Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka).
       chyba że inwestor pyta wprost.
     - Każdy nowy wpis ma Etap i Priorytet. Zanim dodasz – szukaj istniejącego i aktualizuj go zamiast dublować.
     - Porządek robisz statusami, nie usuwaniem. Zamykając sprawę, dopisz jednym zdaniem, jak się skończyła.
+    - **Kolumny to właściwości, szczegóły są w treści strony** (Notatnik, TASKS i inne bazy robocze): pola tekstowe
+      (Notatka, Desc) mają jedno krótkie zdanie – o co chodzi albo co ustalono. Listy, kontekst, uzasadnienia,
+      alternatywy i kolejne dopiski z datą wpisuj do treści strony (nagłówki, punkty, checkboxy dla rzeczy
+      do odhaczenia). Wyjątek: pola Bazy wiedzy i Rejestru sprzeczności – ich zawartość opisuje procedura `wiedza`.
     - Gdy inwestor zmienia etap („zaczynamy SSO”), zaproponuj przestawienie strony DOM: nowa sekcja „Do zamknięcia”,
       otwarte sprawy starego etapu przeniesione albo zamknięte – jednym zestawem zmian do zatwierdzenia.
 

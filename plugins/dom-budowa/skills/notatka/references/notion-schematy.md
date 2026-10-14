@@ -15,7 +15,7 @@ bazy (fetch data source) i zaktualizuj ten plik.
 | Branża | multi-select | Konstrukcja, Grunt i woda, Hydroizolacja, Drenaż, Elektryka, Wod-kan, Ogrzewanie, Wentylacja, Dach, Okna i drzwi, Elewacja, Ściany, Wnętrza, Smart home, Ogród, Formalności, Energooszczędność, Organizacja |
 | Do kogo | select | Konstruktor, Architekt, Geotechnik, Kierownik budowy, Ekipa, Instalator, Dekarz, Ja |
 | Kiedy | data | termin lub moment budowy |
-| Notatka | tekst | szczegóły, kontekst, co ustalono |
+| Notatka | tekst | jedno zdanie: o co chodzi / co ustalono; szczegóły, kontekst i dopiski – w treści strony |
 | Źródło | tekst | skąd to wiem |
 | Wiedza | relacja → Informacje (Baza wiedzy) | informacje wynikające z tego ustalenia (`wiedza`, sekcja F) |
 
@@ -28,7 +28,7 @@ bazy (fetch data source) i zaktualizuj ten plik.
 | Priority | select | Highest, High, Medium, Low |
 | Kategoria | select | Media, Kredyt, Czyszczenie działki, Stan zero, SSO, Ogrodzenie, Teren, Przygotowanie do budowy, Wiata kontener, Projektowanie, Zakup działki, Inne, Ogród |
 | When | data | |
-| Desc | tekst | |
+| Desc | tekst | jedno zdanie; listy i szczegóły – w treści strony (checkboxy) |
 | Kto | select | Ja, Ekipa, Konstruktor, Architekt, Kierownik budowy, Geodeta / geotechnik, Dostawca, Urząd / gestor, Inny – ktoś inny + PLANNED „WAITING” = czekam na |
 | Harmonogram | relacja → Harmonogram | krok, z którego wynika zadanie (`harmonogram`) |
 

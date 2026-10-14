@@ -3,6 +3,12 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.9.5] – 2026-10-14
+
+- HZ-4 `budowa` (zasada 12), `notatka`: kolumny baz roboczych (Notatnik, TASKS) to krótkie właściwości – Notatka i Desc
+  mają jedno zdanie; szczegóły, listy (checkboxy), kontekst, uzasadnienie decyzji i dopiski z datą idą do treści strony.
+  Pola Bazy wiedzy i Rejestru bez zmian (opisuje je `wiedza`).
+
 ## [1.9.4] – 2026-10-14
 
 - `inbox`, `przeglad-dnia`, `przeglad-tygodnia`: „Przetworzone” pogrupowane dzień po dniu w zwijanych blokach (najnowszy

@@ -16,7 +16,7 @@ branżą i adresatem, tak żeby dało się ją filtrować i zamknąć.
    |---|---|---|
    | pytanie do kogoś | Notatnik budowy | Typ „Pytanie”, Status „Otwarte”, Do kogo = adresat |
    | ustalenie / fakt / rzecz do przypilnowania na budowie | Notatnik budowy | Typ „Pamiętać”, Status „Ustalone” (to nie jest sprawa otwarta – wraca w checkliście etapu, procedura `etap`), Etap = kiedy ma wrócić |
-   | decyzja | Notatnik budowy | Typ „Decyzja”, Status „Ustalone”; w Notatka: *co, dlaczego, alternatywy, kto zdecydował* |
+   | decyzja | Notatnik budowy | Typ „Decyzja”, Status „Ustalone”; w Notatce jedno zdanie (co ustalono), w treści strony: *dlaczego, alternatywy, kto zdecydował* |
    | ryzyko | Notatnik budowy | Typ „Ryzyko”, Priorytet wg wpływu |
    | do doczytania / pomysł | Notatnik budowy | Typ „Doczytać” / „Pomysł” |
    | konkretne działanie z terminem | TASKS (2) | PLANNED „TO DO”, When = termin, Kto = Ja |
@@ -29,7 +29,7 @@ branżą i adresatem, tak żeby dało się ją filtrować i zamknąć.
 
 2. **Sprawdź duplikaty:** wyszukaj w Notatniku 2–3 słowa kluczowe. Jeśli wpis istnieje – nie twórz drugiego
    i nie linkuj wpisów do siebie: zostaje jedno źródło prawdy. Zaktualizuj istniejący (status, dopisek z datą);
-   nowy szczegół dopisz do jego Notatki, a gdy informacja pochodzi z innego źródła niż to w polu Źródło –
+   nowy szczegół dopisz w treści jego strony (z datą), a gdy informacja pochodzi z innego źródła niż to w polu Źródło –
    dodaj drugie źródło do Źródła (np. „…; pulpit DOM, 10.2026”).
 3. **Pokaż plan zapisu** jako tabelę (Nazwa | Typ | Etap | Branża | Do kogo | Priorytet | Status).
    Przy 1–3 oczywistych wpisach zapisz od razu; przy więcej lub przy niepewnej klasyfikacji – poproś o „ok”.
@@ -45,6 +45,8 @@ branżą i adresatem, tak żeby dało się ją filtrować i zamknąć.
 ## Zasady
 
 - Nazwa wiersza: krótka i samodzielna („Wysokość drzwi garażu 2,10 m – kolizja z belką”), bez „Notatka z…”.
+- Kolumny to właściwości (`budowa`, zasada 12): Notatka w Notatniku i Desc w TASKS – jedno krótkie zdanie;
+  szczegóły, listy (np. pozycje do sprawdzenia jako checkboxy), kontekst i dopiski z datą – w treści strony.
 - Daty jako daty Notion, nie tekst. Termin względny („za tydzień”) przelicz na datę.
 - Nie zmieniaj ani nie usuwaj cudzych wpisów bez prośby; zamknięcie = Status „Zrobione”/„Odrzucone” + dopisek.
 - Jeśli narzędzia Notion są niedostępne: przygotuj wpisy jako tabelę Markdown do wklejenia i powiedz o tym wprost.
