@@ -22,8 +22,10 @@ Trzy strefy, żeby nowe wpisy nie mieszały się ze starymi – **na wierzchu za
 			- ❓ asystent (12.10): pytanie 1; pytanie 2 – propozycja interpretacji
 			- odpowiedź inwestora (pod pytaniem)
 	### Przetworzone {toggle}
-		🤖 13.10 wieczór: inbox – przetworzono 3, …        ← linia z ostatniego przebiegu (zastępowana, nie dopisywana)
-		- ~~wpis~~ → Notatnik: <link> (12.10)
+		▸ 📅 13.10 wt · 🤖 przetworzono 3 · czeka na Ciebie 2 · jutro 1   ← zwijany blok dnia, najnowszy na górze
+			🤖 13.10 wieczór: inbox – przetworzono 3, … (pełna linia z punktami „jutro”)
+			- ~~wpis~~ → Notatnik: <link>
+		▸ 📅 12.10 pn · 🤖 …                                             ← starsze dni zwinięte
 ```
 **Nowy wpis = każdy blok pierwszego poziomu pod „📥 Inbox”** – akapit albo punkt (inwestor pisze różnie, np. akapit
 zaczynający się od daty), z wyjątkiem „Jak używać”, pustych linii i dwóch zwijanych nagłówków (także gdy
@@ -65,16 +67,19 @@ inwestora). Nie zmieniaj treści wpisów inwestora – tylko dopisuj pod nimi i 
    | „dostałem plik” | `dokumenty` | w Claude Code – klasyfikacja; gdzie indziej – przypomnienie, żeby wrzucić do `_Przychodzące/` |
    | „asystent ma zawsze…” | `rozwoj-harnessu` (A) | skrzynka „Zmiany do harnessu” |
    | „pomysł: …” na asystenta, Notion, Excel, zdjęcia, automatyzację | `rozwoj-harnessu` (C) | baza „Pomysły na rozwój”, od razu z analizą |
-5. **Zamknij wpis:** przenieś go (z dialogiem, z pierwszego poziomu albo z „❓”) do „Przetworzone” jako `~~wpis~~ → <gdzie>: <link> (data)`
-   (albo „→ wiersz do Excela: …”). Zdublowane / nieprzydatne → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
+5. **Zamknij wpis:** przenieś go (z dialogiem, z pierwszego poziomu albo z „❓”) do „Przetworzone”, do **zwijanego bloku
+   dzisiejszego dnia** (`<details>`, tytuł „📅 <dd.mm> <dzień> · <skrót linii 🤖>”; brak – utwórz na górze, nad starszymi dniami),
+   jako `~~wpis~~ → <gdzie>: <link>` (albo „→ wiersz do Excela: …”). Zdublowane / nieprzydatne → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
 6. **Zapisy wsadowo** (`budowa`, zasada 6): najpierw wszystkie odczyty, potem jedno wywołanie na bazę docelową,
    na końcu **jedna** edycja strony DOM (przeniesienia do „❓” z pytaniami, do „Przetworzone”, linia „🤖”).
    Po niej **pierwszy poziom Inboxu jest pusty** – poza „Jak używać”, dwoma zwijanymi nagłówkami i 1–2 pustymi liniami do
-   pisania nie zostaje tam nic: ani wpis, który asystent widział, ani linia „🤖” (ta idzie na górę „Przetworzone”). Edytuj tylko sekcję
-   „📥 Inbox” – reszta strony DOM nietknięta. Przy > 3 wpisach pokaż plan (tabela: wpis | klasa | gdzie trafi |
+   pisania nie zostaje tam nic: ani wpis, który asystent widział, ani linia „🤖” (ta idzie na górę bloku dnia w „Przetworzone”; kolejny przebieg tego
+   samego dnia, np. ręczny – druga linia „🤖 … (ręczne)” w tym samym bloku, tytuł bloku ze skrótem ostatniego przebiegu).
+   Edytuj tylko sekcję „📥 Inbox” – reszta strony DOM nietknięta: w edycji typu „znajdź i zamień” nie obejmuj nagłówka
+   następnej sekcji („✅ Zadania”) – Notion potrafi wtedy zdjąć mu zwijanie i wyciągnąć bazę TASKS na wierzch. Przy > 3 wpisach pokaż plan (tabela: wpis | klasa | gdzie trafi |
    pytanie?) i poproś o „ok”, chyba że inwestor powiedział „bez pytania”.
-7. **Podsumuj** (także przy ręcznym przebiegu zaktualizuj linię „🤖” na górze „Przetworzone”): przetworzone (wpis → gdzie), do wyjaśnienia (wpis: pytania), pominięte. Zmienione / Otwarte / Następny krok.
-   „Przetworzone” czyści przegląd tygodnia (wpisy starsze niż 14 dni, po zgodzie) – linki są już w docelowych miejscach.
+7. **Podsumuj** (także przy ręcznym przebiegu dopisz linię „🤖” w bloku dnia w „Przetworzone”): przetworzone (wpis → gdzie), do wyjaśnienia (wpis: pytania), pominięte. Zmienione / Otwarte / Następny krok.
+   „Przetworzone” czyści przegląd tygodnia (bloki dni starsze niż 14 dni, po zgodzie) – linki są już w docelowych miejscach.
 
 ## Bez inwestora
 

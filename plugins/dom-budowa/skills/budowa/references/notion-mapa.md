@@ -10,7 +10,7 @@ Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – u góry dwa rozwijane 
 ```
 DOM
 ├─ 📥 Inbox (toggle, wolny tekst) – na wierzchu tylko nowe wpisy inwestora (po przebiegu pusto);
-│     „❓ Czeka na Twoją odpowiedź” (wpisy z pytaniem asystenta) i „Przetworzone” (linia „🤖” z ostatniego przebiegu + ślad)
+│     „❓ Czeka na Twoją odpowiedź” (wpisy z pytaniem asystenta) i „Przetworzone” (zwijany blok na każdy dzień: linia „🤖” + ślad)
 ├─ ✅ Zadania (toggle) → TASKS (2) (baza)
 ├─ zakładki:
 │  ├─ 🏗 Etap → baza Harmonogram (widok „📅 Oś czasu”), nagłówek „🔴 Do zamknięcia przed stanem zero” (checklista
@@ -28,7 +28,7 @@ DOM
 
 | Czego szukasz | Gdzie (strona / baza → widok/sekcja) | ID | Najważniejsze pola |
 |---|---|---|---|
-| Luźne wpisy do przetworzenia; pytania asystenta do inwestora | DOM → „📥 Inbox” (toggle): bloki 1. poziomu = nowe wpisy; „❓ Czeka na Twoją odpowiedź” = wpisy z pytaniem (odpowiedź pod pytaniem); „Przetworzone” = ślad | `24af5982-09e7-806b-821a-e157ff33be42` | – (wolny tekst) |
+| Luźne wpisy do przetworzenia; pytania asystenta do inwestora | DOM → „📥 Inbox” (toggle): bloki 1. poziomu = nowe wpisy; „❓ Czeka na Twoją odpowiedź” = wpisy z pytaniem (odpowiedź pod pytaniem); „Przetworzone” = ślad, zwijany blok na dzień | `24af5982-09e7-806b-821a-e157ff33be42` | – (wolny tekst) |
 | Parametry projektu | DOM → „🤖 Dla asystenta” → „📐 Dane projektu (ściąga)” | `24af5982-09e7-806b-821a-e157ff33be42` | – |
 | Jakie mamy dokumenty, co w którym jest, gdzie leżą | 📑 Przewodnik po dokumentach i Notion (generowany – nie edytuj) | `3f6f5982-09e7-81f5-bade-ec877d8d936a` | – |
 | Co blokuje bieżący etap | DOM → zakładka 🏗 Etap → „🔴 Do zamknięcia przed …”; Notatnik → widok „🔴 Krytyczne i otwarte” | `view://3f3f5982-09e7-8125-a50b-000ce287ad48` | Status Otwarte/Do omówienia, Priorytet Krytyczne/Ważne |

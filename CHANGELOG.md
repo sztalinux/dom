@@ -3,6 +3,13 @@
 Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## [1.9.4] – 2026-10-14
+
+- `inbox`, `przeglad-dnia`, `przeglad-tygodnia`: „Przetworzone” pogrupowane dzień po dniu w zwijanych blokach (najnowszy
+  na górze, tytuł z datą i skrótem linii „🤖”); linia „🤖” i przetworzone wpisy trafiają do bloku dnia, kolejny przebieg
+  tego dnia dopisuje się do niego; przegląd tygodnia czyści bloki starsze niż 14 dni. Ostrzeżenie: edycja Inboxu
+  nie obejmuje nagłówka „✅ Zadania” (Notion zdejmuje wtedy zwijanie).
+
 ## [1.9.3] – 2026-10-14
 
 - HZ-2 `inbox`, `przeglad-dnia`: po przebiegu pierwszy poziom Inboxu jest pusty (gotowy na wpisy następnego dnia) –

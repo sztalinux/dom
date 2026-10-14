@@ -44,7 +44,7 @@ Pobierz w jak najmniejszej liczbie zapytań:
 8. **Dziennik budowy** (ID: `dziennik/references/notion-dziennik.md`): wpisy z 7 dni – dni pracy ekipy
    i własne, otwarte problemy, kroki zakryte bez zdjęć („Przed zakryciem OK” odznaczone).
 9. **Inbox** (strona DOM → „📥 Inbox”): liczba nowych wpisów (pierwszy poziom) i wpisów w „❓ Czeka na Twoją odpowiedź” bez odpowiedzi
-   (wymień wpis i pytanie); „Przetworzone” starsze niż 14 dni → do wyczyszczenia (Porządki).
+   (wymień wpis i pytanie); bloki dni w „Przetworzone” starsze niż 14 dni → do wyczyszczenia (Porządki).
 10. **Spójność** (inwestor edytuje Notion ręcznie – wychwyć rozjazdy, nie naprawiaj bez zgody):
     - Notatnik „Ustalone”/„Zrobione” z wiedzą techniczną bez relacji „Wiedza” → kandydaci do `wiedza`, sekcja F;
     - Informacje bez Tematów albo bez Źródeł i bez Notatnika; Tematy, których „W skrócie” przeczy nowszym Informacjom
@@ -89,7 +89,7 @@ Znajdź i zaproponuj – nie wykonuj bez zgody; po „tak” wykonaj wsadowo (za
 - sprawy po terminie albo bez zmian od 30 dni → zamknąć, przesunąć termin czy zostawić (pytanie zbiorcze);
 - Informacje „Nowe” starsze niż 30 dni → „Przejrzane” albo „Nieaktualne”;
 - otwarte sprawy zakończonego etapu → przenieść do bieżącego albo zamknąć;
-- „Przetworzone” w Inboxie starsze niż 14 dni → usunąć (linki są już w docelowych miejscach);
+- bloki dni w „Przetworzone” w Inboxie starsze niż 14 dni → usunąć (linki są już w docelowych miejscach);
 - rozjazdy z punktu „Spójność” → dopisać relację Wiedza / Informację (`wiedza`, F), uzgodnić statusy, poprawić „W skrócie”.
 Niczego nie usuwaj – porządek tylko statusami i scalaniem (z dopiskiem, co scalono).
 

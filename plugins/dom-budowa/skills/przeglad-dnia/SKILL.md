@@ -1,6 +1,6 @@
 ---
 name: przeglad-dnia
-description: Codzienny wieczorny przegląd bez inwestora (zaplanowane zadanie, np. 20:00 na claude.ai) – przerobienie Inboxu bez pytań w rozmowie, analiza nowych pomysłów na rozwój, krótka zapowiedź jutra; wynik jako linia „🤖” w Inboxie na stronie DOM (na górze „Przetworzone”). Używaj, gdy uruchamia go zaplanowane zadanie albo użytkownik mówi „przegląd dnia”, „wieczorny przegląd”, „ogarnij dzisiejsze”, „zrób codzienny przegląd”.
+description: Codzienny wieczorny przegląd bez inwestora (zaplanowane zadanie, np. 20:00 na claude.ai) – przerobienie Inboxu bez pytań w rozmowie, analiza nowych pomysłów na rozwój, krótka zapowiedź jutra; wynik jako linia „🤖” w Inboxie na stronie DOM (zwijany blok dnia w „Przetworzone”). Używaj, gdy uruchamia go zaplanowane zadanie albo użytkownik mówi „przegląd dnia”, „wieczorny przegląd”, „ogarnij dzisiejsze”, „zrób codzienny przegląd”.
 ---
 
 # Przegląd dnia
@@ -29,8 +29,9 @@ i porządki – w `przeglad-tygodnia`.
 3. **Na jutro** (tylko odczyt): TASKS z When = jutro (moje i „czekam na”), kroki Harmonogramu startujące jutro (krok
    „bez odwrotu” → czy jest zadanie bramki), dostawy jutro, Zamówienia z „Zamówić do” = jutro lub po terminie.
    Nic nie ma → pomiń.
-4. **Linia „🤖”** – w tej samej, jednej edycji strony DOM co krok 1: na górze „Przetworzone” zastąp poprzednią linię
-   (z jej punktami) nową. Pierwszy poziom Inboxu zostaje pusty – gotowy na wpisy następnego dnia (`inbox`, krok 6):
+4. **Linia „🤖”** – w tej samej, jednej edycji strony DOM co krok 1: na górze zwijanego bloku dzisiejszego dnia
+   w „Przetworzone” (`inbox`, kroki 5–6; tytuł bloku „📅 13.10 wt · 🤖 <skrót tej linii>”, starsze dni zostają zwinięte niżej).
+   Pierwszy poziom Inboxu zostaje pusty – gotowy na wpisy następnego dnia:
    ```
    🤖 13.10 wieczór: inbox – przetworzono 3, czeka na Ciebie 2 (rozwiń ❓) · pomysły – przeanalizowano 1 · jutro: 2
    	- jutro: <sprawa – kto – kiedy>      ← max 3 punkty zagnieżdżone, tylko gdy są
