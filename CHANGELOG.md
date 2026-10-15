@@ -4,6 +4,11 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.3.1] – 2026-10-15
+
+- `ja`, zasada 8: generowany przewodnik to wyjątek od zmian punktowych (zastępowany w całości); wersja pluginów tylko
+  na stronie „Asystent AI – harness” (Mapa Notion odsyła tam). Wejście z widgetu sprawdzone testową stroną.
+
 ## ja [1.3.0] – 2026-10-15
 
 - `wpisy`, `przeglad-dnia` (tryb szybki): nowe wejście Dziennika – strony zakładane widgetem „nowa strona” w telefonie

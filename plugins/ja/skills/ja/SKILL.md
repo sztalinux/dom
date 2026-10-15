@@ -73,10 +73,10 @@ zapisuj wprost według pól „Gdzie” i „Jak zapisać” w bazie Obszary.
    pracy **wszystkie miejsca, które to opisują** – inaczej asystent i inwestor zaczną działać według różnych opisów:
    - repo: każdy plik z nazwą **i** ID strony w obu pluginach (wyszukaj jedno i drugie), mapy `ja/references/notion-mapa.md`
      i `budowa/references/notion-mapa.md`, README, CHANGELOG;
-   - Notion: w Dzienniku „Jak używać” i „🧭 Dla asystenta”; „🗺 Mapa Notion” (schemat, kroki, tabela struktury, wersje
-     pluginów); strona „Asystent AI – harness” (wersja); opis na stronie, której dotyczy zmiana; przewodnik (`dokumenty`, C).
+   - Notion: w Dzienniku „Jak używać” i „🧭 Dla asystenta”; „🗺 Mapa Notion” (schemat, kroki, tabela struktury);
+     strona „Asystent AI – harness” (jedyne miejsce z wersją pluginów); opis na stronie, której dotyczy zmiana; przewodnik (`dokumenty`, C).
    Strony Notion zmieniaj punktowo (zamiana fragmentu), nigdy całą treścią – mają osadzone bazy i bloki, których odczyt
-   nie pokazuje. W podsumowaniu wymień zaktualizowane miejsca. W drugą stronę: Notion rozjechał się z mapą (nieznana strona
+   nie pokazuje. Wyjątek: generowany przewodnik – zastępujesz go w całości (`dokumenty`, C). W podsumowaniu wymień zaktualizowane miejsca. W drugą stronę: Notion rozjechał się z mapą (nieznana strona
    na najwyższym poziomie, przeniesiona lub przemianowana strona) → nie dopasowuj się po cichu; zaproponuj aktualizację
    mapy (`rozwoj-harnessu`) albo zapytaj.
 
