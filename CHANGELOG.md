@@ -4,6 +4,12 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## dom-budowa [2.2.0] – 2026-10-15
+
+- Nowa baza Notion „✅ Checklista budowy” (strona na dole DOM, wzmianka w zakładce 🏗 Etap): punkty kontroli prac
+  ze scalonych checklist kursu, z polami Etap, Element, Faza, Zrobione, Uwagi, Dotyczy nas i widokami na etapy.
+  Mapa Notion i procedura `etap` (źródła, bramka krok 2 i 8, odbiór krok 2) korzystają z niej przy bramkach i odbiorach.
+
 ## ja [1.2.3] – 2026-10-15
 
 - POM-9 (etap 4): mapa Notion – Relacja i Wesele pod Rodziną, Books w Collections, Quick notes w Archiwum, DASHBOARD

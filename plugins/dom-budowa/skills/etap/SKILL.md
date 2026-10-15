@@ -14,6 +14,7 @@ zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły �
 | Co | Gdzie |
 |---|---|
 | Kolejność prac i checklisty etapów | Notion → „Etapy budowy – przewodnik” (`budowa/references/zrodla.md`) |
+| Kontrola prac krok po kroku (ustalenia, zamówienie, odbiór dostawy, kontrola) | Notion → „✅ Checklista budowy” (`budowa/references/notion-mapa.md`): Etap + Element, Dotyczy nas ≠ Nie; listy „Cała budowa” (beton, zbrojenie, dostawy) przy każdym betonowaniu i dostawie |
 | Bramki stanu zero | Notion → „Stan zero – punkty bez odwrotu” (link na stronie DOM, sekcja „Do zamknięcia”) |
 | Otwarte sprawy etapu | Notatnik budowy: Etap = ten etap, Status Otwarte / Do omówienia **oraz** wszystkie wpisy Typ „Pamiętać” niezależnie od Statusu (mają „Ustalone” – to rzeczy do przypilnowania na budowie, nie sprawy otwarte) |
 | Co i jak kontrolować | Baza wiedzy → Informacje: Rodzaj „Kontrola / odbiór”, „Błąd do uniknięcia”, „Kolejność prac” dla etapu; `references/odbiory.md` |
@@ -43,7 +44,8 @@ zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły �
 ## B. Bramka („jutro betonowanie płyty”, „w czwartek zasypka”, „co sprawdzić zanim…”)
 
 1. Nazwij krok i co po nim jest nieodwracalne (jedno zdanie).
-2. Zbuduj checklistę: punkty bramki z Notion + sprawy Notatnika dla tego kroku + kontrole z `references/odbiory.md`
+2. Zbuduj checklistę: punkty bramki z Notion + sprawy Notatnika dla tego kroku + nieodhaczone punkty „✅ Checklisty budowy”
+   dla elementów tego kroku + kontrole z `references/odbiory.md`
    + parametry z projektu. Każdy punkt ma mieć: **co**, **jak sprawdzić** (pomiar, dokument, zdjęcie), **kto**.
 3. Sprawdź też **poprzednie bramki** ze strony „Stan zero – punkty bez odwrotu”: niezamknięty punkt wcześniejszej bramki
    to też blokada tego kroku.
@@ -53,12 +55,14 @@ zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły �
    jeśli prognoza nie pasuje, zaproponuj przesunięcie.
 7. **Zdjęcia przed zakryciem:** lista ujęć z miarą (od stałych punktów), które mają powstać zanim krok zakryje
    instalacje, zbrojenie, izolację – to jedyna dokumentacja na lata (procedura `dziennik`).
-8. Po bramce: odhacz punkty na stronie Notion, zamknij wpisy w Notatniku (status + dopisek), zapisz pominięcia jako Decyzje.
+8. Po bramce: odhacz punkty na stronie Notion i w „✅ Checkliście budowy” (Zrobione, wynik w Uwagach), zamknij wpisy
+   w Notatniku (status + dopisek), zapisz pominięcia jako Decyzje.
 
 ## C. Odbiór („ekipa skończyła płytę”, „odbieram hydroizolację”, „są usterki”)
 
 1. Wejście: relacja, zdjęcia, pomiary, protokół od ekipy, wpisy kierownika. Ustal, który etap i jaki zakres umowy.
-2. Lista kontrolna z `references/odbiory.md` dla tego etapu + wymagania z projektu + zakres z oferty „Wybrana”
+2. Lista kontrolna: punkty Faza „Kontrola” z „✅ Checklisty budowy” dla tego elementu + `references/odbiory.md`
+   + wymagania z projektu + zakres z oferty „Wybrana”
    (czy wykonano wszystko, co w cenie). Dla pracy własnej – ta sama lista, bez zakresu umowy.
 3. Protokół (tabela): element | wymaganie i źródło (`[projekt]` / norma / `[opinia]`) | wynik | usterka | termin usunięcia | kto.
 4. Zaproponuj wynik: **odebrane / odebrane warunkowo (lista usterek) / nieodebrane** – decyduje inwestor
