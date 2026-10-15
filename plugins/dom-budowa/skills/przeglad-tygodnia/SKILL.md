@@ -1,6 +1,6 @@
 ---
 name: przeglad-tygodnia
-description: Cotygodniowy przegląd budowy i porządki w Notion – co nowego doszło do wiedzy, otwarte sprzeczności czekające na decyzję, pytania do projektantów, zadania i terminy na najbliższe dni, informacje do ponownej weryfikacji. Używaj, gdy uruchamia go zaplanowane zadanie lub użytkownik pyta „co nowego”, „podsumuj tydzień”, „co czeka na mnie”, „przegląd”.
+description: Cotygodniowy przegląd budowy (osobno od spraw osobistych – te ma przeglad-tygodnia-osobisty z pluginu ja) i porządki w Notion budowy – co nowego doszło do wiedzy, otwarte sprzeczności czekające na decyzję, pytania do projektantów, zadania i terminy na najbliższe dni, informacje do ponownej weryfikacji. Używaj, gdy uruchamia go zaplanowane zadanie lub użytkownik pyta „co nowego”, „podsumuj tydzień”, „co czeka na mnie”, „przegląd”.
 ---
 
 # Przegląd tygodnia
@@ -38,14 +38,13 @@ Pobierz w jak najmniejszej liczbie zapytań:
 5b. **Zamówienia i dostawy**: „Zamówić do” w 14 dni lub po terminie bez statusu „Zamówione”; dostawy w 7 dni.
 5c. **Umowy i gwarancje**: Gwarancja do / Rękojmia do w ciągu 60 dni (przegląd przed upływem, zgłoszenie usterek).
 6. **Informacje**: „Wrażliwe na czas” z Datą informacji starszą niż 12 miesięcy, jeśli dotyczą bieżącego etapu.
-7. **Zmiany do harnessu** (`collection://e217448a-60ec-4af6-8584-8f368315109c`): wpisy „Do wdrożenia” starsze niż 7 dni
-   – przypomnienie, żeby uruchomić Claude Code i je wdrożyć. **Pomysły na rozwój** (`collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`): liczba nowych
-   bez analizy (przeanalizuj je – `rozwoj-harnessu` z pluginu `ja`, sekcja C) i „Pytania do mnie”; nie namawiaj do wdrażania.
+7. **Harness i pomysły** – nie tutaj: skrzynkę zmian i „Pomysły na rozwój” raportuje przegląd osobisty
+   (`przeglad-tygodnia-osobisty`, plugin `ja`).
 8. **Dziennik budowy** (ID: `dziennik/references/notion-dziennik.md`): wpisy z 7 dni – dni pracy ekipy
    i własne, otwarte problemy, kroki zakryte bez zdjęć („Przed zakryciem OK” odznaczone).
-9. **Dziennik** (strona „📓 Dziennik”, `3f8f5982-09e7-80c8-a154-c59aeb844e8f`): liczba nowych wpisów (pierwszy poziom)
-   i wpisów w „❓ Czeka na Twoją odpowiedź” bez odpowiedzi (wymień wpis i pytanie – sprawy budowy w całości, pozostałe tylko
-   licznikiem); bloki dni w „Przetworzone” starsze niż 14 dni → do wyczyszczenia (Porządki).
+9. **Dziennik – sprawy budowy:** wpisy o budowie w „❓ Czeka na Twoją odpowiedź” na stronie „📓 Dziennik”
+   (`3f8f5982-09e7-80c8-a154-c59aeb844e8f`) bez odpowiedzi – wymień wpis i pytanie. Pozostałe wpisy, porządki w Dzienniku
+   i jego „Przetworzone” – przegląd osobisty (`przeglad-tygodnia-osobisty`, plugin `ja`).
 10. **Spójność** (inwestor edytuje Notion ręcznie – wychwyć rozjazdy, nie naprawiaj bez zgody):
     - Notatnik „Ustalone”/„Zrobione” z wiedzą techniczną bez relacji „Wiedza” → kandydaci do `wiedza`, sekcja F;
     - Informacje bez Tematów albo bez Źródeł i bez Notatnika; Tematy, których „W skrócie” przeczy nowszym Informacjom
@@ -74,9 +73,7 @@ Pobierz w jak najmniejszej liczbie zapytań:
 **Budowa w tym tygodniu:** dni ekipy / własne, problemy otwarte, braki zdjęć przed zakryciem
 **Zamówić / zapłacić do 14 dni:** <pozycja – do kiedy – skąd>
 **Do ponownej weryfikacji:** WI-x <cena/przepis z roku …>
-**Dziennik:** n do przetworzenia („przerób dziennik”), m czeka na Twoją odpowiedź: <wpis> – <pytanie>
-**Harness – czeka na wdrożenie:** HZ-x … (uruchom Claude Code)
-**Pomysły:** n przeanalizowanych, m z pytaniami do Ciebie: POM-x – <pytanie>
+**Dziennik – budowa:** m wpisów o budowie czeka na Twoją odpowiedź: <wpis> – <pytanie>
 **Sugestia na ten tydzień:** 1–3 konkretne kroki.
 **Na później (n):** licznik spraw z dalszych etapów – bez listy.
 **Porządki (n):** propozycje z sekcji „Porządki” – do zatwierdzenia jednym „tak”.
@@ -90,10 +87,10 @@ Znajdź i zaproponuj – nie wykonuj bez zgody; po „tak” wykonaj wsadowo (za
 - sprawy po terminie albo bez zmian od 30 dni → zamknąć, przesunąć termin czy zostawić (pytanie zbiorcze);
 - Informacje „Nowe” starsze niż 30 dni → „Przejrzane” albo „Nieaktualne”;
 - otwarte sprawy zakończonego etapu → przenieść do bieżącego albo zamknąć;
-- bloki dni w „Przetworzone” w Dzienniku starsze niż 14 dni → usunąć (linki są już w docelowych miejscach);
 - rozjazdy z punktu „Spójność” → dopisać relację Wiedza / Informację (`wiedza`, F), uzgodnić statusy, poprawić „W skrócie”.
 Niczego nie usuwaj – porządek tylko statusami i scalaniem (z dopiskiem, co scalono).
 
-Zapis: dopisz przegląd na górze strony Notion „Przeglądy tygodniowe” (pod DOM) jako zwijany nagłówek
-z tytułem tygodnia – **jedno wywołanie**. W rozmowie podaj ten sam tekst.
+Zapis: dopisz przegląd na górze strony Notion „Przeglądy tygodniowe” (pod DOM, `3f4f5982-09e7-8144-af5e-f9521a52ea9d`)
+jako zwijany nagłówek z tytułem tygodnia – **jedno wywołanie**. W rozmowie podaj ten sam tekst. Gdy wywołał cię przegląd
+osobisty (`przeglad-tygodnia-osobisty`), zwróć mu wzmiankę do wpisu i jedną linię skrótu (do decyzji n, terminy 7 dni n).
 Pusty tydzień (brak nowych rzeczy i terminów) → krótka informacja „bez zmian”, bez zapisu do Notion.

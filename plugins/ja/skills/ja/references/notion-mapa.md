@@ -15,6 +15,7 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 ├─ ### Przetworzone (toggle) – zwijany blok na każdy dzień: linia „🤖” + ślad „~~wpis~~ → gdzie”
 ├─ ### 🧭 Dla asystenta (toggle) – baza 🧭 Obszary Dziennika, wzmianka przewodnika
 ├─ 📆 Przeglądy dzienne (podstrona – przeglądy osobiste; budowa ma własne na DOM)
+├─ 📅 Przeglądy tygodniowe (podstrona – tydzień osobisty; budowa ma własny na DOM)
 └─ 🗃 Przetworzone podstrony (podstrona – archiwum wpisów pisanych jako podstrony)
 ```
 
@@ -24,6 +25,9 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 | Podział wpisów na obszary (dokąd co idzie) | 🧭 Obszary Dziennika → widok „🤖 Aktywne (dla asystenta)” (tryb view – bez limitu) | `collection://253b7564-00ac-45b2-a3f4-956275e3a7e0`, `view://3faf5982-09e7-817b-a060-000c05f26c6a` | Obszar, Rozpoznawanie, Gdzie, Jak zapisać, Procedura, Aktywny, Kolejność, Przykład |
 | Wpisy pisane jako osobne strony | 📝 Wpisy (pod Dziennikiem) – podstrony = nowe wpisy | `3faf5982-09e7-80b2-9b33-c48745d67a4f` | – |
 | Przegląd dnia – sprawy osobiste (dziś / jutro; ręczne „(ręczne)”) | 📆 Przeglądy dzienne (pod Dziennikiem) | `3faf5982-09e7-81df-a361-cc65fddb81f4` | – |
+| Przegląd tygodnia – sprawy osobiste | 📅 Przeglądy tygodniowe (pod Dziennikiem) | `3faf5982-09e7-81e3-a6af-e3786ca4a074` | – |
+| Widoki do przeglądu tygodnia (tryb view) | TASKS „🤖 Tydzień – prywatne”, Wpisy emocji „🤖 Ostatni tydzień”, Dziennik produktywności „🤖 Ostatni tydzień” | `view://3faf5982-09e7-81b5-ad0a-000c1cfabfa0`, `view://3faf5982-09e7-81ec-83af-000c8b518d37`, `view://3faf5982-09e7-81af-9ea1-000cbe3dd643` | – |
+| Wesele (notatki, linki, wzmianki zadań) | 💍 Wesele (najwyższy poziom) | `3faf5982-09e7-81ec-bdc0-c8e41b99d52a` | sekcje: 📝 Notatki i pomysły, 🔗 Linki, miejsca, usługodawcy, ✅ Do zrobienia |
 | Przegląd dnia – budowa | 📆 Przeglądy dzienne – budowa (strona na DOM, plugin dom-budowa) | `3f8f5982-09e7-815e-8b03-eacaa74db190` | – |
 | Przetworzone wpisy-podstrony | 🗃 Przetworzone podstrony (pod Dziennikiem) | `3faf5982-09e7-8115-908f-f764d3133d6f` | – |
 | Wszystkie zadania (dom i prywatne) | TASKS (fizycznie na stronie DOM) | `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e` | Name, **Obszar** (Dom / Prywatne / Dziecko / Praca; puste = Dom), PLANNED, When, Priority, Kategoria, Kto, Desc |

@@ -41,6 +41,7 @@ Podział wpisów na obszary **nie jest w harnessie** – jest w bazie Notion „
 | mówi o dziecku: obserwacja, „porozmawiać z nią o…”, prezent, zabawa, zalecenie specjalisty | `dziecko` |
 | „kończy się X”, „kupiłem X”, „zaczynam / przerwa od” (suplement) | `suple` |
 | „przegląd dnia”, wieczorne zaplanowane zadanie | `przeglad-dnia` |
+| „przegląd tygodnia”, „podsumuj tydzień”, tygodniowe zaplanowane zadanie, „posprzątaj dziennik” | `przeglad-tygodnia-osobisty` (uruchamia też przegląd budowy) |
 | poprawia sposób pracy asystenta, „zapamiętaj na przyszłość”, „mam pomysł na…”, „zrób POM-n”, nowa procedura | `rozwoj-harnessu` |
 | budowa domu: ekipa, projekt, kosztorys, działka, wiedza budowlana, dokumenty budowy | `budowa` (plugin `dom-budowa`) |
 

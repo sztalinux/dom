@@ -62,6 +62,7 @@ claude.ai (telefon, czat, Cowork) ◄── pluginy ja + dom-budowa ─┘   (ka
 | `dziecko` | obserwacja, „porozmawiać z nią o…”, prezent, zalecenie | strona dziecka w sekcjach |
 | `suple` | „kończy się…”, „kupiłem…”, przerwa | baza Suple: Buy, Status, Last break |
 | `przeglad-dnia` | co 1–2 h (tryb szybki) i wieczorem (zaplanowane) / „przegląd dnia” | szybki: nowe wpisy na bieżąco, pusto = koniec bez zapisów; wieczorny: podsumowanie dnia i plan na jutro – osobiste pod Dziennikiem, budowa osobno na DOM (z odnośnikiem), analiza pomysłów |
+| `przeglad-tygodnia-osobisty` | raz w tygodniu (zaplanowane) / „przegląd tygodnia” | sprawy osobiste w liczbach, zaległe, najbliższy tydzień, porządki w Dzienniku; uruchamia przegląd budowy i linkuje do niego |
 | `rozwoj-harnessu` | „zapamiętaj na przyszłość”, nowa procedura, „mam pomysł…”, „zrób POM-n” | skrzynka w Notion → wdrożenie do repo; pomysły → analiza → wdrożenie na polecenie |
 
 **Plugin `dom-budowa`**
@@ -93,7 +94,8 @@ claude.ai (telefon, czat, Cowork) ◄── pluginy ja + dom-budowa ─┘   (ka
 4. claude.ai → Customize → Plugins → Add marketplace → `sztalinux/notion-plugin` → zainstaluj `ja` i `dom-budowa`,
    włącz „Sync automatically” (jeśli organizacja na to pozwala). Bez synchronizacji – jak pobrać nową wersję:
    `plugins/ja/skills/rozwoj-harnessu/references/claude-ai-projekt.md`.
-5. claude.ai → dwa zaplanowane zadania **poza projektem**: co 1–2 h w ciągu dnia „Dziennik – szybki przebieg (skill
+5. claude.ai → trzy zaplanowane zadania **poza projektem** (trzecie: raz w tygodniu „Przegląd tygodnia (skill
+   przeglad-tygodnia-osobisty z pluginu ja)”): co 1–2 h w ciągu dnia „Dziennik – szybki przebieg (skill
    przeglad-dnia z pluginu ja, tryb szybki)” i raz wieczorem „Przegląd dnia (skill przeglad-dnia z pluginu ja, tryb wieczorny)”.
 6. claude.ai → projekt „Dom” (tylko dokumenty budowy):
    - **Instructions:** `python3 tools/build.py` i wklej `dist/claude-ai-projekt/instrukcje.md` – dzięki temu każda

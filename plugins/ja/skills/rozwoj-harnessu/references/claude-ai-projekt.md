@@ -8,6 +8,7 @@
 | Projekt „Dom” | tylko **kontener dokumentów budowy** (wiedza projektu) – rozmowy, które potrzebują projektu architektonicznego, opinii, umów |
 | Zaplanowane zadanie „Dziennik – szybki przebieg” | **poza projektem**, co 1–2 h w ciągu dnia (np. 8–22); polecenie: „Dziennik – szybki przebieg (skill przeglad-dnia z pluginu ja, tryb szybki)”; pusty Dziennik = koniec bez zapisów |
 | Zaplanowane zadanie „Przegląd dnia” | **poza projektem** (pliki projektu nie doklejają się do każdego przebiegu), raz wieczorem; polecenie: „Przegląd dnia (skill przeglad-dnia z pluginu ja, tryb wieczorny)” – podsumowanie dnia i plan na jutro |
+| Zaplanowane zadanie „Przegląd tygodnia” | **poza projektem**, raz w tygodniu (np. niedziela wieczór); polecenie: „Przegląd tygodnia (skill przeglad-tygodnia-osobisty z pluginu ja)” – robi też przegląd budowy na DOM; dawne tygodniowe zadanie w projekcie „Dom” usuń |
 | Preferencje konta (opcjonalnie) | jedna linia: „Gdy rozmowa dotyczy mojego dnia, zadań, emocji, dziecka, suplementów albo budowy, wczytaj skill `ja`” – pas bezpieczeństwa, gdy opis skilla nie zadziała |
 
 Sprawy budowy poza projektem też działają (skille i Notion są wszędzie) – brakuje tylko plików z wiedzy projektu; procedura

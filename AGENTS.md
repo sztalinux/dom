@@ -32,6 +32,7 @@ dziecko, suplementy, przegląd dnia, rozwój harnessu) i `plugins/dom-budowa/ski
 | Spotkanie, rozmowa, decyzja: „jutro mam spotkanie z…”, „o co zapytać”, „jak wybrać z kilku” | `plugins/dom-budowa/skills/przygotowanie/SKILL.md` |
 | Przegląd tygodnia, „co nowego”, „co czeka na mnie” | `plugins/dom-budowa/skills/przeglad-tygodnia/SKILL.md` |
 | Przegląd dnia (wieczorne zaplanowane zadanie): Dziennik, pomysły, jutro | `plugins/ja/skills/przeglad-dnia/SKILL.md` |
+| Przegląd tygodnia – sprawy osobiste (z odnośnikiem do przeglądu budowy), porządki w Dzienniku | `plugins/ja/skills/przeglad-tygodnia-osobisty/SKILL.md` |
 | Zmiana samego harnessu (nowa procedura, poprawka), pomysł na rozwój setupu, „zrób POM-n” | `plugins/ja/skills/rozwoj-harnessu/SKILL.md` |
 
 ## Zasady, które obowiązują zawsze

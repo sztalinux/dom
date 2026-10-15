@@ -4,6 +4,19 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.2.0] – 2026-10-15
+
+- Nowy skill `przeglad-tygodnia-osobisty`: tydzień spraw osobistych (zadania prywatne/dziecko/praca, emocje i produktywność
+  w liczbach, dziecko, wesele, suple) na stronie „📅 Przeglądy tygodniowe” pod Dziennikiem, z linią i odnośnikiem do przeglądu
+  budowy (uruchamia `przeglad-tygodnia` z dom-budowa); czyta przez widoki „🤖 …” (limit zapytań) i przeglądy dzienne;
+  przejmuje porządki w Dzienniku oraz przypomnienia o skrzynce zmian i pomysłach. Jedno zadanie tygodniowe poza projektem.
+- Strona „💍 Wesele” i obszar „Wesele” w bazie Obszary (procedura ogólna – bez zmian w procedurach; tylko mapa).
+
+## dom-budowa [2.1.1] – 2026-10-15
+
+- `przeglad-tygodnia`: tylko budowa – wpisy o budowie czekające w „❓” Dziennika; porządki w Dzienniku, skrzynka zmian
+  i pomysły przeniesione do `przeglad-tygodnia-osobisty` (plugin ja); zwraca link do wpisu, gdy wywołuje go przegląd osobisty.
+
 ## ja [1.1.0] – 2026-10-15
 
 - `przeglad-dnia`, tryb wieczorny: budowa i sprawy osobiste mają osobne przeglądy – osobisty w nowej stronie „📆 Przeglądy
