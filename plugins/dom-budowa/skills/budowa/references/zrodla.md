@@ -22,7 +22,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 | Sprzeczności i dylematy (ADR) | Notion → Baza wiedzy → Rejestr sprzeczności | agent zgłasza, **decyduje inwestor** |
 | Przeglądy tygodniowe | Notion → DOM → Przeglądy tygodniowe | agent (`przeglad-tygodnia`) |
 | Dziennik inwestora (dni na budowie, dostawy, usterki, godziny własne) | Notion → DOM → Dziennik budowy (schemat: `dziennik/references/notion-dziennik.md`); zdjęcia w folderze budowy `Zdjęcia/` | inwestor + agent (`dziennik`) |
-| Bramki i odbiory etapów | Notion → „Etapy budowy – przewodnik”, „Stan zero – punkty bez odwrotu”; protokoły w folderze budowy | agent przygotowuje (`etap`), odbiera inwestor z kierownikiem |
+| Bramki i odbiory etapów | Notion → DOM → 🏗 Etap → zakładki etapów (przewodnik, checklista), „Stan zero – punkty bez odwrotu”; protokoły w folderze budowy | agent przygotowuje (`etap`), odbiera inwestor z kierownikiem |
 | Analizy dokumentów | Notion (strona pod DOM) lub dokument w projekcie Claude | agent (`analiza-techniczna`) |
 | Dokumenty: projekty, opinie, oferty, umowy (PDF, Excel) | folder budowy na komputerze inwestora; opis każdego dokumentu: strona Notion „📑 Przewodnik po dokumentach i Notion” (synchronizuje Claude Code); pełne dokumenty na prośbę | inwestor wrzuca, agent klasyfikuje (`dokumenty`); oryginały tylko odczyt |
 | Ściąga projektu (najważniejsze liczby i decyzje) | **Notion → DOM → „📐 Dane projektu (ściąga)” – jedyne źródło**; `Ściąga projektu.md` w folderze budowy to kopia do paczki awaryjnej (Claude Code odświeża ją po zmianie w Notion) | agent po nowym dokumencie (`dokumenty`, `analiza-techniczna`), inwestor ręcznie |
@@ -38,7 +38,7 @@ Pełna mapa z perspektywy „czego szukasz” (widoki, pola, słowniki): `notion
 | TASKS (data source) | `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e` |
 | Wybór wykonawcy – stan zero (strona) | `3f3f5982-09e7-81e8-b361-c7bee2e3847d` |
 | Porównanie wykonawców – stan zero (data source) | `collection://f7ca5f38-8fc3-46e7-8345-8a32cc8b5215` |
-| Etapy budowy – przewodnik (strona) | `3f3f5982-09e7-8161-b30e-fdcf2284554b` |
+| Zakładka 🏗 Etap na DOM – przewodnik etapów w zakładkach (strona „Etapy budowy – przewodnik” `3f3f5982-09e7-8161-b30e-fdcf2284554b` to tylko odnośnik) | `8e0aca76-56ea-42ec-a022-99e903afb926` |
 | Baza wiedzy (strona) | `3f4f5982-09e7-8193-a68e-fd35c9265012` |
 | Tematy / Informacje / Rozmowy i źródła / Rejestr sprzeczności | `wiedza/references/notion-wiedza.md` |
 | Przeglądy tygodniowe (strona) | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` |

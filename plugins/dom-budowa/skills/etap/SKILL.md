@@ -13,8 +13,8 @@ zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły �
 
 | Co | Gdzie |
 |---|---|
-| Kolejność prac i checklisty etapów | Notion → „Etapy budowy – przewodnik” (`budowa/references/zrodla.md`) |
-| Kontrola prac krok po kroku (ustalenia, zamówienie, odbiór dostawy, kontrola) | Notion → „✅ Checklista budowy” (`budowa/references/notion-mapa.md`): Etap + Element, Dotyczy nas ≠ Nie; listy „Cała budowa” (beton, zbrojenie, dostawy) przy każdym betonowaniu i dostawie |
+| Kolejność prac i co ustalić przed etapem | Notion → DOM → 🏗 Etap → „🗂 Etapy” → zakładka etapu (`budowa/references/notion-mapa.md`); odhaczone tam punkty przewodnika = zamknięte |
+| Kontrola prac krok po kroku (ustalenia, zamówienie, odbiór dostawy, kontrola) | Notion → „✅ Checklista budowy” (`budowa/references/notion-mapa.md`): Etap + Element, Dotyczy nas ≠ Nie; listy „Cała budowa” (beton, zbrojenie, dostawy) przy każdym betonowaniu i dostawie; widok etapu jest też w jego zakładce |
 | Bramki stanu zero | Notion → „Stan zero – punkty bez odwrotu” (link na stronie DOM, sekcja „Do zamknięcia”) |
 | Otwarte sprawy etapu | Notatnik budowy: Etap = ten etap, Status Otwarte / Do omówienia **oraz** wszystkie wpisy Typ „Pamiętać” niezależnie od Statusu (mają „Ustalone” – to rzeczy do przypilnowania na budowie, nie sprawy otwarte) |
 | Co i jak kontrolować | Baza wiedzy → Informacje: Rodzaj „Kontrola / odbiór”, „Błąd do uniknięcia”, „Kolejność prac” dla etapu; `references/odbiory.md` |

@@ -4,6 +4,12 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## dom-budowa [2.3.0] – 2026-10-15
+
+- Zakładka 🏗 Etap na DOM przebudowana: wspólne Harmonogram i „Do zamknięcia” u góry, niżej zakładki etapów
+  (Całość, Stan zero, SSO, Deweloperski, Wykończenie, Teren i ogród) z przewodnikiem etapu, widokiem Checklisty i otwartych
+  spraw Notatnika. Strona „Etapy budowy – przewodnik” to już tylko odnośnik; mapa Notion, `zrodla.md` i `etap` zaktualizowane.
+
 ## ja [1.3.1] – 2026-10-15
 
 - `ja`, zasada 8: generowany przewodnik to wyjątek od zmian punktowych (zastępowany w całości); wersja pluginów tylko

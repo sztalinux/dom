@@ -14,9 +14,12 @@ DOM
 ├─ ✍️ Wpisy → 📓 Dziennik (osobna strona, plugin `ja`) – luźne wpisy i „❓” pytania asystenta są tam, nie na DOM
 ├─ ✅ Zadania (toggle) → TASKS (baza wspólna ze sprawami osobistymi; budowa = Obszar Dom, widoki budowy filtrują Dom/puste)
 ├─ zakładki:
-│  ├─ 🏗 Etap → baza Harmonogram (widok „📅 Oś czasu”), nagłówek „🔴 Do zamknięcia przed stanem zero” (checklista
-│  │     bieżącego etapu), strony: Stan zero – punkty bez odwrotu (bramki), Plan przepustów i tras instalacji,
-│  │     Etapy budowy – przewodnik, ✅ Checklista budowy (wzmianka; strona na dole DOM); baza Zamówienia i dostawy
+│  ├─ 🏗 Etap (blok `8e0aca76-56ea-42ec-a022-99e903afb926`) → wspólne u góry: baza Harmonogram („📅 Oś czasu”) i „🔴 Do
+│  │     zamknięcia przed stanem zero” (bieżący etap); niżej „🗂 Etapy” – zakładki Całość / Stan zero / SSO / Deweloperski /
+│  │     Wykończenie / Teren i ogród, w każdej: przewodnik etapu (kolejność + „co ustalić przed”, do odhaczania), widok
+│  │     Checklisty i otwartych spraw Notatnika dla etapu (Całość: postęp checklisty, listy wspólne, sprawy całej budowy);
+│  │     „📄 Strony”: Stan zero – punkty bez odwrotu (bramki), Plan przepustów i tras instalacji, Etapy budowy – przewodnik
+│  │     (już tylko odnośnik), ✅ Checklista budowy (pełna baza); na dole baza Zamówienia i dostawy (wspólna)
 │  ├─ 📒 Notatnik → Notatnik budowy (baza): pytania, decyzje, ryzyka, „pamiętać” – bez daty zdarzenia
 │  ├─ 📓 Dziennik → Dziennik budowy (baza): co się działo na budowie danego dnia
 │  ├─ 📚 Wiedza → strona Baza wiedzy (Tematy, Informacje, Rozmowy i źródła, Rejestr sprzeczności)
@@ -51,8 +54,8 @@ DOM
 | Co się działo na budowie | Dziennik budowy → „📓 Ostatnie 7 dni”, „⚠️ Otwarte problemy” | `collection://cc113d57-3eaa-4f52-80f6-e4b39a4b4c92`, `view://3f5f5982-09e7-8192-847e-000c8ff6aba3`, `view://3f5f5982-09e7-8122-8524-000cb554728c` | Data, Etap, Krok, Problemy / usterki, Roboty dodatkowe, Przed zakryciem OK |
 | Bramki „bez odwrotu” | Stan zero – punkty bez odwrotu (Bramki 0–6) | `3f4f5982-09e7-81d2-bcae-ee5500a80c20` | – |
 | Przepusty, rury, trasy instalacji | Plan przepustów i tras instalacji | `3f4f5982-09e7-81fd-a382-dd14ab860ca2` | – |
-| Kolejność prac, co ustalić przed etapem | Etapy budowy – przewodnik | `3f3f5982-09e7-8161-b30e-fdcf2284554b` | – |
-| Co sprawdzić na budowie (kontrola prac, ustalenia z ekipą, odbiór dostaw) – checklista do odhaczania | ✅ Checklista budowy (baza w stronie na dole DOM) → widoki „🎯 Na teraz – <etap>”, „🧱 Stan zero”, „🏠 SSO”, „🔌 Deweloperski”, „🔁 Wspólne (beton, zbrojenie, dostawy)”, „🔎 Do ustalenia / nie dotyczy” | `3faf5982-09e7-81dc-8b1b-ec198e1f5020`, `collection://125b5a01-833b-4739-96b9-2d19b74b29a6`, `view://3faf5982-09e7-8182-a371-000c5e455e52` | Punkt, **Zrobione**, Etap, Element, Faza (Decyzja → Wybór wykonawcy → Ustalenia → Materiały/Zamówienie → Odbiór dostawy → Kontrola), Jak sprawdzić, Uwagi, Kto, **Dotyczy nas** (Tak/Do ustalenia/Nie), Źródło, Nr |
+| Kolejność prac, co ustalić przed etapem (przewodnik etapu) | DOM → 🏗 Etap → „🗂 Etapy” → zakładka etapu (strona „Etapy budowy – przewodnik” `3f3f5982-09e7-8161-b30e-fdcf2284554b` to już tylko odnośnik) | blok zakładki `8e0aca76-56ea-42ec-a022-99e903afb926` (fetch pokazuje wszystkie zakładki etapów) | – |
+| Co sprawdzić na budowie (kontrola prac, ustalenia z ekipą, odbiór dostaw) – checklista do odhaczania | ✅ Checklista budowy (strona w zakładce 🏗 Etap → „📄 Strony”; widok etapu także w jego zakładce) → widoki „🎯 Na teraz – <etap>”, „🧱 Stan zero”, „🏠 SSO”, „🔌 Deweloperski”, „🔁 Wspólne (beton, zbrojenie, dostawy)”, „🔎 Do ustalenia / nie dotyczy” | `3faf5982-09e7-81dc-8b1b-ec198e1f5020`, `collection://125b5a01-833b-4739-96b9-2d19b74b29a6`, `view://3faf5982-09e7-8182-a371-000c5e455e52` | Punkt, **Zrobione**, Etap, Element, Faza (Decyzja → Wybór wykonawcy → Ustalenia → Materiały/Zamówienie → Odbiór dostawy → Kontrola), Jak sprawdzić, Uwagi, Kto, **Dotyczy nas** (Tak/Do ustalenia/Nie), Źródło, Nr |
 | Ostatni przegląd tygodnia | Przeglądy tygodniowe | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` | – |
 | Przegląd dnia budowy (dziś / jutro, „rozkminki”; ręczne przebiegi z dopiskiem „(ręczne)”) | 📆 Przeglądy dzienne – budowa (strona na dole DOM, wzmianka w zakładce Więcej); przeglądy osobiste – pod 📓 Dziennikiem (plugin `ja`) | `3f8f5982-09e7-815e-8b03-eacaa74db190` | – |
 | Zasady asystenta, wersja harnessu | Asystent AI – harness budowy | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
