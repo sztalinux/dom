@@ -4,6 +4,21 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.1.0] – 2026-10-15
+
+- `przeglad-dnia`, tryb wieczorny: budowa i sprawy osobiste mają osobne przeglądy – osobisty w nowej stronie „📆 Przeglądy
+  dzienne” pod Dziennikiem (codziennie, bez treści emocji), budowa w „📆 Przeglądy dzienne – budowa” na DOM (pisze `budowa`,
+  sekcja „Wieczorem”); w osobistym jedna linia „🏗 Budowa” z odnośnikiem do wpisu budowy z tego dnia. Powód: intensywne dni
+  na budowie zasłaniały resztę.
+- `wpisy`: wpisy pisane jako osobne strony inwestor zakłada w „📝 Wpisy” (podstrona Dziennika) – jej podstrony to nowe wpisy;
+  tryb szybki czyta Dziennik i „Wpisy”. Pola „Gdzie” / „Jak zapisać” w bazie Obszary są nadrzędne także dla obszarów
+  obsługiwanych przez skille (konfiguracja z Notion bez zmian harnessu).
+
+## dom-budowa [2.1.0] – 2026-10-15
+
+- `budowa`, sekcja „Wieczorem”: zamiast samego odczytu pisze **przegląd dnia budowy** (dziś, decyzje czekające, jutro) do
+  „📆 Przeglądy dzienne – budowa” (strona wróciła na DOM) i zwraca link do przeglądu osobistego; ręcznie „przegląd dnia budowy”.
+
 ## ja [1.0.0] – 2026-10-15
 
 POM-8: jeden Dziennik w Notion na wszystko + drugi plugin. Repo przemianowane na `sztalinux/notion-plugin` (marketplace

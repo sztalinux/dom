@@ -61,7 +61,7 @@ claude.ai (telefon, czat, Cowork) ◄── pluginy ja + dom-budowa ─┘   (ka
 | `zadania` | „muszę…”, „zrobiłem X”, „co mam jutro” | wspólna TASKS z polem Obszar; zmiana statusu z Dziennika |
 | `dziecko` | obserwacja, „porozmawiać z nią o…”, prezent, zalecenie | strona dziecka w sekcjach |
 | `suple` | „kończy się…”, „kupiłem…”, przerwa | baza Suple: Buy, Status, Last break |
-| `przeglad-dnia` | co 1–2 h (tryb szybki) i wieczorem (zaplanowane) / „przegląd dnia” | szybki: nowe wpisy na bieżąco, pusto = koniec bez zapisów; wieczorny: podsumowanie dnia i plan na jutro (Przeglądy dzienne), analiza pomysłów |
+| `przeglad-dnia` | co 1–2 h (tryb szybki) i wieczorem (zaplanowane) / „przegląd dnia” | szybki: nowe wpisy na bieżąco, pusto = koniec bez zapisów; wieczorny: podsumowanie dnia i plan na jutro – osobiste pod Dziennikiem, budowa osobno na DOM (z odnośnikiem), analiza pomysłów |
 | `rozwoj-harnessu` | „zapamiętaj na przyszłość”, nowa procedura, „mam pomysł…”, „zrób POM-n” | skrzynka w Notion → wdrożenie do repo; pomysły → analiza → wdrożenie na polecenie |
 
 **Plugin `dom-budowa`**

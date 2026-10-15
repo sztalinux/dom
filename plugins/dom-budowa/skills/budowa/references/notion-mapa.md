@@ -21,7 +21,7 @@ DOM
 │  ├─ 📓 Dziennik → Dziennik budowy (baza): co się działo na budowie danego dnia
 │  ├─ 📚 Wiedza → strona Baza wiedzy (Tematy, Informacje, Rozmowy i źródła, Rejestr sprzeczności)
 │  ├─ 👷 Wykonawcy → „Wybór wykonawcy – stan zero” (rundy, zakres, wagi) + baza Porównanie wykonawców; baza Umowy i gwarancje
-│  └─ 🗂 Więcej → Przeglądy tygodniowe, Kontakty – kluczowe role (pełna lista w Excelu), zdjęcia i linki, Archiwum – stare notatki
+│  └─ 🗂 Więcej → Przeglądy dzienne – budowa (wzmianka; strona na dole DOM), Przeglądy tygodniowe, Kontakty – kluczowe role (pełna lista w Excelu), zdjęcia i linki, Archiwum – stare notatki
 ├─ 💡 Pomysły na rozwój (toggle) → baza Pomysły na rozwój (widok „💡 Tablica”): pomysły inwestora na harness i setup + analizy
 └─ 🤖 Dla asystenta (toggle) → 📑 Przewodnik po dokumentach i Notion, Asystent AI – harness (wersja + skrzynka
       Zmiany do harnessu), nagłówek „📐 Dane projektu (ściąga)” – JEDYNE źródło ściągi
@@ -53,7 +53,7 @@ DOM
 | Przepusty, rury, trasy instalacji | Plan przepustów i tras instalacji | `3f4f5982-09e7-81fd-a382-dd14ab860ca2` | – |
 | Kolejność prac, co ustalić przed etapem | Etapy budowy – przewodnik | `3f3f5982-09e7-8161-b30e-fdcf2284554b` | – |
 | Ostatni przegląd tygodnia | Przeglądy tygodniowe | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` | – |
-| Przegląd dnia (dziś / jutro, „rozkminki”; ręczne przebiegi z dopiskiem „(ręczne)”) | 📆 Przeglądy dzienne (podstrona 📓 Dziennika) | `3f8f5982-09e7-815e-8b03-eacaa74db190` | – |
+| Przegląd dnia budowy (dziś / jutro, „rozkminki”; ręczne przebiegi z dopiskiem „(ręczne)”) | 📆 Przeglądy dzienne – budowa (strona na dole DOM, wzmianka w zakładce Więcej); przeglądy osobiste – pod 📓 Dziennikiem (plugin `ja`) | `3f8f5982-09e7-815e-8b03-eacaa74db190` | – |
 | Zasady asystenta, wersja harnessu | Asystent AI – harness budowy | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
 | Zgłoszone poprawki harnessu | Zmiany do harnessu | `collection://e217448a-60ec-4af6-8584-8f368315109c` | Status, Procedura, Rodzaj |
 | Pomysły na rozwój harnessu i setupu (do analizy, nie wchodzą same) | DOM → „💡 Pomysły na rozwój” → „💡 Tablica” | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`, `view://3f7f5982-09e7-81f6-97bf-000cb7996ef0` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie; analiza w treści strony |

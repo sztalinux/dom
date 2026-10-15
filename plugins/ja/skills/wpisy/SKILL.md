@@ -25,11 +25,14 @@ jeszcze nie widział):
 			🤖 13.10 wieczór: dziennik – przetworzono 3 (emocje 1, zadania 2), … (pełna linia)
 			- ~~wpis~~ → Wpisy emocji: <link>
 	### 🧭 Dla asystenta {toggle}  ← baza Obszary; nie ruszaj
-	📆 Przeglądy dzienne (podstrona) ← nie jest wpisem
+	📝 Wpisy (podstrona) ← tu inwestor zakłada wpisy jako osobne strony; jej podstrony = nowe wpisy
+	🗃 Przetworzone podstrony, 📆 Przeglądy dzienne (podstrony) ← nie są wpisami
 ```
 
-**Nowy wpis** = każdy blok pierwszego poziomu (akapit, punkt) **albo podstrona** (tytuł + treść = wpis), z wyjątkiem
-„Jak używać”, pustych linii, trzech zwijanych nagłówków i podstron „📆 Przeglądy dzienne” i „🗃 Przetworzone podstrony”.
+**Nowy wpis** = każdy blok pierwszego poziomu (akapit, punkt), **każda podstrona strony „📝 Wpisy”**
+(`3faf5982-09e7-80b2-9b33-c48745d67a4f`; tytuł + treść = wpis) albo podstrona Dziennika założona poza „Wpisami”, z wyjątkiem
+„Jak używać”, pustych linii, trzech zwijanych nagłówków i stałych podstron „📝 Wpisy”, „📆 Przeglądy dzienne”
+i „🗃 Przetworzone podstrony”.
 **Podstrony nie usuwaj i nie wycinaj znacznikiem strony z treści** (to by ją skasowało) – po przetworzeniu przenieś ją
 narzędziem przenoszenia stron pod „🗃 Przetworzone podstrony” (`3faf5982-09e7-8115-908f-f764d3133d6f`), a w śladzie dnia
 daj do niej wzmiankę. Jeden blok może zawierać kilka spraw – rozłóż je osobno. Nie zmieniaj treści
@@ -37,7 +40,7 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
 
 ## Procedura
 
-1. **Pobierz** stronę Dziennik: nowe wpisy oraz wpisy z „❓”, pod których ostatnim pytaniem inwestor coś dopisał (albo
+1. **Pobierz** stronę Dziennik i stronę „📝 Wpisy” (jej podstrony): nowe wpisy oraz wpisy z „❓”, pod których ostatnim pytaniem inwestor coś dopisał (albo
    poprawił wpis) – te oceń ponownie. Wpisy w „❓” bez odpowiedzi pomiń. Brak obu → „Dziennik pusty” (+ liczba czekających w „❓”).
 2. **Pobierz Obszary** – zapisany widok „🤖 Aktywne (dla asystenta)” (`view://3faf5982-09e7-817b-a060-000c05f26c6a`, tryb view:
    Aktywny = tak, sort Kolejność; baza `collection://253b7564-00ac-45b2-a3f4-956275e3a7e0`).
@@ -59,6 +62,8 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
 5. **Jednoznaczny → wykonaj obszar:**
    - Procedura = nazwa skilla (`budowa`, `emocje`, `zadania`, `dziecko`, `suple`, `rozwoj-harnessu`) → wczytaj ten skill
      i wykonaj jego kroki dla wpisu (łącznie z duplikatami i polami). Dla `budowa` – sekcja „Luźny wpis z Dziennika”.
+     Pola „Gdzie” i „Jak zapisać” z wiersza to **ustawienia inwestora nadrzędne wobec skilla** (np. inna sekcja, dodatkowe
+     pole, inny format) – stosuj je, jeśli są czymś więcej niż odesłaniem do skilla.
    - Procedura = `ogólna` → zapisz według „Gdzie” i „Jak zapisać” z wiersza; najpierw szukaj duplikatu (2–3 słowa).
 6. **Zamknij wpis:** przenieś go (z dialogiem) do „Przetworzone”, do **zwijanego bloku dzisiejszego dnia** (`<details>`,
    tytuł „📅 <dd.mm> <dzień> · <skrót linii 🤖>”; brak – utwórz na górze), jako `~~wpis~~ → <gdzie>: <link>`

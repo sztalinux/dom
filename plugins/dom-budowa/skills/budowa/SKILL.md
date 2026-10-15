@@ -37,7 +37,8 @@ Utrzymuje ją Claude Code (procedura `dokumenty`, sekcja C) – zawsze aktualna,
 | pyta o projekt, rysunek, umowę, normę, technologię, „czy to dobrze” | `analiza-techniczna` |
 | wkleja transkrypcję filmu/artykuł; relacjonuje rozmowę („dzwoniłem do konstruktora…”); odpowiada „SP-n: …” | `wiedza` |
 | pyta „co nowego”, „co czeka na mnie”, „podsumuj tydzień” | `przeglad-tygodnia` |
-| „przegląd dnia”, wieczorne zaplanowane zadanie | `przeglad-dnia` (plugin `ja`); część budowlana – sekcja „Wieczorem” niżej |
+| „przegląd dnia”, wieczorne zaplanowane zadanie | `przeglad-dnia` (plugin `ja`); przegląd dnia budowy – sekcja „Wieczorem” niżej |
+| „przegląd dnia budowy”, „co dziś na budowie i co jutro” | sekcja „Wieczorem” niżej |
 | dostał nowe pliki od projektanta/wykonawcy, pyta o dokument, „co wgrać do claude.ai”, „wgrałem” | `dokumenty` |
 | „zaczynamy etap”, „jutro betonowanie – co sprawdzić”, „ekipa skończyła”, odbiór, usterki | `etap` |
 | relacjonuje dzień na budowie, wysyła zdjęcia, podaje swoje godziny, „ekipa chce dopłatę za…” | `dziennik` |
@@ -71,12 +72,22 @@ tutaj (mechanika strony – strefy, „❓”, „Przetworzone” – jest w `wp
    | oferta, wycena | `oferta` | |
    | „dostałem plik” | `dokumenty` | gdzie indziej niż Claude Code – przypomnienie, żeby wrzucić do `_Przychodzące/` |
 
-## Wieczorem (część budowlana przeglądu dnia)
+## Wieczorem (przegląd dnia budowy)
 
-Skill `przeglad-dnia` (plugin `ja`) wywołuje tę sekcję w kroku „Na jutro”. Tylko odczyt:
-kroki Harmonogramu startujące jutro (krok „bez odwrotu” → czy jest zadanie bramki, procedura `etap`), dostawy jutro,
-Zamówienia z „Zamówić do” = jutro lub po terminie, „czekam na” (TASKS WAITING, Obszar Dom lub puste) z terminem jutro albo
-po terminie. Zwróć max 3 najważniejsze punkty „<sprawa – kto – kiedy>”; nic nie ma → nic.
+Skill `przeglad-dnia` (plugin `ja`) wywołuje tę sekcję w trybie wieczornym; ręcznie: „przegląd dnia budowy”. Budowa ma
+własny przegląd, żeby nie zasłaniała spraw osobistych.
+
+1. **Dziś** (odczyt): wpisy o budowie przetworzone dziś (blok dnia w „Przetworzone” w Dzienniku), Dziennik budowy z dzisiejszą
+   datą, Notatnik i TASKS (Obszar Dom/puste) zamknięte lub dodane dziś, nowe decyzje czekające na inwestora (❓ o budowie, SP).
+2. **Jutro** (odczyt): kroki Harmonogramu startujące jutro (krok „bez odwrotu” → czy jest zadanie bramki, procedura `etap`),
+   dostawy jutro, Zamówienia z „Zamówić do” = jutro lub po terminie, TASKS Dom z When = jutro, „czekam na” (WAITING) z terminem
+   jutro albo po terminie.
+3. **Wpis w „📆 Przeglądy dzienne – budowa”** (`3f8f5982-09e7-815e-8b03-eacaa74db190`, strona na DOM) – tylko gdy dziś albo
+   jutro coś jest: zwijany nagłówek „Przegląd dnia budowy – <dzień tygodnia> <data>” na górze strony (najnowszy pierwszy),
+   w środku **Dziś**, **Decyzje i pytania czekające**, **Jutro – plan** (po terminie na górze), opcjonalnie **Rozkminka**
+   (gdy inwestor o nią prosił we wpisie, np. lista pytań na spotkanie). Ręczny przebieg – osobny wpis z dopiskiem „(ręczne)”.
+4. **Zwróć** do przeglądu dnia: wzmiankę (link) do tego wpisu, jedną linię skrótu („3 sprawy dziś, jutro: geodeta 8:00”)
+   i max 1 najważniejszy punkt jutra. Nic nie ma → „bez zmian”, bez wpisu.
 
 ## Zasady pracy (obowiązują we wszystkich procedurach)
 

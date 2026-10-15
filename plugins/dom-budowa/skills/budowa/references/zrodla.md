@@ -43,7 +43,7 @@ Pełna mapa z perspektywy „czego szukasz” (widoki, pola, słowniki): `notion
 | Tematy / Informacje / Rozmowy i źródła / Rejestr sprzeczności | `wiedza/references/notion-wiedza.md` |
 | Przeglądy tygodniowe (strona) | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` |
 | Asystent AI – harness (wersje obu pluginów, skrzynka) | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` |
-| 📓 Dziennik (strona wpisów) / 📆 Przeglądy dzienne | `3f8f5982-09e7-80c8-a154-c59aeb844e8f` / `3f8f5982-09e7-815e-8b03-eacaa74db190` |
+| 📓 Dziennik (strona wpisów) / 📆 Przeglądy dzienne – budowa (na DOM) | `3f8f5982-09e7-80c8-a154-c59aeb844e8f` / `3f8f5982-09e7-815e-8b03-eacaa74db190` |
 | Zmiany do harnessu (data source) | `collection://e217448a-60ec-4af6-8584-8f368315109c` |
 | Pomysły na rozwój (data source) | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` |
 | Dziennik budowy (data source) | `collection://cc113d57-3eaa-4f52-80f6-e4b39a4b4c92` |
