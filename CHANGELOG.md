@@ -13,8 +13,10 @@ z dwoma pluginami).
   „🧭 Obszary Dziennika”, nowy obszar = wiersz w bazie, nie zmiana harnessu; podstrony też są wpisami), `emocje` (Wpisy emocji,
   Dziennik produktywności, podsumowania na prośbę), `zadania` (wspólna TASKS z polem Obszar, zmiana statusu po „zrobiłem X”),
   `dziecko` (strona dziecka w sekcjach), `suple` (Buy / Status / Last break).
-- Przeniesione z `dom-budowa`: `przeglad-dnia` (uogólniony: Dziennik, pomysły, jutro ze wszystkich obszarów, część budowlana
-  z `budowa` → „Wieczorem”; zaplanowane zadanie poza projektem) i `rozwoj-harnessu` (dwa pluginy, wersje per plugin,
+- Przeniesione z `dom-budowa`: `przeglad-dnia` – dwa tryby: szybki (co 1–2 h, nowe wpisy na bieżąco, pusty Dziennik = koniec
+  bez zapisów, pomija wpisy świeższe niż 15 min) i wieczorny (ostatni przebieg, podsumowanie dnia i plan na jutro ze wszystkich
+  obszarów w Przeglądach dziennych codziennie, część budowlana z `budowa` → „Wieczorem”, analiza pomysłów); oba zadania
+  poza projektem i `rozwoj-harnessu` (dwa pluginy, wersje per plugin,
   pole Plugin w skrzynce, changelog z nagłówkiem pluginu).
 - HZ-3 `rozwoj-harnessu`, `ja`: wpisy w skrzynce z pustym Statusem (dodane ręcznie) są do wdrożenia – asystent najpierw
   uzupełnia ich pola; puste pola pomysłów uzupełnia przy analizie.

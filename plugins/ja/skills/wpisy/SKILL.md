@@ -73,8 +73,9 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
 
 ## Bez inwestora
 
-Codziennie wieczorem Dziennik przerabia zaplanowany **przegląd dnia** (`przeglad-dnia`) – bez pytań w rozmowie, z wyjątkami
-opisanymi tam.
+W ciągu dnia Dziennik przerabia zaplanowany **szybki przebieg** (co 1–2 h), a wieczorem **przegląd dnia** – oba w skillu
+`przeglad-dnia` (tryby A i B), bez pytań w rozmowie, z wyjątkami opisanymi tam. Kilka przebiegów dziennie dopisuje się
+do jednego bloku dnia w „Przetworzone”.
 
 ## Zasady
 

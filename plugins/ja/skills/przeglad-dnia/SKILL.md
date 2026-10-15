@@ -1,57 +1,78 @@
 ---
 name: przeglad-dnia
-description: Codzienny wieczorny przegląd bez inwestora (zaplanowane zadanie, np. 20:00 na claude.ai, poza projektem) – przerobienie Dziennika według obszarów bez pytań w rozmowie, analiza nowych pomysłów na rozwój, zapowiedź jutra ze wszystkich obszarów (zadania prywatne, dziecko, praca, budowa); wynik jako linia „🤖” w Dzienniku (zwijany blok dnia w „Przetworzone”) i wpis w „📆 Przeglądy dzienne”. Używaj, gdy uruchamia go zaplanowane zadanie albo użytkownik mówi „przegląd dnia”, „wieczorny przegląd”, „ogarnij dzisiejsze”, „zrób codzienny przegląd”.
+description: Zaplanowane przebiegi bez inwestora (claude.ai, poza projektem) w dwóch trybach – SZYBKI (co godzinę lub co 2 godziny w ciągu dnia) rozkłada nowe wpisy z „📓 Dziennika” na bieżąco i kończy się od razu, gdy nic nie ma; WIECZORNY robi podsumowanie dnia i plan na jutro ze wszystkich obszarów (zadania prywatne, dziecko, praca, budowa) we wpisie „📆 Przeglądy dzienne” i linii „🤖” w Dzienniku, plus analizę nowych pomysłów. Używaj, gdy uruchamia go zaplanowane zadanie („Dziennik – szybki przebieg”, „Przegląd dnia”) albo użytkownik mówi „przegląd dnia”, „podsumuj dzień”, „plan na jutro”, „wieczorny przegląd”, „ogarnij dzisiejsze”.
 ---
 
-# Przegląd dnia
+# Przegląd dnia – tryb szybki i wieczorny
 
-Cel: co wieczór, bez inwestora, porządek w tym, co wpadło w ciągu dnia – żeby rano zobaczył krótkie podsumowanie: co zrobione,
-co czeka na niego, co jutro. Tylko to, co nowe od wczoraj. Szerokie podsumowania budowy i porządki – `przeglad-tygodnia`
-(plugin dom-budowa).
+Dwa zaplanowane zadania na claude.ai, oba **poza projektem** (pliki projektu „Dom” nie doklejają się do przebiegu):
 
-## Zasady trybu bez inwestora (wszystkie kroki)
+| Zadanie | Kiedy | Polecenie | Co robi |
+|---|---|---|---|
+| Dziennik – szybki przebieg | co 1–2 h w ciągu dnia (np. 8–22) | „Dziennik – szybki przebieg (skill przeglad-dnia z pluginu ja, tryb szybki)” | rozkłada nowe wpisy; pusto → koniec bez zapisów |
+| Przegląd dnia | raz wieczorem (np. 21:30) | „Przegląd dnia (skill przeglad-dnia z pluginu ja, tryb wieczorny)” | ostatni szybki przebieg + podsumowanie dnia + plan na jutro + pomysły |
 
-- Nie ma kogo zapytać: niejasne → pytanie w Notion, tam gdzie inwestor je zobaczy (Dziennik „❓”, strona pomysłu).
-- Nie zapisuj niczego, co jest decyzją inwestora, rozstrzygnięciem sprzeczności (SP), zmianą w Excelu ani zmianą terminów
-  kroków Harmonogramu budowy – zostaw to z pytaniem i propozycją.
+Ręcznie w rozmowie: „przerób dziennik” = tryb szybki, „przegląd dnia” / „podsumuj dzień” = tryb wieczorny.
+
+## Zasady trybu bez inwestora (oba tryby)
+
+- Nie ma kogo zapytać: niejasne → pytanie w Notion (Dziennik „❓”, strona pomysłu), nie tylko w odpowiedzi.
+- Nie zapisuj decyzji inwestora, rozstrzygnięć sprzeczności (SP), zmian w Excelu ani zmian terminów kroków Harmonogramu
+  budowy – zostaw w „❓” z pytaniem i propozycją. Nowy obszar Dziennika tylko proponuj w „❓”, nie dodawaj sam.
 - Bez planu do akceptacji; zapisy wsadowo (`ja`, zasada 2); odczyt baz trybem rows/view, nie SQL.
-- Na starcie pobierz stronę „📑 Przewodnik po dokumentach i Notion” (`3f6f5982-09e7-81f5-bade-ec877d8d936a`) – aktualne ID baz.
-- Błąd zapisu (brak uprawnień, limit) → nie ponawiaj w kółko; jeśli się da, odnotuj go w linii „🤖” („nie zapisano: …”) i zakończ.
+- Błąd zapisu (brak uprawnień, limit) → nie ponawiaj w kółko; odnotuj „nie zapisano: …” i zakończ.
+- W odpowiedzi (log zadania) bez treści emocji i notatek o dziecku – liczby i linki.
 
-## Kroki
+## A. Tryb szybki – ma być tani
 
-1. **Dziennik** – procedura `wpisy`, kroki 1–7, z wyjątkami:
-   - przetwarzaj tylko wpisy jednoznaczne; niejasne → „❓” z pytaniem;
-   - wpis będący decyzją budowlaną, rozstrzygnięciem SP albo zmianą w Excelu → „❓” z pytaniem „potwierdź, że to decyzja: …”;
-   - nowy termin kroku Harmonogramu → „❓” z propozycją zmiany; zadania i „czekam na” (TASKS) zapisuj normalnie;
-   - nowy obszar (krok 4 `wpisy`) tylko proponuj w „❓”, nie dodawaj sam;
-   - wpisy w „❓”, pod którymi inwestor odpowiedział – oceń ponownie.
-2. **Pomysły na rozwój** – `rozwoj-harnessu`, sekcja C: Status Nowy lub pusty → analiza (max 3 na wieczór, najstarsze
-   pierwsze); „Pytania do mnie” z odpowiedzią inwestora → analizuj dalej. Niczego nie wdrażaj.
-3. **Na jutro** (tylko odczyt):
-   - TASKS, widok „📅 Jutro – wszystko” (wszystkie obszary) oraz zadania po terminie (When < dziś, niezakończone);
-   - część budowlana: skill `budowa` (plugin dom-budowa), sekcja „Wieczorem” – kroki Harmonogramu, bramki, dostawy, zamówienia.
-   Nic nie ma → pomiń.
-4. **Linia „🤖”** – w tej samej, jednej edycji strony Dziennik co krok 1: na górze zwijanego bloku dzisiejszego dnia
-   w „Przetworzone” (tytuł bloku „📅 15.10 czw · 🤖 <skrót tej linii>”). Pierwszy poziom Dziennika zostaje pusty:
+1. **Jeden odczyt:** pobierz tylko stronę Dziennik (`3f8f5982-09e7-80c8-a154-c59aeb844e8f`). Nie pobieraj jeszcze Obszarów,
+   przewodnika ani baz.
+2. **Nic nowego → koniec.** Brak bloków/podstron na pierwszym poziomie (definicja w `wpisy`) i brak odpowiedzi inwestora pod
+   pytaniami w „❓” → odpowiedz jedną linią „Dziennik: nic nowego (<godzina>)” i zakończ. **Zero zapisów** – nie dopisuj linii
+   „🤖”, nie zmieniaj strony.
+3. **Inwestor może jeszcze pisać:** strona edytowana mniej niż 15 minut temu (czas ostatniej edycji strony), a najnowszy wpis
+   nie ma jeszcze kropki, wygląda na urwany albo jest pusty → „Dziennik: pomijam, świeże wpisy (<godzina>)” i zakończ.
+   Następny przebieg je weźmie.
+4. **Są wpisy:** procedura `wpisy`, kroki 2–7, bez pytań w rozmowie (wyjątki z zasad wyżej). Linia „🤖” w bloku dnia –
+   krótka, z godziną: `🤖 11:00: przetworzono 2 (zadania 1, emocje 1), czeka na Ciebie 1`. Kolejne przebiegi tego dnia
+   dopisują swoje linie pod spodem w tym samym bloku; tytuł bloku pokazuje sumę dnia.
+5. Bez analizy pomysłów, bez „jutra”, bez wpisu w Przeglądach dziennych – to robi wieczór.
+
+## B. Tryb wieczorny – podsumowanie i plan
+
+1. **Ostatni szybki przebieg** – jak A.1–A.4, ale bez reguły 15 minut (wieczorem przetwórz wszystko, co jednoznaczne).
+2. **Pomysły na rozwój** – `rozwoj-harnessu`, sekcja C: Status Nowy lub pusty → analiza (max 3, najstarsze pierwsze);
+   „Pytania do mnie” z odpowiedzią → analizuj dalej. Niczego nie wdrażaj.
+3. **Dziś** (tylko odczyt): blok dzisiejszego dnia w „Przetworzone” (co rozłożono, liczby per obszar), TASKS zamknięte dziś
+   (PLANNED DONE, ostatnia edycja dziś – wszystkie obszary), Dziennik budowy z dzisiejszą datą, liczba wpisów emocji z dziś
+   (bez treści), wpisy w „❓” czekające na inwestora.
+4. **Jutro** (tylko odczyt): TASKS „📅 Jutro – wszystko” i zadania po terminie (When < dziś, niezakończone); część budowlana –
+   skill `budowa` (plugin dom-budowa), sekcja „Wieczorem” (Harmonogram, bramki, dostawy, zamówienia). Na stronie przewodnika
+   (`3f6f5982-09e7-81f5-bade-ec877d8d936a`) sprawdź ID, jeśli któryś odczyt się nie powiedzie.
+5. **Wpis w „📆 Przeglądy dzienne”** (`3f8f5982-09e7-815e-8b03-eacaa74db190`) – **codziennie**, także w spokojny dzień:
+   zwijany nagłówek „Przegląd dnia – <dzień tygodnia> <data>” na górze strony (najnowszy pierwszy), w środku:
    ```
-   🤖 15.10 wieczór: dziennik – przetworzono 4 (budowa 1, emocje 1, zadania 2), czeka na Ciebie 1 · pomysły – 1 · jutro: 3
-   	- jutro: <sprawa – kto – kiedy>      ← max 3 punkty zagnieżdżone, budowa i prywatne razem, najważniejsze pierwsze
+   **Dziś:** 3–6 punktów – co się wydarzyło i co zamknięte (budowa / prywatne / dziecko / praca)
+   **Czeka na Ciebie:** n pytań w ❓ (rozwiń w Dzienniku), decyzje budowy
+   **Jutro – plan:** lista wg godzin/priorytetu: zadania z terminem, kroki budowy, „przypomnij się <komu>”, po terminie na górze
+   **Rozkminka** (tylko gdy inwestor prosił we wpisie albo dzień przyniósł decyzję do przemyślenia): 2–5 zdań
    ```
-   Pusty dzień → „🤖 15.10 wieczór: nic nowego”. Punkty pod linią „🤖” to nie wpisy Dziennika.
-5. **Wpis w „📆 Przeglądy dzienne”** (`3f8f5982-09e7-815e-8b03-eacaa74db190`, podstrona Dziennika), gdy przebieg ma tam coś
-   do dopisania (dziś / jutro, „rozkminka”, o którą inwestor prosi we wpisie): zwijany nagłówek „Przegląd dnia – <dzień
-   tygodnia> <data>” na górze strony (najnowszy pierwszy), sekcje „Dziś” i „Jutro” z podziałem Budowa / Prywatne.
-   **Ręczny przebieg** (inwestor prosi w rozmowie) = **osobny wpis** z tą samą datą i dopiskiem „(ręczne)”, kolejne
-   „(ręczne 2)”… Nigdy nie nadpisuj wcześniejszego wpisu – sprostowanie to jedna linia kursywą na jego górze z odesłaniem.
-6. **Odpowiedź** (log zadania): treść linii „🤖” + lista zapisów (gdzie, link) i błędów – bez treści emocji i notatek o dziecku.
+   **Ręczny przebieg** (prośba w rozmowie) = osobny wpis z tą samą datą i dopiskiem „(ręczne)”, kolejne „(ręczne 2)”…
+   Nigdy nie nadpisuj wcześniejszego wpisu – sprostowanie to jedna linia kursywą na jego górze z odesłaniem.
+6. **Linia „🤖”** – na górze dzisiejszego bloku w „Przetworzone”, w tej samej edycji Dziennika co krok 1:
+   ```
+   🤖 15.10 wieczór: dziś przetworzono 6 · czeka na Ciebie 1 · pomysły – 1 · jutro: 3 → Przeglądy dzienne
+   	- jutro: <sprawa – kto – kiedy>      ← max 3 najważniejsze punkty, budowa i prywatne razem
+   ```
+7. **Odpowiedź** (log zadania): linia „🤖” + lista zapisów (gdzie, link) i błędów.
+
+## Koszt i częstotliwość
+
+Każdy przebieg to osobna sesja – nawet pusty zużywa limit konta na start (instrukcje, opisy skilli, narzędzia Notion) i jeden
+odczyt Dziennika. Dlatego tryb szybki ma wyjście w kroku A.2 bez dalszych odczytów i zapisów, a strona Dziennik ma zostać
+krótka (przegląd tygodnia czyści „Przetworzone” starsze niż 14 dni). Zacznij od co 2 godzin; częściej – gdy limit pozwala.
 
 ## Rozszerzanie
 
-Nowa rzecz codzienna (np. poranny brief, kontrola suplementów do kupienia) = nowy krok przed „Linią 🤖” i jeden licznik w linii.
-Warunek: tani odczyt, nic do decyzji inwestora. Nowy obszar Dziennika nie wymaga zmian tutaj – obsługuje go `wpisy`.
-
-## Uruchomienie
-
-Zaplanowane zadanie na claude.ai **poza projektem** (żeby nie doklejać plików projektu „Dom” do każdego przebiegu), codziennie
-wieczorem, polecenie: „Przegląd dnia (skill przeglad-dnia z pluginu ja)”. Ręcznie w dowolnej rozmowie: „zrób przegląd dnia”.
+Nowa rzecz codzienna (np. poranny brief, suplementy do kupienia) = nowy krok trybu wieczornego przed wpisem w Przeglądach
+i jeden licznik w linii „🤖”. Tryb szybki zostaje minimalny. Nowy obszar Dziennika nie wymaga zmian tutaj – obsługuje go `wpisy`.

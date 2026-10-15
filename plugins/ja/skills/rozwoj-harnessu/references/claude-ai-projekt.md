@@ -6,7 +6,8 @@
 |---|---|
 | Pluginy `dom-budowa` i `ja` z marketplace `sztalinux/notion-plugin` | działają w **każdej** rozmowie – skille wczytują się z opisu (`description`), bez projektu i bez „/” |
 | Projekt „Dom” | tylko **kontener dokumentów budowy** (wiedza projektu) – rozmowy, które potrzebują projektu architektonicznego, opinii, umów |
-| Zaplanowane zadanie „Przegląd dnia” | **poza projektem** (pliki projektu nie doklejają się do każdego przebiegu); polecenie: „Przegląd dnia (skill przeglad-dnia z pluginu ja)”, codziennie wieczorem |
+| Zaplanowane zadanie „Dziennik – szybki przebieg” | **poza projektem**, co 1–2 h w ciągu dnia (np. 8–22); polecenie: „Dziennik – szybki przebieg (skill przeglad-dnia z pluginu ja, tryb szybki)”; pusty Dziennik = koniec bez zapisów |
+| Zaplanowane zadanie „Przegląd dnia” | **poza projektem** (pliki projektu nie doklejają się do każdego przebiegu), raz wieczorem; polecenie: „Przegląd dnia (skill przeglad-dnia z pluginu ja, tryb wieczorny)” – podsumowanie dnia i plan na jutro |
 | Preferencje konta (opcjonalnie) | jedna linia: „Gdy rozmowa dotyczy mojego dnia, zadań, emocji, dziecka, suplementów albo budowy, wczytaj skill `ja`” – pas bezpieczeństwa, gdy opis skilla nie zadziała |
 
 Sprawy budowy poza projektem też działają (skille i Notion są wszędzie) – brakuje tylko plików z wiedzy projektu; procedura
@@ -41,8 +42,8 @@ wersją:
    i `dist/ja.plugin`.
 
 **Przejście z repo `sztalinux/dom` (jednorazowo, 2.0.0):** usuń plugin „Dom budowa” i marketplace „dom”, dodaj marketplace
-`sztalinux/notion-plugin`, zainstaluj oba pluginy; zaplanowane zadanie „Przegląd dnia” przenieś z projektu „Dom” poza projekt
-(nowe polecenie wyżej); w projekcie „Dom” wklej na nowo instrukcje z `dist/claude-ai-projekt/instrukcje.md`.
+`sztalinux/notion-plugin`, zainstaluj oba pluginy; zaplanowane zadanie „Przegląd dnia” usuń z projektu „Dom” i utwórz dwa
+nowe poza projektem (tabela wyżej); w projekcie „Dom” wklej na nowo instrukcje z `dist/claude-ai-projekt/instrukcje.md`.
 
 ## Wiedza projektu a kontekst
 
