@@ -38,7 +38,7 @@ Bazy (ID i pola: `ja/references/notion-mapa.md`): **Wpisy emocji**, **Dni (dzien
 
 ## C. Podsumowanie (tylko na prośbę)
 
-„Podsumuj emocje z dnia / tygodnia” → odczytaj wiersze z okresu (rows, filtr Kiedy), pokaż w rozmowie: najczęstsze emocje,
+„Podsumuj emocje z dnia / tygodnia” → odczytaj wiersze z okresu (widok z filtrem Kiedy – `ja`, zasada 3), pokaż w rozmowie: najczęstsze emocje,
 średnia intensywność, powtarzające się triggery i potrzeby (bez ocen i diagnoz). Zapis do bazy **Dni (dziennik emocji)**
 tylko gdy inwestor poprosi: Dzień = „Podsumowanie – <data>”, Data, treść podsumowania w treści strony.
 

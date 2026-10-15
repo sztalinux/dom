@@ -18,6 +18,10 @@ z dwoma pluginami).
   obszarów w Przeglądach dziennych codziennie, część budowlana z `budowa` → „Wieczorem”, analiza pomysłów); oba zadania
   poza projektem i `rozwoj-harnessu` (dwa pluginy, wersje per plugin,
   pole Plugin w skrzynce, changelog z nagłówkiem pluginu).
+- Odczyt baz: limit Notion obejmuje też tryb rows (wyczerpany 15.10) – procedury czytają przez zapisane widoki (tryb view, bez
+  limitu) i wyszukiwarkę z parametrem bazy; Obszary przez widok „🤖 Aktywne (dla asystenta)” (także `budowa`, zasada 6).
+- Wpisy-podstrony w Dzienniku po przetworzeniu przenoszone pod „🗃 Przetworzone podstrony” (nie wycinane z treści – to by je
+  skasowało); data podstrony bez daty w treści = data jej ostatniej edycji. Sprawdzone na pierwszym przebiegu 15.10.
 - HZ-3 `rozwoj-harnessu`, `ja`: wpisy w skrzynce z pustym Statusem (dodane ręcznie) są do wdrożenia – asystent najpierw
   uzupełnia ich pola; puste pola pomysłów uzupełnia przy analizie.
 - Instrukcje projektu „Dom” zmienione (skrzynka opisana w `ja`) – wklej na nowo `dist/claude-ai-projekt/instrukcje.md`.

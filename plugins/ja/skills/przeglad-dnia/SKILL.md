@@ -19,7 +19,7 @@ Ręcznie w rozmowie: „przerób dziennik” = tryb szybki, „przegląd dnia”
 - Nie ma kogo zapytać: niejasne → pytanie w Notion (Dziennik „❓”, strona pomysłu), nie tylko w odpowiedzi.
 - Nie zapisuj decyzji inwestora, rozstrzygnięć sprzeczności (SP), zmian w Excelu ani zmian terminów kroków Harmonogramu
   budowy – zostaw w „❓” z pytaniem i propozycją. Nowy obszar Dziennika tylko proponuj w „❓”, nie dodawaj sam.
-- Bez planu do akceptacji; zapisy wsadowo (`ja`, zasada 2); odczyt baz trybem rows/view, nie SQL.
+- Bez planu do akceptacji; zapisy wsadowo (`ja`, zasada 2); odczyt baz przez zapisane widoki i wyszukiwarkę (`ja`, zasada 3), nie SQL.
 - Błąd zapisu (brak uprawnień, limit) → nie ponawiaj w kółko; odnotuj „nie zapisano: …” i zakończ.
 - W odpowiedzi (log zadania) bez treści emocji i notatek o dziecku – liczby i linki.
 

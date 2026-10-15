@@ -12,7 +12,7 @@ dla wszystkich obszarów.
 
 ## A. Nowe zadanie
 
-1. Sprawdź duplikat: rows z filtrem PLANNED nie w grupie Complete i tytułem zawierającym 1–2 słowa kluczowe.
+1. Sprawdź duplikat: wyszukiwarka z parametrem bazy TASKS (1–2 słowa kluczowe), wśród niezakończonych.
    Jest → uzupełnij (termin, opis w treści), nie dubluj.
 2. Pola:
    | Pole | Wartość |
@@ -37,7 +37,7 @@ dla wszystkich obszarów.
 | „przesuwam na …”, „w przyszłym tygodniu” | zostaje, When = nowy termin |
 | „odpuszczam”, „nieaktualne” | ARCHIVED |
 
-1. Szukaj we **wszystkich obszarach** wśród niezakończonych (rows: filtr tekstu w Name, potem porównanie treści).
+1. Szukaj we **wszystkich obszarach** wśród niezakończonych (wyszukiwarka z parametrem bazy TASKS – słowa z wpisu, potem porównanie treści i statusu).
 2. Jedno trafienie → zmień status; w treści strony dopisz linię „<data>: <co się stało> (z Dziennika)”. Zadanie budowy
    (Obszar Dom/puste) z powiązanym krokiem Harmonogramu → status kroku zostaw procedurze `harmonogram` (przekaż jej sprawę).
 3. Brak trafienia → Dziennik „❓”: „Nie znalazłem zadania »…« – utworzyć jako zrobione (ślad) czy pominąć?”.

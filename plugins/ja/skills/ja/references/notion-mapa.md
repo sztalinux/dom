@@ -13,14 +13,16 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 ├─ ### ❓ Czeka na Twoją odpowiedź (toggle) – wpisy z pytaniem asystenta, odpowiedź pod pytaniem
 ├─ ### Przetworzone (toggle) – zwijany blok na każdy dzień: linia „🤖” + ślad „~~wpis~~ → gdzie”
 ├─ ### 🧭 Dla asystenta (toggle) – baza 🧭 Obszary Dziennika, wzmianka przewodnika
-└─ 📆 Przeglądy dzienne (podstrona)
+├─ 📆 Przeglądy dzienne (podstrona)
+└─ 🗃 Przetworzone podstrony (podstrona – archiwum wpisów pisanych jako podstrony)
 ```
 
 | Czego szukasz | Gdzie | ID | Najważniejsze pola |
 |---|---|---|---|
 | Nowe wpisy, pytania asystenta | 📓 Dziennik (schemat wyżej) | `3f8f5982-09e7-80c8-a154-c59aeb844e8f` | – (wolny tekst) |
-| Podział wpisów na obszary (dokąd co idzie) | 🧭 Obszary Dziennika | `collection://253b7564-00ac-45b2-a3f4-956275e3a7e0` | Obszar, Rozpoznawanie, Gdzie, Jak zapisać, Procedura, Aktywny, Kolejność, Przykład |
+| Podział wpisów na obszary (dokąd co idzie) | 🧭 Obszary Dziennika → widok „🤖 Aktywne (dla asystenta)” (tryb view – bez limitu) | `collection://253b7564-00ac-45b2-a3f4-956275e3a7e0`, `view://3faf5982-09e7-817b-a060-000c05f26c6a` | Obszar, Rozpoznawanie, Gdzie, Jak zapisać, Procedura, Aktywny, Kolejność, Przykład |
 | Przegląd dnia (dziś / jutro; ręczne przebiegi „(ręczne)”) | 📆 Przeglądy dzienne (pod Dziennikiem) | `3f8f5982-09e7-815e-8b03-eacaa74db190` | – |
+| Przetworzone wpisy-podstrony | 🗃 Przetworzone podstrony (pod Dziennikiem) | `3faf5982-09e7-8115-908f-f764d3133d6f` | – |
 | Wszystkie zadania (dom i prywatne) | TASKS (fizycznie na stronie DOM) | `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e` | Name, **Obszar** (Dom / Prywatne / Dziecko / Praca; puste = Dom), PLANNED, When, Priority, Kategoria, Kto, Desc |
 | Zadania prywatne / dziecka / jutro | TASKS → „🏠 Prywatne”, „👪 Dziecko”, „📅 Jutro – wszystko” | `view://3faf5982-09e7-81f9-9832-000c4e6b8e97`, `view://3faf5982-09e7-81aa-8e09-000c3fb8e29f`, `view://3faf5982-09e7-818a-9939-000cb6095c9c` | – |
 | Emocje (jeden wiersz = jedna emocja) | Dziennik emocji → Wpisy emocji | `collection://41556944-46fa-4155-ae95-5b74b983d7aa` | Wpis (nazwa emocji), Kiedy, Intensywność, Trigger / co się stało, Ciało, Myśl, Potrzeba, Reakcja, Emocja wtórna, Czynniki podatności |

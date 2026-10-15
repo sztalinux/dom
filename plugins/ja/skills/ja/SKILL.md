@@ -53,8 +53,9 @@ zapisuj wprost według pól „Gdzie” i „Jak zapisać” w bazie Obszary.
    jest nadrzędna. Jedna informacja ma jedno miejsce – zanim dodasz, szukaj istniejącego wpisu (2–3 słowa) i aktualizuj.
 2. **Zapisy wsadowe bez straty jakości:** najpierw wszystkie odczyty, potem jedno wywołanie na bazę i jedna edycja na stronę;
    przy więcej niż 2 zapisach jedna linia przed nimi: „Zapiszę: 1) … 2) … – N zatwierdzeń”. Nie skracaj treści, nie pomijaj pól.
-3. **Odczyt baz:** tryb rows z filtrem → zapisany widok → SQL tylko do zliczeń (wspólny limit SQL w planie Notion;
-   błąd „usage limit” → bez ponawiania, przejdź na rows/view).
+3. **Odczyt baz:** zapytania w trybach rows i SQL mają wspólny limit w planie Notion (bywa wyczerpany); tryb **view**
+   (zapisany widok) limitu nie ma. Kolejność: widok (brak pasującego → utwórz go z filtrem) → wyszukiwarka z parametrem bazy
+   (duplikaty, pojedyncze wiersze) → rows → SQL. Błąd „usage limit” → bez ponawiania, przejdź na widok/wyszukiwarkę.
 4. **Nie zgaduj:** niejasny wpis, brak daty przy terminie, nie wiadomo czego dotyczy → pytanie (w Dzienniku „❓”, w rozmowie
    wprost). Słowa względne („wczoraj”, „w piątek”) licz od daty we wpisie, nie od daty przetwarzania.
 5. **Prywatność:** treść emocji, notatki o dziecku i zdrowiu zostają w Notion; w odpowiedziach nie cytuj ich ponad potrzebę.

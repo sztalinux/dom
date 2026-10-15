@@ -28,23 +28,27 @@ jeszcze nie widział):
 	📆 Przeglądy dzienne (podstrona) ← nie jest wpisem
 ```
 
-**Nowy wpis** = każdy blok pierwszego poziomu (akapit, punkt) **albo podstrona** (tytuł + treść = wpis; podstronę po
-przetworzeniu przenieś do bloku dnia jako `<page>` – nie usuwaj), z wyjątkiem „Jak używać”, pustych linii, trzech zwijanych
-nagłówków i podstrony „Przeglądy dzienne”. Jeden blok może zawierać kilka spraw – rozłóż je osobno. Nie zmieniaj treści
+**Nowy wpis** = każdy blok pierwszego poziomu (akapit, punkt) **albo podstrona** (tytuł + treść = wpis), z wyjątkiem
+„Jak używać”, pustych linii, trzech zwijanych nagłówków i podstron „📆 Przeglądy dzienne” i „🗃 Przetworzone podstrony”.
+**Podstrony nie usuwaj i nie wycinaj znacznikiem strony z treści** (to by ją skasowało) – po przetworzeniu przenieś ją
+narzędziem przenoszenia stron pod „🗃 Przetworzone podstrony” (`3faf5982-09e7-8115-908f-f764d3133d6f`), a w śladzie dnia
+daj do niej wzmiankę. Jeden blok może zawierać kilka spraw – rozłóż je osobno. Nie zmieniaj treści
 wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
 
 ## Procedura
 
 1. **Pobierz** stronę Dziennik: nowe wpisy oraz wpisy z „❓”, pod których ostatnim pytaniem inwestor coś dopisał (albo
    poprawił wpis) – te oceń ponownie. Wpisy w „❓” bez odpowiedzi pomiń. Brak obu → „Dziennik pusty” (+ liczba czekających w „❓”).
-2. **Pobierz Obszary** (`collection://253b7564-00ac-45b2-a3f4-956275e3a7e0`, Aktywny = tak, tryb rows, sort Kolejność).
+2. **Pobierz Obszary** – zapisany widok „🤖 Aktywne (dla asystenta)” (`view://3faf5982-09e7-817b-a060-000c05f26c6a`, tryb view:
+   Aktywny = tak, sort Kolejność; baza `collection://253b7564-00ac-45b2-a3f4-956275e3a7e0`).
 3. **Dla każdego wpisu ustal** (razem z dialogiem pod nim):
    - **Obszar** – porównaj treść z „Rozpoznawanie” i „Przykład”. Jeden wpis może dotyczyć kilku obszarów (emocja + zadanie,
      budowa + emocja) – rozłóż na części. Przy remisie wygrywa niższa „Kolejność”.
    - **Czy jest jednoznaczny** – da się go zapisać jako samodzielne zdanie: co, kogo/czego dotyczy, kiedy. Pojedyncze słowa,
      skróty, zaimki bez kontekstu, „asdf” – **niejednoznaczne**.
    - **Data zdarzenia** – wzmianka daty we wpisie (`@today`) albo data tekstem; słowa względne licz od niej. Notion nie zapisuje,
-     kiedy dopisano pojedynczy punkt, więc data przetwarzania to nie data wpisu. Słowo względne bez daty przy terminie lub
+     kiedy dopisano pojedynczy punkt, więc data przetwarzania to nie data wpisu. Podstrona bez daty w treści → data jej
+     ostatniej edycji (z odczytu podstrony), z dopiskiem w śladzie. Słowo względne bez daty przy terminie lub
      zdarzeniu z budowy → zapytaj („czy »wczoraj« to 11.10?”); przy emocji bez daty – data przetwarzania z dopiskiem
      „(data przetworzenia)”.
 4. **Niejednoznaczny albo bez obszaru → nie przetwarzaj.** Przenieś do „❓” i dopisz pod nim „❓ asystent (data): …” z 1–3
@@ -57,11 +61,13 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
      i wykonaj jego kroki dla wpisu (łącznie z duplikatami i polami). Dla `budowa` – sekcja „Luźny wpis z Dziennika”.
    - Procedura = `ogólna` → zapisz według „Gdzie” i „Jak zapisać” z wiersza; najpierw szukaj duplikatu (2–3 słowa).
 6. **Zamknij wpis:** przenieś go (z dialogiem) do „Przetworzone”, do **zwijanego bloku dzisiejszego dnia** (`<details>`,
-   tytuł „📅 <dd.mm> <dzień> · <skrót linii 🤖>”; brak – utwórz na górze), jako `~~wpis~~ → <gdzie>: <link>`. Zdublowane
+   tytuł „📅 <dd.mm> <dzień> · <skrót linii 🤖>”; brak – utwórz na górze), jako `~~wpis~~ → <gdzie>: <link>`
+   (podstrona: `~~tytuł~~ (podstrona → <wzmianka>) → <gdzie>: <link>`, po przeniesieniu jej pod „🗃 Przetworzone podstrony”). Zdublowane
    / nieprzydatne / testowe → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
 7. **Zapisy wsadowo** (`ja`, zasada 2): odczyty, potem jedno wywołanie na bazę docelową, na końcu **jedna** edycja strony
-   Dziennik (przeniesienia do „❓”, do „Przetworzone”, linia „🤖”). Po niej **pierwszy poziom jest pusty** – poza „Jak używać”,
-   trzema nagłówkami, podstroną „Przeglądy dzienne” i 1–2 pustymi liniami do pisania. Linia „🤖” idzie na górę bloku dnia:
+   Dziennik (przeniesienia do „❓”, do „Przetworzone”, linia „🤖”) – podstrony przenosisz osobnym wywołaniem przed nią.
+   Po niej **pierwszy poziom jest pusty** – poza „Jak używać”, trzema nagłówkami, dwiema stałymi podstronami i 1–2 pustymi
+   liniami do pisania. Linia „🤖” idzie na górę bloku dnia:
    ```
    🤖 15.10 wieczór: dziennik – przetworzono 5 (budowa 2, emocje 1, zadania 2), czeka na Ciebie 1 · pomysły – 1 · jutro: 3
    ```

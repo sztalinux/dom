@@ -11,7 +11,7 @@ When, Last break, Type, ceny i dawki (formuły – nie ruszaj).
 
 ## Procedura
 
-1. Dopasuj suplement do wiersza po Name (odmiana, skróty, „wit. D” = „Witamina D”). Odczyt: rows z filtrem tekstu.
+1. Dopasuj suplement do wiersza po Name (odmiana, skróty, „wit. D” = „Witamina D”). Odczyt: wyszukiwarka z parametrem bazy Suple (nazwa) albo widok.
 2. Zmiana według wpisu:
    | Wpis | Zmiana |
    |---|---|
@@ -28,4 +28,4 @@ When, Last break, Type, ceny i dawki (formuły – nie ruszaj).
 
 ## Odczyt
 
-„Co mam kupić” → wiersze z Buy = tak (rows, filtr checkbox): nazwa, kto, link. „Co biorę” → Status = TAKING według When.
+„Co mam kupić” → wiersze z Buy = tak (widok z filtrem Buy; brak – utwórz „🛒 Do kupienia”): nazwa, kto, link. „Co biorę” → Status = TAKING według When.
