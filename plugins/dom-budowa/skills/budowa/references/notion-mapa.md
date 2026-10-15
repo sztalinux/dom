@@ -29,7 +29,7 @@ DOM
 
 | Czego szukasz | Gdzie (strona / baza → widok/sekcja) | ID | Najważniejsze pola |
 |---|---|---|---|
-| Luźne wpisy do przetworzenia; pytania asystenta do inwestora | 📓 Dziennik (plugin `ja`): bloki 1. poziomu = nowe wpisy; „❓ Czeka na Twoją odpowiedź”; „Przetworzone” = ślad, zwijany blok na dzień | `3f8f5982-09e7-80c8-a154-c59aeb844e8f` | – (wolny tekst) |
+| Luźne wpisy do przetworzenia; pytania asystenta do inwestora | 📓 Dziennik (plugin `ja`): nowe wpisy = bloki 1. poziomu, podstrony „📝 Wpisy” i strony z widgetu na najwyższym poziomie Private (definicja w `wpisy`); „❓ Czeka na Twoją odpowiedź”; „Przetworzone” = ślad, zwijany blok na dzień | `3f8f5982-09e7-80c8-a154-c59aeb844e8f` | – (wolny tekst) |
 | Parametry projektu | DOM → „🤖 Dla asystenta” → „📐 Dane projektu (ściąga)” | `24af5982-09e7-806b-821a-e157ff33be42` | – |
 | Jakie mamy dokumenty, co w którym jest, gdzie leżą | 📑 Przewodnik po dokumentach i Notion (generowany – nie edytuj) | `3f6f5982-09e7-81f5-bade-ec877d8d936a` | – |
 | Co blokuje bieżący etap | DOM → zakładka 🏗 Etap → „🔴 Do zamknięcia przed …”; Notatnik → widok „🔴 Krytyczne i otwarte” | `view://3f3f5982-09e7-8125-a50b-000ce287ad48` | Status Otwarte/Do omówienia, Priorytet Krytyczne/Ważne |

@@ -73,7 +73,8 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
    jest tylko ramką nad skrzynką – opis procedur jest w README repo); nowa procedura = nowa opcja w polu „Procedura” skrzynki.
    Zmiana struktury Notion (baza, widok, pole) → zaktualizuj mapę: budowa – `dom-budowa/skills/budowa/references/notion-mapa.md`,
    sprawy osobiste – `ja/skills/ja/references/notion-mapa.md`. Obie trafiają do przewodnika w Notion przy następnym
-   `tools/dokumenty.py` – zsynchronizuj go (`dokumenty`, sekcja C). Nowy rodzaj wpisu w Dzienniku, który da się opisać
+   `tools/dokumenty.py` – zsynchronizuj go (`dokumenty`, sekcja C). Pełna lista miejsc w repo i w Notion, które trzeba
+   zaktualizować przy zmianie miejsca lub struktury: `ja`, zasada 8 – przejdź ją całą. Nowy rodzaj wpisu w Dzienniku, który da się opisać
    polami „Gdzie” i „Jak zapisać”, to wiersz w bazie Obszary, nie zmiana harnessu.
 8. Podsumuj w 2–4 liniach: wersje, co weszło, co odrzucone/odłożone i dlaczego. Dopisz przypomnienie:
    „odśwież plugin(y) na claude.ai (`references/claude-ai-projekt.md`, sekcja „Aktualizacja pluginów”)”; jeśli zmienił się tekst instrukcji

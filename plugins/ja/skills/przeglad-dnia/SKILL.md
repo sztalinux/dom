@@ -1,6 +1,6 @@
 ---
 name: przeglad-dnia
-description: Zaplanowane przebiegi bez inwestora (claude.ai, poza projektem) w dwóch trybach – SZYBKI (co godzinę lub co 2 godziny w ciągu dnia) rozkłada nowe wpisy z „📓 Dziennika” na bieżąco i kończy się od razu, gdy nic nie ma; WIECZORNY robi podsumowanie dnia i plan na jutro – sprawy osobiste w „📆 Przeglądy dzienne” pod Dziennikiem, budowa osobno w „📆 Przeglądy dzienne – budowa” na DOM (z odnośnikiem między nimi) – i linię „🤖” w Dzienniku, plus analizę nowych pomysłów. Używaj, gdy uruchamia go zaplanowane zadanie („Dziennik – szybki przebieg”, „Przegląd dnia”) albo użytkownik mówi „przegląd dnia”, „podsumuj dzień”, „plan na jutro”, „wieczorny przegląd”, „ogarnij dzisiejsze”.
+description: Zaplanowane przebiegi bez inwestora (claude.ai, poza projektem) w dwóch trybach – SZYBKI (co godzinę lub co 2 godziny w ciągu dnia) rozkłada nowe wpisy z „📓 Dziennika” (i strony z widgetu na najwyższym poziomie Private) na bieżąco i kończy się od razu, gdy nic nie ma; WIECZORNY robi podsumowanie dnia i plan na jutro – sprawy osobiste w „📆 Przeglądy dzienne” pod Dziennikiem, budowa osobno w „📆 Przeglądy dzienne – budowa” na DOM (z odnośnikiem między nimi) – i linię „🤖” w Dzienniku, plus analizę nowych pomysłów. Używaj, gdy uruchamia go zaplanowane zadanie („Dziennik – szybki przebieg”, „Przegląd dnia”) albo użytkownik mówi „przegląd dnia”, „podsumuj dzień”, „plan na jutro”, „wieczorny przegląd”, „ogarnij dzisiejsze”.
 ---
 
 # Przegląd dnia – tryb szybki i wieczorny
@@ -25,14 +25,17 @@ Ręcznie w rozmowie: „przerób dziennik” = tryb szybki, „przegląd dnia”
 
 ## A. Tryb szybki – ma być tani
 
-1. **Dwa odczyty:** pobierz tylko stronę Dziennik (`3f8f5982-09e7-80c8-a154-c59aeb844e8f`) i stronę „📝 Wpisy”
-   (`3faf5982-09e7-80b2-9b33-c48745d67a4f` – lista jej podstron). Nie pobieraj jeszcze Obszarów, przewodnika ani baz.
-2. **Nic nowego → koniec.** Brak bloków na pierwszym poziomie i podstron w „Wpisach” (definicja w `wpisy`) i brak odpowiedzi inwestora pod
+1. **Trzy odczyty:** pobierz tylko stronę Dziennik (`3f8f5982-09e7-80c8-a154-c59aeb844e8f`), stronę „📝 Wpisy”
+   (`3faf5982-09e7-80b2-9b33-c48745d67a4f` – lista jej podstron) i listę stron najwyższego poziomu Private (porównaj ID
+   z listą stałych stron w `ja/references/notion-mapa.md`; 🔒 Prywatne nie otwieraj). Otwórz tylko strony spoza listy.
+   Nie pobieraj jeszcze Obszarów, przewodnika ani baz. Brak narzędzia do listy stron prywatnych → to źródło pomiń (`wpisy`, krok 1).
+2. **Nic nowego → koniec.** Brak bloków na pierwszym poziomie, podstron w „Wpisach” i nowych stron w Private (definicja w `wpisy`) i brak odpowiedzi inwestora pod
    pytaniami w „❓” → odpowiedz jedną linią „Dziennik: nic nowego (<godzina>)” i zakończ. **Zero zapisów** – nie dopisuj linii
    „🤖”, nie zmieniaj strony.
 3. **Inwestor może jeszcze pisać:** strona edytowana mniej niż 15 minut temu (czas ostatniej edycji strony), a najnowszy wpis
    nie ma jeszcze kropki, wygląda na urwany albo jest pusty → „Dziennik: pomijam, świeże wpisy (<godzina>)” i zakończ.
-   Następny przebieg je weźmie.
+   Następny przebieg je weźmie. Podstronę lub stronę z widgetu edytowaną mniej niż 15 minut temu pomiń w tym przebiegu
+   (pozostałe wpisy przetwórz); pusta strona z widgetu starsza niż 15 minut → pominięta (`wpisy`, krok 6).
 4. **Są wpisy:** procedura `wpisy`, kroki 2–7, bez pytań w rozmowie (wyjątki z zasad wyżej). Linia „🤖” w bloku dnia –
    krótka, z godziną: `🤖 11:00: przetworzono 2 (zadania 1, emocje 1), czeka na Ciebie 1`. Kolejne przebiegi tego dnia
    dopisują swoje linie pod spodem w tym samym bloku; tytuł bloku pokazuje sumę dnia.

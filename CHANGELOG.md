@@ -4,6 +4,21 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.3.0] – 2026-10-15
+
+- `wpisy`, `przeglad-dnia` (tryb szybki): nowe wejście Dziennika – strony zakładane widgetem „nowa strona” w telefonie
+  na najwyższym poziomie Private. Wpis = każda strona spoza listy stałych stron (porównanie po ID; 🔒 Prywatne na liście,
+  nigdy nieotwierana); strona z podstronami/bazą albo wyglądająca na nowy obszar → pytanie w „❓”, bez przenoszenia.
+  Po przetworzeniu strona idzie pod „🗃 Przetworzone podstrony”; świeża (< 15 min) czeka na następny przebieg, pusta → pominięta.
+  „📝 Wpisy” działa dalej.
+- Mapa `ja/references/notion-mapa.md`: komplet stałych stron najwyższego poziomu z ID (doszły DASHBOARD, DOM, Dziennik, ID Prywatnych).
+- `ja`, zasada 8: harness i Notion mówią to samo – zmiana miejsca lub struktury obejmuje wszystkie opisy w repo i w Notion
+  (lista miejsc); rozbieżność Notion z mapą → propozycja aktualizacji, nie ciche dopasowanie. `rozwoj-harnessu` B.7 odsyła do niej.
+
+## dom-budowa [2.2.2] – 2026-10-15
+
+- Mapa Notion budowy: wiersz Dziennika wymienia wszystkie wejścia wpisów (bloki, „📝 Wpisy”, strony z widgetu w Private).
+
 ## dom-budowa [2.2.1] – 2026-10-15
 
 - `etap`, plan etapu krok 7: przy zmianie etapu przestawiany jest też widok „🎯 Na teraz – <etap>” w „✅ Checkliście budowy”.

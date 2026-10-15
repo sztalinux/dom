@@ -61,12 +61,24 @@ zapisuj wprost według pól „Gdzie” i „Jak zapisać” w bazie Obszary.
    wprost). Słowa względne („wczoraj”, „w piątek”) licz od daty we wpisie, nie od daty przetwarzania.
 5. **Prywatność:** strona **„🔒 Prywatne”** (`3faf5982-09e7-816b-92ab-d8b79c61ad92`) i wszystko pod nią jest poza zasięgiem
    asystenta – nie czytaj, nie przeszukuj (wyniki wyszukiwania z niej pomijaj), nie cytuj, nie przenoś tam i stamtąd niczego
-   bez wyraźnego polecenia. Wpis intymny lub bardzo osobisty z Dziennika nie trafia nigdzie – zostaje w „❓” z pytaniem, czy
+   bez wyraźnego polecenia. Lista stron najwyższego poziomu Private (odczyt wpisów z widgetu) pokazuje też tę stronę –
+   pomiń ją, nie otwieraj. Wpis intymny lub bardzo osobisty z Dziennika nie trafia nigdzie – zostaje w „❓” z pytaniem, czy
    inwestor przeniesie go sam do „🔒 Prywatne”. Haseł nie przepisuj nigdy (przechodziłyby przez rozmowę z AI) – całe strony
    wolno przenosić. Treść emocji, notatki o dziecku i zdrowiu zostają w Notion; w odpowiedziach nie cytuj ich ponad potrzebę.
    Repo harnessu jest publiczne – zero imion, treści wpisów i danych w plikach procedur, przykłady zmyślone.
 6. **Porządek statusami, nie usuwaniem.** Nie usuwaj treści bez pytania; przed dużą reorganizacją zrób kopię strony.
 7. **Pole tekstowe = jedno zdanie;** szczegóły, listy i dopiski z datą idą do treści strony (tak jak w procedurach budowy).
+8. **Harness i Notion mówią to samo.** Zmiana tego, gdzie coś leży albo jak trafia do asystenta (nowe wejście wpisów,
+   przeniesiona lub przemianowana strona/baza, nowy widok, nowa stała strona najwyższego poziomu), obejmuje w tej samej
+   pracy **wszystkie miejsca, które to opisują** – inaczej asystent i inwestor zaczną działać według różnych opisów:
+   - repo: każdy plik z nazwą **i** ID strony w obu pluginach (wyszukaj jedno i drugie), mapy `ja/references/notion-mapa.md`
+     i `budowa/references/notion-mapa.md`, README, CHANGELOG;
+   - Notion: w Dzienniku „Jak używać” i „🧭 Dla asystenta”; „🗺 Mapa Notion” (schemat, kroki, tabela struktury, wersje
+     pluginów); strona „Asystent AI – harness” (wersja); opis na stronie, której dotyczy zmiana; przewodnik (`dokumenty`, C).
+   Strony Notion zmieniaj punktowo (zamiana fragmentu), nigdy całą treścią – mają osadzone bazy i bloki, których odczyt
+   nie pokazuje. W podsumowaniu wymień zaktualizowane miejsca. W drugą stronę: Notion rozjechał się z mapą (nieznana strona
+   na najwyższym poziomie, przeniesiona lub przemianowana strona) → nie dopasowuj się po cichu; zaproponuj aktualizację
+   mapy (`rozwoj-harnessu`) albo zapytaj.
 
 ## Domknięcie rozmowy
 

@@ -1,6 +1,6 @@
 ---
 name: wpisy
-description: Przetwarzanie luźnych wpisów inwestora ze strony „📓 Dziennik” w Notion (myśli, emocje, zadania, sprawy budowy, dziecko, suplementy, książki – wpisane w biegu, z telefonu) – rozpoznanie obszaru według bazy „🧭 Obszary Dziennika”, wyjaśnienie niejasnych, przekazanie do właściwej procedury, ślad w „Przetworzone”. Używaj, gdy użytkownik mówi „przerób dziennik”, „ogarnij dziennik”, „co mam w dzienniku”, „odpowiedziałem w dzienniku”, „przerób inbox”, gdy przegląd dnia lub tygodnia pokazuje wpisy do przetworzenia, albo gdy wkleja kilka luźnych notatek naraz i prosi „wrzuć gdzie trzeba”.
+description: Przetwarzanie luźnych wpisów inwestora ze strony „📓 Dziennik” w Notion i ze stron zakładanych widgetem w telefonie na najwyższym poziomie Private (myśli, emocje, zadania, sprawy budowy, dziecko, suplementy, książki – wpisane w biegu, z telefonu) – rozpoznanie obszaru według bazy „🧭 Obszary Dziennika”, wyjaśnienie niejasnych, przekazanie do właściwej procedury, ślad w „Przetworzone”. Używaj, gdy użytkownik mówi „przerób dziennik”, „ogarnij dziennik”, „co mam w dzienniku”, „odpowiedziałem w dzienniku”, „przerób inbox”, gdy przegląd dnia lub tygodnia pokazuje wpisy do przetworzenia, albo gdy wkleja kilka luźnych notatek naraz i prosi „wrzuć gdzie trzeba”.
 ---
 
 # Dziennik → właściwe miejsca
@@ -27,20 +27,31 @@ jeszcze nie widział):
 	### 🧭 Dla asystenta {toggle}  ← baza Obszary; nie ruszaj
 	📝 Wpisy (podstrona) ← tu inwestor zakłada wpisy jako osobne strony; jej podstrony = nowe wpisy
 	🗃 Przetworzone podstrony, 📆 Przeglądy dzienne (podstrony) ← nie są wpisami
+Private (najwyższy poziom)
+	📌 DASHBOARD, 🛖 DOM, 📓 Dziennik, … 🔒 Prywatne   ← stałe strony (lista w ja/references/notion-mapa.md)
+	nowa strona z widgetu w telefonie                 ← NOWY wpis; po przetworzeniu przeniesiona pod 🗃
 ```
 
 **Nowy wpis** = każdy blok pierwszego poziomu (akapit, punkt), **każda podstrona strony „📝 Wpisy”**
-(`3faf5982-09e7-80b2-9b33-c48745d67a4f`; tytuł + treść = wpis) albo podstrona Dziennika założona poza „Wpisami”, z wyjątkiem
+(`3faf5982-09e7-80b2-9b33-c48745d67a4f`; tytuł + treść = wpis), podstrona Dziennika założona poza „Wpisami”, z wyjątkiem
 „Jak używać”, pustych linii, trzech zwijanych nagłówków i stałych podstron „📝 Wpisy”, „📆 Przeglądy dzienne”
-i „🗃 Przetworzone podstrony”.
-**Podstrony nie usuwaj i nie wycinaj znacznikiem strony z treści** (to by ją skasowało) – po przetworzeniu przenieś ją
-narzędziem przenoszenia stron pod „🗃 Przetworzone podstrony” (`3faf5982-09e7-8115-908f-f764d3133d6f`), a w śladzie dnia
+i „🗃 Przetworzone podstrony”, **oraz każda strona na najwyższym poziomie Private spoza listy stałych stron**
+(lista z ID: `ja/references/notion-mapa.md`, „Struktura najwyższego poziomu”) – tam widget „nowa strona” w telefonie
+zakłada strony. Porównuj po ID, nie po tytule. 🔒 Prywatne jest na liście – nigdy jej nie otwieraj (`ja`, zasada 5).
+Nieznana strona na najwyższym poziomie, która ma podstrony lub bazę albo wygląda na nowy obszar (tytuł jak nazwa działu,
+bez treści wpisu), **nie jest wpisem**: nie przetwarzaj jej i nie przenoś – w „❓” punkt ze wzmianką strony: „Nowa strona
+na najwyższym poziomie – wpis czy nowa stała strona? Jeśli stała, dopiszę ją do listy”.
+**Podstrony (także strony z widgetu w Private) nie usuwaj i nie wycinaj znacznikiem strony z treści** (to by ją skasowało)
+– po przetworzeniu przenieś ją narzędziem przenoszenia stron pod „🗃 Przetworzone podstrony” (`3faf5982-09e7-8115-908f-f764d3133d6f`), a w śladzie dnia
 daj do niej wzmiankę. Jeden blok może zawierać kilka spraw – rozłóż je osobno. Nie zmieniaj treści
 wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
 
 ## Procedura
 
-1. **Pobierz** stronę Dziennik i stronę „📝 Wpisy” (jej podstrony): nowe wpisy oraz wpisy z „❓”, pod których ostatnim pytaniem inwestor coś dopisał (albo
+1. **Pobierz** stronę Dziennik, stronę „📝 Wpisy” (jej podstrony) i listę stron najwyższego poziomu Private (odczyt
+   listy stron prywatnych; strony spoza listy stałych otwórz, żeby mieć treść i czas ostatniej edycji – tylko je). Brak
+   narzędzia do listy stron prywatnych → pomiń to źródło i dopisz w linii „🤖”: „strony z widgetu – brak odczytu”.
+   Nowe wpisy oraz wpisy z „❓”, pod których ostatnim pytaniem inwestor coś dopisał (albo
    poprawił wpis) – te oceń ponownie. Wpisy w „❓” bez odpowiedzi pomiń. Brak obu → „Dziennik pusty” (+ liczba czekających w „❓”).
 2. **Pobierz Obszary** – zapisany widok „🤖 Aktywne (dla asystenta)” (`view://3faf5982-09e7-817b-a060-000c05f26c6a`, tryb view:
    Aktywny = tak, sort Kolejność; baza `collection://253b7564-00ac-45b2-a3f4-956275e3a7e0`).
@@ -50,12 +61,14 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
    - **Czy jest jednoznaczny** – da się go zapisać jako samodzielne zdanie: co, kogo/czego dotyczy, kiedy. Pojedyncze słowa,
      skróty, zaimki bez kontekstu, „asdf” – **niejednoznaczne**.
    - **Data zdarzenia** – wzmianka daty we wpisie (`@today`) albo data tekstem; słowa względne licz od niej. Notion nie zapisuje,
-     kiedy dopisano pojedynczy punkt, więc data przetwarzania to nie data wpisu. Podstrona bez daty w treści → data jej
-     ostatniej edycji (z odczytu podstrony), z dopiskiem w śladzie. Słowo względne bez daty przy terminie lub
+     kiedy dopisano pojedynczy punkt, więc data przetwarzania to nie data wpisu. Podstrona lub strona z widgetu bez daty
+     w treści → data jej ostatniej edycji (z odczytu strony), z dopiskiem w śladzie. Słowo względne bez daty przy terminie lub
      zdarzeniu z budowy → zapytaj („czy »wczoraj« to 11.10?”); przy emocji bez daty – data przetwarzania z dopiskiem
      „(data przetworzenia)”.
 4. **Niejednoznaczny albo bez obszaru → nie przetwarzaj.** Przenieś do „❓” i dopisz pod nim „❓ asystent (data): …” z 1–3
-   pytaniami i propozycją („Czy to zadanie prywatne na ten tydzień?”). Wpis z odpowiedzią – połącz i oceń ponownie.
+   pytaniami i propozycją („Czy to zadanie prywatne na ten tydzień?”). Podstrona lub strona z widgetu zostaje na miejscu –
+   w „❓” idzie punkt z jej wzmianką i pytaniem; strona wymieniona w „❓” nie jest nowym wpisem, dopóki inwestor nie odpowie
+   pod pytaniem albo nie zmieni strony po dacie pytania. Wpis z odpowiedzią – połącz i oceń ponownie.
    Odpowiedź opisuje rodzaj wpisu, którego nie ma w Obszarach → przetwórz go i **zaproponuj nowy wiersz Obszarów**
    („Dodać obszar »…« z rozpoznawaniem »…«, zapis do …?”); po zgodzie dodaj go (bez zmiany harnessu). Gdy nowy obszar wymaga
    własnej logiki, której nie da się opisać w polu „Jak zapisać” – zaproponuj pomysł (`rozwoj-harnessu`, C).
@@ -67,10 +80,12 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
    - Procedura = `ogólna` → zapisz według „Gdzie” i „Jak zapisać” z wiersza; najpierw szukaj duplikatu (2–3 słowa).
 6. **Zamknij wpis:** przenieś go (z dialogiem) do „Przetworzone”, do **zwijanego bloku dzisiejszego dnia** (`<details>`,
    tytuł „📅 <dd.mm> <dzień> · <skrót linii 🤖>”; brak – utwórz na górze), jako `~~wpis~~ → <gdzie>: <link>`
-   (podstrona: `~~tytuł~~ (podstrona → <wzmianka>) → <gdzie>: <link>`, po przeniesieniu jej pod „🗃 Przetworzone podstrony”). Zdublowane
-   / nieprzydatne / testowe → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
+   (podstrona: `~~tytuł~~ (podstrona → <wzmianka>) → <gdzie>: <link>`, strona z widgetu: `(widget → <wzmianka>)`, po
+   przeniesieniu jej pod „🗃 Przetworzone podstrony”). Zdublowane / nieprzydatne / testowe / pusta strona z widgetu (bez
+   tytułu i treści) → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
 7. **Zapisy wsadowo** (`ja`, zasada 2): odczyty, potem jedno wywołanie na bazę docelową, na końcu **jedna** edycja strony
-   Dziennik (przeniesienia do „❓”, do „Przetworzone”, linia „🤖”) – podstrony przenosisz osobnym wywołaniem przed nią.
+   Dziennik (przeniesienia do „❓”, do „Przetworzone”, linia „🤖”) – podstrony i strony z widgetu przenosisz
+   jednym osobnym wywołaniem przed nią; po nim na najwyższym poziomie Private zostają tylko stałe strony (i te czekające w „❓”).
    Po niej **pierwszy poziom jest pusty** – poza „Jak używać”, trzema nagłówkami, dwiema stałymi podstronami i 1–2 pustymi
    liniami do pisania. Linia „🤖” idzie na górę bloku dnia:
    ```
