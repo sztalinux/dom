@@ -27,10 +27,10 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 | Przegląd dnia – sprawy osobiste (dziś / jutro; ręczne „(ręczne)”) | 📆 Przeglądy dzienne (pod Dziennikiem) | `3faf5982-09e7-81df-a361-cc65fddb81f4` | – |
 | Przegląd tygodnia – sprawy osobiste | 📅 Przeglądy tygodniowe (pod Dziennikiem) | `3faf5982-09e7-81e3-a6af-e3786ca4a074` | – |
 | Widoki do przeglądu tygodnia (tryb view) | TASKS „🤖 Tydzień – prywatne”, Wpisy emocji „🤖 Ostatni tydzień”, Dziennik produktywności „🤖 Ostatni tydzień” | `view://3faf5982-09e7-81b5-ad0a-000c1cfabfa0`, `view://3faf5982-09e7-81ec-83af-000c8b518d37`, `view://3faf5982-09e7-81af-9ea1-000cbe3dd643` | – |
-| Relacja z narzeczoną (do przegadania, prezenty, wspólny czas, daty) | 💞 Relacja (najwyższy poziom; docelowo pod Rodziną – POM-9) | `3faf5982-09e7-81ac-9071-d72e1036eb1f` | sekcje: 💬 Do przegadania, 🎁 Prezenty i niespodzianki, 💡 Wspólny czas i randki, 📅 Ważne daty |
-| Strona startowa ze skrótami | 📌 DASHBOARD (na górze linki; niżej Quick notes – do uporządkowania, POM-9) | `8ef0a264-9b9e-4463-8e2e-2c64887f110d` | – |
+| Relacja z narzeczoną (do przegadania, prezenty, wspólny czas, daty) | 💞 Relacja (pod 👨‍👩‍👧 Rodzina) | `3faf5982-09e7-81ac-9071-d72e1036eb1f` | sekcje: 💬 Do przegadania, 🎁 Prezenty i niespodzianki, 💡 Wspólny czas i randki, 📅 Ważne daty |
+| Strona startowa ze skrótami | 📌 DASHBOARD (zakładki obszarów; podstrona 🗺 Mapa Notion) | `8ef0a264-9b9e-4463-8e2e-2c64887f110d` | – |
 | **Poza zasięgiem asystenta** | 🔒 Prywatne i jej podstrony – nie czytaj, nie przeszukuj, nie cytuj (`ja`, zasada 5) | `3faf5982-09e7-816b-92ab-d8b79c61ad92` | – |
-| Wesele (notatki, linki, wzmianki zadań) | 💍 Wesele (najwyższy poziom) | `3faf5982-09e7-81ec-bdc0-c8e41b99d52a` | sekcje: 📝 Notatki i pomysły, 🔗 Linki, miejsca, usługodawcy, ✅ Do zrobienia |
+| Wesele (notatki, linki, wzmianki zadań) | 💍 Wesele (pod 👨‍👩‍👧 Rodzina) | `3faf5982-09e7-81ec-bdc0-c8e41b99d52a` | sekcje: 📝 Notatki i pomysły, 🔗 Linki, miejsca, usługodawcy, ✅ Do zrobienia |
 | Przegląd dnia – budowa | 📆 Przeglądy dzienne – budowa (strona na DOM, plugin dom-budowa) | `3f8f5982-09e7-815e-8b03-eacaa74db190` | – |
 | Przetworzone wpisy-podstrony | 🗃 Przetworzone podstrony (pod Dziennikiem) | `3faf5982-09e7-8115-908f-f764d3133d6f` | – |
 | Wszystkie zadania (dom i prywatne) | TASKS (fizycznie na stronie DOM) | `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e` | Name, **Obszar** (Dom / Prywatne / Dziecko / Praca; puste = Dom), PLANNED, When, Priority, Kategoria, Kto, Desc |
@@ -46,19 +46,19 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 | Pomysły na rozwój harnessu | Pomysły na rozwój (na stronie DOM) | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie |
 | Wersja harnessu | Asystent AI – harness | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
 
-**Struktura najwyższego poziomu (POM-9, 15.10.2026)** – strona startowa 📌 DASHBOARD z linkami, mapa porządków: „🗺 Mapa Notion”
+**Struktura najwyższego poziomu (POM-9, 15.10.2026)** – strona startowa 📌 DASHBOARD w zakładkach, opis całości dla inwestora: „🗺 Mapa Notion”
 (`3faf5982-09e7-8186-b1f1-f2b4ed2a9448`, pod DASHBOARD):
 - ✅ Zadania `3faf5982-09e7-8188-8bbd-ce6f8f691cdd` – widoki TASKS (baza na DOM);
 - 👨‍👩‍👧 Rodzina `3faf5982-09e7-8134-b482-c6eb748e87a7` – strona dziecka, 💞 Relacja, 💍 Wesele;
 - 🩺 Zdrowie `3faf5982-09e7-81a2-93bd-c85b2ebe040b` – Suplementacja (baza Suple), Examinations, notatki zdrowotne;
 - 🧠 Ja `3faf5982-09e7-81b6-b5b7-e0d5e3fe7ef8` – Personality (Dziennik emocji, Terapie, Wartości…), Hobbies, Inspiration;
 - 💼 WORK `c1dc91d3-5247-4c9b-8ec9-cc431c1b3ebb` – praca;
-- 📚 Wiedza `3faf5982-09e7-8113-a03c-eed243d4adc8` – Knowledge, Books, My Kindle Clippings;
-- 🗂️ Collections `44321b47-fd10-46f8-8d2e-574ac07502ac` – listy i kolekcje;
+- 📚 Wiedza `3faf5982-09e7-8113-a03c-eed243d4adc8` – Knowledge, My Kindle Clippings;
+- 🗂️ Collections `44321b47-fd10-46f8-8d2e-574ac07502ac` – listy i kolekcje, Books, Listy do zabrania, Linki do obejrzenia;
 - 🗄 Archiwum `3faf5982-09e7-8100-8725-cc0ca586a23e` – nieużywane strony (tylko do wglądu, nie zapisuj);
 - 🔒 Prywatne – poza zasięgiem asystenta (wyżej).
 Nowa strona w obszarze: zapisuj pod stroną obszaru; nowy rodzaj wpisu z Dziennika – wiersz w bazie Obszary.
 
-**Archiwa (tylko do wglądu, nie zapisuj):** 🗄 Archiwum (ALL TODOS, DONE, stara RESOURCES z Others, kopie zapasowe), lista „TO DO”
-na stronie Quick notes (przeniesiona do TASKS; Quick notes rozbierany w POM-9). Strona WORK ma własną bazę zadań z pracy – nie zapisuj tam; zadania z pracy
+**Archiwa (tylko do wglądu, nie zapisuj):** 🗄 Archiwum (ALL TODOS, DONE, stara RESOURCES z Others, kopie zapasowe,
+Quick notes – rozebrany w POM-9, oryginały w jego podstronie „Przetworzone”). Strona WORK ma własną bazę zadań z pracy – nie zapisuj tam; zadania z pracy
 wpisane do Dziennika idą do TASKS z Obszar = Praca.
