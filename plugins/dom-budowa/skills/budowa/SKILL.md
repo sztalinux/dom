@@ -145,7 +145,8 @@ własny przegląd, żeby nie zasłaniała spraw osobistych.
     W odpowiedzi rozdziel warstwy: „W Twoich materiałach: …” / „Otwarte: …” / „Z internetu (do potwierdzenia): …”.
     Na końcu zaproponuj zapis wartościowej informacji z internetu do Bazy wiedzy (procedura `wiedza`) – tylko za zgodą.
     Kolejność wyszukiwania nie zmienia hierarchii wiarygodności z zasady 1 (projekt > opinie > oferty > notatki > internet).
-11. **Notion jest źródłem prawdy i inwestor edytuje go ręcznie** – obok asystenta. Dlatego: przed każdym zapisem
+11. **Strona „🔒 Prywatne” jest poza zasięgiem asystenta** (nie czytaj, pomijaj w wynikach wyszukiwania, nie cytuj – plugin `ja`, zasada 5).
+    **Notion jest źródłem prawdy i inwestor edytuje go ręcznie** – obok asystenta. Dlatego: przed każdym zapisem
     czytaj aktualny stan (nie polegaj na tym, co pamiętasz z rozmowy); ręczna zmiana inwestora (status, treść) jest
     nadrzędna – nie „poprawiaj” jej bez pytania; jedna informacja ma jedno miejsce (ściąga = Notion → „📐 Dane projektu”;
     plik `Ściąga projektu.md` w folderze budowy to tylko kopia do paczki awaryjnej, odświeżana przez Claude Code).

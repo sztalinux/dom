@@ -59,7 +59,11 @@ zapisuj wprost według pól „Gdzie” i „Jak zapisać” w bazie Obszary.
    (duplikaty, pojedyncze wiersze) → rows → SQL. Błąd „usage limit” → bez ponawiania, przejdź na widok/wyszukiwarkę.
 4. **Nie zgaduj:** niejasny wpis, brak daty przy terminie, nie wiadomo czego dotyczy → pytanie (w Dzienniku „❓”, w rozmowie
    wprost). Słowa względne („wczoraj”, „w piątek”) licz od daty we wpisie, nie od daty przetwarzania.
-5. **Prywatność:** treść emocji, notatki o dziecku i zdrowiu zostają w Notion; w odpowiedziach nie cytuj ich ponad potrzebę.
+5. **Prywatność:** strona **„🔒 Prywatne”** (`3faf5982-09e7-816b-92ab-d8b79c61ad92`) i wszystko pod nią jest poza zasięgiem
+   asystenta – nie czytaj, nie przeszukuj (wyniki wyszukiwania z niej pomijaj), nie cytuj, nie przenoś tam i stamtąd niczego
+   bez wyraźnego polecenia. Wpis intymny lub bardzo osobisty z Dziennika nie trafia nigdzie – zostaje w „❓” z pytaniem, czy
+   inwestor przeniesie go sam do „🔒 Prywatne”. Haseł nie przepisuj nigdy (przechodziłyby przez rozmowę z AI) – całe strony
+   wolno przenosić. Treść emocji, notatki o dziecku i zdrowiu zostają w Notion; w odpowiedziach nie cytuj ich ponad potrzebę.
    Repo harnessu jest publiczne – zero imion, treści wpisów i danych w plikach procedur, przykłady zmyślone.
 6. **Porządek statusami, nie usuwaniem.** Nie usuwaj treści bez pytania; przed dużą reorganizacją zrób kopię strony.
 7. **Pole tekstowe = jedno zdanie;** szczegóły, listy i dopiski z datą idą do treści strony (tak jak w procedurach budowy).

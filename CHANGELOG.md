@@ -4,6 +4,16 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.2.1] – 2026-10-15
+
+- `ja`, zasada 5: strona „🔒 Prywatne” i jej podstrony poza zasięgiem asystenta (nie czytać, nie przeszukiwać, nie cytować);
+  wpis intymny z Dziennika zostaje w „❓” z pytaniem o ręczne przeniesienie; hasła nigdy nie są przepisywane. Mapa: strona
+  „💞 Relacja” (obszar w bazie Obszary – konfiguracja), DASHBOARD jako strona startowa.
+
+## dom-budowa [2.1.2] – 2026-10-15
+
+- `budowa`, zasada 11: „🔒 Prywatne” poza zasięgiem także procedur budowy.
+
 ## ja [1.2.0] – 2026-10-15
 
 - Nowy skill `przeglad-tygodnia-osobisty`: tydzień spraw osobistych (zadania prywatne/dziecko/praca, emocje i produktywność

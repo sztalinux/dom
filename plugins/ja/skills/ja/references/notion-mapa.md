@@ -27,6 +27,9 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 | Przegląd dnia – sprawy osobiste (dziś / jutro; ręczne „(ręczne)”) | 📆 Przeglądy dzienne (pod Dziennikiem) | `3faf5982-09e7-81df-a361-cc65fddb81f4` | – |
 | Przegląd tygodnia – sprawy osobiste | 📅 Przeglądy tygodniowe (pod Dziennikiem) | `3faf5982-09e7-81e3-a6af-e3786ca4a074` | – |
 | Widoki do przeglądu tygodnia (tryb view) | TASKS „🤖 Tydzień – prywatne”, Wpisy emocji „🤖 Ostatni tydzień”, Dziennik produktywności „🤖 Ostatni tydzień” | `view://3faf5982-09e7-81b5-ad0a-000c1cfabfa0`, `view://3faf5982-09e7-81ec-83af-000c8b518d37`, `view://3faf5982-09e7-81af-9ea1-000cbe3dd643` | – |
+| Relacja z narzeczoną (do przegadania, prezenty, wspólny czas, daty) | 💞 Relacja (najwyższy poziom; docelowo pod Rodziną – POM-9) | `3faf5982-09e7-81ac-9071-d72e1036eb1f` | sekcje: 💬 Do przegadania, 🎁 Prezenty i niespodzianki, 💡 Wspólny czas i randki, 📅 Ważne daty |
+| Strona startowa ze skrótami | 📌 DASHBOARD (na górze linki; niżej Quick notes – do uporządkowania, POM-9) | `8ef0a264-9b9e-4463-8e2e-2c64887f110d` | – |
+| **Poza zasięgiem asystenta** | 🔒 Prywatne i jej podstrony – nie czytaj, nie przeszukuj, nie cytuj (`ja`, zasada 5) | `3faf5982-09e7-816b-92ab-d8b79c61ad92` | – |
 | Wesele (notatki, linki, wzmianki zadań) | 💍 Wesele (najwyższy poziom) | `3faf5982-09e7-81ec-bdc0-c8e41b99d52a` | sekcje: 📝 Notatki i pomysły, 🔗 Linki, miejsca, usługodawcy, ✅ Do zrobienia |
 | Przegląd dnia – budowa | 📆 Przeglądy dzienne – budowa (strona na DOM, plugin dom-budowa) | `3f8f5982-09e7-815e-8b03-eacaa74db190` | – |
 | Przetworzone wpisy-podstrony | 🗃 Przetworzone podstrony (pod Dziennikiem) | `3faf5982-09e7-8115-908f-f764d3133d6f` | – |
