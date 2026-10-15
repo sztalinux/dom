@@ -1,7 +1,39 @@
 # Changelog
 
-Format: [wersja] – data – co i dlaczego. Wersjonowanie semver:
+Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] – data` (`dom-budowa` albo `ja`).
+Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
+
+## ja [1.0.0] – 2026-10-15
+
+POM-8: jeden Dziennik w Notion na wszystko + drugi plugin. Repo przemianowane na `sztalinux/notion-plugin` (marketplace
+z dwoma pluginami).
+- Nowy plugin `ja`: skill kontekstowy `ja` (kontekst osobisty, skrzynka zmian na starcie rozmowy, mapa procedur, zasady,
+  `references/notion-mapa.md`), `wpisy` (router strony „📓 Dziennik” – mechanika dawnego `inbox`, obszary z bazy Notion
+  „🧭 Obszary Dziennika”, nowy obszar = wiersz w bazie, nie zmiana harnessu; podstrony też są wpisami), `emocje` (Wpisy emocji,
+  Dziennik produktywności, podsumowania na prośbę), `zadania` (wspólna TASKS z polem Obszar, zmiana statusu po „zrobiłem X”),
+  `dziecko` (strona dziecka w sekcjach), `suple` (Buy / Status / Last break).
+- Przeniesione z `dom-budowa`: `przeglad-dnia` (uogólniony: Dziennik, pomysły, jutro ze wszystkich obszarów, część budowlana
+  z `budowa` → „Wieczorem”; zaplanowane zadanie poza projektem) i `rozwoj-harnessu` (dwa pluginy, wersje per plugin,
+  pole Plugin w skrzynce, changelog z nagłówkiem pluginu).
+- HZ-3 `rozwoj-harnessu`, `ja`: wpisy w skrzynce z pustym Statusem (dodane ręcznie) są do wdrożenia – asystent najpierw
+  uzupełnia ich pola; puste pola pomysłów uzupełnia przy analizie.
+- Instrukcje projektu „Dom” zmienione (skrzynka opisana w `ja`) – wklej na nowo `dist/claude-ai-projekt/instrukcje.md`.
+
+## dom-budowa [2.0.0] – 2026-10-15
+
+POM-8 – zmiana struktury danych:
+- `inbox` usunięty (zastąpiony przez `wpisy` w pluginie `ja`); `przeglad-dnia` i `rozwoj-harnessu` przeniesione do `ja`.
+- `budowa`: „Na starcie” odsyła do `ja`; nowe sekcje „Luźny wpis z Dziennika” (klasy wpisu, jednoznaczność, źródło,
+  duplikaty, tabela klasa → procedura) i „Wieczorem” (część budowlana przeglądu dnia); mapa procedur bez `inbox`.
+- TASKS (dawniej „TASKS (2)”) jest wspólna ze sprawami osobistymi: nowe pole Obszar – procedury budowy ustawiają Obszar = Dom,
+  puste = stare wiersze budowy; widoki „🏗 ToDo/Doing – Dom” i „⏳ Czekam na” filtrują Dom/puste (`notatka`, `harmonogram`,
+  `przeglad-tygodnia`, schematy, mapa Notion).
+- Strona DOM bez Inboxu (odnośnik do „📓 Dziennik”); Przeglądy dzienne przeniesione pod Dziennik; `przeglad-tygodnia` liczy
+  i czyści wpisy Dziennika zamiast Inboxu.
+- Narzędzia: `tools/build.py` dla wielu pluginów (walidacja per plugin, unikalne nazwy skilli, dowiązania `.claude/skills/`
+  i `.agents/skills/` na każdy skill, `dist/<plugin>.plugin`); `tools/dokumenty.py` dokłada do przewodnika drugą mapę Notion
+  (sprawy osobiste).
 
 ## [1.9.5] – 2026-10-14
 

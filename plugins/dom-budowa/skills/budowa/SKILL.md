@@ -16,20 +16,10 @@ Szczegóły projektu (wymiary, materiały, decyzje, zespół) nie są w repo (je
 `references/projekt.md`. Oryginalne dokumenty: procedura `dokumenty`.
 Gdzie leżą dane i jak je zmieniać: `references/zrodla.md`; gdzie czego szukać w Notion: `references/notion-mapa.md`.
 
-## Na starcie: zmiany do harnessu z Notion
+## Na starcie
 
-Inwestor zgłasza poprawki sposobu pracy z różnych miejsc (np. z telefonu) do skrzynki w Notion
-**„Zmiany do harnessu”** (`collection://e217448a-60ec-4af6-8584-8f368315109c`). Na początku rozmowy o budowie
-pobierz wpisy ze Statusem „Do wdrożenia” (jedno zapytanie) i:
-
-- **W repozytorium harnessu (Claude Code, widzisz `plugins/dom-budowa/skills/`):** wdroż je od razu –
-  procedura `rozwoj-harnessu`, sekcja „Wdrożenie” (zmiana plików, wersja, commit, push, oznaczenie „Wdrożone”).
-- **Gdziekolwiek indziej (czat, telefon, Cowork, inne AI):** traktuj je jako obowiązujące zasady – mają
-  pierwszeństwo przed treścią procedur, jeśli są sprzeczne (są nowsze i zatwierdzone przez inwestora).
-  Nie zmieniaj ich statusu.
-- Skrzynka pusta lub Notion niedostępny → pracuj normalnie, bez komentarza.
-- **Pomysły na rozwój** (`collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`) nie są zasadami i nie wchodzą same. W Claude Code dopisz na starcie jedną linię:
-  „Pomysły: n nowych do analizy, m »Do zrobienia«” (pomiń, gdy obie liczby = 0); analiza i wdrożenie – `rozwoj-harnessu`, sekcja C.
+Skrzynkę „Zmiany do harnessu” i licznik pomysłów obsługuje skill `ja` (plugin `ja`, sekcja „Na starcie rozmowy”) – wczytaj
+go, jeśli nie jest wczytany; wpisy „Do wdrożenia” albo z pustym Statusem obowiązują też w sprawach budowy.
 
 Poza Claude Code pobierz też (raz na rozmowę, razem ze skrzynką) stronę Notion **„📑 Przewodnik po dokumentach i Notion”**
 (`3f6f5982-09e7-81f5-bade-ec877d8d936a`): co jest w którym dokumencie, gdzie leży i gdzie czego szukać w Notion.
@@ -40,22 +30,53 @@ Utrzymuje ją Claude Code (procedura `dokumenty`, sekcja C) – zawsze aktualna,
 | Gdy użytkownik… | Wczytaj |
 |---|---|
 | wkleja ofertę, wycenę, notatkę z rozmowy z wykonawcą; „porównaj oferty” | `oferta` |
-| „przerób inbox”, „co mam w inboxie” (sekcja „📥 Inbox” na stronie DOM), wkleja kilka luźnych notatek naraz | `inbox` |
+| wpis z Dziennika o budowie (przekazany przez `wpisy`), kilka luźnych notatek o budowie naraz | sekcja „Luźny wpis z Dziennika” niżej |
 | ma spotkanie, rozmowę lub decyzję: „jutro spotkanie z kierownikiem”, „o co zapytać”, „przygotuj mnie”, „kogo wybrać z kilku” | `przygotowanie` (liczby z `oferta`) |
 | podaje wydatek, fakturę, paragon; prosi o Excel, kosztorys, „ile wydaliśmy” | `koszty` |
 | dyktuje notatkę, ustalenie, decyzję, zadanie; „zapisz”, „dodaj do Notion” | `notatka` |
 | pyta o projekt, rysunek, umowę, normę, technologię, „czy to dobrze” | `analiza-techniczna` |
 | wkleja transkrypcję filmu/artykuł; relacjonuje rozmowę („dzwoniłem do konstruktora…”); odpowiada „SP-n: …” | `wiedza` |
 | pyta „co nowego”, „co czeka na mnie”, „podsumuj tydzień” | `przeglad-tygodnia` |
-| „przegląd dnia”, wieczorne zaplanowane zadanie | `przeglad-dnia` (Inbox, pomysły, jutro) |
+| „przegląd dnia”, wieczorne zaplanowane zadanie | `przeglad-dnia` (plugin `ja`); część budowlana – sekcja „Wieczorem” niżej |
 | dostał nowe pliki od projektanta/wykonawcy, pyta o dokument, „co wgrać do claude.ai”, „wgrałem” | `dokumenty` |
 | „zaczynamy etap”, „jutro betonowanie – co sprawdzić”, „ekipa skończyła”, odbiór, usterki | `etap` |
 | relacjonuje dzień na budowie, wysyła zdjęcia, podaje swoje godziny, „ekipa chce dopłatę za…” | `dziennik` |
 | „co kupić na…”, „ile zamówić”, „kiedy zamawiać okna”, oferta hurtowni, „przyjechała dostawa” | `zakupy` |
 | „ekipa wchodzi…”, „przesuwamy…”, „ułóż harmonogram”, „do piątku mam…”, „czekam na…”, „co mnie czeka” | `harmonogram` |
-| poprawia sposób pracy asystenta, chce nową procedurę, „mam pomysł na…” (setup, automatyzacja), „zrób POM-n” | `rozwoj-harnessu` |
+| poprawia sposób pracy asystenta, chce nową procedurę, „mam pomysł na…” (setup, automatyzacja), „zrób POM-n” | `rozwoj-harnessu` (plugin `ja`) |
+| sprawy pozabudowlane: emocje, zadania prywatne, dziecko, suplementy, „przerób dziennik” | `ja` (plugin `ja`) |
 
 Jedna rozmowa może wymagać kilku procedur (np. oferta → koszty → notatka). Wykonuj je po kolei.
+
+## Luźny wpis z Dziennika
+
+Inwestor wpisuje wszystko na stronę „📓 Dziennik”; skill `wpisy` (plugin `ja`) rozpoznaje obszar „Budowa” i przekazuje wpis
+tutaj (mechanika strony – strefy, „❓”, „Przetworzone” – jest w `wpisy`). Dla każdego wpisu o budowie:
+
+1. **Klasa:** ustalenie/decyzja, pytanie do kogoś, ryzyko, zadanie z terminem, relacja z dnia na budowie, wiedza ogólna
+   (usłyszał, przeczytał, obejrzał), wydatek/koszt, oferta, dokument do posortowania, pomysł/do doczytania.
+2. **Jednoznaczny i ze źródłem:** da się zapisać jako samodzielne zdanie (co, czego dotyczy, liczba, kiedy); dla wiedzy
+   i ustaleń znane jest źródło (kto powiedział / skąd; własne przemyślenie = „własne”). Nie → wraca do `wpisy` jako „❓”
+   z 1–3 pytaniami i propozycją interpretacji.
+3. **Duplikat:** szukaj w docelowej bazie (Notatnik, Informacje, TASKS) 2–3 słów kluczowych – jest → uzupełnij.
+4. **Przekaż** (kilka klas w jednym wpisie → kilka procedur):
+   | Klasa | Procedura | Uwaga |
+   |---|---|---|
+   | ustalenie, decyzja, pytanie, ryzyko, pomysł, doczytać | `notatka` | ustalenie z wiedzą techniczną → także `wiedza`, sekcja F |
+   | zadanie z terminem, „do piątku dam znać…” | `harmonogram` (D) → TASKS, Kto = Ja, Obszar = Dom | |
+   | ktoś ma coś zrobić / przyjść / dostarczyć w dniu X | `harmonogram` (D) → TASKS WAITING; krok budowy → Harmonogram | |
+   | relacja z budowy, dostawa, usterka, godziny własne | `dziennik` | |
+   | wiedza ogólna | `wiedza` | brak źródła = krok 2 |
+   | wydatek, faktura, koszt | `koszty` | wiersz do Excela – wpis zostaje w „❓”, dopóki inwestor go nie wpisze |
+   | oferta, wycena | `oferta` | |
+   | „dostałem plik” | `dokumenty` | gdzie indziej niż Claude Code – przypomnienie, żeby wrzucić do `_Przychodzące/` |
+
+## Wieczorem (część budowlana przeglądu dnia)
+
+Skill `przeglad-dnia` (plugin `ja`) wywołuje tę sekcję w kroku „Na jutro”. Tylko odczyt:
+kroki Harmonogramu startujące jutro (krok „bez odwrotu” → czy jest zadanie bramki, procedura `etap`), dostawy jutro,
+Zamówienia z „Zamówić do” = jutro lub po terminie, „czekam na” (TASKS WAITING, Obszar Dom lub puste) z terminem jutro albo
+po terminie. Zwróć max 3 najważniejsze punkty „<sprawa – kto – kiedy>”; nic nie ma → nic.
 
 ## Zasady pracy (obowiązują we wszystkich procedurach)
 

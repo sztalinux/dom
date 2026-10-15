@@ -1,9 +1,15 @@
 {
   "name": "dom-budowa",
-  "version": "1.9.5",
-  "description": "Harness budowy domu: zasady pracy, oferty, koszty (Excel), notatki i wiedza z filmów w Notion z rejestrem sprzeczności, analiza techniczna, przegląd tygodnia, porządek w dokumentach budowy z paczką dla claude.ai, etapy (bramki i odbiory), dziennik inwestora, zakupy, przygotowanie do spotkań i decyzji, inbox luźnych wpisów, harmonogram i terminy.",
+  "version": "2.0.0",
+  "description": "Harness budowy domu: zasady pracy, oferty, koszty (Excel), notatki i wiedza z filmów w Notion z rejestrem sprzeczności, analiza techniczna, przegląd tygodnia, porządek w dokumentach budowy z paczką dla claude.ai, etapy (bramki i odbiory), dziennik budowy, zakupy, przygotowanie do spotkań i decyzji, harmonogram i terminy. Luźne wpisy, przegląd dnia i rozwój harnessu – plugin ja.",
   "author": {
     "name": "sztalinux"
   },
-  "keywords": ["budowa", "kosztorys", "oferty", "notion", "dom"]
+  "keywords": [
+    "budowa",
+    "kosztorys",
+    "oferty",
+    "notion",
+    "dom"
+  ]
 }

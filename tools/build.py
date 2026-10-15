@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """Walidacja i budowanie paczek harnessu dom-budowa.
 
-    python3 tools/build.py                       # walidacja + dist/
+    python3 tools/build.py                       # walidacja + dowiązania skilli + dist/
     python3 tools/build.py --tylko-walidacja     # tylko walidacja
     python3 tools/build.py --kopiuj-dowiazania   # .agents/skills i .claude/skills jako kopie (Windows)
 
+Pluginy = katalogi plugins/<nazwa>/ z .claude-plugin/plugin.json (dziś: dom-budowa, ja).
+.claude/skills/ i .agents/skills/ to katalogi z dowiązaniem na każdy skill wszystkich pluginów
+(odtwarzane przy każdym uruchomieniu).
+
 Wynik w dist/:
-    dom-budowa.plugin         – plugin dla Claude (Cowork / claude.ai)
-    gemini-gem/instrukcje.md  – instrukcje do wklejenia w Gem
+    <plugin>.plugin           – plugin dla Claude (Cowork / claude.ai), po jednym na plugin
+    gemini-gem/instrukcje.md  – instrukcje do wklejenia w Gem (dom-budowa)
     gemini-gem/wiedza/*.md    – po jednym pliku na procedurę (pliki wiedzy Gema)
     claude-ai-projekt/instrukcje.md – instrukcje projektu „Dom” na claude.ai
 """
@@ -22,8 +26,10 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PLUGIN = ROOT / "plugins" / "dom-budowa"
+PLUGINS = ROOT / "plugins"
+PLUGIN = PLUGINS / "dom-budowa"          # Gemini i instrukcje projektu „Dom” – tylko ten plugin
 SKILLS = PLUGIN / "skills"
+KONTEKST = {"dom-budowa": "budowa", "ja": "ja"}  # skill kontekstowy pluginu = mapa jego procedur
 DIST = ROOT / "dist"
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 HUB = Path(os.environ.get("DOM_HUB", ROOT.parent.parent)).expanduser()
@@ -44,60 +50,82 @@ def frontmatter(path: Path) -> dict:
     return out
 
 
+def pluginy() -> list:
+    return sorted(d for d in PLUGINS.iterdir() if (d / ".claude-plugin/plugin.json").exists())
+
+
+def skille(plugin: Path) -> list:
+    return sorted(d for d in (plugin / "skills").iterdir() if d.is_dir())
+
+
 def waliduj() -> list:
     bledy = []
     # manifesty i wersje
     try:
-        plugin = json.loads((PLUGIN / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
         market = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8"))
         gem = json.loads((ROOT / "gemini-extension.json").read_text(encoding="utf-8"))
     except Exception as e:  # noqa: BLE001
         return [f"Manifest JSON nieczytelny: {e}"]
-    wpisy = [p for p in market.get("plugins", []) if p.get("name") == plugin.get("name")]
-    if not wpisy:
-        bledy.append("marketplace.json: brak wpisu dla pluginu " + str(plugin.get("name")))
-    elif not (ROOT / wpisy[0].get("source", "")).joinpath(".claude-plugin/plugin.json").exists():
-        bledy.append("marketplace.json: source nie wskazuje katalogu pluginu")
-    if not NAME_RE.match(plugin.get("name", "")):
-        bledy.append("plugin.json: name nie jest kebab-case")
-    if plugin.get("version") != gem.get("version"):
-        bledy.append(f"Różne wersje: plugin.json {plugin.get('version')} vs gemini-extension.json {gem.get('version')}")
-    if not re.match(r"^\d+\.\d+\.\d+$", plugin.get("version", "")):
-        bledy.append("plugin.json: version nie jest semver X.Y.Z")
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8") if (ROOT / "CHANGELOG.md").exists() else ""
-    if f"[{plugin.get('version')}]" not in changelog:
-        bledy.append(f"CHANGELOG.md: brak wpisu dla wersji [{plugin.get('version')}]")
-
-    # procedury
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-    router = (SKILLS / "budowa/SKILL.md").read_text(encoding="utf-8")
-    for d in sorted(p for p in SKILLS.iterdir() if p.is_dir()):
-        sk = d / "SKILL.md"
-        if not sk.exists():
-            bledy.append(f"{d.name}: brak SKILL.md")
+    nazwy_skilli = {}
+    for pl in pluginy():
+        try:
+            plugin = json.loads((pl / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
+        except Exception as e:  # noqa: BLE001
+            bledy.append(f"{pl.name}: plugin.json nieczytelny: {e}")
             continue
-        fm = frontmatter(sk)
-        if fm.get("name") != d.name:
-            bledy.append(f"{d.name}: name we frontmatter ({fm.get('name')}) ≠ nazwa katalogu")
-        if not NAME_RE.match(d.name):
-            bledy.append(f"{d.name}: nazwa katalogu nie jest kebab-case")
-        desc = fm.get("description", "")
-        if not desc:
-            bledy.append(f"{d.name}: brak description")
-        elif len(desc) > 1024:
-            bledy.append(f"{d.name}: description ma {len(desc)} znaków (max 1024)")
-        if d.name != "budowa":
-            if f"plugins/dom-budowa/skills/{d.name}/SKILL.md" not in agents:
-                bledy.append(f"{d.name}: brak w tabeli procedur w AGENTS.md")
-            if f"`{d.name}`" not in router:
-                bledy.append(f"{d.name}: brak w mapie procedur w skills/budowa/SKILL.md")
-        linie = len(sk.read_text(encoding="utf-8").splitlines())
-        if linie > 200:
-            bledy.append(f"{d.name}: SKILL.md ma {linie} linii – przenieś szczegóły do references/")
-        # odwołania do references/ muszą istnieć
-        for ref in re.findall(r"`(references/[\w\-./]+)`", sk.read_text(encoding="utf-8")):
-            if not (d / ref).exists():
-                bledy.append(f"{d.name}: odwołanie do nieistniejącego {ref}")
+        nazwa, wersja = plugin.get("name", ""), plugin.get("version", "")
+        if nazwa != pl.name:
+            bledy.append(f"{pl.name}: name w plugin.json ({nazwa}) ≠ nazwa katalogu")
+        wpisy = [p for p in market.get("plugins", []) if p.get("name") == nazwa]
+        if not wpisy:
+            bledy.append(f"marketplace.json: brak wpisu dla pluginu {nazwa}")
+        elif not (ROOT / wpisy[0].get("source", "")).joinpath(".claude-plugin/plugin.json").exists():
+            bledy.append(f"marketplace.json: source pluginu {nazwa} nie wskazuje katalogu pluginu")
+        if not NAME_RE.match(nazwa):
+            bledy.append(f"{pl.name}: name nie jest kebab-case")
+        if not re.match(r"^\d+\.\d+\.\d+$", wersja):
+            bledy.append(f"{pl.name}: version nie jest semver X.Y.Z")
+        if nazwa == "dom-budowa" and wersja != gem.get("version"):
+            bledy.append(f"Różne wersje: dom-budowa {wersja} vs gemini-extension.json {gem.get('version')}")
+        if not re.search(rf"^## {re.escape(nazwa)} \[{re.escape(wersja)}\]", changelog, re.M):
+            bledy.append(f"CHANGELOG.md: brak nagłówka „## {nazwa} [{wersja}] – data”")
+        kontekst = KONTEKST.get(nazwa)
+        if not kontekst or not (pl / "skills" / kontekst / "SKILL.md").exists():
+            bledy.append(f"{pl.name}: brak skilla kontekstowego (słownik KONTEKST w tools/build.py)")
+            continue
+        router = (pl / "skills" / kontekst / "SKILL.md").read_text(encoding="utf-8")
+        for d in skille(pl):
+            if d.name in nazwy_skilli:
+                bledy.append(f"{d.name}: ta sama nazwa skilla w {nazwy_skilli[d.name]} i {pl.name} – nazwy muszą być unikalne")
+            nazwy_skilli[d.name] = pl.name
+            sk = d / "SKILL.md"
+            if not sk.exists():
+                bledy.append(f"{pl.name}/{d.name}: brak SKILL.md")
+                continue
+            fm = frontmatter(sk)
+            if fm.get("name") != d.name:
+                bledy.append(f"{d.name}: name we frontmatter ({fm.get('name')}) ≠ nazwa katalogu")
+            if not NAME_RE.match(d.name):
+                bledy.append(f"{d.name}: nazwa katalogu nie jest kebab-case")
+            desc = fm.get("description", "")
+            if not desc:
+                bledy.append(f"{d.name}: brak description")
+            elif len(desc) > 1024:
+                bledy.append(f"{d.name}: description ma {len(desc)} znaków (max 1024)")
+            if d.name != kontekst:
+                if f"plugins/{pl.name}/skills/{d.name}/SKILL.md" not in agents:
+                    bledy.append(f"{d.name}: brak w tabeli procedur w AGENTS.md (plugins/{pl.name}/skills/{d.name}/SKILL.md)")
+                if f"`{d.name}`" not in router:
+                    bledy.append(f"{d.name}: brak w mapie procedur w skills/{kontekst}/SKILL.md")
+            linie = len(sk.read_text(encoding="utf-8").splitlines())
+            if linie > 200:
+                bledy.append(f"{d.name}: SKILL.md ma {linie} linii – przenieś szczegóły do references/")
+            # odwołania do references/ muszą istnieć
+            for ref in re.findall(r"`(references/[\w\-./]+)`", sk.read_text(encoding="utf-8")):
+                if not (d / ref).exists():
+                    bledy.append(f"{d.name}: odwołanie do nieistniejącego {ref}")
     bledy += kontrola_prywatnosci()
     return bledy
 
@@ -149,7 +177,8 @@ def kontrola_prywatnosci() -> list:
     bledy, zakazane = [], zakazane_slowa()
     for f in sorted(ROOT.rglob("*")):
         rel = f.relative_to(ROOT)
-        if not f.is_file() or set(rel.parts) & POMIJANE_KATALOGI or rel.as_posix().startswith(".claude/skills"):
+        if (not f.is_file() or set(rel.parts) & POMIJANE_KATALOGI
+                or rel.as_posix().startswith((".claude/skills", ".claude/worktrees"))):
             continue
         if f.suffix.lower() in BINARNE:
             bledy.append(f"{rel}: plik z danymi w repo – dokumenty trzymaj w folderze budowy")
@@ -217,12 +246,12 @@ def kontrola_commitow(zakres: list) -> list:
     return bledy
 
 
-def zbuduj_plugin(wersja: str) -> Path:
-    out = DIST / "dom-budowa.plugin"
+def zbuduj_plugin(pl: Path) -> Path:
+    out = DIST / f"{pl.name}.plugin"
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
-        for f in sorted(PLUGIN.rglob("*")):
+        for f in sorted(pl.rglob("*")):
             if f.is_file() and "__pycache__" not in f.parts:
-                z.write(f, f.relative_to(PLUGIN).as_posix())
+                z.write(f, f.relative_to(pl).as_posix())
     return out
 
 
@@ -248,7 +277,7 @@ def zbuduj_gem(wersja: str) -> Path:
 
 
 def zbuduj_claude_projekt(wersja: str) -> Path:
-    zrodlo = (SKILLS / "rozwoj-harnessu/references/claude-ai-projekt.md").read_text(encoding="utf-8")
+    zrodlo = (PLUGINS / "ja/skills/rozwoj-harnessu/references/claude-ai-projekt.md").read_text(encoding="utf-8")
     m = re.search(r"<!-- instrukcje-start -->\n(.*?)<!-- instrukcje-koniec -->", zrodlo, re.S)
     if not m:
         raise SystemExit("claude-ai-projekt.md: brak znaczników instrukcje-start / instrukcje-koniec")
@@ -258,16 +287,27 @@ def zbuduj_claude_projekt(wersja: str) -> Path:
     return out
 
 
-def kopiuj_dowiazania():
-    for link in (ROOT / ".agents/skills", ROOT / ".claude/skills"):
-        if link.is_symlink() or link.exists():
-            if link.is_symlink() or link.is_file():
-                link.unlink()
+def odswiez_dowiazania(kopiuj: bool = False):
+    """.claude/skills i .agents/skills: katalog z dowiązaniem (albo kopią – Windows) na każdy skill każdego pluginu."""
+    for kat in (ROOT / ".agents/skills", ROOT / ".claude/skills"):
+        if kat.is_symlink() or kat.is_file():
+            kat.unlink()  # stary układ: jedno dowiązanie do plugins/dom-budowa/skills
+        kat.mkdir(parents=True, exist_ok=True)
+        oczekiwane = {d.name: d for pl in pluginy() for d in skille(pl)}
+        for wpis in list(kat.iterdir()):
+            if wpis.name not in oczekiwane or kopiuj != (not wpis.is_symlink()):
+                wpis.unlink() if wpis.is_symlink() or wpis.is_file() else shutil.rmtree(wpis)
+        for nazwa, d in oczekiwane.items():
+            cel = kat / nazwa
+            if cel.exists() or cel.is_symlink():
+                if kopiuj:
+                    shutil.rmtree(cel)
+                    shutil.copytree(d, cel)
+                continue
+            if kopiuj:
+                shutil.copytree(d, cel)
             else:
-                shutil.rmtree(link)
-        link.parent.mkdir(exist_ok=True)
-        shutil.copytree(SKILLS, link)
-        print(f"skopiowano skills/ → {link.relative_to(ROOT)}")
+                cel.symlink_to(os.path.relpath(d, kat))
 
 
 def main() -> int:
@@ -285,21 +325,20 @@ def main() -> int:
             for b in bledy:
                 print("  ✗", b)
             return 1 if bledy else 0
-    if a.kopiuj_dowiazania:
-        kopiuj_dowiazania()
     bledy = waliduj()
     if bledy:
         print("WALIDACJA – BŁĘDY:")
         for b in bledy:
             print("  ✗", b)
         return 1
-    n = len([p for p in SKILLS.iterdir() if p.is_dir()])
-    print(f"Walidacja OK ({n} procedur).")
+    print("Walidacja OK (" + ", ".join(f"{pl.name}: {len(skille(pl))}" for pl in pluginy()) + " procedur).")
     if a.tylko_walidacja:
         return 0
+    odswiez_dowiazania(kopiuj=a.kopiuj_dowiazania)
     wersja = json.loads((PLUGIN / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
     DIST.mkdir(exist_ok=True)
-    print("Zbudowano:", zbuduj_plugin(wersja).relative_to(ROOT))
+    for pl in pluginy():
+        print("Zbudowano:", zbuduj_plugin(pl).relative_to(ROOT))
     print("Zbudowano:", zbuduj_gem(wersja).relative_to(ROOT), "(instrukcje.md + wiedza/)")
     print("Zbudowano:", zbuduj_claude_projekt(wersja).relative_to(ROOT), "(wklej w projekt „Dom” → Instructions)")
     return 0

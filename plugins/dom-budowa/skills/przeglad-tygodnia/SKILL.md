@@ -31,7 +31,7 @@ Pobierz w jak najmniejszej liczbie zapytań:
    Reszta tylko licznikiem: „na ten etap jeszcze n niepokazanych” i „na później: SSO n, Deweloperski n, …”.
 3. **Rejestr sprzeczności**: Status „Czeka na decyzję” i „Do sprawdzenia u projektanta” (z datą zgłoszenia – najstarsze pierwsze).
 4. **Notatnik budowy**: Status „Otwarte” lub „Do omówienia” z Priorytetem Krytyczne/Ważne; wpisy z „Kiedy” w ciągu 14 dni lub po terminie.
-5. **TASKS (2)**: niezakończone z „When” w ciągu 7 dni lub po terminie; osobno **czekam na** (PLANNED „WAITING”, Kto ≠ Ja) – po terminie = „przypomnij się”.
+5. **TASKS** (Obszar Dom albo puste – sprawy prywatne nie wchodzą do przeglądu budowy): niezakończone z „When” w ciągu 7 dni lub po terminie; osobno **czekam na** (PLANNED „WAITING”, Kto ≠ Ja) – po terminie = „przypomnij się”.
 5a. **Harmonogram** (`collection://d7a479ab-1e23-453f-8f59-55f4097f7d04`): kroki startujące / kończące się w 14 dni, kroki po terminie
     bez statusu „Zrobione”, kroki „Bez odwrotu” w 14 dni (czy jest zadanie bramki), terminy „Szacunek” na najbliższe 14 dni
     (do potwierdzenia u wykonawcy).
@@ -40,11 +40,12 @@ Pobierz w jak najmniejszej liczbie zapytań:
 6. **Informacje**: „Wrażliwe na czas” z Datą informacji starszą niż 12 miesięcy, jeśli dotyczą bieżącego etapu.
 7. **Zmiany do harnessu** (`collection://e217448a-60ec-4af6-8584-8f368315109c`): wpisy „Do wdrożenia” starsze niż 7 dni
    – przypomnienie, żeby uruchomić Claude Code i je wdrożyć. **Pomysły na rozwój** (`collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`): liczba nowych
-   bez analizy (przeanalizuj je – `rozwoj-harnessu`, sekcja C) i „Pytania do mnie”; nie namawiaj do wdrażania.
+   bez analizy (przeanalizuj je – `rozwoj-harnessu` z pluginu `ja`, sekcja C) i „Pytania do mnie”; nie namawiaj do wdrażania.
 8. **Dziennik budowy** (ID: `dziennik/references/notion-dziennik.md`): wpisy z 7 dni – dni pracy ekipy
    i własne, otwarte problemy, kroki zakryte bez zdjęć („Przed zakryciem OK” odznaczone).
-9. **Inbox** (strona DOM → „📥 Inbox”): liczba nowych wpisów (pierwszy poziom) i wpisów w „❓ Czeka na Twoją odpowiedź” bez odpowiedzi
-   (wymień wpis i pytanie); bloki dni w „Przetworzone” starsze niż 14 dni → do wyczyszczenia (Porządki).
+9. **Dziennik** (strona „📓 Dziennik”, `3f8f5982-09e7-80c8-a154-c59aeb844e8f`): liczba nowych wpisów (pierwszy poziom)
+   i wpisów w „❓ Czeka na Twoją odpowiedź” bez odpowiedzi (wymień wpis i pytanie – sprawy budowy w całości, pozostałe tylko
+   licznikiem); bloki dni w „Przetworzone” starsze niż 14 dni → do wyczyszczenia (Porządki).
 10. **Spójność** (inwestor edytuje Notion ręcznie – wychwyć rozjazdy, nie naprawiaj bez zgody):
     - Notatnik „Ustalone”/„Zrobione” z wiedzą techniczną bez relacji „Wiedza” → kandydaci do `wiedza`, sekcja F;
     - Informacje bez Tematów albo bez Źródeł i bez Notatnika; Tematy, których „W skrócie” przeczy nowszym Informacjom
@@ -73,7 +74,7 @@ Pobierz w jak najmniejszej liczbie zapytań:
 **Budowa w tym tygodniu:** dni ekipy / własne, problemy otwarte, braki zdjęć przed zakryciem
 **Zamówić / zapłacić do 14 dni:** <pozycja – do kiedy – skąd>
 **Do ponownej weryfikacji:** WI-x <cena/przepis z roku …>
-**Inbox:** n do przetworzenia („przerób inbox”), m czeka na Twoją odpowiedź: <wpis> – <pytanie>
+**Dziennik:** n do przetworzenia („przerób dziennik”), m czeka na Twoją odpowiedź: <wpis> – <pytanie>
 **Harness – czeka na wdrożenie:** HZ-x … (uruchom Claude Code)
 **Pomysły:** n przeanalizowanych, m z pytaniami do Ciebie: POM-x – <pytanie>
 **Sugestia na ten tydzień:** 1–3 konkretne kroki.
@@ -89,7 +90,7 @@ Znajdź i zaproponuj – nie wykonuj bez zgody; po „tak” wykonaj wsadowo (za
 - sprawy po terminie albo bez zmian od 30 dni → zamknąć, przesunąć termin czy zostawić (pytanie zbiorcze);
 - Informacje „Nowe” starsze niż 30 dni → „Przejrzane” albo „Nieaktualne”;
 - otwarte sprawy zakończonego etapu → przenieść do bieżącego albo zamknąć;
-- bloki dni w „Przetworzone” w Inboxie starsze niż 14 dni → usunąć (linki są już w docelowych miejscach);
+- bloki dni w „Przetworzone” w Dzienniku starsze niż 14 dni → usunąć (linki są już w docelowych miejscach);
 - rozjazdy z punktu „Spójność” → dopisać relację Wiedza / Informację (`wiedza`, F), uzgodnić statusy, poprawić „W skrócie”.
 Niczego nie usuwaj – porządek tylko statusami i scalaniem (z dopiskiem, co scalono).
 

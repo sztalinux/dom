@@ -19,12 +19,12 @@ branżą i adresatem, tak żeby dało się ją filtrować i zamknąć.
    | decyzja | Notatnik budowy | Typ „Decyzja”, Status „Ustalone”; w Notatce jedno zdanie (co ustalono), w treści strony: *dlaczego, alternatywy, kto zdecydował* |
    | ryzyko | Notatnik budowy | Typ „Ryzyko”, Priorytet wg wpływu |
    | do doczytania / pomysł | Notatnik budowy | Typ „Doczytać” / „Pomysł” |
-   | konkretne działanie z terminem | TASKS (2) | PLANNED „TO DO”, When = termin, Kto = Ja |
-   | ktoś inny ma coś zrobić do daty („czekam na”) | TASKS (2) | PLANNED „WAITING”, Kto = ta osoba, When – procedura `harmonogram`, D |
+   | konkretne działanie z terminem | TASKS | PLANNED „TO DO”, When = termin, Kto = Ja, Obszar = Dom |
+   | ktoś inny ma coś zrobić do daty („czekam na”) | TASKS | PLANNED „WAITING”, Kto = ta osoba, Obszar = Dom, When – procedura `harmonogram`, D |
    | relacja z dnia na budowie, dostawa, usterka, roboty dodatkowe | → procedura `dziennik` | stąd ustalenia i zadania wracają tu |
    | koszt / płatność | → procedura `koszty` | nie zapisuj kwot tylko w Notion |
    | oferta / wycena | → procedura `oferta` | |
-   | kilka luźnych, niejasnych wpisów naraz / „przerób inbox” | → procedura `inbox` | wyjaśnia, potem wraca tu |
+   | kilka luźnych, niejasnych wpisów naraz / „przerób dziennik” | → procedura `wpisy` (plugin `ja`) | wyjaśnia, potem wraca tu |
    | rozmowa z projektantem/wykonawcą, film, artykuł – „kto co powiedział” | → procedura `wiedza` (Rozmowy i źródła, Informacje, Tematy) | stąd tylko działania do Notatnika |
 
 2. **Sprawdź duplikaty:** wyszukaj w Notatniku 2–3 słowa kluczowe. Jeśli wpis istnieje – nie twórz drugiego

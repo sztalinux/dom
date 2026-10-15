@@ -2,8 +2,9 @@
 
 ## Claude Code w tym repozytorium – obowiązkowo na starcie każdej sesji
 
-To repozytorium jest źródłem harnessu. Procedury czytasz z `plugins/dom-budowa/skills/` (dowiązanie `.claude/skills`),
-a nie z pluginu zainstalowanego na koncie (ten jest tu celowo wyłączony w `.claude/settings.json`).
+To repozytorium jest źródłem harnessu – dwóch pluginów: `ja` (`plugins/ja/skills/`) i `dom-budowa`
+(`plugins/dom-budowa/skills/`). Procedury czytasz z dysku (`.claude/skills/` – dowiązanie na każdy skill obu pluginów,
+odtwarza je `python3 tools/build.py`), a nie z pluginów zainstalowanych na koncie (te są tu wyłączone w `.claude/settings.json`).
 
 Zanim zajmiesz się czymkolwiek innym:
 
@@ -18,11 +19,11 @@ Zanim zajmiesz się czymkolwiek innym:
     które sam zmieniłeś w tej sesji (`git add <pliki>`, nie `git add -A`); obce zmiany w `git status` zostaw i zgłoś.
 1. `git pull` – żeby pracować na aktualnej wersji.
 2. Sprawdź skrzynkę **„Zmiany do harnessu”** w Notion (`collection://e217448a-60ec-4af6-8584-8f368315109c`),
-   wpisy ze Statusem „Do wdrożenia”.
-3. Jeśli są – wdroż je od razu wg `plugins/dom-budowa/skills/rozwoj-harnessu/SKILL.md`, sekcja „Wdrożenie”
+   wpisy ze Statusem „Do wdrożenia” **albo pustym** (inwestor dodaje je ręcznie bez pól – uzupełnij je, HZ-3).
+3. Jeśli są – wdroż je od razu wg `plugins/ja/skills/rozwoj-harnessu/SKILL.md`, sekcja „Wdrożenie”
    (zmiana plików → wersja → CHANGELOG → `python3 tools/build.py` → commit → push → oznaczenie wpisów jako „Wdrożone”).
    Jeśli wpis jest niejasny albo sprzeczny z inną procedurą – zapytaj inwestora, zanim go wdrożysz.
-4. Jeśli skrzynka jest pusta – napisz jedną linię „Harness aktualny (wersja X.Y.Z)”.
+4. Jeśli skrzynka jest pusta – napisz jedną linię „Harness aktualny (dom-budowa X.Y.Z, ja X.Y.Z)”.
 4a. Baza **„Pomysły na rozwój”** (`collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`): dopisz jedną linię „Pomysły: n nowych do analizy,
     m »Do zrobienia«” (pomiń przy zerach). Niczego z niej nie wdrażaj bez polecenia „zrób POM-n”
     (`rozwoj-harnessu`, sekcja C).

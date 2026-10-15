@@ -1,6 +1,7 @@
 # Adaptery dostawców – jak ten sam harness działa w różnych narzędziach
 
-Jedno źródło: `plugins/dom-budowa/skills/` + `AGENTS.md` w publicznym repo GitHub `sztalinux/dom` (bez danych osobowych i danych budowy).
+Jedno źródło: `plugins/dom-budowa/skills/` i `plugins/ja/skills/` + `AGENTS.md` w publicznym repo GitHub `sztalinux/notion-plugin`
+(bez danych osobowych i danych budowy).
 Poprawki zgłoszone z dowolnego miejsca czekają w Notion („Zmiany do harnessu”) i obowiązują od razu.
 
 | Narzędzie | Skąd bierze harness | Uwagi |
@@ -14,8 +15,11 @@ Poprawki zgłoszone z dowolnego miejsca czekają w Notion („Zmiany do harnessu
 Uwagi:
 - W Claude Code w folderze repo plugin z konta jest wyłączony (`.claude/settings.json`, `enabledPlugins`),
   żeby nie dublować skilli – obowiązują pliki z dysku.
-- `.agents/skills` i `.claude/skills` to dowiązania do `plugins/dom-budowa/skills`. Na Windows bez obsługi symlinków:
-  `python3 tools/build.py --kopiuj-dowiazania` (albo włącz `git config core.symlinks true` i tryb dewelopera Windows).
+- `.agents/skills/` i `.claude/skills/` to katalogi z dowiązaniem na każdy skill obu pluginów (odtwarza je `tools/build.py`).
+  Na Windows bez obsługi symlinków: `python3 tools/build.py --kopiuj-dowiazania` (albo `git config core.symlinks true`
+  i tryb dewelopera Windows).
+- Gemini (CLI i Gem) dostaje na razie tylko `dom-budowa` (`gemini-extension.json`, `dist/gemini-gem/`); plugin `ja` działa
+  w Claude i w narzędziach czytających `AGENTS.md` + `.agents/skills`.
 - Dane (Notion, Excel, dokumenty) nie są częścią pluginu. Pliki leżą w folderze budowy na komputerze (poza repo).
 - W Claude Code w repo synchronizacja pluginów z claude.ai jest wyłączona lokalnie (`.claude/settings.local.json`,
   `syncClaudeAiPlugins: false`) – inaczej wersja z konta dublowałaby procedury z dysku.

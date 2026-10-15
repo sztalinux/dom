@@ -19,14 +19,18 @@ bazy (fetch data source) i zaktualizuj ten plik.
 | Źródło | tekst | skąd to wiem |
 | Wiedza | relacja → Informacje (Baza wiedzy) | informacje wynikające z tego ustalenia (`wiedza`, sekcja F) |
 
-## TASKS (2) – `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e`
+## TASKS – `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e`
+
+Wspólna baza zadań (dom i sprawy prywatne – plugin `ja`). Procedury budowy ustawiają zawsze **Obszar = Dom**;
+puste Obszar = stare wiersze budowy. Widoki budowy filtrują „Dom albo puste”.
 
 | Pole | Typ | Wartości |
 |---|---|---|
 | Name | tytuł | |
+| Obszar | select | Dom, Prywatne, Dziecko, Praca – budowa: zawsze Dom |
 | PLANNED | status | TO DO, PLANNED, IN PROGRESS, WAITING, ON HOLD, BLOCKED, SOMEDAY, DONE, ARCHIVED |
 | Priority | select | Highest, High, Medium, Low |
-| Kategoria | select | Media, Kredyt, Czyszczenie działki, Stan zero, SSO, Ogrodzenie, Teren, Przygotowanie do budowy, Wiata kontener, Projektowanie, Zakup działki, Inne, Ogród |
+| Kategoria | select | Media, Kredyt, Czyszczenie działki, Stan zero, SSO, Ogrodzenie, Teren, Przygotowanie do budowy, Wiata kontener, Projektowanie, Zakup działki, Inne, Ogród (+ Zakup, Zdrowie, Nauka – dla spraw prywatnych) |
 | When | data | |
 | Desc | tekst | jedno zdanie; listy i szczegóły – w treści strony (checkboxy) |
 | Kto | select | Ja, Ekipa, Konstruktor, Architekt, Kierownik budowy, Geodeta / geotechnik, Dostawca, Urząd / gestor, Inny – ktoś inny + PLANNED „WAITING” = czekam na |

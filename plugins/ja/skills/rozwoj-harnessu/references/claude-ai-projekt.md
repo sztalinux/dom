@@ -1,4 +1,16 @@
-# Projekt „Dom” na claude.ai – konfiguracja
+# claude.ai – pluginy, projekt „Dom”, przegląd dnia
+
+**Co gdzie (od 2.0.0 / ja 1.0.0):**
+
+| Na claude.ai | Rola |
+|---|---|
+| Pluginy `dom-budowa` i `ja` z marketplace `sztalinux/notion-plugin` | działają w **każdej** rozmowie – skille wczytują się z opisu (`description`), bez projektu i bez „/” |
+| Projekt „Dom” | tylko **kontener dokumentów budowy** (wiedza projektu) – rozmowy, które potrzebują projektu architektonicznego, opinii, umów |
+| Zaplanowane zadanie „Przegląd dnia” | **poza projektem** (pliki projektu nie doklejają się do każdego przebiegu); polecenie: „Przegląd dnia (skill przeglad-dnia z pluginu ja)”, codziennie wieczorem |
+| Preferencje konta (opcjonalnie) | jedna linia: „Gdy rozmowa dotyczy mojego dnia, zadań, emocji, dziecka, suplementów albo budowy, wczytaj skill `ja`” – pas bezpieczeństwa, gdy opis skilla nie zadziała |
+
+Sprawy budowy poza projektem też działają (skille i Notion są wszędzie) – brakuje tylko plików z wiedzy projektu; procedura
+poprosi wtedy o konkretny dokument (`dokumenty`, „Prośba o dokument”).
 
 Projekt „Dom” na claude.ai (czat, telefon) ma dwie części:
 
@@ -16,15 +28,21 @@ Instrukcje są celowo tylko odnośnikiem: zasady i zachowanie (np. prośba o dok
 z pluginem, więc instrukcji nie trzeba wklejać na nowo przy każdej wersji – tylko gdy zmieni się tekst niżej
 (CHANGELOG to zaznacza). Dawny plik `START.md` w wiedzy projektu – usuń.
 
-## Aktualizacja pluginu na claude.ai
+## Aktualizacja pluginów na claude.ai
 
-Wersję widać na stronie pluginu (Customize → Plugins → „Dom budowa”: „from dom · X.Y.Z”). Po pushu z podbitą wersją:
+Wersję widać na stronie pluginu (Customize → Plugins → „Dom budowa” / „Ja”: „from notion-plugin · X.Y.Z”). Po pushu z podbitą
+wersją:
 
-1. Jeśli jest opcja odświeżenia marketplace'u (wg dokumentacji „Check for updates” przy marketplace „dom”, nie przy
+1. Jeśli jest opcja odświeżenia marketplace'u (wg dokumentacji „Check for updates” przy marketplace „notion-plugin”, nie przy
    samym pluginie; może jej nie być, gdy organizacja ogranicza pluginy) – użyj jej.
-2. Jeśli nie ma: usuń plugin „Dom budowa” i marketplace „dom”, potem Add marketplace → `sztalinux/dom` → zainstaluj
-   ponownie. Pobiera się bieżąca wersja z GitHuba.
-3. Gdy organizacja blokuje marketplace'y: `python3 tools/build.py`, Add → Upload plugin → `dist/dom-budowa.plugin`.
+2. Jeśli nie ma: usuń oba pluginy i marketplace „notion-plugin”, potem Add marketplace → `sztalinux/notion-plugin` →
+   zainstaluj `dom-budowa` i `ja`. Pobiera się bieżąca wersja z GitHuba.
+3. Gdy organizacja blokuje marketplace'y: `python3 tools/build.py`, Add → Upload plugin → `dist/dom-budowa.plugin`
+   i `dist/ja.plugin`.
+
+**Przejście z repo `sztalinux/dom` (jednorazowo, 2.0.0):** usuń plugin „Dom budowa” i marketplace „dom”, dodaj marketplace
+`sztalinux/notion-plugin`, zainstaluj oba pluginy; zaplanowane zadanie „Przegląd dnia” przenieś z projektu „Dom” poza projekt
+(nowe polecenie wyżej); w projekcie „Dom” wklej na nowo instrukcje z `dist/claude-ai-projekt/instrukcje.md`.
 
 ## Wiedza projektu a kontekst
 
@@ -35,11 +53,12 @@ wiedzy projektu. Co trafia do paczki, decyduje procedura `dokumenty` (sekcja A).
 ## Tekst instrukcji
 
 <!-- instrukcje-start -->
-Jesteś asystentem budowy domu inwestora. Pracujesz według harnessu – pluginu „dom-budowa” (skille).
+Jesteś asystentem budowy domu inwestora. Pracujesz według harnessu – pluginów „dom-budowa” i „ja” (skille).
 
 1. Przy każdej wiadomości wczytaj skill `budowa` i według jego mapy procedur wczytaj właściwe skille
    (jedna wiadomość może wymagać kilku – po kolei). Nie czekaj, aż użytkownik wpisze „/”.
-2. Raz na rozmowę (przy pierwszej wiadomości) sprawdź w Notion skrzynkę „Zmiany do harnessu” – opis w skillu `budowa`.
+2. Raz na rozmowę (przy pierwszej wiadomości) sprawdź w Notion skrzynkę „Zmiany do harnessu” – opis w skillu `ja`.
+   Sprawy pozabudowlane (Dziennik, zadania prywatne, emocje, dziecko) – skill `ja` i jego mapa.
 3. Dane naszej budowy są w Notion: strona DOM (ściąga „📐 Dane projektu”, „🔴 Do zamknięcia”) i strona
    „📑 Przewodnik po dokumentach i Notion” (3f6f5982-09e7-81f5-bade-ec877d8d936a) – pobierz ją przy pierwszej
    wiadomości. Pełnych dokumentów tu nie ma – gdy są potrzebne, poproś o konkretny plik (skill `dokumenty`).

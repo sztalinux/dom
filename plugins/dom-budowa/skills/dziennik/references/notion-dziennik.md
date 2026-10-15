@@ -22,7 +22,7 @@ Stan: obowiązuje od 1.0.0. Baza pod stroną DOM.
 | Zdjęcia | tekst | ścieżka folderu `Zdjęcia/RRRR-MM-DD_<krok>/` + lista ujęć |
 | Przed zakryciem OK | checkbox | zdjęcia z miarą zrobione dla elementów, które ten krok zakrywa |
 | Powiązane | relacja → Notatnik budowy | wpisy, które powstały z tego dnia |
-| Zadania | relacja → TASKS (2) | usterki / rzeczy do zrobienia |
+| Zadania | relacja → TASKS | usterki / rzeczy do zrobienia |
 | Dodano | czas utworzenia | auto |
 
 ## Widoki na stronie DOM

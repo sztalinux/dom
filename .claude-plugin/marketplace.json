@@ -1,16 +1,21 @@
 {
-  "name": "dom-budowa",
+  "name": "notion-plugin",
   "owner": {
     "name": "sztalinux"
   },
   "metadata": {
-    "description": "Publiczny marketplace z harnessem budowy domu (bez danych osobowych i projektowych)."
+    "description": "Publiczny marketplace z pluginami Claude do Notion inwestora: budowa domu (dom-budowa) i sprawy osobiste (ja) – bez danych osobowych i projektowych."
   },
   "plugins": [
     {
       "name": "dom-budowa",
       "source": "./plugins/dom-budowa",
-      "description": "Harness budowy domu: zasady pracy, oferty, koszty (Excel), notatki i wiedza z filmów w Notion z rejestrem sprzeczności, analiza techniczna, przegląd tygodnia, porządek w dokumentach budowy z paczką dla claude.ai, etapy (bramki i odbiory), dziennik inwestora, zakupy, przygotowanie do spotkań i decyzji, inbox luźnych wpisów, harmonogram i terminy."
+      "description": "Harness budowy domu: zasady pracy, oferty, koszty (Excel), notatki i wiedza z filmów w Notion z rejestrem sprzeczności, analiza techniczna, przegląd tygodnia, porządek w dokumentach budowy z paczką dla claude.ai, etapy (bramki i odbiory), dziennik budowy, zakupy, przygotowanie do spotkań i decyzji, harmonogram i terminy. Luźne wpisy, przegląd dnia i rozwój harnessu – plugin ja."
+    },
+    {
+      "name": "ja",
+      "source": "./plugins/ja",
+      "description": "Osobisty asystent w Notion: jeden Dziennik na wszystko (emocje, praca, dziecko, zadania, suplementy, budowa), rozkładanie wpisów według bazy Obszary, zadania ze zmianą statusu, wieczorny przegląd dnia oraz rozwój harnessu (skrzynka zmian, pomysły). Budowę obsługuje plugin dom-budowa."
     }
   ]
 }

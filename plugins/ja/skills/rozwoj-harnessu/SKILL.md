@@ -1,12 +1,14 @@
 ---
 name: rozwoj-harnessu
-description: Zgłaszanie i wdrażanie zmian w harnessie budowy (procedury, zasady, szablony w repozytorium harnessu) przez skrzynkę „Zmiany do harnessu” w Notion oraz analiza pomysłów na rozwój setupu (baza „Pomysły na rozwój”). Używaj, gdy użytkownik poprawia sposób pracy asystenta („zawsze rób X”, „nie rób Y”, „źle to zapisałeś”, „zapamiętaj na przyszłość”), chce nową procedurę, zmienia strukturę Notion/Excela, mówi „wdróż zmiany”, „zaktualizuj harness”, „mam pomysł na…”, „przeanalizuj pomysły”, „zrób POM-3”, albo pyta o przeniesienie harnessu do innego AI.
+description: Zgłaszanie i wdrażanie zmian w harnessie (pluginy dom-budowa i ja – procedury, zasady, szablony w repozytorium harnessu) przez skrzynkę „Zmiany do harnessu” w Notion oraz analiza pomysłów na rozwój setupu (baza „Pomysły na rozwój”). Używaj, gdy użytkownik poprawia sposób pracy asystenta („zawsze rób X”, „nie rób Y”, „źle to zapisałeś”, „zapamiętaj na przyszłość”), chce nową procedurę, zmienia strukturę Notion/Excela, mówi „wdróż zmiany”, „zaktualizuj harness”, „mam pomysł na…”, „przeanalizuj pomysły”, „zrób POM-3”, albo pyta o przeniesienie harnessu do innego AI.
 ---
 
 # Rozwój harnessu
 
-Źródło harnessu: **publiczne** repozytorium GitHub `sztalinux/dom` (marketplace z pluginem `dom-budowa`). Claude na koncie (czat, telefon, Cowork)
-pobiera z niego plugin – po nowej wersji inwestor odświeża go ręcznie (albo synchronizacja, jeśli organizacja pozwala).
+Źródło harnessu: **publiczne** repozytorium GitHub `sztalinux/notion-plugin` – marketplace z dwoma pluginami:
+`dom-budowa` (budowa domu) i `ja` (Dziennik, emocje, zadania, dziecko, suplementy, przegląd dnia, ten skill). Claude na koncie
+(czat, telefon, Cowork) pobiera z niego pluginy – po nowej wersji inwestor odświeża je ręcznie (albo synchronizacja, jeśli
+organizacja pozwala).
 Konfiguracja projektu „Dom” na claude.ai (instrukcje, wiedza): `references/claude-ai-projekt.md`. Zmiany trafiają do repo dwiema drogami:
 
 | Gdzie jesteś | Co robisz |
@@ -18,9 +20,9 @@ Konfiguracja projektu „Dom” na claude.ai (instrukcje, wiedza): `references/c
 Skrzynka = konkretna reguła, wchodzi od razu. Pomysł = coś do przemyślenia; nic nie wchodzi samo, decyduje inwestor.
 
 Skrzynka: Notion → „Zmiany do harnessu”, `collection://e217448a-60ec-4af6-8584-8f368315109c`.
-Pola: Zmiana (tytuł), Status (Do wdrożenia / Wdrożone / Odrzucone), Procedura, Rodzaj (Nowa zasada, Poprawka,
-Nowa procedura, Zmiana struktury Notion / Excela, Usunięcie), Treść do wdrożenia, Dlaczego, Wdrożono w wersji,
-Data wdrożenia, ID (HZ-n).
+Pola: Zmiana (tytuł), Status (Do wdrożenia / Wdrożone / Odrzucone; **pusty = do wdrożenia** – inwestor dodaje wpisy ręcznie,
+bez pól), Plugin (dom-budowa / ja), Procedura, Rodzaj (Nowa zasada, Poprawka, Nowa procedura, Zmiana struktury Notion / Excela,
+Usunięcie), Treść do wdrożenia, Dlaczego, Wdrożono w wersji, Data wdrożenia, ID (HZ-n).
 
 ## Kiedy proponować zmianę (pętla uczenia)
 
@@ -37,7 +39,7 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
 
 1. Sformułuj zmianę tak, żeby dało się ją wdrożyć bez tej rozmowy:
    - **Zmiana:** krótki tytuł („Oferta: zawsze pytaj o fasety”),
-   - **Procedura** i **Rodzaj**,
+   - **Plugin**, **Procedura** i **Rodzaj**,
    - **Treść do wdrożenia:** gotowy tekst reguły w trybie rozkazującym, tak jak ma trafić do procedury,
    - **Dlaczego:** 1–2 zdania kontekstu z rozmowy (data).
 2. Sprawdź w skrzynce, czy podobny wpis już nie czeka – jeśli tak, uzupełnij go zamiast dublować.
@@ -47,26 +49,34 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
 
 ## B. Wdrożenie (tylko Claude Code w folderze repo)
 
-1. `git pull`. Pobierz wpisy „Do wdrożenia” (najstarsze pierwsze).
-2. Dla każdego wpisu: znajdź właściwe miejsce (`plugins/dom-budowa/skills/<procedura>/SKILL.md` lub `references/`),
+1. `git pull`. Pobierz wpisy ze Statusem „Do wdrożenia” **albo pustym** (najstarsze pierwsze). Wpis dodany ręcznie z samym
+   tytułem → najpierw uzupełnij pola jednym zapisem: Status „Do wdrożenia”, Plugin, Procedura, Rodzaj, Treść do wdrożenia
+   (reguła w trybie rozkazującym, wyprowadzona z tytułu) i Dlaczego („wpis ręczny inwestora, <data>”). Nie da się ustalić,
+   o co chodzi → zapytaj inwestora, nie wdrażaj.
+2. Dla każdego wpisu: znajdź właściwe miejsce (`plugins/<plugin>/skills/<procedura>/SKILL.md` lub `references/`),
    wprowadź zmianę zgodnie z `references/pisanie-procedur.md`. Nie kopiuj treści mechanicznie – wpasuj w strukturę
    procedury, usuń sprzeczne stare zapisy. Wpis niejasny lub sprzeczny z inną procedurą → zapytaj inwestora przed wdrożeniem.
-3. Podbij wersję w `plugins/dom-budowa/.claude-plugin/plugin.json` i `gemini-extension.json` (muszą być równe):
-   PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
-   **Bez podbicia wersji telefon i Cowork nie dostaną aktualizacji.**
-4. Dopisz wpis w `CHANGELOG.md` (wersja, data, lista HZ-n z jednym zdaniem każdy).
+3. Podbij wersję zmienionego pluginu w `plugins/<plugin>/.claude-plugin/plugin.json` (dla `dom-budowa` także
+   `gemini-extension.json` – muszą być równe): PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana
+   struktury danych. **Bez podbicia wersji telefon i Cowork nie dostaną aktualizacji.**
+4. Dopisz wpis w `CHANGELOG.md` pod nagłówkiem `## <plugin> [wersja] – data` (lista HZ-n z jednym zdaniem każdy);
+   zmiana obu pluginów = dwa nagłówki.
 5. `python3 tools/build.py` – musi przejść walidację, w tym kontrolę prywatności (wzorce + lista słów zakazanych
    `.dom/zakazane-w-repo.txt` w folderze budowy). Hooki w `.githooks/` powtarzają ją przy commicie (pliki, autor,
    wiadomość) i przed pushem (każdy wysyłany commit). Zablokowany hook = popraw dane, nigdy `--no-verify`.
    Przejrzyj `git diff`: zero nazwisk, firm, adresów, działek, telefonów, e-maili, kwot i treści notatek.
    Jeśli wpis ze skrzynki zawiera takie dane – wdroż regułę w wersji ogólnej („Firma A”), a konkret zostaw w Notion.
-6. `git add <zmienione pliki> && git commit -m "Harness <wersja>: HZ-… <skrót>" && git push` – tylko pliki z tej sesji; obce zmiany zgłoś.
+6. `git add <zmienione pliki> && git commit -m "Harness <plugin> <wersja>: HZ-… <skrót>" && git push` – tylko pliki z tej
+   sesji; obce zmiany zgłoś. `tools/build.py` odtwarza dowiązania `.claude/skills/` – nowy skill dodaj do commita z nimi.
 7. W Notion oznacz wdrożone wpisy jednym przebiegiem: Status „Wdrożone”, Wdrożono w wersji, Data wdrożenia.
-   Zaktualizuj linię „Wersja” na stronie „Asystent AI – harness budowy” (ID w `budowa/references/zrodla.md`; strona jest
-   tylko ramką nad skrzynką – opis procedur jest w README repo); nowa procedura = nowa opcja w polu „Procedura” skrzynki.
-   Zmiana struktury Notion (baza, widok, pole) → zaktualizuj `budowa/references/notion-mapa.md` (trafia do przewodnika w Notion przy następnym `tools/dokumenty.py` – zsynchronizuj go, `dokumenty`, sekcja C).
-8. Podsumuj w 2–4 liniach: wersja, co weszło, co odrzucone/odłożone i dlaczego. Dopisz przypomnienie:
-   „odśwież plugin na claude.ai (`references/claude-ai-projekt.md`, sekcja „Aktualizacja pluginu”)”; jeśli zmienił się tekst instrukcji
+   Zaktualizuj linię „Wersja” (obu pluginów) na stronie „Asystent AI – harness” (ID w `ja/references/notion-mapa.md`; strona
+   jest tylko ramką nad skrzynką – opis procedur jest w README repo); nowa procedura = nowa opcja w polu „Procedura” skrzynki.
+   Zmiana struktury Notion (baza, widok, pole) → zaktualizuj mapę: budowa – `dom-budowa/skills/budowa/references/notion-mapa.md`,
+   sprawy osobiste – `ja/skills/ja/references/notion-mapa.md`. Obie trafiają do przewodnika w Notion przy następnym
+   `tools/dokumenty.py` – zsynchronizuj go (`dokumenty`, sekcja C). Nowy rodzaj wpisu w Dzienniku, który da się opisać
+   polami „Gdzie” i „Jak zapisać”, to wiersz w bazie Obszary, nie zmiana harnessu.
+8. Podsumuj w 2–4 liniach: wersje, co weszło, co odrzucone/odłożone i dlaczego. Dopisz przypomnienie:
+   „odśwież plugin(y) na claude.ai (`references/claude-ai-projekt.md`, sekcja „Aktualizacja pluginów”)”; jeśli zmienił się tekst instrukcji
    w `references/claude-ai-projekt.md` – także „wklej na nowo `dist/claude-ai-projekt/instrukcje.md` w projekt »Dom«”.
 
 Zmiany, o które inwestor prosi bezpośrednio w Claude Code, wdrażasz od razu tymi samymi krokami 2–8 (bez skrzynki).
@@ -78,13 +88,14 @@ Pola: Pomysł (tytuł), Status (Nowy / Pytania do mnie / Przeanalizowany / Do zr
 **pusty = Nowy**), Obszar, Nakład (S/M/L), Wymaga ode mnie, Przeanalizowano, Zrobiono w wersji, ID (POM-n).
 Treść strony: pomysł inwestora (nie zmieniaj), pod nim sekcja „Analiza” pisana przez asystenta.
 
-**Zapis pomysłu** („mam pomysł…”, wpis w Inboxie „pomysł: …” o asystencie, Notion, Excelu, plikach, automatyzacji):
+**Zapis pomysłu** („mam pomysł…”, wpis w Dzienniku „pomysł: …” o asystencie, Notion, Excelu, plikach, automatyzacji):
 sprawdź, czy podobny już jest (uzupełnij zamiast dublować); nowy wiersz – tytuł, Obszar, w treści „## Pomysł (kto, data)”
 i słowa inwestora. Status pusty/Nowy. Poprawka sposobu pracy (jedna reguła) to nie pomysł – sekcja A.
 
 **Analiza** (wpisy Nowy lub pusty; w przeglądzie dnia `przeglad-dnia` automatycznie, inaczej na prośbę i na starcie Claude Code):
-1. Przeczytaj pomysł i przejrzyj, co już jest: procedury (`budowa` – mapa procedur, odpowiednie `SKILL.md`), mapa Notion
-   (`budowa/references/notion-mapa.md`), inne pomysły (zależności, duplikaty).
+1. Przeczytaj pomysł i przejrzyj, co już jest: procedury (mapy w `ja` i `budowa`, odpowiednie `SKILL.md`), mapy Notion
+   (`ja/references/notion-mapa.md`, `budowa/references/notion-mapa.md`), inne pomysły (zależności, duplikaty). Wiersz dodany
+   ręcznie z pustymi polami → uzupełnij je przy analizie (Obszar, Status, Nakład, Wymaga ode mnie).
 2. Niejasne, co inwestor chce → dopisz „### ❓ Pytania (data)” z 1–3 pytaniami i propozycją interpretacji, Status
    „Pytania do mnie”. Odpowiedź inwestora pod pytaniami → przy następnym przebiegu analizuj dalej.
 3. Jasne → dopisz pod pomysłem sekcję (nie nadpisuj wcześniejszych):
@@ -109,10 +120,11 @@ przeczytaj stronę pomysłu z analizą, potwierdź decyzje z „Do decyzji przed
 
 ## Nowa procedura – minimum
 
-- Katalog `plugins/dom-budowa/skills/<nazwa-kebab-case>/SKILL.md` z frontmatter `name` (= nazwa katalogu)
-  i `description` (co robi + kiedy używać + typowe frazy, < 1024 znaki).
-- Wpis w tabeli procedur w `AGENTS.md` i w „Mapie procedur” w `skills/budowa/SKILL.md`; nowa opcja w polu
-  „Procedura” skrzynki w Notion.
+- Katalog `plugins/<plugin>/skills/<nazwa-kebab-case>/SKILL.md` (budowa → `dom-budowa`, reszta → `ja`) z frontmatter
+  `name` (= nazwa katalogu, **unikalna w obu pluginach**) i `description` (co robi + kiedy używać + typowe frazy, < 1024 znaki).
+- Wpis w tabeli procedur w `AGENTS.md` i w mapie procedur skilla kontekstowego pluginu (`ja/SKILL.md` albo
+  `budowa/SKILL.md`); nowa opcja w polu „Procedura” skrzynki w Notion; gdy procedura obsługuje wpisy z Dziennika –
+  wiersz w bazie Obszary z tą nazwą w polu Procedura (i nowa opcja tego pola).
 - Szczegóły, schematy, szablony → `references/`.
 
 ## Przeniesienie do innego dostawcy

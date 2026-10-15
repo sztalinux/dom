@@ -75,7 +75,8 @@ co już wiadomo ze ściągi, z oznaczeniem źródła. W Claude Code nie proś �
 
 Strona Notion „📑 Przewodnik po dokumentach i Notion” (`3f6f5982-09e7-81f5-bade-ec877d8d936a`) jest głównym przewodnikiem
 dla asystenta na claude.ai – czyta go z Notion, więc inwestor niczego nie wgrywa. Treść generuje skrypt
-(`.dom/przewodnik-notion.md` w folderze budowy: dokumenty + mapa Notion z `budowa/references/notion-mapa.md`).
+(`.dom/przewodnik-notion.md` w folderze budowy: dokumenty + dwie mapy Notion – budowa z `budowa/references/notion-mapa.md`
+i sprawy osobiste z `ja/references/notion-mapa.md`, plugin `ja`).
 
 1. Raport startowy pokazuje „Przewodnik zmieniony → przepisz stronę Notion…” → bez pytania zastąp całą treść strony
    zawartością pliku (jedno wywołanie, plik już ma składnię Notion; nie zmieniaj jej ręcznie).

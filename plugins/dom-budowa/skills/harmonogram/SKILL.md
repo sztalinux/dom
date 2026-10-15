@@ -14,7 +14,7 @@ Notion trzyma czas.
 | Co | Baza | Klucz |
 |---|---|---|
 | Kroki budowy w czasie | **Harmonogram** `collection://d7a479ab-1e23-453f-8f59-55f4097f7d04` | Krok, Nr etapu (= Excel, arkusz Etapy), Termin (od–do), Kto, Status, Pewność terminu, Bez odwrotu, Zależy od / Blokuje |
-| Moje zadania i cudze terminy | **TASKS (2)** `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e` | When, PLANNED, **Kto**, Harmonogram |
+| Moje zadania i cudze terminy | **TASKS** `collection://2a9f5982-09e7-81be-91e8-000b0e10a05e` (wspólna z pluginem `ja` – zawsze **Obszar = Dom**) | When, PLANNED, **Kto**, Obszar, Harmonogram |
 | Materiał do zamówienia | **Zamówienia i dostawy** `collection://a9854c6c-43ec-4bc1-8ef0-273fb02261c7` | Zamówić do, Dostawa, Status, Krok |
 | Umowa, w ramach której ekipa robi krok | **Umowy i gwarancje** `collection://60c06f30-7867-435d-8f2e-1e025a3daa5c` | Kroki |
 
@@ -51,9 +51,9 @@ Każde zadanie/zamówienie podpinaj relacją do kroku – wtedy przesunięcie kr
 
 ## D. Czekam na („geodeta tyczy w czwartek”, „ekipa ma przysłać wycenę do 15.10”)
 
-- Cudzy termin → TASKS: Name „<kto> – <co>”, **Kto** = ta osoba/rola, PLANNED „WAITING”, When = termin, Desc = skąd wiadomo
+- Cudzy termin → TASKS: Name „<kto> – <co>”, **Kto** = ta osoba/rola, PLANNED „WAITING”, Obszar = Dom, When = termin, Desc = skąd wiadomo
   (rozmowa, data). Gdy dotyczy kroku – relacja Harmonogram.
-- Mój termin wobec kogoś („do piątku dam znać X”) → TASKS: Kto = Ja, PLANNED „TO DO”, When = termin.
+- Mój termin wobec kogoś („do piątku dam znać X”) → TASKS: Kto = Ja, PLANNED „TO DO”, Obszar = Dom, When = termin.
 - Po terminie: „czekam na” bez zmiany statusu → w przeglądzie (i w „co mnie czeka”) jako „przypomnij się <komu>”.
 - „Zrobione / przyszło” → DONE; jeśli wynikło z tego ustalenie – `notatka`, wiedza – `wiedza`.
 
@@ -64,7 +64,7 @@ zamówienia z „Zamówić do” i dostawy, bramki. Na górze: po terminie i dzi
 
 ## Zasady
 
-- Daty względne licz od daty podanej w rozmowie/wpisie (inbox: `@today`); brak daty przy terminie → zapytaj.
+- Daty względne licz od daty podanej w rozmowie/wpisie (Dziennik: `@today`); brak daty przy terminie → zapytaj.
 - Terminów innych osób nie zmieniaj „na domysł” – tylko z ich informacji (inwestor relacjonuje) i z Pewnością terminu.
 - Kwoty nigdy w Harmonogramie ani Zamówieniach – Excel (`koszty`).
 - Termin w Notatniku (pole Kiedy) i zadanie w TASKS dla tej samej sprawy → zadanie w TASKS, w Notatniku link; nie dubluj dat.
