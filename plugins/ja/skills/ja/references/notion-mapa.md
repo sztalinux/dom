@@ -46,6 +46,19 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 | Pomysły na rozwój harnessu | Pomysły na rozwój (na stronie DOM) | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie |
 | Wersja harnessu | Asystent AI – harness | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
 
-**Archiwa (tylko do wglądu, nie zapisuj):** ALL TODOS (stara lista zadań, wszystko ARCHIVED 15.10.2026), lista „TO DO”
-na stronie Quick notes (przeniesiona do TASKS). Strona WORK ma własną bazę zadań z pracy – nie zapisuj tam; zadania z pracy
+**Struktura najwyższego poziomu (POM-9, 15.10.2026)** – strona startowa 📌 DASHBOARD z linkami, mapa porządków: „🗺 Mapa Notion”
+(`3faf5982-09e7-8186-b1f1-f2b4ed2a9448`, pod DASHBOARD):
+- ✅ Zadania `3faf5982-09e7-8188-8bbd-ce6f8f691cdd` – widoki TASKS (baza na DOM);
+- 👨‍👩‍👧 Rodzina `3faf5982-09e7-8134-b482-c6eb748e87a7` – strona dziecka, 💞 Relacja, 💍 Wesele;
+- 🩺 Zdrowie `3faf5982-09e7-81a2-93bd-c85b2ebe040b` – Suplementacja (baza Suple), Examinations, notatki zdrowotne;
+- 🧠 Ja `3faf5982-09e7-81b6-b5b7-e0d5e3fe7ef8` – Personality (Dziennik emocji, Terapie, Wartości…), Hobbies, Inspiration;
+- 💼 WORK `c1dc91d3-5247-4c9b-8ec9-cc431c1b3ebb` – praca;
+- 📚 Wiedza `3faf5982-09e7-8113-a03c-eed243d4adc8` – Knowledge, Books, My Kindle Clippings;
+- 🗂️ Collections `44321b47-fd10-46f8-8d2e-574ac07502ac` – listy i kolekcje;
+- 🗄 Archiwum `3faf5982-09e7-8100-8725-cc0ca586a23e` – nieużywane strony (tylko do wglądu, nie zapisuj);
+- 🔒 Prywatne – poza zasięgiem asystenta (wyżej).
+Nowa strona w obszarze: zapisuj pod stroną obszaru; nowy rodzaj wpisu z Dziennika – wiersz w bazie Obszary.
+
+**Archiwa (tylko do wglądu, nie zapisuj):** 🗄 Archiwum (ALL TODOS, DONE, stara RESOURCES z Others, kopie zapasowe), lista „TO DO”
+na stronie Quick notes (przeniesiona do TASKS; Quick notes rozbierany w POM-9). Strona WORK ma własną bazę zadań z pracy – nie zapisuj tam; zadania z pracy
 wpisane do Dziennika idą do TASKS z Obszar = Praca.

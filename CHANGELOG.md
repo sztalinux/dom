@@ -4,6 +4,11 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.2.2] – 2026-10-15
+
+- POM-9 (etapy 1–3): mapa Notion – nowa struktura najwyższego poziomu (Zadania, Rodzina, Zdrowie, Ja, WORK, Wiedza,
+  Collections, Archiwum, Prywatne) z ID w `ja/references/notion-mapa.md`; strony przeniesione w całości (ID bez zmian).
+
 ## ja [1.2.1] – 2026-10-15
 
 - `ja`, zasada 5: strona „🔒 Prywatne” i jej podstrony poza zasięgiem asystenta (nie czytać, nie przeszukiwać, nie cytować);
