@@ -18,7 +18,8 @@ reszta niżej. Inwestor jest programistą, nie budowlańcem – pojęcia, które
    umowa → `oferta/references/umowa.md`, bramka lub odbiór → `etap`, formalności → `etap/references/formalnosci.md`,
    zakupy → `zakupy`. Nie powtarzaj ich pracy – weź wynik i przygotuj na nim rozmowę lub decyzję.
 3. **Kontekst naszej budowy** (odczyty zbierz przed pisaniem, równolegle):
-   - Notion → DOM: sekcja „🔴 Do zamknięcia przed …” (bieżący etap);
+   - Notion → DOM: sekcja „🔴 Do zamknięcia przed …” – blokady bieżącego etapu (widok Notatnika
+     `view://ddbaff9a-2f5b-47a5-bf7b-aa031bf88fc8`);
    - Notatnik budowy: otwarte Pytania, Ryzyka, Decyzje dla tej osoby (pole „Do kogo”) i tego etapu, „Pamiętać” etapu;
    - Rejestr sprzeczności: otwarte w tym temacie; Baza wiedzy: tematy, których dotyczy rozmowa;
    - wybór wykonawcy: baza „Porównanie wykonawców” i strona „Wybór wykonawcy” (knock-out, Runda 1);

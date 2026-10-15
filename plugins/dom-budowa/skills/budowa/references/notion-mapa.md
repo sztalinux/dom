@@ -15,9 +15,10 @@ DOM
 ├─ ✅ Zadania (toggle) → TASKS (baza wspólna ze sprawami osobistymi; budowa = Obszar Dom, widoki budowy filtrują Dom/puste)
 ├─ zakładki:
 │  ├─ 🏗 Etap (blok `8e0aca76-56ea-42ec-a022-99e903afb926`) → wspólne u góry: baza Harmonogram („📅 Oś czasu”) i „🔴 Do
-│  │     zamknięcia przed stanem zero” (bieżący etap); niżej „🗂 Etapy” – zakładki Całość / Stan zero / SSO / Deweloperski /
-│  │     Wykończenie / Teren i ogród, w każdej: przewodnik etapu (kolejność + „co ustalić przed”, do odhaczania), widok
-│  │     Checklisty i otwartych spraw Notatnika dla etapu (Całość: postęp checklisty, listy wspólne, sprawy całej budowy);
+│  │     zamknięcia przed stanem zero” (nagłówek rozwijany, widok Notatnika – blokady bieżącego etapu); niżej
+│  │     „🗂 Etapy” – zakładki Całość / Stan zero / SSO / Deweloperski / Wykończenie / Teren i ogród, w każdej:
+│  │     przewodnik etapu (kolejność + „co ustalić przed”, do odhaczania), widok Checklisty i otwartych spraw Notatnika
+│  │     dla etapu (Całość: postęp checklisty, listy wspólne, sprawy całej budowy);
 │  │     „📄 Strony”: Stan zero – punkty bez odwrotu (bramki), Plan przepustów i tras instalacji, Etapy budowy – przewodnik
 │  │     (już tylko odnośnik), ✅ Checklista budowy (pełna baza); na dole baza Zamówienia i dostawy (wspólna)
 │  ├─ 📒 Notatnik → Notatnik budowy (baza): pytania, decyzje, ryzyka, „pamiętać” – bez daty zdarzenia
@@ -35,7 +36,7 @@ DOM
 | Luźne wpisy do przetworzenia; pytania asystenta do inwestora | 📓 Dziennik (plugin `ja`): nowe wpisy = bloki 1. poziomu, podstrony „📝 Wpisy” i strony z widgetu na najwyższym poziomie Private (definicja w `wpisy`); „❓ Czeka na Twoją odpowiedź”; „Przetworzone” = ślad, zwijany blok na dzień | `3f8f5982-09e7-80c8-a154-c59aeb844e8f` | – (wolny tekst) |
 | Parametry projektu | DOM → „🤖 Dla asystenta” → „📐 Dane projektu (ściąga)” | `24af5982-09e7-806b-821a-e157ff33be42` | – |
 | Jakie mamy dokumenty, co w którym jest, gdzie leżą | 📑 Przewodnik po dokumentach i Notion (generowany – nie edytuj) | `3f6f5982-09e7-81f5-bade-ec877d8d936a` | – |
-| Co blokuje bieżący etap | DOM → zakładka 🏗 Etap → „🔴 Do zamknięcia przed …”; Notatnik → widok „🔴 Krytyczne i otwarte” | `view://3f3f5982-09e7-8125-a50b-000ce287ad48` | Status Otwarte/Do omówienia, Priorytet Krytyczne/Ważne |
+| Co blokuje bieżący etap | DOM → zakładka 🏗 Etap → „🔴 Do zamknięcia przed …” (nagłówek rozwijany z widokiem Notatnika „🔴 Blokady – <etap>”); szerzej: Notatnik → widok „🔴 Krytyczne i otwarte” | `view://ddbaff9a-2f5b-47a5-bf7b-aa031bf88fc8`; `view://3f3f5982-09e7-8125-a50b-000ce287ad48` | Blokady: Priorytet Krytyczne, Status Otwarte/Do omówienia, Etap = bieżący lub „Projekt i formalności”. Szerszy: Krytyczne/Ważne |
 | Otwarte pytania do konstruktora, architekta, kierownika… | Notatnik → „❓ Pytania do projektantów” (wg Do kogo) | `collection://7423414a-707b-415f-8751-c6ab7ebb6753`, `view://3f3f5982-09e7-81d2-a527-000caeaed4ea` | Typ Pytanie/Decyzja, Status otwarte, **Do kogo** |
 | Co ustaliliśmy, decyzje | Notatnik → „✅ Ustalone i zrobione” | `view://3f3f5982-09e7-8172-a666-000cb0777dc1` | Status Ustalone/Zrobione/Odrzucone, Typ Decyzja |
 | Notatki wg etapu / branży | Notatnik → „🏗 Wg etapu”, „🔧 Wg branży” | `view://3f3f5982-09e7-81f8-9782-000c7f49c705`, `view://3f3f5982-09e7-81e7-bfd0-000c9c2a8e8c` | Etap, Branża, Temat, Dziennik budowy |

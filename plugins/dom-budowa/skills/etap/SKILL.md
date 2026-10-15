@@ -15,7 +15,7 @@ zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły �
 |---|---|
 | Kolejność prac i co ustalić przed etapem | Notion → DOM → 🏗 Etap → „🗂 Etapy” → zakładka etapu (`budowa/references/notion-mapa.md`); odhaczone tam punkty przewodnika = zamknięte |
 | Kontrola prac krok po kroku (ustalenia, zamówienie, odbiór dostawy, kontrola) | Notion → „✅ Checklista budowy” (`budowa/references/notion-mapa.md`): Etap + Element, Dotyczy nas ≠ Nie; listy „Cała budowa” (beton, zbrojenie, dostawy) przy każdym betonowaniu i dostawie; widok etapu jest też w jego zakładce |
-| Bramki stanu zero | Notion → „Stan zero – punkty bez odwrotu” (link na stronie DOM, sekcja „Do zamknięcia”) |
+| Bramki stanu zero | Notion → „Stan zero – punkty bez odwrotu” (strona w zakładce 🏗 Etap na DOM, „📄 Strony”) |
 | Otwarte sprawy etapu | Notatnik budowy: Etap = ten etap, Status Otwarte / Do omówienia **oraz** wszystkie wpisy Typ „Pamiętać” niezależnie od Statusu (mają „Ustalone” – to rzeczy do przypilnowania na budowie, nie sprawy otwarte) |
 | Co i jak kontrolować | Baza wiedzy → Informacje: Rodzaj „Kontrola / odbiór”, „Błąd do uniknięcia”, „Kolejność prac” dla etapu; `references/odbiory.md` |
 | Parametry projektu | ściąga projektu (`budowa/references/projekt.md`) – grubości, klasy, rzędne, zbrojenie |
@@ -38,7 +38,9 @@ zanim pójdzie za niego płatność. Asystent przygotowuje listy i protokoły �
    (`budowa`, zasada 12) jednym zestawem zmian – razem z widokiem Informacji „🎯 Na teraz – <etap>”
    (`view://3f7f5982-09e7-81bf-a377-000c19ce62cc`: nazwa i filtr Etap = nowy etap lub „Cała budowa”; poprzedni etap
    z filtra usuń) i z widokiem „🎯 Na teraz – <etap>” w „✅ Checkliście budowy”
-   (`view://3faf5982-09e7-8182-a371-000c5e455e52`: nazwa i filtr Etap = nowy etap). Zakładki etapów w bloku
+   (`view://3faf5982-09e7-8182-a371-000c5e455e52`: nazwa i filtr Etap = nowy etap) oraz z sekcją „🔴 Do zamknięcia”
+   (tytuł i widok `view://ddbaff9a-2f5b-47a5-bf7b-aa031bf88fc8`: nazwa i filtr Etap = nowy etap, „Projekt i formalności”
+   zostaje). Zakładki etapów w bloku
    „🗂 Wiedza wg etapu” i widoki etapów checklisty są stałe – nie zmieniaj ich.
 8. **Wiedza na ten etap:** z Informacji (Etap = ten etap, Kluczowe i Ważne, Status ≠ Nieaktualne) wybierz to, co zmienia
    plan, bramki albo zamówienia, i wpleć w punkty 2–6 z WI-x – nie jako osobną listę do czytania.

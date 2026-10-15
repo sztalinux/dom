@@ -1,6 +1,6 @@
 ---
 name: notatka
-description: Zapis notatek, ustaleń, decyzji, pytań, ryzyk i zadań budowy do Notion (Notatnik budowy, TASKS, Do zamknięcia). Używaj, gdy użytkownik dyktuje lub wkleja notatkę z budowy, rozmowy z projektantem/ekipą, mówi „zapisz”, „zanotuj”, „dodaj do Notion”, „przypomnij mi”, „ustaliliśmy że…”, „decyzja: …”, albo gdy inna procedura wygenerowała otwarte pytania lub decyzje.
+description: Zapis notatek, ustaleń, decyzji, pytań, ryzyk i zadań budowy do Notion (Notatnik budowy, TASKS). Używaj, gdy użytkownik dyktuje lub wkleja notatkę z budowy, rozmowy z projektantem/ekipą, mówi „zapisz”, „zanotuj”, „dodaj do Notion”, „przypomnij mi”, „ustaliliśmy że…”, „decyzja: …”, albo gdy inna procedura wygenerowała otwarte pytania lub decyzje.
 ---
 
 # Notatka → Notion
@@ -35,8 +35,9 @@ branżą i adresatem, tak żeby dało się ją filtrować i zamknąć.
    Przy 1–3 oczywistych wpisach zapisz od razu; przy więcej lub przy niepewnej klasyfikacji – poproś o „ok”.
 4. **Zapisz jednym wywołaniem na bazę** (wiele stron w jednej operacji; zasada 6 z `budowa`), wartości pól dokładnie
    wg `references/notion-schematy.md`. Źródło = skąd to wiadomo (rozmowa z X dnia RRRR-MM-DD, PT KT.03, oferta Y).
-5. **Krytyczne sprawy przed etapem** (blokują start etapu) dodaj też jako checkbox w sekcji
-   „🔴 Do zamknięcia przed stanem zero” na stronie DOM – i odhacz, gdy zamknięte.
+5. **Krytyczne sprawy przed etapem** (blokują start etapu): Priorytet „Krytyczne” i Etap = bieżący etap – wtedy wpis
+   sam pojawia się w sekcji „🔴 Do zamknięcia przed …” na stronie DOM (widok Notatnika). Niczego tam nie dopisuj
+   ani nie odhaczaj ręcznie; sprawę zamyka Status wpisu.
 6. **Ustalenie = wiedza:** wpis ze Statusem „Ustalone”/„Zrobione”, który niesie wiedzę techniczną (decyzja, parametr,
    zasada wykonania, odpowiedź na pytanie) → w tym samym zestawie zapisów dodaj Informację w Bazie wiedzy z relacją
    do tego wpisu (procedura `wiedza`, sekcja F). Tak Baza wiedzy zawsze pokazuje, co u nas obowiązuje i skąd to wiadomo.

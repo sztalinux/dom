@@ -153,7 +153,8 @@ własny przegląd, żeby nie zasłaniała spraw osobistych.
     Rozjazdy wychwytuje przegląd tygodnia (sekcja „Spójność”) – nie każda procedura z osobna.
 12. **Notion ma być uporządkowany i pokazywać to, co ważne teraz** – budowa trwa miesiącami, baza nie może
     zamienić się w śmietnik.
-    - **Bieżący etap** wyznacza sekcja „🔴 Do zamknięcia przed …” na stronie DOM. Na pierwszym planie zawsze:
+    - **Bieżący etap** wyznacza sekcja „🔴 Do zamknięcia przed …” na stronie DOM – widok Notatnika „🔴 Blokady – <etap>”
+      (Krytyczne + Otwarte/Do omówienia + bieżący etap i „Projekt i formalności”). Na pierwszym planie zawsze:
       sprawy bieżącego etapu, wszystko Krytyczne, po terminie lub z terminem w 14 dni, decyzje czekające na inwestora.
     - **Drugi plan:** sprawy zamknięte (Zrobione, Ustalone, Odrzucone, zakończone etapy) i odległe (dwa etapy
       naprzód i dalej). W odpowiedziach i przeglądach pokazuj je tylko licznikiem („+7 spraw na SSO i dalej”),
@@ -164,8 +165,9 @@ własny przegląd, żeby nie zasłaniała spraw osobistych.
       (Notatka, Desc) mają jedno krótkie zdanie – o co chodzi albo co ustalono. Listy, kontekst, uzasadnienia,
       alternatywy i kolejne dopiski z datą wpisuj do treści strony (nagłówki, punkty, checkboxy dla rzeczy
       do odhaczenia). Wyjątek: pola Bazy wiedzy i Rejestru sprzeczności – ich zawartość opisuje procedura `wiedza`.
-    - Gdy inwestor zmienia etap („zaczynamy SSO”), zaproponuj przestawienie strony DOM: nowa sekcja „Do zamknięcia”,
-      otwarte sprawy starego etapu przeniesione albo zamknięte – jednym zestawem zmian do zatwierdzenia.
+    - Gdy inwestor zmienia etap („zaczynamy SSO”), zaproponuj przestawienie strony DOM jednym zestawem zmian:
+      tytuł sekcji „🔴 Do zamknięcia przed <nowy etap>”, w widoku `view://ddbaff9a-2f5b-47a5-bf7b-aa031bf88fc8` nazwa
+      i filtr Etap = nowy etap (zostaje „Projekt i formalności”), otwarte sprawy starego etapu przeniesione albo zamknięte.
 
 ## Domknięcie każdej rozmowy
 

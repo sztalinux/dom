@@ -4,6 +4,12 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## dom-budowa [2.3.1] – 2026-10-15
+
+- Sekcja „🔴 Do zamknięcia przed …” na DOM to teraz nagłówek rozwijany z widokiem Notatnika „🔴 Blokady – <etap>”
+  (Krytyczne + otwarte + bieżący etap i formalności) zamiast ręcznej listy checkboxów. `budowa` (zasada 12), `notatka`,
+  `etap` (A.7), `przygotowanie`, `przeglad-tygodnia` (Spójność) i mapa Notion zaktualizowane.
+
 ## dom-budowa [2.3.0] – 2026-10-15
 
 - Zakładka 🏗 Etap na DOM przebudowana: wspólne Harmonogram i „Do zamknięcia” u góry, niżej zakładki etapów

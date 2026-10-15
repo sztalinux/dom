@@ -49,7 +49,8 @@ Pobierz w jak najmniejszej liczbie zapytań:
     - Notatnik „Ustalone”/„Zrobione” z wiedzą techniczną bez relacji „Wiedza” → kandydaci do `wiedza`, sekcja F;
     - Informacje bez Tematów albo bez Źródeł i bez Notatnika; Tematy, których „W skrócie” przeczy nowszym Informacjom
       lub decyzjom; Informacje „Sporne” bez wpisu w Rejestrze;
-    - checkboxy w „🔴 Do zamknięcia” odhaczone, a wpis w Notatniku nadal „Otwarte” (i odwrotnie);
+    - sprawy blokujące bieżący etap bez Priorytetu „Krytyczne” (np. termin przed startem etapu, a Priorytet „Ważne”) –
+      nie widać ich w „🔴 Do zamknięcia” na DOM;
     - Dziennik: problemy bez wpisu w Notatniku/TASKS; TASKS „DONE”, a powiązany wpis Notatnika otwarty.
 11. **Zamówienia z wyprzedzeniem**: pozycje na najbliższe dwa etapy, których termin zamówienia (`zakupy/references/wyprzedzenia.md`)
    wypada w ciągu 14 dni; **płatności** – Wydatki „Planowane” z datą w 14 dni i transze po odbiorach, jeśli Excel jest
