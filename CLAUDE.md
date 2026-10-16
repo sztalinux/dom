@@ -14,9 +14,13 @@ Zanim zajmiesz się czymkolwiek innym:
    W historii nigdy nie mogą się znaleźć dane innych osób (projektanci, wykonawcy, urzędy) – raz wypchniętych
    nie da się skutecznie usunąć, więc kontrola musi zadziałać przed pushem. Nie przepisuj opublikowanej historii
    (force push zostawia stare commity dostępne po SHA) – chyba że wyciekły dane; wtedy zatrzymaj się i zapytaj inwestora.
-0a. **Jedna sesja Claude Code w tym repo naraz.** Przed startem: `ps -axo pid,command | grep "[c]laude"` –
-    jeśli działa inna sesja w tym katalogu, zapytaj inwestora, zanim cokolwiek zmienisz. Commituj tylko pliki,
-    które sam zmieniłeś w tej sesji (`git add <pliki>`, nie `git add -A`); obce zmiany w `git status` zostaw i zgłoś.
+0a. **Równoległe sesje Claude są dozwolone, ale nie na tych samych danych.** Przed zmianami sprawdź
+    `ps -axo pid,command | grep "[c]laude"` i `git status`. Jeśli działa inna sesja, pracuj dalej, o ile nie dotykasz
+    tego co ona: plików z obcymi niezacommitowanymi zmianami ani stron i baz Notion, które ona właśnie zmienia
+    (np. skrypt kursu → Baza wiedzy). Gdy zadanie wymaga tych samych plików lub danych albo nie da się tego ustalić –
+    zapytaj inwestora. Commituj tylko pliki, które sam zmieniłeś w tej sesji (`git add <pliki>`, nie `git add -A`);
+    obce zmiany w `git status` zostaw i zgłoś. Przed commitem `git pull` – gdy inna sesja podbiła wersję pluginu,
+    ustaw swoją wyżej.
 1. `git pull` – żeby pracować na aktualnej wersji.
 2. Sprawdź skrzynkę **„Zmiany do harnessu”** w Notion (`collection://e217448a-60ec-4af6-8584-8f368315109c`),
    wpisy ze Statusem „Do wdrożenia” **albo pustym** (inwestor dodaje je ręcznie bez pól – uzupełnij je, HZ-3).
