@@ -4,6 +4,13 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.3.4] – 2026-10-16
+
+- HZ-5: książka, film/serial i pomysł na prezent to nie zadanie – idą do Books, 🎬 Films i na stronę osoby; zadanie tylko
+  przy terminie lub decyzji o zakupie (`zadania`); baza 🎬 Films w mapie Notion `ja`.
+- HZ-6: tematy do przegadania z dzieckiem i partnerką zawsze na stronę osoby, po świeżym zdarzeniu także zadanie
+  z terminem +3 dni (`ja`, zasada 9; odwołanie w `dziecko`).
+
 ## ja [1.3.3] – 2026-10-16
 
 - Strona „🤖 Asystent AI” przeniesiona na najwyższy poziom Private (była pod DOM) i trzyma skrzynkę Zmiany do harnessu

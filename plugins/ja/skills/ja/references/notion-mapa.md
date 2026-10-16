@@ -44,6 +44,7 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 | Książki dla dziecka | strona dziecka → 💡 Pomysły → baza Ksiazki | `collection://32ff5982-09e7-809c-b4ac-000b8a8bf9ac` | Name |
 | Suplementy | Suple | `collection://0771d295-5bc0-46e3-b0cb-def13bccab8d` | Name, Status (TAKING / BREAK / TO START / SUSPENDED), **Buy**, Who, When, Last break, Type |
 | Książki do przeczytania | Books → All | `collection://5b028761-478a-4d72-acfd-6082043487c2` | Name, Author, Status (To read…), Priority (Must/Should/May), Area |
+| Filmy i seriale do obejrzenia | 🎬 Films (w 🗂️ Collections) | `collection://bea14b52-2a7f-45a2-b5a7-cbd1c255fa8b` | Name, Status (To watch / Watched), Tags, URL |
 | Poprawki sposobu pracy asystenta | Zmiany do harnessu | `collection://e217448a-60ec-4af6-8584-8f368315109c` | Zmiana, Status, **Plugin**, Procedura, Rodzaj, Treść do wdrożenia, Dlaczego |
 | Pomysły na rozwój harnessu | Pomysły na rozwój (na stronie 🤖 Asystent AI) | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie |
 | Wersja harnessu, skrzynka i pomysły | 🤖 Asystent AI | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
@@ -62,7 +63,7 @@ każda inna strona na tym poziomie to nowy wpis z widgetu, `wpisy`):**
 - 🧠 Ja `3faf5982-09e7-81b6-b5b7-e0d5e3fe7ef8` – Personality (Dziennik emocji, Terapie, Wartości…), Hobbies, Inspiration;
 - 💼 WORK `c1dc91d3-5247-4c9b-8ec9-cc431c1b3ebb` – praca;
 - 📚 Wiedza `3faf5982-09e7-8113-a03c-eed243d4adc8` – Knowledge, My Kindle Clippings;
-- 🗂️ Collections `44321b47-fd10-46f8-8d2e-574ac07502ac` – listy i kolekcje, Books, Listy do zabrania, Linki do obejrzenia;
+- 🗂️ Collections `44321b47-fd10-46f8-8d2e-574ac07502ac` – listy i kolekcje, Books, 🎬 Films, Listy do zabrania, Linki do obejrzenia;
 - 🗄 Archiwum `3faf5982-09e7-8100-8725-cc0ca586a23e` – nieużywane strony (tylko do wglądu, nie zapisuj);
 - 🔒 Prywatne `3faf5982-09e7-816b-92ab-d8b79c61ad92` – poza zasięgiem asystenta (wyżej): na liście tylko po to, żeby jej nie
   otwierać.

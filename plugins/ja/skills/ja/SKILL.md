@@ -79,6 +79,12 @@ zapisuj wprost według pól „Gdzie” i „Jak zapisać” w bazie Obszary.
    nie pokazuje. Wyjątek: generowany przewodnik – zastępujesz go w całości (`dokumenty`, C). W podsumowaniu wymień zaktualizowane miejsca. W drugą stronę: Notion rozjechał się z mapą (nieznana strona
    na najwyższym poziomie, przeniesiona lub przemianowana strona) → nie dopasowuj się po cichu; zaproponuj aktualizację
    mapy (`rozwoj-harnessu`) albo zapytaj.
+9. **Tematy do przegadania (dziecko, partnerka).** Temat zapisz zawsze najpierw w sekcji „💬 Do przegadania” na stronie
+   osoby: dziecko – `dziecko`; partnerka – „💞 Relacja”, według bazy Obszary. Gdy temat dotyczy konkretnego, świeżego
+   zdarzenia, które trzeba omówić, zanim się rozmyje (nie ogólny temat wychowawczy, relacyjny ani praca nad sobą), załóż
+   dodatkowo zadanie w TASKS (`zadania`): „Porozmawiać z <dzieckiem / partnerką> o <temat>”, Obszar Dziecko albo Prywatne,
+   When = data wpisu + 3 dni, w treści odnośnik do strony osoby – inaczej rozmowa na świeżo przepada. Temat ogólny → tylko
+   strona. Nie da się ocenić, czy to świeże zdarzenie → pytanie (w Dzienniku „❓”).
 
 ## Domknięcie rozmowy
 

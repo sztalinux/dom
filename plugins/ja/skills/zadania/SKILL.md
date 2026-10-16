@@ -12,6 +12,15 @@ dla wszystkich obszarów.
 
 ## A. Nowe zadanie
 
+Najpierw ustal, czy to w ogóle zadanie. Nie zakładaj go w TASKS (także jako SOMEDAY), gdy wpis to – również w formie
+„muszę przeczytać”, „trzeba obejrzeć”, „kupić X na prezent”:
+- książka do przeczytania → Books, według obszaru „Książka do przeczytania” w bazie Obszary;
+- film lub serial do obejrzenia → 🎬 Films, według obszaru „Film / serial do obejrzenia”;
+- pomysł na prezent → strona dziecka „🎁 Prezenty” (`dziecko`) albo „💞 Relacja” → „🎁 Prezenty i niespodzianki”;
+  prezent dla innej osoby → zapytaj, gdzie zapisać.
+Zadanie załóż tylko przy terminie albo decyzji o zakupie („kupić prezent do 20.11”) – wtedy zadanie i pomysł na stronie osoby.
+Bez tej kontroli takie wpisy lądowały w TASKS zamiast na listach i stronach osób.
+
 1. Sprawdź duplikat: wyszukiwarka z parametrem bazy TASKS (1–2 słowa kluczowe), wśród niezakończonych.
    Jest → uzupełnij (termin, opis w treści), nie dubluj.
 2. Pola:
@@ -20,7 +29,7 @@ dla wszystkich obszarów.
    | Name | krótko, bezokolicznik („Umówić stomatologa”) |
    | Obszar | Dziecko – gdy dotyczy dziecka; Praca – sprawy zawodowe; inaczej Prywatne. Budowa/działka/dom → nie tu, `budowa` |
    | When | termin z wpisu; „do piątku” licz od daty wpisu; brak terminu → puste |
-   | PLANNED | z terminem lub „na dniach” → TO DO; „kiedyś”, link do obejrzenia, zakup bez terminu → SOMEDAY |
+   | PLANNED | z terminem lub „na dniach” → TO DO; „kiedyś”, link do produktu do sprawdzenia (nie film), zakup bez terminu → SOMEDAY |
    | Priority | domyślnie Medium; „pilne”, „koniecznie” → High; drobiazg / zakup bez terminu → Low |
    | Kategoria | Zakup / Zdrowie / Nauka / Inne |
    | Kto | Ja; ktoś inny ma coś zrobić → jego rola opisowo w Desc, Kto = Inny, PLANNED WAITING |
@@ -53,4 +62,5 @@ terminie osobno na górze. SOMEDAY pokazuj tylko licznikiem, chyba że pyta o ni
 
 - Porządek statusami, nie usuwaniem; zamykając, dopisz jednym zdaniem, jak się skończyło.
 - Nie zakładaj zadań z rzeczy, które są tylko informacją albo emocją – to inne obszary.
-- Zakup dla dziecka → Obszar Dziecko, Kategoria Zakup; pomysł na prezent bez decyzji o zakupie → `dziecko` (sekcja Prezenty).
+- Zakup dla dziecka → Obszar Dziecko, Kategoria Zakup; pomysł na prezent bez terminu i decyzji o zakupie → strona osoby (sekcja A).
+- Temat do przegadania z dzieckiem lub partnerką → strona osoby, zadanie tylko po świeżym zdarzeniu (`ja`, zasada 9).
