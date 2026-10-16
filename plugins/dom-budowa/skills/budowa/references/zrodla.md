@@ -16,7 +16,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 | Luźne wpisy inwestora do rozłożenia (wszystkie obszary, także budowa) | Notion → „📓 Dziennik” (wolny tekst; podział na obszary w bazie „🧭 Obszary Dziennika”) | inwestor wpisuje, agent przetwarza (`wpisy`, plugin `ja`; sprawy budowy – `budowa`, „Luźny wpis z Dziennika”) |
 | Liczby: kosztorys, wydatki, oferty, wykonawcy (z kontaktami) | Excel „Kosztorys_stan_zero.xlsx” – prowadzi inwestor | Inwestor; agent tylko na prośbę (`koszty`): w Claude Code plik z folderu budowy, na claude.ai plik załączony w rozmowie (w wiedzy projektu go nie ma) |
 | Notatki, decyzje, pytania, ryzyka naszej budowy | Notion → DOM → Notatnik budowy | Inwestor + agent (`notatka`) |
-| Zadania z terminem | Notion → TASKS (na stronie DOM; wspólna ze sprawami osobistymi, budowa = Obszar Dom) | Inwestor + agent (`notatka`, `harmonogram`; prywatne – `zadania`, plugin `ja`) |
+| Zadania z terminem | Notion → TASKS (baza na stronie ✅ Zadania, na DOM widok „🏗 Zadania budowy”; wspólna ze sprawami osobistymi, budowa = Obszar Dom) | Inwestor + agent (`notatka`, `harmonogram`; prywatne – `zadania`, plugin `ja`) |
 | Porównanie wykonawców (jakość, zakres, knock-out) | Notion → Wybór wykonawcy – stan zero → baza „Porównanie wykonawców” | agent (`oferta`) |
 | Wiedza: tematy, informacje, rozmowy i filmy | Notion → DOM → Baza wiedzy (Tematy, Informacje, Rozmowy i źródła) | agent (`wiedza`), inwestor przegląda |
 | Sprzeczności i dylematy (ADR) | Notion → Baza wiedzy → Rejestr sprzeczności | agent zgłasza, **decyduje inwestor** |

@@ -12,7 +12,9 @@ Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – u góry odnośnik do D
 ```
 DOM
 ├─ ✍️ Wpisy → 📓 Dziennik (osobna strona, plugin `ja`) – luźne wpisy i „❓” pytania asystenta są tam, nie na DOM
-├─ ✅ Zadania (toggle) → TASKS (baza wspólna ze sprawami osobistymi; budowa = Obszar Dom, widoki budowy filtrują Dom/puste)
+├─ ✅ Zadania budowy (toggle) → widok TASKS „🏗 Zadania budowy – otwarte” (`view://3612dacf-51d8-4b08-a006-7623f74f0c3e`,
+│     Obszar Dom/puste, bez DONE/ARCHIVED); sama baza TASKS leży na stronie
+│     ✅ Zadania (plugin `ja`), wspólna ze sprawami osobistymi
 ├─ zakładki:
 │  ├─ 🏗 Etap (blok `8e0aca76-56ea-42ec-a022-99e903afb926`) → wspólne u góry: baza Harmonogram („📅 Oś czasu”) i „🔴 Do
 │  │     zamknięcia przed stanem zero” (nagłówek rozwijany, widok Notatnika – blokady bieżącego etapu); niżej

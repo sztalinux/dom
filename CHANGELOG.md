@@ -4,6 +4,15 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.3.2] – 2026-10-16
+
+- Baza TASKS przeniesiona z DOM na stronę ✅ Zadania (ID i widoki bez zmian) – mapa Notion `ja` zaktualizowana.
+
+## dom-budowa [2.3.2] – 2026-10-16
+
+- Na DOM zamiast bazy TASKS toggle „✅ Zadania budowy” z widokiem „🏗 Zadania budowy – otwarte” (Obszar Dom/puste)
+  i odnośnikiem do strony ✅ Zadania; mapa Notion i `zrodla.md` zaktualizowane.
+
 ## dom-budowa [2.3.1] – 2026-10-15
 
 - Sekcja „🔴 Do zamknięcia przed …” na DOM to teraz nagłówek rozwijany z widokiem Notatnika „🔴 Blokady – <etap>”
