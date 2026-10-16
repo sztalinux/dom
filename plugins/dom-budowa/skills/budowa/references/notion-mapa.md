@@ -7,7 +7,7 @@ Zmiana struktury Notion (nowa baza, widok, pole) → zaktualizuj ten plik (proce
 Sprawy osobiste (📓 Dziennik, 🧭 Obszary, zadania prywatne, dziecko, emocje, suplementy) – mapa w pluginie `ja`
 (`ja/references/notion-mapa.md`), w przewodniku sekcja „Notion – sprawy osobiste”.
 
-Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – u góry odnośnik do Dziennika i zadania, pod nimi zakładki, na dole pomysły i sekcja dla AI:
+Pulpit **DOM** `24af5982-09e7-806b-821a-e157ff33be42` – u góry odnośnik do Dziennika i zadania budowy, pod nimi zakładki, na dole sekcja dla AI:
 
 ```
 DOM
@@ -28,9 +28,10 @@ DOM
 │  ├─ 📚 Wiedza → strona Baza wiedzy (Tematy, Informacje, Rozmowy i źródła, Rejestr sprzeczności)
 │  ├─ 👷 Wykonawcy → „Wybór wykonawcy – stan zero” (rundy, zakres, wagi) + baza Porównanie wykonawców; baza Umowy i gwarancje
 │  └─ 🗂 Więcej → Przeglądy dzienne – budowa (wzmianka; strona na dole DOM), Przeglądy tygodniowe, Kontakty – kluczowe role (pełna lista w Excelu), zdjęcia i linki, Archiwum – stare notatki
-├─ 💡 Pomysły na rozwój (toggle) → baza Pomysły na rozwój (widok „💡 Tablica”): pomysły inwestora na harness i setup + analizy
-└─ 🤖 Dla asystenta (toggle) → 📑 Przewodnik po dokumentach i Notion, Asystent AI – harness (wersja + skrzynka
-      Zmiany do harnessu), nagłówek „📐 Dane projektu (ściąga)” – JEDYNE źródło ściągi
+└─ 🤖 Dla asystenta (toggle) → 📑 Przewodnik po dokumentach i Notion, odnośnik do 🤖 Asystent AI, nagłówek
+      „📐 Dane projektu (ściąga)” – JEDYNE źródło ściągi
+Poza DOM (najwyższy poziom Private, plugin `ja`): 🤖 Asystent AI – wersja pluginów, skrzynka Zmiany do harnessu,
+baza Pomysły na rozwój (widok „💡 Tablica”) – także dla zmian i pomysłów dotyczących budowy.
 ```
 
 | Czego szukasz | Gdzie (strona / baza → widok/sekcja) | ID | Najważniejsze pola |
@@ -61,9 +62,9 @@ DOM
 | Co sprawdzić na budowie (kontrola prac, ustalenia z ekipą, odbiór dostaw) – checklista do odhaczania | ✅ Checklista budowy (strona w zakładce 🏗 Etap → „📄 Strony”; widok etapu także w jego zakładce) → widoki „🎯 Na teraz – <etap>”, „🧱 Stan zero”, „🏠 SSO”, „🔌 Deweloperski”, „🔁 Wspólne (beton, zbrojenie, dostawy)”, „🔎 Do ustalenia / nie dotyczy” | `3faf5982-09e7-81dc-8b1b-ec198e1f5020`, `collection://125b5a01-833b-4739-96b9-2d19b74b29a6`, `view://3faf5982-09e7-8182-a371-000c5e455e52` | Punkt, **Zrobione**, Etap, Element, Faza (Decyzja → Wybór wykonawcy → Ustalenia → Materiały/Zamówienie → Odbiór dostawy → Kontrola), Jak sprawdzić, Uwagi, Kto, **Dotyczy nas** (Tak/Do ustalenia/Nie), Źródło, Nr |
 | Ostatni przegląd tygodnia | Przeglądy tygodniowe | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` | – |
 | Przegląd dnia budowy (dziś / jutro, „rozkminki”; ręczne przebiegi z dopiskiem „(ręczne)”) | 📆 Przeglądy dzienne – budowa (strona na dole DOM, wzmianka w zakładce Więcej); przeglądy osobiste – pod 📓 Dziennikiem (plugin `ja`) | `3f8f5982-09e7-815e-8b03-eacaa74db190` | – |
-| Zasady asystenta, wersja harnessu | Asystent AI – harness budowy | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
+| Zasady asystenta, wersja harnessu | 🤖 Asystent AI (najwyższy poziom Private, plugin `ja`) | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
 | Zgłoszone poprawki harnessu | Zmiany do harnessu | `collection://e217448a-60ec-4af6-8584-8f368315109c` | Status, Procedura, Rodzaj |
-| Pomysły na rozwój harnessu i setupu (do analizy, nie wchodzą same) | DOM → „💡 Pomysły na rozwój” → „💡 Tablica” | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`, `view://3f7f5982-09e7-81f6-97bf-000cb7996ef0` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie; analiza w treści strony |
+| Pomysły na rozwój harnessu i setupu (do analizy, nie wchodzą same) | 🤖 Asystent AI → „💡 Pomysły na rozwój” → „💡 Tablica” | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`, `view://3f7f5982-09e7-81f6-97bf-000cb7996ef0` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie; analiza w treści strony |
 | Stare notatki sprzed systemu | Archiwum – stare notatki (tylko do wglądu; przydatne rzeczy są w Notatniku) | `3f3f5982-09e7-817c-bab8-f439d883e6ce` | – (nie zapisuj tam) |
 
 **Słowniki.** Etap: Projekt i formalności / Stan zero / SSO / Deweloperski / Wykończenie / Teren i ogród / Cała budowa.

@@ -69,8 +69,8 @@ Bez zgody nic nie zapisuj. Jednorazowe prośby to nie zmiany harnessu.
 6. `git add <zmienione pliki> && git commit -m "Harness <plugin> <wersja>: HZ-… <skrót>" && git push` – tylko pliki z tej
    sesji; obce zmiany zgłoś. `tools/build.py` odtwarza dowiązania `.claude/skills/` – nowy skill dodaj do commita z nimi.
 7. W Notion oznacz wdrożone wpisy jednym przebiegiem: Status „Wdrożone”, Wdrożono w wersji, Data wdrożenia.
-   Zaktualizuj linię „Wersja” (obu pluginów) na stronie „Asystent AI – harness” (ID w `ja/references/notion-mapa.md`; strona
-   jest tylko ramką nad skrzynką – opis procedur jest w README repo); nowa procedura = nowa opcja w polu „Procedura” skrzynki.
+   Zaktualizuj linię „Wersja” (obu pluginów) na stronie „🤖 Asystent AI” (najwyższy poziom Private, ID w `ja/references/notion-mapa.md`;
+   strona to ramka nad skrzynką i pomysłami – opis procedur jest w README repo); nowa procedura = nowa opcja w polu „Procedura” skrzynki.
    Zmiana struktury Notion (baza, widok, pole) → zaktualizuj mapę: budowa – `dom-budowa/skills/budowa/references/notion-mapa.md`,
    sprawy osobiste – `ja/skills/ja/references/notion-mapa.md`. Obie trafiają do przewodnika w Notion przy następnym
    `tools/dokumenty.py` – zsynchronizuj go (`dokumenty`, sekcja C). Pełna lista miejsc w repo i w Notion, które trzeba
@@ -84,7 +84,7 @@ Zmiany, o które inwestor prosi bezpośrednio w Claude Code, wdrażasz od razu t
 
 ## C. Pomysły na rozwój
 
-Baza: Notion → DOM → „💡 Pomysły na rozwój”, `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` (widok „💡 Tablica”).
+Baza: Notion → 🤖 Asystent AI → „💡 Pomysły na rozwój”, `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` (widok „💡 Tablica”).
 Pola: Pomysł (tytuł), Status (Nowy / Pytania do mnie / Przeanalizowany / Do zrobienia / Zrobione / Odłożone / Odrzucone;
 **pusty = Nowy**), Obszar, Nakład (S/M/L), Wymaga ode mnie, Przeanalizowano, Zrobiono w wersji, ID (POM-n).
 Treść strony: pomysł inwestora (nie zmieniaj), pod nim sekcja „Analiza” pisana przez asystenta.

@@ -9,8 +9,8 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 | Co | Gdzie | Kto edytuje |
 |---|---|---|
 | Procedury, zasady, szablony | publiczne repo GitHub `sztalinux/notion-plugin` → pluginy `dom-budowa` i `ja` na koncie Claude (aktualizacja: ręczne odświeżenie lub synchronizacja – plugin `ja`, `rozwoj-harnessu/references/claude-ai-projekt.md`) | Claude Code (`rozwoj-harnessu`, sekcja B) |
-| Zgłoszone zmiany harnessu (obowiązują od razu) | Notion → Asystent AI → Zmiany do harnessu | dowolny asystent (`rozwoj-harnessu`, sekcja A) |
-| Pomysły na rozwój (do analizy; wdrożenie tylko na polecenie) | Notion → DOM → 💡 Pomysły na rozwój | inwestor wpisuje, asystent analizuje (`rozwoj-harnessu`, sekcja C) |
+| Zgłoszone zmiany harnessu (obowiązują od razu) | Notion → 🤖 Asystent AI (najwyższy poziom) → Zmiany do harnessu | dowolny asystent (`rozwoj-harnessu`, sekcja A) |
+| Pomysły na rozwój (do analizy; wdrożenie tylko na polecenie) | Notion → 🤖 Asystent AI → 💡 Pomysły na rozwój | inwestor wpisuje, asystent analizuje (`rozwoj-harnessu`, sekcja C) |
 | Terminy: harmonogram, zadania, czekam na, zamówienia | Notion → Harmonogram, TASKS, Zamówienia i dostawy (daty); kwoty i płatności – Excel (arkusz Płatności) | agent (`harmonogram`, `zakupy`), inwestor |
 | Umowy, odbiory, gwarancje | Notion → Umowy i gwarancje; skany – folder budowy | agent (`oferta`, `etap`), inwestor |
 | Luźne wpisy inwestora do rozłożenia (wszystkie obszary, także budowa) | Notion → „📓 Dziennik” (wolny tekst; podział na obszary w bazie „🧭 Obszary Dziennika”) | inwestor wpisuje, agent przetwarza (`wpisy`, plugin `ja`; sprawy budowy – `budowa`, „Luźny wpis z Dziennika”) |
@@ -42,7 +42,7 @@ Pełna mapa z perspektywy „czego szukasz” (widoki, pola, słowniki): `notion
 | Baza wiedzy (strona) | `3f4f5982-09e7-8193-a68e-fd35c9265012` |
 | Tematy / Informacje / Rozmowy i źródła / Rejestr sprzeczności | `wiedza/references/notion-wiedza.md` |
 | Przeglądy tygodniowe (strona) | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` |
-| Asystent AI – harness (wersje obu pluginów, skrzynka) | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` |
+| 🤖 Asystent AI (wersje obu pluginów, skrzynka, pomysły) | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` |
 | 📓 Dziennik (strona wpisów) / 📆 Przeglądy dzienne – budowa (na DOM) | `3f8f5982-09e7-80c8-a154-c59aeb844e8f` / `3f8f5982-09e7-815e-8b03-eacaa74db190` |
 | Zmiany do harnessu (data source) | `collection://e217448a-60ec-4af6-8584-8f368315109c` |
 | Pomysły na rozwój (data source) | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` |

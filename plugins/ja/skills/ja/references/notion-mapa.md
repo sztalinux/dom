@@ -45,8 +45,8 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 | Suplementy | Suple | `collection://0771d295-5bc0-46e3-b0cb-def13bccab8d` | Name, Status (TAKING / BREAK / TO START / SUSPENDED), **Buy**, Who, When, Last break, Type |
 | Książki do przeczytania | Books → All | `collection://5b028761-478a-4d72-acfd-6082043487c2` | Name, Author, Status (To read…), Priority (Must/Should/May), Area |
 | Poprawki sposobu pracy asystenta | Zmiany do harnessu | `collection://e217448a-60ec-4af6-8584-8f368315109c` | Zmiana, Status, **Plugin**, Procedura, Rodzaj, Treść do wdrożenia, Dlaczego |
-| Pomysły na rozwój harnessu | Pomysły na rozwój (na stronie DOM) | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie |
-| Wersja harnessu | Asystent AI – harness | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
+| Pomysły na rozwój harnessu | Pomysły na rozwój (na stronie 🤖 Asystent AI) | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie |
+| Wersja harnessu, skrzynka i pomysły | 🤖 Asystent AI | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
 
 **Struktura najwyższego poziomu (POM-9, 15.10.2026)** – strona startowa 📌 DASHBOARD w zakładkach, opis całości dla inwestora: „🗺 Mapa Notion”
 (`3faf5982-09e7-8186-b1f1-f2b4ed2a9448`, pod DASHBOARD). **Lista stałych stron najwyższego poziomu Private (komplet –
@@ -55,6 +55,8 @@ każda inna strona na tym poziomie to nowy wpis z widgetu, `wpisy`):**
 - 🛖 DOM `24af5982-09e7-806b-821a-e157ff33be42` – budowa (plugin dom-budowa);
 - 📓 Dziennik `3f8f5982-09e7-80c8-a154-c59aeb844e8f` – wejście na wszystko (schemat wyżej);
 - ✅ Zadania `3faf5982-09e7-8188-8bbd-ce6f8f691cdd` – baza TASKS (wszystkie obszary) i jej widoki; na DOM tylko widok zadań budowy;
+- 🤖 Asystent AI `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` – wszystko o samym asystencie (budowa i sprawy osobiste): wersja pluginów,
+  skrzynka Zmiany do harnessu, baza Pomysły na rozwój;
 - 👨‍👩‍👧 Rodzina `3faf5982-09e7-8134-b482-c6eb748e87a7` – strona dziecka, 💞 Relacja, 💍 Wesele;
 - 🩺 Zdrowie `3faf5982-09e7-81a2-93bd-c85b2ebe040b` – Suplementacja (baza Suple), Examinations, notatki zdrowotne;
 - 🧠 Ja `3faf5982-09e7-81b6-b5b7-e0d5e3fe7ef8` – Personality (Dziennik emocji, Terapie, Wartości…), Hobbies, Inspiration;

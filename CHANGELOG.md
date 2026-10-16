@@ -4,6 +4,17 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.3.3] – 2026-10-16
+
+- Strona „🤖 Asystent AI” przeniesiona na najwyższy poziom Private (była pod DOM) i trzyma skrzynkę Zmiany do harnessu
+  oraz bazę Pomysły na rozwój – dla budowy i spraw osobistych. Lista stałych stron, mapa `ja`, `rozwoj-harnessu`
+  i strona „🗺 Mapa Notion” zaktualizowane (ID stron i baz bez zmian).
+
+## dom-budowa [2.3.3] – 2026-10-16
+
+- Na DOM nie ma już Pomysłów na rozwój ani strony Asystent AI – w „🤖 Dla asystenta” jest odnośnik; mapa Notion
+  budowy i `zrodla.md` wskazują nowe miejsce.
+
 ## ja [1.3.2] – 2026-10-16
 
 - Baza TASKS przeniesiona z DOM na stronę ✅ Zadania (ID i widoki bez zmian) – mapa Notion `ja` zaktualizowana.
