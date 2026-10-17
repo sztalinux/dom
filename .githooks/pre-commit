@@ -12,7 +12,7 @@ python3 tools/build.py --tozsamosc || {
   exit 1
 }
 # Dokumenty i dane nigdy nie mogą trafić do commita
-if git diff --cached --name-only | grep -qiE '^dane/|\.(xlsx|xls|pdf|docx?|zip|jpe?g|png|heic)$'; then
-  echo "Commit zablokowany: w commicie jest plik z dane/ albo dokument (arkusz/PDF/zdjęcie)."
+if git diff --cached --name-only | grep -qiE '^dane/|\.(xlsx|xls|pdf|docx?|zip|jpe?g|png|heic|sqlite3?|db|(sqlite3?|db)-(wal|shm|journal))$'; then
+  echo "Commit zablokowany: w commicie jest plik z dane/ albo dokument lub plik bazy (arkusz/PDF/zdjęcie/SQLite)."
   exit 1
 fi

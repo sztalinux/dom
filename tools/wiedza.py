@@ -1,0 +1,1678 @@
+#!/usr/bin/env python3
+"""Indeks Bazy wiedzy: lokalna kopia czterech baz Notion (Informacje, Tematy, Źródła, Rejestr sprzeczności)
+w SQLite FTS5 – tylko do odczytu, Notion zostaje jedynym źródłem prawdy i jedynym miejscem zapisu.
+
+Plik indeksu: `.dom/wiedza/wiedza.sqlite` w folderze-centrum (hub) – domyślnie dwa poziomy nad repozytorium,
+albo zmienna DOM_HUB; w czacie podaje się --db <katalog>/wiedza.sqlite.
+
+    python3 tools/wiedza.py sync [--pelny] [--publikuj]   # pobierz zmiany z Notion (hook na starcie: --publikuj --cicho)
+    python3 tools/wiedza.py szukaj "ZAPYTANIE" [--etap …] [--istotnosc …] [--status …] [--rodzaj …] [--temat …]
+                                               [--ciekawostki] [--limit 12]
+    python3 tools/wiedza.py temat "NAZWA"                 # stan wiedzy, Kluczowe i otwarte SP tematu
+    python3 tools/wiedza.py duplikaty [--od RRRR-MM-DD] [--prog 0.82] [--temat NAZWA]
+    python3 tools/wiedza.py stan                          # liczniki, daty synchronizacji i publikacji
+    python3 tools/wiedza.py publikuj [--teraz] [--wymus] [--reset]   # kopia indeksu do prywatnego repo GITHUB_REPO
+
+Opcje wspólne (także po podkomendzie): --db ŚCIEŻKA, --cicho (tylko zmiany i błędy), --json.
+publikuj: --teraz bez odstępu 60 min; --wymus wysyła plik indeksu także bez zmian danych (np. po odtworzeniu
+repo); --reset zastępuje historię repo jednym commitem z czterema plikami (gdy `stan` ostrzega o rozmiarze).
+WIEDZA_DEBUG=1 (tylko ręcznie w terminalu, bez --cicho – traceback może nieść wartości pól): pełny traceback
+nieoczekiwanego błędu na stderr zamiast samej nazwy typu i linii.
+
+Zasady:
+- Moduł nigdy nie pisze do Notion: wysyła tylko zapytania o wiersze baz (query) i odczyt schematu bazy.
+- szukaj, temat, duplikaty i stan działają na samym pliku: bez tokena, bez sieci i bez pliku synonimów.
+- sync i publikuj czytają NOTION_TOKEN, GITHUB_TOKEN_SYNC i GITHUB_REPO z `.dom/sekrety.env` (chmod 600);
+  wartości nigdy nie są wypisywane ani zapisywane.
+- Dane leżą w `.dom/wiedza/` w hubie (katalog 700, pliki 600), nigdy w repozytorium; bez katalogu `.dom` sync
+  kończy się komunikatem i niczego nie tworzy. Uszkodzony indeks domyślny sync odkłada na bok i buduje od nowa.
+- sync --cicho (hook na starcie, nocne skrypty) pisze tylko przy zmianach albo błędach, mieści się w limicie
+  czasu startu (pobór i publikacja razem) i kończy się kodem 0.
+- publikuj wysyła wyłącznie do repo prywatnego (sprawdza to przed wysyłką).
+- Komunikaty zawierają tylko numery WI/ZRD/SP, ID stron, nazwy właściwości, liczby i statusy HTTP – nigdy
+  wartości pól (te drukują wyłącznie wyniki szukaj, temat i duplikaty).
+"""
+import argparse
+import base64
+import contextlib
+import difflib
+import hashlib
+import heapq
+import http.client
+import json
+import os
+import re
+import sqlite3
+import sys
+import time
+import traceback
+import unicodedata
+import urllib.error
+import urllib.request
+from collections import Counter
+from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+HUB = Path(os.environ.get("DOM_HUB") or REPO.parent.parent).expanduser().resolve()
+CONF = HUB / ".dom"
+KATALOG = CONF / "wiedza"
+DB_DOMYSLNA = KATALOG / "wiedza.sqlite"
+SEKRETY = CONF / "sekrety.env"
+SYNONIMY = Path(__file__).resolve().parent / "wiedza_synonimy.txt"  # czyta tylko sync; w czacie pliku nie ma
+
+NOTION_API = "https://api.notion.com"
+GITHUB_API = "https://api.github.com"
+# Działa 2025-09-03 (data sources; sprawdzone sondą schematu). Zapas 2022-06-28 z POST /v1/databases/{id}/query
+# wdrażać tylko, gdyby ta wersja zaczęła zwracać błąd wersji.
+NOTION_WERSJA = "2025-09-03"
+# Kolejność = kolejność synchronizacji. Klucz = tabela SQLite; "numer" = nazwa właściwości unique_id
+# (w sondzie "ID" we wszystkich trzech bazach z numerem; Tematy nie mają numeru – kluczem jest ID strony);
+# "klucz" = kolumna klucza głównego tabeli.
+BAZY = {
+    "tematy": {"zrodlo": "718422ca-ed6f-4269-a38f-4e508eff286c", "numer": None, "klucz": "id"},
+    "zrodla": {"zrodlo": "35453d82-e38d-4797-840c-d19677c71b54", "numer": "ID", "klucz": "zrd"},
+    "sprzecznosci": {"zrodlo": "7589d5f5-2d22-4b85-9138-72cd34d4a1f8", "numer": "ID", "klucz": "sp"},
+    "informacje": {"zrodlo": "f78bb02d-6da5-46fb-bea9-c25e15f93117", "numer": "ID", "klucz": "wi"},
+}
+
+ODSTEP_NOTION = 0.35        # s między żądaniami do Notion (limit ok. 3 zapytań/s)
+ZAPAS_MIN = 5               # filtr przyrostowy: ostatnie `zmieniono` minus tyle minut
+PELNY_CO_DNI = 7
+PUBLIKACJA_CO_MIN = 60
+LIMIT_HISTORII_MB = 500     # powyżej `stan` zaleca publikuj --reset
+# Zachowawczy limit treści base64 jednego pliku (base64 to ok. +1/3, więc plik indeksu do ok. 37 MB): duży zapas
+# względem limitów plików GitHuba, a limit wysyłki (20 s + 5 s/MB) mieści się w 300 s nocnego skryptu.
+LIMIT_PLIKU_MB = 50
+SCHEMAT_WERSJA = 1          # PRAGMA user_version; podbij przy zmianie schematu, normalizacji albo treści FTS
+ZNACZNIK = 0x57494544       # PRAGMA application_id („WIED”): plik jest indeksem wiedzy – w każdej wersji schematu
+BUDZET_CICHO = 110          # s na całe sync --cicho (pobór i publikacja) liczone od startu; hook ma limit 120 s
+GITHUB_WERSJA = "2022-11-28"
+MB = 1024 * 1024
+WZORZEC_REPO = re.compile(r"[\w.-]+/[\w.-]+")
+
+LIMIT_RETRY_AFTER = 60      # s, najdłuższe czekanie na 429
+PROBY_429 = 5               # łączna liczba prób przy 429
+ZAPAS_PROBY = 0.5           # s: krótszej reszty limitu czasu nie zaczynamy żądania
+DLUGOSC_KOMUNIKATU = 300
+BEARER = re.compile(r"bearer\s+\S+", re.I)
+
+ostatnie_notion = 0.0       # time.monotonic() ostatniego żądania do Notion
+
+
+def ostrzez(tekst: str):
+    print(f"  ! {tekst}")
+
+
+def blad(tekst: str):
+    print(f"  ✗ {tekst}")
+
+
+def wczytaj_sekrety(plik: Path) -> dict:
+    """{KLUCZ: wartość} z wierszy `KLUCZ=wartość`; brak pliku → {}. Wartości nigdy nie są wypisywane."""
+    try:
+        tekst = plik.read_text(encoding="utf-8")
+        tryb = plik.stat().st_mode & 0o777
+    except FileNotFoundError:
+        return {}
+    if tryb & 0o077:
+        ostrzez(f"{plik.name} ma uprawnienia {tryb:o} – ustaw chmod 600")
+    sekrety = {}
+    for linia in tekst.splitlines():
+        # kotwica na początku wiersza: komentarze w pliku też zawierają nazwy zmiennych
+        m = re.match(r"([A-Za-z_]\w*)=(.*)$", linia)
+        if m and m.group(2).strip():
+            sekrety[m.group(1)] = m.group(2).strip()
+    return sekrety
+
+
+def redaguj(tekst: str, sekrety: dict, nazwy=()) -> str:
+    """Zasłania wartości sekretów (od 8 znaków), każdy nagłówek `Bearer …` i `nazwy` (człony nazwy repo, od 3 znaków,
+    bez względu na wielkość liter, tylko jako całe słowa – krótki człon nie psuje reszty komunikatu). Członu krótszego
+    niż 3 znaki nie da się sensownie zasłonić: jako całe słowo pasowałby do przypadkowych fragmentów komunikatu."""
+    for wartosc in sorted(sekrety.values(), key=len, reverse=True):
+        if len(wartosc) >= 8:
+            tekst = tekst.replace(wartosc, "***")
+    for nazwa in sorted(nazwy, key=len, reverse=True):
+        if len(nazwa) >= 3:
+            tekst = re.sub(r"(?<![\w-])" + re.escape(nazwa) + r"(?![\w-])", "***", tekst, flags=re.I)
+    return BEARER.sub("***", tekst)
+
+
+def tekst_bledu(e: Exception, sekrety: dict, nazwy=()) -> str:
+    """Błąd HTTP lub sieci do komunikatu: najpierw redakcja, potem skrót – przecięta wartość nie zostałaby
+    rozpoznana."""
+    return redaguj(str(e), sekrety, nazwy)[:DLUGOSC_KOMUNIKATU]
+
+
+class BladHttp(Exception):
+    """Odpowiedź 4xx/5xx; niesie tylko status i pola `code`/`message` z ciała, po redakcji."""
+
+    def __init__(self, status: int, code: str = "", message: str = ""):
+        super().__init__(status, code, message)
+        self.status, self.code, self.message = status, code, message
+
+    def __str__(self) -> str:
+        return " ".join(c for c in (f"HTTP {self.status}", self.code, self.message) if c)
+
+
+class BladSieci(Exception):
+    """Brak połączenia albo przekroczony limit czasu; niesie tylko nazwę typu błędu (bez adresu) albo LIMIT_CZASU,
+    gdy wyczerpał się termin polecenia."""
+
+
+LIMIT_CZASU = "limit czasu startu"
+
+
+def pola_bledu(cialo: bytes) -> tuple:
+    try:
+        dane = json.loads(cialo.decode("utf-8", "replace"))
+    except ValueError:
+        return "", ""
+    if not isinstance(dane, dict):
+        return "", ""
+    return str(dane.get("code") or ""), str(dane.get("message") or "")
+
+
+def odczekaj_notion():
+    global ostatnie_notion
+    reszta = ODSTEP_NOTION - (time.monotonic() - ostatnie_notion)
+    if reszta > 0:
+        time.sleep(reszta)
+    ostatnie_notion = time.monotonic()
+
+
+class BezPrzekierowan(urllib.request.HTTPRedirectHandler):
+    """Przekierowanie 3xx kończy się błędem HTTP: urllib przeniósłby nagłówek Authorization także na inny host."""
+
+    def redirect_request(self, *args, **kwargs):
+        return None
+
+
+OTWIERACZ = urllib.request.build_opener(BezPrzekierowan)  # jedyne wyjście do sieci (zadanie_http)
+
+
+def zadanie_http(metoda: str, url: str, naglowki: dict, dane=None, timeout: float = 20, termin=None) -> dict:
+    """Żądanie JSON. Powtarza tylko 429 (Retry-After, najwyżej PROBY_429 prób); 5xx, 3xx i błąd sieci – od razu
+    wyjątek. termin = time.monotonic() końca limitu polecenia albo None: każda próba dostaje najwyżej resztę
+    czasu, a czekanie na 429, które się w niej nie mieści, kończy się BladHttp(429). Adres nie trafia do błędów –
+    ścieżki GitHuba zawierają nazwę prywatnego repo."""
+    cialo = None if dane is None else json.dumps(dane).encode("utf-8")
+    naglowki = dict(naglowki)
+    if cialo is not None:
+        naglowki.setdefault("Content-Type", "application/json")
+    # ukrywamy dokładnie to, co wysłaliśmy – serwer może odesłać token w treści błędu
+    wyslane = {k: v.split(" ", 1)[-1] for k, v in naglowki.items() if k.lower() == "authorization"}
+    for proba in range(1, PROBY_429 + 1):
+        if url.startswith(NOTION_API):
+            odczekaj_notion()
+        limit = timeout if termin is None else min(timeout, termin - time.monotonic())  # po odstępie Notion
+        if limit < ZAPAS_PROBY:
+            raise BladSieci(LIMIT_CZASU)
+        zadanie = urllib.request.Request(url, data=cialo, headers=naglowki, method=metoda)
+        try:
+            with OTWIERACZ.open(zadanie, timeout=limit) as odp:
+                tresc = odp.read()
+            return json.loads(tresc.decode("utf-8")) if tresc else {}
+        except urllib.error.HTTPError as e:
+            status, tresc_bledu, retry_after = e.code, e.read(), e.headers.get("Retry-After")
+            e.close()
+            if status == 429 and proba < PROBY_429:
+                try:
+                    czekaj = min(max(float(retry_after), 0), LIMIT_RETRY_AFTER)
+                except (TypeError, ValueError):
+                    czekaj = 1
+                if termin is None or time.monotonic() + czekaj + ZAPAS_PROBY < termin:
+                    time.sleep(czekaj)
+                    continue
+            code, message = pola_bledu(tresc_bledu)
+            # pełna treść (bez wysłanego tokena); skrót dopiero przy wydruku, po redakcji nazw (tekst_bledu)
+            raise BladHttp(status, redaguj(code, wyslane), redaguj(message, wyslane)) from None
+        except (OSError, http.client.HTTPException) as e:
+            raise BladSieci(type(e).__name__) from None
+
+
+TABELA_L = str.maketrans({"ł": "l", "Ł": "L"})
+
+
+def normalizuj(tekst: str) -> str:
+    """NFC, ł→l, małe litery – tokenizer unicode61 usuwa diakrytyki, ale „ł” nie ma rozkładu i zostałoby literą."""
+    return unicodedata.normalize("NFC", tekst or "").translate(TABELA_L).lower()
+
+
+def bez_diakrytykow(tekst: str) -> str:
+    """Do porównań w temat i duplikaty: najpierw normalizuj (ł), potem NFKD bez znaków łączących."""
+    return "".join(z for z in unicodedata.normalize("NFKD", normalizuj(tekst)) if not unicodedata.combining(z))
+
+
+def wczytaj_synonimy(plik: Path) -> list:
+    """Grupy synonimów (listy terminów po normalizuj) z wierszy `termin = syn1, syn2`; brak pliku → []."""
+    try:
+        tekst = plik.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return []
+    grupy = []
+    for nr, linia in enumerate(tekst.splitlines(), 1):
+        linia = linia.strip()
+        if not linia or linia.startswith("#"):
+            continue
+        if "=" not in linia:
+            ostrzez(f"{plik.name}: wiersz {nr} bez „=” – pominięty")
+            continue
+        termin, reszta = linia.split("=", 1)
+        grupa = []
+        for t in [termin] + reszta.split(","):
+            t = " ".join(normalizuj(t).split())
+            if t and t not in grupa:
+                grupa.append(t)
+        grupy.append(grupa)
+    return grupy
+
+
+def wzorzec_terminu(termin: str) -> str:
+    return r"(?<!\w)" + r"\s+".join(re.escape(s) for s in termin.split()) + r"(?!\w)"
+
+
+def rozwin_synonimy(tekst: str, grupy: list) -> str:
+    """Kolumna `slowa`: pozostałe terminy każdej grupy, której termin występuje w tekście jako całe słowo(a)."""
+    tekst, slowa = normalizuj(tekst), []
+    for grupa in grupy:
+        # najpierw tani test podciągu (pierwsze słowo terminu musi wystąpić), regex tylko dla kandydatów
+        obecne = [t for t in grupa if t.split()[0] in tekst and re.search(wzorzec_terminu(t), tekst)]
+        if obecne:
+            slowa += [t for t in grupa if t not in obecne and t not in slowa]
+    return " ".join(slowa)
+
+
+ELEMENT_ZAPYTANIA = re.compile(r'"([^"]*)"|(\S+)')  # fraza w domkniętym cudzysłowie albo zwykły token
+NIE_SLOWO = re.compile(r"[\W_]+")
+# słowa wypełniające pytań (po bez_diakrytykow) – w zapytaniu AND wycinałyby prawie wszystko albo nic nie wnosiły
+STOP_ZAPYTANIA = frozenset("""czy jak co na w z ze do po dla oraz jest sa byc moze mozna ma mam by sie to ten ta te
+o od u i a ale lub albo nie tak przy nad pod bez za przez jaki jaka jakie kiedy gdzie ile wiemy wiem warto robic
+zrobic potrzebny potrzebna potrzebne potrzeba trzeba nalezy powinien powinna powinno dobrze lepiej najlepiej czym
+miedzy pomiedzy moge moga""".split())
+TEMAT_OD = 6                # od tylu liter token traci końcówkę odmiany, najwyżej 2 litery: „przerwie” → przerw*
+TEMAT_MIN = 5               # tyle liter zostaje co najmniej: 6-literowe tracą 1 („termin” → termi*, nie term*)
+DOPELNIJ_PONIZEJ = 5        # szukaj: mniej widocznych trafień AND → dopełnienie trafieniami OR
+
+
+def termin_tokenu(slowo: str, prefiks: bool) -> str:
+    """Token → "temat"*: dłuższe słowa z samych liter bez końcówki, żeby forma odmieniona łapała podstawową
+    („roboczej” → robocz*); jawny prefiks z `*` zostaje bez zmian."""
+    if not prefiks and slowo.isalpha() and len(slowo) >= TEMAT_OD:
+        slowo = slowo[:max(TEMAT_MIN, len(slowo) - 2)]
+    return '"%s"*' % slowo
+
+
+def zbuduj_zapytanie_fts(zapytanie: str, tryb: str = "AND"):
+    """Ciąg MATCH dla informacje_fts albo None, gdy nie zostaje żaden termin; tryb "AND" albo "OR".
+    Frazy i operator `OR` (wielkimi literami) rozpoznawane na surowym wejściu – po normalizuj byłby zwykłym „or”.
+    Potem każdy element osobno: normalizuj, znaki spoza liter i cyfr → odstęp (niedomknięty cudzysłów, `-`, `*`,
+    `NEAR(` przestają być składnią); token → "temat"* (termin_tokenu), fraza bez * i bez zmian. Słowa wypełniające
+    (STOP_ZAPYTANIA) wypadają, chyba że zapytanie składa się tylko z nich; nie dotyczy to fraz ani tokenów z `*`.
+    Tryb "OR" z samych słów wypełniających → None: każde z nich trafia przypadkowo („na…”, „w…”)."""
+    terminy = []  # (termin FTS, czy słowo wypełniające) albo ("OR", False)
+    for m in ELEMENT_ZAPYTANIA.finditer(zapytanie or ""):
+        fraza, token = m.groups()
+        if token == "OR":
+            terminy.append(("OR", False))
+        elif fraza is not None:
+            slowa = NIE_SLOWO.sub(" ", normalizuj(fraza)).split()
+            if slowa:
+                terminy.append(('"%s"' % " ".join(slowa), False))
+        else:
+            prefiks = token.endswith("*")
+            terminy += [(termin_tokenu(s, prefiks), not prefiks and bez_diakrytykow(s) in STOP_ZAPYTANIA)
+                        for s in NIE_SLOWO.sub(" ", normalizuj(token)).split()]
+    same_stop = all(stop for t, stop in terminy if t != "OR")
+    if same_stop and tryb == "OR":
+        return None
+    if not same_stop:
+        terminy = [(t, stop) for t, stop in terminy if not stop]
+    czyste = []  # "OR" tylko między dwoma terminami
+    for t, _ in terminy:
+        if t != "OR" or (czyste and czyste[-1] != "OR"):
+            czyste.append(t)
+    if czyste and czyste[-1] == "OR":
+        czyste.pop()
+    if not czyste:
+        return None
+    if tryb == "OR":
+        return " OR ".join(t for t in czyste if t != "OR")
+    return " ".join(czyste)
+
+
+def czytaj_tekst(w: dict) -> str:
+    return "".join(s.get("plain_text") or "" for s in w.get(w["type"]) or [])
+
+
+def czytaj_select(w: dict) -> str:
+    return (w.get(w["type"]) or {}).get("name") or ""
+
+
+def czytaj_multi(w: dict) -> str:
+    return "; ".join(o.get("name") or "" for o in w.get("multi_select") or [])
+
+
+def czytaj_relacje(w: dict) -> list:
+    return [r["id"] for r in w.get("relation") or []]
+
+
+def czytaj_unique_id(w: dict):
+    return (w.get("unique_id") or {}).get("number")
+
+
+def czytaj_checkbox(w: dict) -> int:
+    return 1 if w.get("checkbox") else 0
+
+
+def czytaj_date(w: dict) -> str:
+    return (w.get("date") or {}).get("start") or ""
+
+
+def czytaj_url(w: dict) -> str:
+    return w.get("url") or ""
+
+
+# Czytnik wybierany po typie właściwości, nie po nazwie: Branża i Etap bywają select albo multi_select (Rejestr),
+# a Status może być typu status. Typ spoza listy (rollup, formuła) → None.
+CZYTNIKI = {"title": czytaj_tekst, "rich_text": czytaj_tekst, "select": czytaj_select, "status": czytaj_select,
+            "multi_select": czytaj_multi, "relation": czytaj_relacje, "unique_id": czytaj_unique_id,
+            "checkbox": czytaj_checkbox, "date": czytaj_date, "url": czytaj_url}
+
+# kolumna ← właściwość Notion (nazwy jak w notion-wiedza.md, potwierdzone sondą). Nazwa z „*” na końcu = dopasowanie
+# po początku: właściwość Rejestru „Pytanie do …” ma w nazwie imię inwestora, którego nie ma w repo.
+# Rollupy (Potwierdzenia, Data informacji) i relacje od strony Tematów i Źródeł nie są czytane.
+MAPOWANIE = {
+    "tematy": {"nazwa": "Temat", "w_skrocie": "W skrócie", "stan_wiedzy": "Stan wiedzy", "etap": "Etap",
+               "branza": "Branża", "kluczowe_dla": "Kluczowe dla"},
+    "zrodla": {"tytul": "Rozmowa", "data": "Data", "forma": "Forma", "kto": "Kto", "z_kim": "Z kim",
+               "najwazniejsze": "Najważniejsze", "link": "Link", "typ_autora": "Typ autora",
+               "konflikt": "Konflikt interesów", "wiarygodnosc": "Wiarygodność"},
+    "sprzecznosci": {"dylemat": "Dylemat", "status": "Status", "rodzaj": "Rodzaj", "branza": "Branża", "etap": "Etap",
+                     "priorytet": "Priorytet", "stanowisko_a": "Stanowisko A", "stanowisko_b": "Stanowisko B",
+                     "kontekst": "Kontekst naszej budowy", "opcje": "Opcje", "rekomendacja": "Rekomendacja asystenta",
+                     "pytanie": "Pytanie do*", "decyzja": "Decyzja", "uzasadnienie": "Uzasadnienie",
+                     "konsekwencje": "Konsekwencje", "data_decyzji": "Data decyzji"},
+    "informacje": {"teza": "Informacja", "szczegoly": "Szczegóły", "dla_nas": "Dla naszej budowy",
+                   "fragment": "Fragment", "rodzaj": "Rodzaj", "etap": "Etap", "branza": "Branża",
+                   "istotnosc": "Istotność", "status": "Status", "dotyczy_nas": "Dotyczy nas",
+                   "moj_komentarz": "Mój komentarz", "wrazliwe_na_czas": "Wrażliwe na czas", "pokazano": "Pokazano"},
+}
+# relacje czytane wyłącznie od strony Informacji: tabela relacji ← (właściwość, kolumna z ID strony po drugiej stronie)
+RELACJE = {"informacje_tematy": ("Tematy", "temat_id"), "informacje_zrodla": ("Źródła", "zrd_id"),
+           "informacje_sp": ("Sprzeczności", "sp_id"), "informacje_notatnik": ("Notatnik", "notatnik_id")}
+
+
+class BladMapowania(Exception):
+    """Strona nie pasuje do mapowania (brak właściwości); komunikat zawiera tylko nazwy baz i właściwości."""
+
+
+def wlasciwosc(baza: str, wlasciwosci: dict, nazwa: str) -> dict:
+    if nazwa.endswith("*"):
+        pasujace = [n for n in wlasciwosci if n.startswith(nazwa[:-1])]
+        if len(pasujace) != 1:
+            raise BladMapowania(f"{baza}: {len(pasujace)} właściwości o nazwie zaczynającej się od „{nazwa[:-1]}”")
+        nazwa = pasujace[0]
+    if nazwa not in wlasciwosci:
+        raise BladMapowania(f"{baza}: brak właściwości „{nazwa}”")
+    return wlasciwosci[nazwa]
+
+
+def wartosc(w: dict):
+    czytnik = CZYTNIKI.get(w.get("type"))
+    return czytnik(w) if czytnik else None
+
+
+def wlasciwosc_numeru(baza: str, wlasciwosci: dict) -> dict:
+    """Właściwość unique_id po nazwie z BAZY, a gdy nazwa się różni – pierwsza tego typu."""
+    w = wlasciwosci.get(BAZY[baza]["numer"])
+    if not w or w.get("type") != "unique_id":
+        w = next((v for v in wlasciwosci.values() if v.get("type") == "unique_id"), None)
+    if w is None:
+        raise BladMapowania(f"{baza}: brak właściwości typu unique_id")
+    return w
+
+
+def mapuj_strone(baza: str, strona: dict):
+    """Strona z odpowiedzi API → (kolumny, relacje) albo None, gdy stronę pomijamy (kosz, archiwum, obiekt inny niż
+    strona, brak numeru). kolumny: {kolumna tabeli `baza`: wartość} – komplet kolumn tabeli; relacje: {tabela relacji:
+    [ID stron]} tylko dla informacji, dla pozostałych baz {}."""
+    if strona.get("object") != "page" or strona.get("in_trash") or strona.get("archived"):
+        return None
+    wlasciwosci = strona.get("properties") or {}
+    kolumny = {"id": strona["id"]}
+    klucz = BAZY[baza]["klucz"]
+    if klucz != "id":
+        numer = czytaj_unique_id(wlasciwosc_numeru(baza, wlasciwosci))
+        if numer is None:
+            ostrzez(f"{baza}: strona {strona['id']} bez numeru – pominięta")
+            return None
+        kolumny[klucz] = numer
+    for kolumna, nazwa in MAPOWANIE[baza].items():
+        kolumny[kolumna] = wartosc(wlasciwosc(baza, wlasciwosci, nazwa))
+    kolumny["notion_url"] = strona.get("url") or ""
+    kolumny["zmieniono"] = strona.get("last_edited_time") or ""
+    relacje = {}
+    if baza == "informacje":
+        kolumny["dodano"] = strona.get("created_time") or ""
+        for tabela, (nazwa, _) in RELACJE.items():
+            w = wlasciwosc(baza, wlasciwosci, nazwa)
+            if w.get("has_more"):
+                ostrzez(f"WI-{kolumny['wi']}: relacja „{nazwa}” ma więcej powiązań, niż zwraca API – w indeksie część")
+            relacje[tabela] = czytaj_relacje(w) if w.get("type") == "relation" else []
+    return kolumny, relacje
+
+
+SCHEMAT = """
+CREATE TABLE tematy      (id TEXT PRIMARY KEY, nazwa TEXT, w_skrocie TEXT, stan_wiedzy TEXT, etap TEXT, branza TEXT,
+                          kluczowe_dla TEXT, notion_url TEXT, zmieniono TEXT);
+CREATE TABLE zrodla      (zrd INTEGER PRIMARY KEY, id TEXT UNIQUE, tytul TEXT, data TEXT, forma TEXT, kto TEXT, z_kim TEXT,
+                          najwazniejsze TEXT, link TEXT, typ_autora TEXT, konflikt TEXT, wiarygodnosc TEXT, notion_url TEXT,
+                          zmieniono TEXT);
+CREATE TABLE sprzecznosci(sp INTEGER PRIMARY KEY, id TEXT UNIQUE, dylemat TEXT, status TEXT, rodzaj TEXT, branza TEXT,
+                          etap TEXT, priorytet TEXT, stanowisko_a TEXT, stanowisko_b TEXT, kontekst TEXT, opcje TEXT,
+                          rekomendacja TEXT, pytanie TEXT, decyzja TEXT, uzasadnienie TEXT, konsekwencje TEXT,
+                          data_decyzji TEXT, notion_url TEXT, zmieniono TEXT);
+CREATE TABLE informacje  (wi INTEGER PRIMARY KEY, id TEXT UNIQUE, teza TEXT, szczegoly TEXT, dla_nas TEXT, fragment TEXT,
+                          rodzaj TEXT, etap TEXT, branza TEXT, istotnosc TEXT, status TEXT, dotyczy_nas TEXT,
+                          moj_komentarz TEXT, wrazliwe_na_czas INTEGER, pokazano TEXT, notion_url TEXT, dodano TEXT,
+                          zmieniono TEXT);
+CREATE TABLE informacje_tematy   (wi INTEGER, temat_id TEXT, PRIMARY KEY (wi, temat_id));
+CREATE TABLE informacje_zrodla   (wi INTEGER, zrd_id TEXT, PRIMARY KEY (wi, zrd_id));
+CREATE TABLE informacje_sp       (wi INTEGER, sp_id TEXT, PRIMARY KEY (wi, sp_id));
+CREATE TABLE informacje_notatnik (wi INTEGER, notatnik_id TEXT, PRIMARY KEY (wi, notatnik_id));
+CREATE TABLE sync_stan   (baza TEXT PRIMARY KEY, ostatnie_zmieniono TEXT, wierszy INTEGER, zsynchronizowano TEXT);
+CREATE TABLE meta        (klucz TEXT PRIMARY KEY, wartosc TEXT);
+CREATE VIRTUAL TABLE informacje_fts USING fts5(teza, tematy, szczegoly, dla_nas, slowa,
+                          tokenize='unicode61 remove_diacritics 2');  -- rowid = wi
+"""
+# treść indeksu do hasha publikacji; sync_stan, meta i FTS (pochodna) poza nim
+TABELE_DANYCH = ("tematy", "zrodla", "sprzecznosci", "informacje",
+                 "informacje_tematy", "informacje_zrodla", "informacje_sp", "informacje_notatnik")
+
+
+class BladIndeksu(Exception):
+    """Pliku indeksu nie da się użyć (brak, inna wersja schematu, brak FTS5, obcy plik); komunikat bez wartości
+    pól."""
+
+
+def sprawdz_fts5() -> bool:
+    conn = sqlite3.connect(":memory:")
+    try:
+        conn.execute("CREATE VIRTUAL TABLE t USING fts5(x)")
+        return True
+    except sqlite3.OperationalError:
+        return False
+    finally:
+        conn.close()
+
+
+# obiekty schematu bez wewnętrznych SQLite (sqlite_…); ten sam zbiór porównuje otworz_db i usuwa utworz_schemat
+BEZ_WEWNETRZNYCH = "name NOT LIKE 'sqlite\\_%' ESCAPE '\\'"
+NAZWY_OBIEKTOW = f"SELECT name FROM sqlite_master WHERE {BEZ_WEWNETRZNYCH}"
+# Obiekty schematu 1, zamrożone: indeks zbudowany przed znacznikiem (ZNACZNIK) rozpoznajemy po nich i po wersji 1
+NAZWY_V1 = frozenset("""tematy zrodla sprzecznosci informacje informacje_tematy informacje_zrodla informacje_sp
+informacje_notatnik sync_stan meta informacje_fts informacje_fts_data informacje_fts_idx informacje_fts_content
+informacje_fts_docsize informacje_fts_config""".split())
+NIEZBEDNE_V1 = {"meta", "sync_stan", "informacje"}
+
+
+def nazwy_schematu() -> set:
+    """Nazwy obiektów, które zakłada SCHEMAT, razem z tabelami pomocniczymi FTS5 – z próbnej bazy w pamięci."""
+    conn = sqlite3.connect(":memory:")
+    try:
+        conn.executescript(SCHEMAT)
+        return {n for (n,) in conn.execute(NAZWY_OBIEKTOW)}
+    finally:
+        conn.close()
+
+
+def uszkodzony(e: BaseException) -> bool:
+    """Plik nie jest bazą albo ma zepsute strony: sqlite3 zgłasza wtedy sam DatabaseError; podklasy (zajęta baza,
+    brak dostępu, błąd zapytania – OperationalError i inne) to nie uszkodzenie."""
+    return type(e) is sqlite3.DatabaseError
+
+
+def utworz_schemat(conn: sqlite3.Connection):
+    """Tabele od nowa w jednej transakcji: usuwa wszystkie obiekty spoza wewnętrznych SQLite – widoki, wyzwalacze
+    i indeksy, potem tabele wirtualne (ich tabele pomocnicze znikają razem z nimi), na końcu zwykłe; obcy obiekt,
+    który by został, wywoływałby przebudowę przy każdym otwarciu. Zakłada SCHEMAT, ustawia user_version
+    i ZNACZNIK. Pusta meta (brak ostatni_pelny) wymusza pełny sync."""
+    obiekty = conn.execute(
+        f"SELECT type, name FROM sqlite_master WHERE {BEZ_WEWNETRZNYCH} AND type IN ('view', 'trigger', 'index', "
+        "'table') ORDER BY type = 'table', sql LIKE 'CREATE VIRTUAL TABLE%' DESC").fetchall()
+    usun = "".join('DROP %s IF EXISTS "%s";' % (typ.upper(), nazwa.replace('"', '""')) for typ, nazwa in obiekty)
+    conn.executescript(f"BEGIN; {usun} {SCHEMAT}; PRAGMA user_version = {SCHEMAT_WERSJA}; "
+                       f"PRAGMA application_id = {ZNACZNIK}; COMMIT;")
+
+
+def plik_indeksu(conn: sqlite3.Connection, nazwy: set) -> bool:
+    """Niepusty plik jest indeksem wiedzy, gdy ma ZNACZNIK (dowolna wersja i lista tabel – wolno go przebudować) albo
+    jest indeksem schematu 1 sprzed znacznika: user_version 1, obiekty z NAZWY_V1, w tym NIEZBEDNE_V1. Każdy inny,
+    także z user_version 0, jest obcy – własny indeks ustawia wersję w tej samej transakcji co tabele."""
+    if conn.execute("PRAGMA application_id").fetchone()[0] == ZNACZNIK:
+        return True
+    return (conn.execute("PRAGMA user_version").fetchone()[0] == 1 and nazwy <= NAZWY_V1
+            and NIEZBEDNE_V1 <= nazwy)
+
+
+def otworz_db(sciezka: Path, zapis: bool) -> sqlite3.Connection:
+    """Odczyt: tylko do odczytu (URI mode=ro), pliku nie tworzy; brak pliku albo inna wersja schematu → BladIndeksu.
+    Zapis (sync): tworzy plik (katalog musi istnieć); niepusty plik, który nie jest indeksem (plik_indeksu) →
+    BladIndeksu i plik nietknięty; uszkodzony (quick_check) → sqlite3.DatabaseError; przy innej wersji albo innym
+    zestawie tabel – tabele od nowa; indeks sprzed znacznika dostaje ZNACZNIK bez przebudowy.
+    timeout=5 to busy_timeout 5000 ms; dziennik DELETE (bez WAL) – czat pobiera jeden plik."""
+    sciezka = Path(sciezka)
+    if zapis:
+        if not sprawdz_fts5():
+            raise BladIndeksu(f"SQLite {sqlite3.sqlite_version} bez FTS5 – indeks wymaga FTS5")
+        conn = sqlite3.connect(str(sciezka), timeout=5)
+        try:
+            # przed pierwszym zapisem (PRAGMA journal_mode pisze do pliku): przebudowa kasuje tabele, więc wolno ją
+            # zrobić tylko na pliku pustym albo na indeksie wiedzy – cudzej bazy nie ruszamy
+            nazwy = {n for (n,) in conn.execute(NAZWY_OBIEKTOW)}
+            if nazwy and not plik_indeksu(conn, nazwy):
+                raise BladIndeksu(f"{sciezka.name}: plik nie jest indeksem wiedzy – nie nadpisuję go")
+            if conn.execute("PRAGMA quick_check").fetchone()[0] != "ok":
+                raise sqlite3.DatabaseError("quick_check")
+            conn.execute("PRAGMA journal_mode = DELETE")
+            wersja = conn.execute("PRAGMA user_version").fetchone()[0]
+            if wersja != SCHEMAT_WERSJA or nazwy != nazwy_schematu():
+                if nazwy:
+                    powod = (f"w schemacie {wersja}, wymagany {SCHEMAT_WERSJA}" if wersja != SCHEMAT_WERSJA
+                             else "z innym zestawem tabel")
+                    ostrzez(f"indeks {powod} – tabele od nowa, pełny sync")
+                utworz_schemat(conn)
+            elif conn.execute("PRAGMA application_id").fetchone()[0] != ZNACZNIK:
+                conn.execute(f"PRAGMA application_id = {ZNACZNIK}")
+        except BaseException:
+            conn.close()
+            raise
+        return conn
+    if not sciezka.is_file():
+        raise BladIndeksu(f"brak pliku indeksu {sciezka} – uruchom sync (na Macu)")
+    conn = sqlite3.connect(sciezka.resolve().as_uri() + "?mode=ro", uri=True, timeout=5)
+    wersja = conn.execute("PRAGMA user_version").fetchone()[0]
+    if wersja != SCHEMAT_WERSJA:
+        conn.close()
+        if wersja < SCHEMAT_WERSJA:
+            raise BladIndeksu("indeks w starszym schemacie – uruchom sync (na Macu)")
+        raise BladIndeksu("indeks w nowszym schemacie – zaktualizuj wiedza.py")
+    return conn
+
+
+def hash_danych(conn: sqlite3.Connection) -> str:
+    """SHA-256 treści indeksu (TABELE_DANYCH w kolejności klucza głównego), wersji schematu i meta.synonimy_sha.
+    Zmiana samego czasu synchronizacji lub publikacji (reszta meta, sync_stan) nie zmienia hasha."""
+    h = hashlib.sha256()
+    wersja = conn.execute("PRAGMA user_version").fetchone()[0]
+    synonimy = conn.execute("SELECT wartosc FROM meta WHERE klucz = 'synonimy_sha'").fetchone()
+    h.update(json.dumps([wersja, synonimy[0] if synonimy else None]).encode("utf-8"))
+    for tabela in TABELE_DANYCH:
+        h.update(f"\n#{tabela}".encode("utf-8"))
+        # kolumna 1 to klucz główny tabel głównych; w tabelach relacji kluczem jest para (1, 2)
+        for wiersz in conn.execute(f"SELECT * FROM {tabela} ORDER BY 1, 2"):
+            h.update(b"\n" + json.dumps(list(wiersz), ensure_ascii=False).encode("utf-8"))
+    return h.hexdigest()
+
+
+def git_blob_sha(bajty: bytes) -> str:
+    """SHA-1 obiektu blob gita – porównanie pliku lokalnego z `sha` z GitHuba bez pobierania treści."""
+    return hashlib.sha1(b"blob %d\0" % len(bajty) + bajty).hexdigest()
+
+
+@contextlib.contextmanager
+def blokada(plik_bazy: Path):
+    """Wyłączna blokada `<plik bazy>.lock` na czas polecenia; zwraca True, gdy wzięta, False, gdy trzyma ją inny
+    proces. Bierze ją raz polecenie najwyższego poziomu (sync albo publikuj) – flock należy do otwartego pliku,
+    więc ponowne wzięcie w tym samym procesie by się nie udało; publikacja w sync --publikuj działa pod tą."""
+    import fcntl  # leniwie: polecenia odczytu działają też tam, gdzie fcntl nie ma
+    plik = open(str(plik_bazy) + ".lock", "a")
+    try:
+        try:
+            fcntl.flock(plik, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            wzieta = True
+        except BlockingIOError:
+            wzieta = False
+        yield wzieta
+    finally:
+        plik.close()  # zamknięcie zwalnia blokadę
+
+
+class BladPoboru(Exception):
+    """Pobór bazy z Notion nie powiódł się; niesie nazwę bazy i przyczynę (BladHttp albo BladSieci)."""
+
+    def __init__(self, baza: str, przyczyna: Exception):
+        super().__init__(baza, przyczyna)
+        self.baza, self.przyczyna = baza, przyczyna
+
+
+def teraz_iso() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def na_czas(tekst: str) -> datetime:
+    """Czas ISO (także z końcówką Z z API – Python 3.9 jej nie przyjmuje) → datetime."""
+    return datetime.fromisoformat(tekst.replace("Z", "+00:00"))
+
+
+def starsze_niz(tekst, okres: timedelta) -> bool:
+    return not tekst or datetime.now(timezone.utc) - na_czas(tekst) > okres
+
+
+def pobierz_baze(baza: str, token: str, od, termin) -> list:
+    """Wszystkie strony bazy rosnąco po last_edited_time (stronicowanie has_more/next_cursor); od=None → bez filtra
+    (tryb pełny); termin – jak w zadanie_http."""
+    url = f"{NOTION_API}/v1/data_sources/{BAZY[baza]['zrodlo']}/query"
+    naglowki = {"Authorization": "Bearer " + token, "Notion-Version": NOTION_WERSJA}
+    cialo = {"page_size": 100, "sorts": [{"timestamp": "last_edited_time", "direction": "ascending"}]}
+    if od:
+        cialo["filter"] = {"timestamp": "last_edited_time", "last_edited_time": {"on_or_after": od}}
+    strony = []
+    while True:
+        odp = zadanie_http("POST", url, naglowki, cialo, termin=termin)
+        strony += odp.get("results") or []
+        if not odp.get("has_more") or not odp.get("next_cursor"):
+            return strony
+        cialo["start_cursor"] = odp["next_cursor"]
+
+
+def pobierz(token: str, filtry: dict, termin) -> dict:
+    """{baza: strony} dla wszystkich baz w kolejności BAZY; błąd dowolnej bazy przerywa całość przed zapisem."""
+    pobrane = {}
+    for baza in BAZY:
+        try:
+            pobrane[baza] = pobierz_baze(baza, token, filtry.get(baza), termin)
+        except (BladHttp, BladSieci) as e:
+            raise BladPoboru(baza, e) from None
+    return pobrane
+
+
+def wiersz_po_id(conn: sqlite3.Connection, baza: str, id_: str):
+    kursor = conn.execute(f"SELECT * FROM {baza} WHERE id = ?", (id_,))
+    wiersz = kursor.fetchone()
+    return None if wiersz is None else dict(zip([k[0] for k in kursor.description], wiersz))
+
+
+def relacje_informacji(conn: sqlite3.Connection, wi: int) -> dict:
+    return {t: {i for (i,) in conn.execute(f"SELECT {k} FROM {t} WHERE wi = ?", (wi,))}
+            for t, (_, k) in RELACJE.items()}
+
+
+def usun_relacje_informacji(conn: sqlite3.Connection, wi: int):
+    for tabela in RELACJE:
+        conn.execute(f"DELETE FROM {tabela} WHERE wi = ?", (wi,))
+
+
+def zsynchronizuj_baze(conn: sqlite3.Connection, baza: str, strony, pelny: bool) -> dict:
+    """Zapis stron jednej bazy w transakcji wołającego (bez commitu i bez FTS). Nowy = brak `id` w tabeli;
+    zmieniony = inna wartość dowolnej kolumny albo (informacje) inny zbiór ID w relacjach; identyczny – pominięty.
+    W trybie pełnym usuwa wiersze spoza listingu (pusty listing → bez usuwania, z ostrzeżeniem).
+    Wynik: {"nowe", "zmienione", "usuniete": liczby}."""
+    klucz = BAZY[baza]["klucz"]
+    wynik = {"nowe": 0, "zmienione": 0, "usuniete": 0}
+    widziane = set()
+    for strona in strony:
+        zmapowana = mapuj_strone(baza, strona)
+        if zmapowana is None:
+            continue
+        kolumny, relacje = zmapowana
+        relacje = {t: set(ids) for t, ids in relacje.items()}
+        widziane.add(kolumny["id"])
+        stary = wiersz_po_id(conn, baza, kolumny["id"])
+        if stary == kolumny and (baza != "informacje" or relacje_informacji(conn, stary["wi"]) == relacje):
+            continue
+        wynik["nowe" if stary is None else "zmienione"] += 1
+        if baza == "informacje":
+            if stary is not None:
+                usun_relacje_informacji(conn, stary["wi"])
+            for tabela, ids in relacje.items():
+                conn.executemany(f"INSERT OR IGNORE INTO {tabela} VALUES (?, ?)", [(kolumny["wi"], i) for i in ids])
+        nazwy = list(kolumny)
+        conn.execute(f"INSERT OR REPLACE INTO {baza} ({', '.join(nazwy)}) VALUES ({', '.join('?' * len(nazwy))})",
+                     [kolumny[n] for n in nazwy])
+    if pelny:
+        nieobecne = [(i, k) for i, k in conn.execute(f"SELECT id, {klucz} FROM {baza}") if i not in widziane]
+        if nieobecne and not widziane:
+            ostrzez(f"{baza}: pusty listing w trybie pełnym – usuwanie pominięte (sprawdź dostęp integracji)")
+            nieobecne = []
+        for id_, numer in nieobecne:
+            if baza == "informacje":
+                usun_relacje_informacji(conn, numer)
+            if baza == "tematy":
+                conn.execute("DELETE FROM informacje_tematy WHERE temat_id = ?", (id_,))
+            conn.execute(f"DELETE FROM {baza} WHERE id = ?", (id_,))
+        wynik["usuniete"] = len(nieobecne)
+    return wynik
+
+
+def przebuduj_fts(conn: sqlite3.Connection, grupy: list):
+    """informacje_fts od nowa (rowid = WI): tekst po normalizuj, tematy po nazwie, `slowa` z synonimów.
+    Pełna przebudowa (ok. 0,2 s na 1,5 tys. informacji) zamiast śledzenia, które wiersze zmieniła zmiana tematu."""
+    tematy = {}
+    for wi, nazwa in conn.execute("SELECT it.wi, t.nazwa FROM informacje_tematy it JOIN tematy t "
+                                  "ON t.id = it.temat_id ORDER BY t.nazwa"):
+        tematy.setdefault(wi, []).append(nazwa or "")
+    conn.execute("DELETE FROM informacje_fts")
+    for wi, *pola in conn.execute("SELECT wi, teza, szczegoly, dla_nas FROM informacje").fetchall():
+        teza, szczegoly, dla_nas = (p or "" for p in pola)
+        nazwy = "; ".join(tematy.get(wi, []))
+        slowa = rozwin_synonimy(" ".join((teza, nazwy, szczegoly, dla_nas)), grupy)
+        conn.execute("INSERT INTO informacje_fts (rowid, teza, tematy, szczegoly, dla_nas, slowa) "
+                     "VALUES (?, ?, ?, ?, ?, ?)",
+                     (wi, normalizuj(teza), normalizuj(nazwy), normalizuj(szczegoly), normalizuj(dla_nas), slowa))
+
+
+def sha_synonimow() -> str:
+    try:
+        bajty = SYNONIMY.read_bytes()
+    except FileNotFoundError:
+        bajty = b""
+    return hashlib.sha256(bajty).hexdigest()
+
+
+def zapisz_pobrane(conn: sqlite3.Connection, pobrane: dict, pelny: bool) -> dict:
+    """Zapis całego poboru ({baza: strony}) w jednej krótkiej transakcji – błąd → rollback, nic nie zapisane:
+    bazy w kolejności BAZY, przebudowa FTS (gdy zmienił się którykolwiek wiersz albo plik synonimów), sync_stan,
+    meta.zbudowano, meta.synonimy_sha i przy pełnym meta.ostatni_pelny.
+    Wynik: {"nowe", "zmienione", "usuniete": suma po bazach, "wierszy": {baza: liczba wierszy}}."""
+    suma = {"nowe": 0, "zmienione": 0, "usuniete": 0, "wierszy": {}}
+    teraz = teraz_iso()
+    sha = sha_synonimow()
+    with conn:
+        for baza in BAZY:
+            wynik = zsynchronizuj_baze(conn, baza, pobrane.get(baza, []), pelny)
+            for licznik in ("nowe", "zmienione", "usuniete"):
+                suma[licznik] += wynik[licznik]
+        if suma["nowe"] + suma["zmienione"] + suma["usuniete"] or meta_bazy(conn).get("synonimy_sha") != sha:
+            przebuduj_fts(conn, wczytaj_synonimy(SYNONIMY))
+        for baza in BAZY:
+            ostatnie, wierszy = conn.execute(f"SELECT MAX(zmieniono), COUNT(*) FROM {baza}").fetchone()
+            conn.execute("INSERT OR REPLACE INTO sync_stan VALUES (?, ?, ?, ?)", (baza, ostatnie, wierszy, teraz))
+            suma["wierszy"][baza] = wierszy
+        meta = [("zbudowano", teraz), ("synonimy_sha", sha)] + ([("ostatni_pelny", teraz)] if pelny else [])
+        conn.executemany("INSERT OR REPLACE INTO meta VALUES (?, ?)", meta)
+    return suma
+
+
+def linia_raportu(wynik: dict, pelny: bool, sekundy: float) -> str:
+    zmiany = wynik["nowe"] + wynik["zmienione"] + wynik["usuniete"]
+    opis = f"+{wynik['nowe']} nowe, ~{wynik['zmienione']} zmienione" if zmiany else "bez zmian"
+    if wynik["usuniete"]:
+        opis += f", −{wynik['usuniete']} usunięte"
+    n, czas = wynik["wierszy"], f"{sekundy:.1f}".replace(".", ",")
+    return (f"[wiedza] sync{' (pełny)' if pelny else ''}: {opis} · informacje {n['informacje']}, "
+            f"tematy {n['tematy']}, źródła {n['zrodla']}, SP {n['sprzecznosci']} · {czas} s")
+
+
+def synchronizuj(conn: sqlite3.Connection, a, token: str, start: float, termin):
+    """Kroki 2–9 syncu pod blokadą: tryb, pobór do pamięci (BladPoboru, gdy się nie uda albo minie termin), jedna
+    transakcja zapisu, linia raportu."""
+    pelny = a.pelny or starsze_niz(meta_bazy(conn).get("ostatni_pelny"), timedelta(days=PELNY_CO_DNI))
+    filtry = {}
+    if not pelny:
+        for baza, ostatnie in conn.execute("SELECT baza, ostatnie_zmieniono FROM sync_stan"):
+            if ostatnie:
+                filtry[baza] = (na_czas(ostatnie) - timedelta(minutes=ZAPAS_MIN)).isoformat()
+    wynik = zapisz_pobrane(conn, pobierz(token, filtry, termin), pelny)
+    if not a.cicho or wynik["nowe"] + wynik["zmienione"] + wynik["usuniete"]:
+        print(linia_raportu(wynik, pelny, time.monotonic() - start))
+
+
+def w_worktree() -> bool:
+    """Kopia repo w .claude/worktrees/… (sesja równoległa): sync i publikuj nic nie robią także wtedy, gdy DOM_HUB
+    wskazuje prawdziwy hub – niedokończony kod nie może przebudować indeksu ani trafić do czatu."""
+    return REPO.parent.name == "worktrees" and REPO.parent.parent.name == ".claude"
+
+
+def sciezka_bazy(a) -> Path:
+    return Path(a.db) if a.db else DB_DOMYSLNA
+
+
+@contextlib.contextmanager
+def prywatne_pliki():
+    """Pliki i katalogi tworzone przez sync i publikuj (indeks, blokada, kopia do wysyłki) tylko dla właściciela –
+    indeks zawiera dane osób trzecich. Maska wraca po poleceniu (ważne, gdy moduł jest importowany)."""
+    stara = os.umask(0o077)
+    try:
+        yield
+    finally:
+        os.umask(stara)
+
+
+def przygotuj_katalog(sciezka: Path) -> bool:
+    """Katalog pliku bazy: domyślny zakłada (700, .dom już istnieje), inny musi istnieć – --db nie tworzy katalogów."""
+    if sciezka == DB_DOMYSLNA:
+        KATALOG.mkdir(mode=0o700, exist_ok=True)
+        return True
+    if sciezka.parent.is_dir():
+        return True
+    blad(f"--db: katalog {sciezka.parent} nie istnieje – nic nie utworzono")
+    return False
+
+
+def zaostrz_uprawnienia(sciezka: Path):
+    """Indeks domyślny: katalog 700, pliki w nim (baza, blokada, kopie) 600 – także utworzone wcześniej z inną maską
+    albo przeniesione z kopii. Bez zmiany, gdy już tak jest; katalogów i plików spoza domyślnej ścieżki (--db)
+    nie dotyka. To higiena, nie warunek syncu: błąd (np. plik innego właściciela) daje ostrzeżenie i idziemy dalej."""
+    if sciezka != DB_DOMYSLNA:
+        return
+    try:
+        pliki = [p for p in KATALOG.iterdir() if p.is_file() and not p.is_symlink()]
+    except OSError:
+        ostrzez(f"{KATALOG.name}: nie da się odczytać listy plików – uprawnienia sprawdź ręcznie")
+        pliki = []
+    for p, tryb in [(KATALOG, 0o700)] + [(p, 0o600) for p in pliki]:
+        try:
+            if p.stat().st_mode & 0o777 != tryb:
+                os.chmod(p, tryb)
+        except OSError:
+            ostrzez(f"{p.name}: nie da się ustawić uprawnień {tryb:o} – ustaw ręcznie")
+
+
+def otworz_do_zapisu(sciezka: Path) -> sqlite3.Connection:
+    """otworz_db do zapisu; uszkodzony indeks domyślny odkłada na bok jako `<plik>.uszkodzony-RRRRMMDD-GGMMSS`
+    (zostają 2 najnowsze) i zakłada pusty – następny pobór jest pełny, bo Notion jest źródłem prawdy. Plik spoza
+    domyślnej ścieżki (--db) nie jest przenoszony: wyjątek idzie dalej."""
+    try:
+        return otworz_db(sciezka, zapis=True)
+    except sqlite3.DatabaseError as e:
+        if not uszkodzony(e) or sciezka != DB_DOMYSLNA:
+            raise
+    odlozony = sciezka.with_name(f"{sciezka.name}.uszkodzony-{datetime.now():%Y%m%d-%H%M%S}")
+    sciezka.replace(odlozony)
+    with contextlib.suppress(FileNotFoundError):  # gorący dziennik należy do starego pliku
+        sciezka.with_name(sciezka.name + "-journal").unlink()
+    for stary in sorted(sciezka.parent.glob(sciezka.name + ".uszkodzony-*"))[:-2]:
+        stary.unlink()
+    print(f"[wiedza] indeks uszkodzony – odłożony jako {odlozony.name}, budowa od nowa pełnym sync")
+    return otworz_db(sciezka, zapis=True)
+
+
+def zglos_wyjatek(e: BaseException, przedrostek: str = "", cicho: bool = False):
+    """Nieoczekiwany wyjątek: tylko typ i linia, bo treść i traceback mogą nieść wartości pól. Pełny traceback na
+    stderr tylko z WIEDZA_DEBUG=1 przy ręcznym uruchomieniu: bez --cicho i ze stderr w terminalu – zmienna
+    wyeksportowana na stałe nie może wpuścić wartości pól do wyjścia hooka."""
+    blad(f"{przedrostek}{type(e).__name__} (linia {linia_bledu(e)})")
+    if os.environ.get("WIEDZA_DEBUG") == "1" and not cicho and sys.stderr.isatty():
+        traceback.print_exception(type(e), e, e.__traceback__, file=sys.stderr)
+
+
+def cmd_sync(a) -> int:
+    """Kody: 0 przy sukcesie i warunkach miękkich (worktree, brak .dom, tokena, sieci, zajęta blokada, limit czasu,
+    Notion 5xx/429); błąd twardy (HTTP 4xx, mapowanie, baza, obcy plik --db) → 1, a z --cicho 0 (hook i nocne
+    skrypty). Pod --cicho termin BUDZET_CICHO od startu obejmuje pobór i publikację."""
+    start = time.monotonic()
+    termin = start + BUDZET_CICHO if a.cicho else None
+    if w_worktree():
+        if not a.cicho:
+            print("[wiedza] uruchomiono z worktree – sync pominięty, nic nie utworzono")
+        return 0
+    if not CONF.is_dir():
+        print("[wiedza] brak katalogu .dom w hubie (np. worktree) – sync pominięty, nic nie utworzono")
+        return 0
+    sekrety = wczytaj_sekrety(SEKRETY)
+    token = sekrety.get("NOTION_TOKEN")
+    if not token:
+        print(f"[wiedza] brak NOTION_TOKEN w .dom/{SEKRETY.name} – sync pominięty")
+        return 0
+    twardy = 0 if a.cicho else 1
+    sciezka = sciezka_bazy(a)
+    with prywatne_pliki():
+        if not przygotuj_katalog(sciezka):
+            return twardy
+        with blokada(sciezka) as wzieta:
+            if not wzieta:
+                if not a.cicho:
+                    print("[wiedza] trwa inny sync albo publikacja – sync pominięty")
+                return 0
+            conn = None
+            try:
+                conn = otworz_do_zapisu(sciezka)
+                zaostrz_uprawnienia(sciezka)
+                synchronizuj(conn, a, token, start, termin)
+                if a.publikuj:
+                    # pod blokadą tego syncu; błąd publikacji nie zmienia kodu wyjścia sync
+                    try:
+                        opublikuj(conn, sciezka, sekrety, cicho=a.cicho, termin=termin)
+                    except Exception as e:  # noqa: BLE001 – treść wyjątku może nieść wartości pól
+                        zglos_wyjatek(e, "publikacja: ", a.cicho)
+                return 0
+            except BladPoboru as e:
+                przyczyna = tekst_bledu(e.przyczyna, sekrety)
+                if isinstance(e.przyczyna, BladSieci):
+                    if str(e.przyczyna) == LIMIT_CZASU or (termin is not None and time.monotonic() >= termin):
+                        print(f"[wiedza] sync nie zmieścił się w limicie czasu startu ({BUDZET_CICHO} s, {e.baza}) – "
+                              "nic nie zapisano")
+                    else:
+                        print(f"[wiedza] brak połączenia z Notion ({przyczyna}) – sync pominięty, nic nie zapisano")
+                    return 0
+                if e.przyczyna.status == 429 or e.przyczyna.status >= 500:
+                    print(f"[wiedza] Notion niedostępny ({e.baza}: {przyczyna}) – sync pominięty, nic nie zapisano")
+                    return 0
+                print("[wiedza] sync przerwany – nic nie zapisano")
+                blad(f"Notion, {e.baza}: {przyczyna}")
+                return twardy
+            except (BladIndeksu, BladMapowania) as e:
+                print("[wiedza] sync przerwany – nic nie zapisano")
+                blad(str(e))
+                return twardy
+            except sqlite3.DatabaseError as e:
+                print("[wiedza] sync przerwany – nic nie zapisano")
+                if uszkodzony(e):
+                    blad(f"{sciezka.name}: plik nie jest bazą SQLite albo jest uszkodzony – nie nadpisuję go")
+                else:
+                    zglos_wyjatek(e, "plik indeksu: ", a.cicho)
+                return twardy
+            finally:
+                if conn is not None:
+                    conn.close()
+
+
+README = """# Indeks Bazy wiedzy – kopia tylko do odczytu
+
+Stan: {stan} · {informacji} informacji. Pliki publikuje `wiedza.py publikuj` z komputera inwestora; źródłem prawdy
+jest Notion, a każda publikacja nadpisuje te pliki – nie edytuj ich tutaj.
+
+Czat: `<GITHUB_REPO>` i `<TOKEN>` (token tylko do odczytu) wstaw ze strony „🔑 Asystent – dostęp” w Notion.
+
+    curl -sf -H "Authorization: Bearer <TOKEN>" -H "Accept: application/vnd.github.raw" \\
+      -o /tmp/wiedza.sqlite https://api.github.com/repos/<GITHUB_REPO>/contents/wiedza.sqlite
+    curl -sf -H "Authorization: Bearer <TOKEN>" -H "Accept: application/vnd.github.raw" \\
+      -o /tmp/wiedza.py https://api.github.com/repos/<GITHUB_REPO>/contents/wiedza.py
+    python3 /tmp/wiedza.py szukaj "ZAPYTANIE" --db /tmp/wiedza.sqlite [--etap "Stan zero"] [--limit 12]
+    python3 /tmp/wiedza.py temat "NAZWA" --db /tmp/wiedza.sqlite
+    python3 /tmp/wiedza.py stan --db /tmp/wiedza.sqlite
+"""
+
+
+def plik_kopii(sciezka: Path) -> Path:
+    """Kopia do wysłania obok pliku bazy; stała nazwa wystarcza, bo publikacja działa pod blokadą."""
+    return sciezka.with_name(f"{sciezka.stem}.publikacja.sqlite")
+
+
+def usun_plik(plik: Path):
+    for p in (plik, plik.with_name(plik.name + "-journal")):
+        with contextlib.suppress(FileNotFoundError):
+            p.unlink()
+
+
+def limit_wysylki(bajty_base64: int) -> float:
+    """Czas na wysyłkę pliku: 20 s + 5 s na MB base64 (łącze ok. 1,5 Mbit/s). To także zachowawcza miara, czy
+    wysyłka zmieści się w reszcie terminu: w Pythonie 3.9 limit gniazda SSL dotyczy każdego kawałka osobno,
+    więc sam nie ogranicza czasu całej wysyłki."""
+    return 20 + 5 * bajty_base64 / MB
+
+
+def rozmiar_opis(bajty: int) -> str:
+    if bajty >= MB:
+        return f"{bajty / MB:.1f} MB".replace(".", ",")
+    return f"{max(1, round(bajty / 1024))} KB"
+
+
+def galaz_prywatnego_repo(repo: str, naglowki: dict, termin):
+    """Gałąź domyślna repo z GET /repos; None, gdy repo nie jest prywatne – wtedy nic nie wysyłamy."""
+    dane = zadanie_http("GET", f"{GITHUB_API}/repos/{repo}", naglowki, termin=termin)
+    # repo `internal` (GitHub Enterprise) też ma private true – widzi je cała organizacja
+    if dane.get("private") is not True or dane.get("visibility", "private") != "private":
+        return None
+    return dane.get("default_branch") or "main"
+
+
+def sha_na_githubie(repo: str, naglowki: dict, nazwa: str, termin):
+    """`sha` pliku z GET Contents API (pliki ponad 1 MB przychodzą bez treści, z `sha`); 404 → None (nowy plik)."""
+    try:
+        return zadanie_http("GET", f"{GITHUB_API}/repos/{repo}/contents/{nazwa}", naglowki, termin=termin).get("sha")
+    except BladHttp as e:
+        if e.status == 404:
+            return None
+        raise
+
+
+def wyslij_plik(repo: str, naglowki: dict, nazwa: str, tresc: str, sha_lokalny: str, sha_zdalny,
+                wiadomosc: str, termin) -> bool:
+    """PUT Contents API (gałąź domyślna). Konflikt sha (409/422) → ponowne GET i jedna powtórka, drugi konflikt →
+    False z komunikatem. Zdalny sha równy lokalnemu po konflikcie = sukces: wcześniejszy PUT doszedł, a zgubiła
+    się tylko odpowiedź."""
+    url = f"{GITHUB_API}/repos/{repo}/contents/{nazwa}"
+    cialo = {"message": wiadomosc, "content": tresc}
+    for proba in (1, 2):
+        cialo.pop("sha", None)
+        if sha_zdalny:
+            cialo["sha"] = sha_zdalny
+        try:
+            zadanie_http("PUT", url, naglowki, cialo, timeout=limit_wysylki(len(tresc)), termin=termin)
+            return True
+        except BladHttp as e:
+            if e.status not in (409, 422):
+                raise
+            if proba == 2:
+                ostrzez(f"{nazwa}: konflikt sha na GitHubie po powtórce – pominięty, wyśle go następna publikacja")
+                return False
+        sha_zdalny = sha_na_githubie(repo, naglowki, nazwa, termin)
+        if sha_zdalny == sha_lokalny:
+            return True
+    return False
+
+
+def resetuj_historie(repo: str, naglowki: dict, zakodowane: dict, wiadomosc: str, galaz: str):
+    """Historia repo od nowa (publikuj --reset): blob każdego z czterech plików, drzewo z dokładnie nimi (bez
+    base_tree – drzewo z samym indeksem usunęłoby kod potrzebny czatowi), commit bez rodzica, wymuszone
+    przestawienie gałęzi domyślnej. Błąd w środku niczego nie zmienia – gałąź przestawia dopiero ostatnie żądanie.
+    GitHub odzyskuje miejsce z opóźnieniem."""
+    git = f"{GITHUB_API}/repos/{repo}/git"
+    wpisy = []
+    for nazwa, tresc in zakodowane.items():
+        blob = zadanie_http("POST", f"{git}/blobs", naglowki, {"content": tresc, "encoding": "base64"},
+                            timeout=limit_wysylki(len(tresc)))
+        wpisy.append({"path": nazwa, "mode": "100644", "type": "blob", "sha": blob["sha"]})
+    drzewo = zadanie_http("POST", f"{git}/trees", naglowki, {"tree": wpisy})["sha"]
+    commit = zadanie_http("POST", f"{git}/commits", naglowki,
+                          {"message": wiadomosc + " (reset historii)", "tree": drzewo, "parents": []})["sha"]
+    zadanie_http("PATCH", f"{git}/refs/heads/{galaz}", naglowki, {"sha": commit, "force": True})
+
+
+def zapisz_meta_kopii(kopia: Path, wartosci: dict) -> bytes:
+    """Dane publikacji w kopii przed wysłaniem – opublikowany plik niesie własną datę i hash, więc `stan` w czacie
+    pokazuje prawdę o kopii; meta jest poza hashem."""
+    c = sqlite3.connect(str(kopia))
+    try:
+        c.execute("PRAGMA journal_mode = DELETE")
+        with c:
+            c.executemany("INSERT OR REPLACE INTO meta VALUES (?, ?)", list(wartosci.items()))
+    finally:
+        c.close()
+    return kopia.read_bytes()
+
+
+def opublikuj(conn: sqlite3.Connection, sciezka: Path, sekrety: dict, teraz: bool = False, wymus: bool = False,
+              reset: bool = False, cicho: bool = False, termin=None) -> bool:
+    """Kopia indeksu, wiedza.py, synonimów i README do prywatnego repo GITHUB_REPO, pod blokadą wołającego
+    (cmd_publikuj albo cmd_sync). Najpierw GET /repos: repo nieprywatne → nic nie wysyła. Plik indeksu (z README)
+    przy zmianie hash_danych, najwyżej raz na PUBLIKACJA_CO_MIN (teraz, wymus, reset i zmiana schematu omijają
+    odstęp; wymus i reset wysyłają go także bez zmiany danych); kod i synonimy po porównaniu sha z GitHubem.
+    reset: jeden commit bez rodzica z czterema plikami zamiast PUT-ów. termin – jak w zadanie_http (sync --cicho):
+    plik, którego wysyłka nie mieści się w reszcie czasu, czeka na następną publikację.
+    Wynik False = błąd (publikuj → kod 1)."""
+    start = time.monotonic()
+    token, repo = sekrety.get("GITHUB_TOKEN_SYNC"), sekrety.get("GITHUB_REPO")
+    if not token or not repo:
+        print(f"[wiedza] brak GITHUB_TOKEN_SYNC albo GITHUB_REPO w .dom/{SEKRETY.name} – publikacja pominięta")
+        return False
+    if not WZORZEC_REPO.fullmatch(repo):
+        blad("GITHUB_REPO: oczekiwany format właściciel/repo – publikacja pominięta")
+        return False
+    informacji = conn.execute("SELECT COUNT(*) FROM informacje").fetchone()[0]
+    if not informacji:
+        print("[wiedza] indeks bez informacji – publikacja pominięta (uruchom sync)")
+        return False
+    ukryj = repo.split("/")  # komunikaty GitHuba bywają z nazwą konta albo repo
+    naglowki = {"Authorization": "Bearer " + token, "Accept": "application/vnd.github+json",
+                "X-GitHub-Api-Version": GITHUB_WERSJA}
+    kopia = plik_kopii(sciezka)
+    usun_plik(kopia)  # zostaje po przerwanej publikacji
+    pliki, wartosci, wyslane, odlozone, ok = {}, {}, [], [], True  # pliki: nazwa → bajty w kolejności wysyłki
+    try:
+        galaz = galaz_prywatnego_repo(repo, naglowki, termin)
+        if galaz is None:
+            blad("GITHUB_REPO wskazuje repo, które nie jest prywatne – publikacja wstrzymana "
+                 "(indeks zawiera dane osób trzecich)")
+            return False
+        meta = meta_bazy(conn)
+        h = hash_danych(conn)
+        schemat = str(conn.execute("PRAGMA user_version").fetchone()[0])
+        nowy_schemat = meta.get("opublikowano_schemat") != schemat
+        indeks_zmieniony = h != meta.get("opublikowano_sha")
+        odlozony = (indeks_zmieniony and not (teraz or wymus or reset or nowy_schemat)
+                    and not starsze_niz(meta.get("opublikowano_kiedy"), timedelta(minutes=PUBLIKACJA_CO_MIN)))
+        z_indeksem = wymus or reset or (indeks_zmieniony and not odlozony)
+        kod = {"wiedza.py": Path(__file__).read_bytes()}
+        if SYNONIMY.is_file():
+            kod["wiedza_synonimy.txt"] = SYNONIMY.read_bytes()
+        zdalne = {} if reset else {n: sha_na_githubie(repo, naglowki, n, termin) for n in kod}
+        do_wyslania = list(kod) if reset else [n for n in kod if zdalne[n] != git_blob_sha(kod[n])]
+        if not z_indeksem and not do_wyslania:
+            if not cicho:
+                powod = "kopia aktualna"
+                if odlozony:
+                    nastepna = na_czas(meta["opublikowano_kiedy"]) + timedelta(minutes=PUBLIKACJA_CO_MIN)
+                    powod = (f"indeks odłożony do {lokalnie(nastepna.isoformat())} (raz na {PUBLIKACJA_CO_MIN} min;"
+                             f" --teraz wysyła od razu)")
+                print(f"[wiedza] publikacja: wysłano 0 – {powod}")
+            return True
+        kiedy = teraz_iso()
+        if z_indeksem and termin is not None:
+            # przed VACUUM INTO: kopia nie jest większa niż plik bazy, base64 to ok. +1/3
+            bajty = conn.execute("PRAGMA page_count").fetchone()[0] * conn.execute("PRAGMA page_size").fetchone()[0]
+            if time.monotonic() + limit_wysylki(bajty * 4 // 3) > termin:
+                odlozone.append("wiedza.sqlite")
+                z_indeksem = False
+        if z_indeksem:
+            if not reset:
+                for n in ("wiedza.sqlite", "README.md"):
+                    zdalne[n] = sha_na_githubie(repo, naglowki, n, termin)
+            conn.execute("VACUUM INTO ?", (str(kopia),))
+            wartosci = {"opublikowano_kiedy": kiedy, "opublikowano_sha": h, "opublikowano_schemat": schemat,
+                        "publikacje_liczba": str(int(meta.get("publikacje_liczba") or 0) + 1)}
+            pliki["wiedza.sqlite"] = zapisz_meta_kopii(kopia, wartosci)
+            pliki["README.md"] = README.format(stan=lokalnie(meta.get("zbudowano")),
+                                               informacji=informacji).encode("utf-8")
+        for n in do_wyslania:
+            pliki[n] = kod[n]
+        zakodowane = {n: base64.b64encode(b).decode("ascii") for n, b in pliki.items()}
+        za_duze = [n for n, t in zakodowane.items() if len(t) > LIMIT_PLIKU_MB * MB]
+        if za_duze:
+            blad(f"{', '.join(za_duze)}: ponad {LIMIT_PLIKU_MB} MB po base64 – publikacja pominięta")
+            return False
+        wiadomosc = f"indeks {lokalnie(kiedy)} · {informacji} inf."
+        if reset:
+            resetuj_historie(repo, naglowki, zakodowane, wiadomosc, galaz)
+            wyslane = list(pliki)
+        else:
+            for nazwa, tresc in zakodowane.items():
+                if nazwa == "README.md" and "wiedza.sqlite" not in wyslane:
+                    continue  # README opisuje plik indeksu – idzie tylko razem z nim
+                if nazwa == "wiedza.py" and nowy_schemat and indeks_zmieniony and "wiedza.sqlite" not in wyslane:
+                    # nowy kod w czacie odrzuciłby zdalny plik indeksu w starym schemacie
+                    ostrzez("wiedza.py wstrzymany – nowy schemat, a plik indeksu nie został wysłany")
+                    continue
+                if termin is not None and time.monotonic() + limit_wysylki(len(tresc)) > termin:
+                    odlozone.append(nazwa)
+                    continue
+                try:
+                    if wyslij_plik(repo, naglowki, nazwa, tresc, git_blob_sha(pliki[nazwa]), zdalne.get(nazwa),
+                                   wiadomosc, termin):
+                        wyslane.append(nazwa)
+                    else:
+                        ok = False
+                except (BladHttp, BladSieci) as e:
+                    blad(f"GitHub, {nazwa}: {tekst_bledu(e, sekrety, ukryj)}")
+                    ok = False
+        if wyslane:
+            zapis = dict(wartosci) if "wiedza.sqlite" in wyslane else {}
+            historia = 0 if reset else float(meta.get("historia_mb") or 0) * MB  # surowe bajty od ostatniego resetu
+            zapis["historia_mb"] = f"{(historia + sum(len(pliki[n]) for n in wyslane)) / MB:.2f}"
+            with conn:
+                conn.executemany("INSERT OR REPLACE INTO meta VALUES (?, ?)", list(zapis.items()))
+    except (BladHttp, BladSieci) as e:
+        blad(f"GitHub: {tekst_bledu(e, sekrety, ukryj)} – publikacja przerwana, lokalne dane publikacji bez zmian")
+        return False
+    finally:
+        usun_plik(kopia)
+    if odlozone:
+        print(f"[wiedza] publikacja: {', '.join(odlozone)} odłożone – wysyłka nie mieści się w limicie czasu startu "
+              "(zrobi ją następny sync --publikuj albo publikuj)")
+    if wyslane or not cicho:
+        opis = ", ".join(f"{n} {rozmiar_opis(len(pliki[n]))}" for n in wyslane)
+        czas = f"{time.monotonic() - start:.1f}".replace(".", ",")
+        print(f"[wiedza] publikacja{' (reset historii)' if reset else ''}: wysłano {len(wyslane)}"
+              + (f" – {opis}" if opis else "") + f" · {czas} s")
+    return ok
+
+
+def cmd_publikuj(a) -> int:
+    """Samodzielna publikacja pod własną blokadą. Kody: 0 – wysłano albo nie było czego, zajęta blokada;
+    1 – worktree, brak .dom, tokena albo repo, repo nieprywatne, brak lub inny schemat pliku indeksu, błąd wysyłki."""
+    if w_worktree():
+        print("[wiedza] uruchomiono z worktree – publikacja pominięta, nic nie utworzono")
+        return 1
+    if not CONF.is_dir():
+        print("[wiedza] brak katalogu .dom w hubie (np. worktree) – publikacja pominięta, nic nie utworzono")
+        return 1
+    sekrety = wczytaj_sekrety(SEKRETY)
+    sciezka = sciezka_bazy(a)
+    # tylko odczyt: zapis przy innej wersji schematu skasowałby tabele, a brak pliku by go utworzył
+    otworz_db(sciezka, zapis=False).close()
+    with prywatne_pliki(), blokada(sciezka) as wzieta:
+        if not wzieta:
+            if not a.cicho:
+                print("[wiedza] trwa sync albo inna publikacja – publikacja pominięta")
+            return 0
+        zaostrz_uprawnienia(sciezka)
+        with contextlib.closing(sqlite3.connect(str(sciezka), timeout=5)) as conn:
+            return 0 if opublikuj(conn, sciezka, sekrety, teraz=a.teraz, wymus=a.wymus, reset=a.reset,
+                                  cicho=a.cicho) else 1
+
+
+# Polecenia odczytu: sam plik indeksu (tryb ro) – bez sekretów, sieci, synonimów, blokady i bez dotykania huba
+# przy --db. Wartości pól drukuje wyłącznie właściwy wynik polecenia.
+OTWARTE_SP = ("czeka na decyzję", "do sprawdzenia u projektanta")  # Status Rejestru po normalizuj
+FILTRY_SZUKAJ = ("etap", "istotnosc", "status", "rodzaj")
+# duplikaty: słowa funkcyjne (≥ 5 liter, po bez_diakrytykow), które nie świadczą o podobieństwie tez
+STOP_SLOWA = frozenset("""ktory ktora ktore ktorej ktorego ktorych ktorym ktorymi przez przed miedzy ponad okolo
+takze rowniez jednak tylko bardzo wtedy zawsze gdzie kiedy nalezy trzeba jesli jezeli wiecej mniej czyli sobie
+nawet dlatego powinien powinna powinno zamiast""".split())
+# duplikaty: token obecny w więcej niż max(CZESTOSC_MIN, CZESTOSC_UDZIAL × liczba tez) tezach jest pospolity
+# (przy 1,5 tys. informacji: ponad 0,08 × 1500 = 120 tez). Kandydatów na parę szuka SONDA_RZADKIE najrzadszych
+# niepospolitych tokenów tezy (krótkie listy), a teza z mniej niż 3 takimi – SONDA_POSPOLITE najrzadszych w ogóle;
+# wspólne tokeny liczone na pełnych zbiorach. Kandydat, którego sama długość wyklucza próg (górna granica ratio:
+# 2·min(la, lb) / (la + lb)), odpada; SequenceMatcher (drogi) dostaje najwyżej KANDYDACI_NA_TEZE pozostałych
+# z największą liczbą wspólnych tokenów, a przy remisie najbliższych długością – dłuższe tezy zawierające wszystkie
+# tokeny krótkiej nie wypchną jej bliskiej kopii.
+CZESTOSC_MIN = 50
+CZESTOSC_UDZIAL = 0.08
+SONDA_RZADKIE = 8
+SONDA_POSPOLITE = 2
+KANDYDACI_NA_TEZE = 5
+
+
+def otworz_do_odczytu(a) -> sqlite3.Connection:
+    return otworz_db(sciezka_bazy(a), zapis=False)
+
+
+def meta_bazy(conn: sqlite3.Connection) -> dict:
+    return dict(conn.execute("SELECT klucz, wartosc FROM meta"))
+
+
+def lokalnie(tekst) -> str:
+    """Czas ISO z bazy (UTC) → lokalne „RRRR-MM-DD GG:MM”; brak → „–”."""
+    return na_czas(tekst).astimezone().strftime("%Y-%m-%d %H:%M") if tekst else "–"
+
+
+def jedna_linia(tekst) -> str:
+    """Wartość do linii wyniku: bez złamań wiersza (rich_text bywa wielowierszowy); pusta → „–”."""
+    return " ".join((tekst or "").split()) or "–"
+
+
+def skroc(tekst, n: int) -> str:
+    tekst = jedna_linia(tekst)
+    return tekst if len(tekst) <= n else tekst[:n - 1] + "…"
+
+
+def wypisz_json(obiekt):
+    print(json.dumps(obiekt, ensure_ascii=False))
+
+
+def opisz_informacje(conn: sqlite3.Connection, numery) -> list:
+    """Informacje w kształcie wyniku JSON, w kolejności `numery`; puste pola → "", relacje do stron spoza indeksu
+    (np. usuniętego źródła) pominięte. Tekst linii powstaje z tych samych słowników (linia_informacji)."""
+    tematy = dict(conn.execute("SELECT id, nazwa FROM tematy"))
+    zrodla = {r[0]: r[1:] for r in conn.execute("SELECT id, zrd, tytul, kto, typ_autora, wiarygodnosc FROM zrodla")}
+    numery_sp = dict(conn.execute("SELECT id, sp FROM sprzecznosci"))
+    wyniki = []
+    for wi in numery:
+        istotnosc, etap, status, teza, komentarz, url = (x or "" for x in conn.execute(
+            "SELECT istotnosc, etap, status, teza, moj_komentarz, notion_url FROM informacje WHERE wi = ?",
+            (wi,)).fetchone())
+        rel = relacje_informacji(conn, wi)
+        zr = sorted((zrodla[i] for i in rel["informacje_zrodla"] if i in zrodla), key=lambda z: z[0])
+        wyniki.append({
+            "wi": wi, "istotnosc": istotnosc, "etap": etap, "status": status, "teza": teza,
+            "tematy": sorted(tematy[i] or "" for i in rel["informacje_tematy"] if i in tematy),
+            "zrodla": [{"zrd": n, "tytul": t or "", "kto": k or "", "typ_autora": ta or "", "wiarygodnosc": w or ""}
+                       for n, t, k, ta, w in zr],
+            "sp": sorted(numery_sp[i] for i in rel["informacje_sp"] if i in numery_sp),
+            "notatnik": bool(rel["informacje_notatnik"]), "komentarz": komentarz, "notion_url": url})
+    return wyniki
+
+
+def linia_informacji(w: dict) -> str:
+    """Linia wyniku dla agenta; „Kto” każdego źródła obowiązkowe (ten sam autor to nie potwierdzenie)."""
+    zrodla = ", ".join(f"ZRD-{z['zrd']} „{skroc(z['tytul'], 60)}” (Kto: {jedna_linia(z['kto'])}; "
+                       f"{jedna_linia(z['typ_autora'])}; {jedna_linia(z['wiarygodnosc'])})" for z in w["zrodla"])
+    czesci = [f"WI-{w['wi']}", jedna_linia(w["istotnosc"]), jedna_linia(w["etap"]), jedna_linia(w["status"]),
+              jedna_linia(w["teza"]), "T: " + ("; ".join(jedna_linia(t) for t in w["tematy"]) or "–"),
+              zrodla or "ZRD: – (Kto: –)"]
+    if w["notatnik"]:
+        czesci.append("ustalenie w Notatniku")
+    if w["sp"]:
+        czesci.append(", ".join(f"SP-{n}" for n in w["sp"]))
+    czesci.append(w["notion_url"] or "–")
+    linia = " · ".join(czesci)
+    if w["komentarz"].strip():
+        linia += " · 💬 komentarz inwestora: " + jedna_linia(w["komentarz"])
+    return linia
+
+
+def otwarte_sp(conn: sqlite3.Connection, numery: set) -> list:
+    """Sprzeczności z `numery` o Statusie „Czeka na decyzję” albo „Do sprawdzenia u projektanta”, rosnąco."""
+    return [{"sp": sp, "status": status or "", "dylemat": dylemat or "", "notion_url": url or ""}
+            for sp, status, dylemat, url in conn.execute(
+                "SELECT sp, status, dylemat, notion_url FROM sprzecznosci ORDER BY sp")
+            if sp in numery and normalizuj(status) in OTWARTE_SP]
+
+
+def otwarte_sp_trafien(conn: sqlite3.Connection, trafienia: list, wyniki: list) -> list:
+    """Otwarte SP wszystkich trafień, nie tylko pokazanych (--limit): najpierw z pokazanych wyników w kolejności
+    pierwszego wystąpienia, potem tylko z dalszych trafień rosnąco; w_widocznych – SP niesie pokazany wynik."""
+    trafienia = set(trafienia)
+    otwarte = {s["sp"]: s for s in otwarte_sp(conn, {sp for wi, sp in conn.execute(
+        "SELECT x.wi, s.sp FROM informacje_sp x JOIN sprzecznosci s ON s.id = x.sp_id") if wi in trafienia})}
+    widoczne = list(dict.fromkeys(n for w in wyniki for n in w["sp"] if n in otwarte))
+    dalsze = [n for n in otwarte if n not in widoczne]
+    return ([dict(otwarte[n], w_widocznych=True) for n in widoczne]
+            + [dict(otwarte[n], w_widocznych=False) for n in dalsze])
+
+
+def linia_sp(s: dict) -> str:
+    return f"SP-{s['sp']} · {jedna_linia(s['status'])} · {jedna_linia(s['dylemat'])} · {s['notion_url'] or '–'}"
+
+
+def wi_tematow(conn: sqlite3.Connection, nazwa: str) -> set:
+    """WI informacji powiązanych z tematem, którego nazwa zawiera `nazwa` (bez wielkości liter i diakrytyków)."""
+    szukana = bez_diakrytykow(nazwa).strip()
+    return {wi for wi, n in conn.execute(
+        "SELECT it.wi, t.nazwa FROM informacje_tematy it JOIN tematy t ON t.id = it.temat_id")
+            if szukana in bez_diakrytykow(n)}
+
+
+def wybierz(conn: sqlite3.Connection, mecz: str, a) -> tuple:
+    """(widoczne WI wg bm25 rosnąco – najlepsze ma najmniejszą wartość, liczniki pominiętych) dla ciągu MATCH.
+    Domyślnie pomija Status „Nieaktualne” i Istotność „Ciekawostka”; jawny filtr --status / --istotnosc albo
+    --ciekawostki to wyłącza."""
+    pola = {wi: [normalizuj(x) for x in r] for wi, *r in conn.execute(
+        f"SELECT wi, {', '.join(FILTRY_SZUKAJ)} FROM informacje")}
+    filtry = {f: normalizuj(getattr(a, f)) for f in FILTRY_SZUKAJ if getattr(a, f) is not None}
+    temat = wi_tematow(conn, a.temat) if a.temat is not None else None
+    widoczne, pominieto = [], {"nieaktualne": 0, "ciekawostki": 0}
+    for (wi,) in conn.execute("SELECT rowid FROM informacje_fts WHERE informacje_fts MATCH ? "
+                              "ORDER BY bm25(informacje_fts, 3.0, 2.0, 1.0, 1.0, 1.5), rowid", (mecz,)).fetchall():
+        wartosci = dict(zip(FILTRY_SZUKAJ, pola.get(wi) or ()))
+        if not wartosci or any(wartosci[f] != v for f, v in filtry.items()) or (temat is not None and wi not in temat):
+            continue
+        if wartosci["status"] == "nieaktualne" and "status" not in filtry:
+            pominieto["nieaktualne"] += 1
+        elif wartosci["istotnosc"] == "ciekawostka" and not (a.ciekawostki or "istotnosc" in filtry):
+            pominieto["ciekawostki"] += 1
+        else:
+            widoczne.append(wi)
+    return widoczne, pominieto
+
+
+def cmd_szukaj(a) -> int:
+    mecz = zbuduj_zapytanie_fts(a.zapytanie, "AND")
+    if mecz is None:
+        blad("puste zapytanie – podaj słowa do wyszukania")
+        return 1
+    if a.limit < 1:
+        blad("--limit musi być co najmniej 1")
+        return 1
+    with contextlib.closing(otworz_do_odczytu(a)) as conn:
+        widoczne, pominieto = wybierz(conn, mecz, a)
+        # mniej niż DOPELNIJ_PONIZEJ widocznych trafień AND i ≥ 2 terminy treściowe (OR inne niż AND, nie same
+        # słowa wypełniające) → za trafieniami AND dopisane pozostałe trafienia OR, każda grupa wg bm25 (dopasowanie
+        # częściowe od pozycji pelnych + 1); liczniki pominiętych z OR, bo trafienia OR obejmują trafienia AND
+        mecz_or = zbuduj_zapytanie_fts(a.zapytanie, "OR")
+        czesciowe, pelnych = False, len(widoczne)
+        if len(widoczne) < DOPELNIJ_PONIZEJ and mecz_or is not None and mecz_or != mecz:
+            widoczne_or, pominieto_or = wybierz(conn, mecz_or, a)
+            juz = set(widoczne)
+            dalsze = [wi for wi in widoczne_or if wi not in juz]
+            if dalsze:
+                widoczne, pominieto, czesciowe = widoczne + dalsze, pominieto_or, True
+        wyniki = opisz_informacje(conn, widoczne[:a.limit])
+        sprzecznosci = otwarte_sp_trafien(conn, widoczne, wyniki)
+        stan = meta_bazy(conn).get("zbudowano") or ""
+        informacji = conn.execute("SELECT COUNT(*) FROM informacje").fetchone()[0]
+    if a.json:
+        wypisz_json({"stan": stan, "zapytanie": a.zapytanie, "czesciowe": czesciowe, "pelnych": pelnych,
+                     "trafien": len(widoczne), "pominieto": pominieto, "wyniki": wyniki, "sprzecznosci": sprzecznosci})
+        return 0
+    pominiete = ", ".join(f"{k} {n}" for k, n in pominieto.items() if n)
+    naglowek = f"# indeks: stan {lokalnie(stan)} · {informacji} informacji · zapytanie: {a.zapytanie}"
+    naglowek += "".join(f" · {f}: {getattr(a, f)}" for f in FILTRY_SZUKAJ + ("temat",) if getattr(a, f) is not None)
+    naglowek += f" · trafień: {len(widoczne)}"
+    if len(widoczne) > a.limit:
+        naglowek += f" (pokazano {a.limit})"
+    if czesciowe:
+        naglowek += f" (dopasowanie częściowe od pozycji {pelnych + 1})"
+    if pominiete:
+        naglowek += f" (pominięto: {pominiete})"
+    print(naglowek)
+    for w in wyniki:
+        print(linia_informacji(w))
+    if sprzecznosci:
+        dalsze = sum(not s["w_widocznych"] for s in sprzecznosci)
+        print("## Otwarte sprzeczności w trafieniach"
+              + (f" ({dalsze} tylko w dalszych trafieniach)" if dalsze else ""))
+        for s in sprzecznosci:
+            print(linia_sp(s) + ("" if s["w_widocznych"] else " · (tylko w dalszych trafieniach)"))
+    if pominiete:
+        print(f"# pominięto: {pominiete} – ciekawostki pokaże --ciekawostki, nieaktualne --status Nieaktualne")
+    return 0
+
+
+def cmd_temat(a) -> int:
+    szukana = bez_diakrytykow(a.nazwa).strip()
+    if not szukana:
+        blad("pusta nazwa tematu")
+        return 1
+    with contextlib.closing(otworz_do_odczytu(a)) as conn:
+        pasujace = [t for t in conn.execute(
+            "SELECT id, nazwa, stan_wiedzy, etap, w_skrocie, notion_url FROM tematy ORDER BY nazwa")
+                    if szukana in bez_diakrytykow(t[1])]
+        # nazwa równa zapytaniu wygrywa z dłuższymi, które ją zawierają („Drenaż” obok „Drenaż opaskowy”)
+        dokladne = [t for t in pasujace if bez_diakrytykow(t[1]).strip() == szukana]
+        if len(dokladne) == 1:
+            pasujace = dokladne
+        if len(pasujace) != 1:
+            kandydaci = [{"nazwa": t[1] or "", "notion_url": t[5] or ""} for t in pasujace]
+            if a.json:
+                wypisz_json({"kandydaci": kandydaci})
+            else:
+                print(f"# temat „{a.nazwa}”: " + (f"{len(kandydaci)} pasujących – podaj dokładniejszą nazwę"
+                                                  if kandydaci else "brak pasującego tematu"))
+                for k in kandydaci:
+                    print(f"{jedna_linia(k['nazwa'])} · {k['notion_url'] or '–'}")
+            return 0
+        id_, nazwa, stan_wiedzy, etap, w_skrocie, url = (x or "" for x in pasujace[0])
+        aktualne = [(wi, normalizuj(ist), normalizuj(st)) for wi, ist, st in conn.execute(
+            "SELECT i.wi, i.istotnosc, i.status FROM informacje i JOIN informacje_tematy it ON it.wi = i.wi "
+            "WHERE it.temat_id = ? ORDER BY i.wi", (id_,)) if normalizuj(st) != "nieaktualne"]
+        istotnosci = Counter(ist for _, ist, _ in aktualne)
+        statusy = Counter(st for _, _, st in aktualne)
+        liczniki = {"kluczowe": istotnosci["kluczowe"], "wazne": istotnosci["ważne"],
+                    "ciekawostki": istotnosci["ciekawostka"], "sporne": statusy["sporne"], "nowe": statusy["nowe"]}
+        kluczowe = opisz_informacje(conn, [wi for wi, ist, _ in aktualne if ist == "kluczowe"])
+        # znane ograniczenie: SP powiązane tylko z Tematem (bez informacji tematu) tu nie wystąpią
+        sp = otwarte_sp(conn, {n for (n,) in conn.execute(
+            "SELECT s.sp FROM informacje_sp x JOIN informacje_tematy it ON it.wi = x.wi "
+            "JOIN sprzecznosci s ON s.id = x.sp_id WHERE it.temat_id = ?", (id_,))})
+        stan = meta_bazy(conn).get("zbudowano") or ""
+    if a.json:
+        wypisz_json({"stan": stan, "nazwa": nazwa, "stan_wiedzy": stan_wiedzy, "etap": etap, "w_skrocie": w_skrocie,
+                     "liczniki": liczniki, "kluczowe": kluczowe, "sp": sp, "notion_url": url})
+        return 0
+    print(f"# indeks: stan {lokalnie(stan)} · temat: {jedna_linia(nazwa)} · {url or '–'}")
+    print(f"Stan wiedzy: {jedna_linia(stan_wiedzy)} · Etap: {jedna_linia(etap)}")
+    print(f"W skrócie: {jedna_linia(w_skrocie)}")
+    print(f"Liczniki (bez nieaktualnych): Kluczowe {liczniki['kluczowe']} · Ważne {liczniki['wazne']} · "
+          f"Ciekawostki {liczniki['ciekawostki']} · Sporne {liczniki['sporne']} · Nowe {liczniki['nowe']}")
+    print("## Kluczowe")
+    for w in kluczowe:
+        print(linia_informacji(w))
+    print("## Otwarte sprzeczności tematu")
+    for s in sp:
+        print(linia_sp(s))
+    return 0
+
+
+def dzien_lokalny(tekst):
+    """`dodano` (UTC z API) → data lokalna; bez zamiany para z granicy doby wypadłaby z --od o dzień."""
+    return na_czas(tekst).astimezone().date() if tekst else None
+
+
+def tokeny_tezy(tekst: str) -> set:
+    """Tokeny tezy już po bez_diakrytykow: co najmniej 5 znaków, bez liczb i stop-słów."""
+    return {t for t in NIE_SLOWO.sub(" ", tekst).split() if len(t) >= 5 and not t.isdigit() and t not in STOP_SLOWA}
+
+
+def cmd_duplikaty(a) -> int:
+    od = None
+    if a.od:
+        try:
+            od = date.fromisoformat(a.od)
+        except ValueError:
+            blad("--od: podaj datę w formacie RRRR-MM-DD")
+            return 1
+    if not 0 < a.prog <= 1:
+        blad("--prog: podaj liczbę z przedziału (0, 1]")
+        return 1
+    with contextlib.closing(otworz_do_odczytu(a)) as conn:
+        temat = wi_tematow(conn, a.temat) if a.temat is not None else None
+        tezy = {}  # WI → (teza, teza po bez_diakrytykow, data lokalna dodania); bez „Nieaktualne”
+        for wi, teza, status, dodano in conn.execute("SELECT wi, teza, status, dodano FROM informacje ORDER BY wi"):
+            if normalizuj(status) != "nieaktualne" and (temat is None or wi in temat):
+                tezy[wi] = (teza or "", bez_diakrytykow(teza), dzien_lokalny(dodano))
+        zrodla = {}
+        for wi, zrd in conn.execute("SELECT x.wi, z.zrd FROM informacje_zrodla x JOIN zrodla z ON z.id = x.zrd_id "
+                                    "ORDER BY z.zrd"):
+            zrodla.setdefault(wi, []).append(zrd)
+        stan = meta_bazy(conn).get("zbudowano") or ""
+    # indeks odwrócony token → WI zamiast porównywać każdą parę; kandydaci z najrzadszych tokenów (CZESTOSC_*,
+    # SONDA_*), bo długie listy tokenów pospolitych dawały kwadratowo wiele kandydatów
+    tokeny = {wi: tokeny_tezy(znormalizowana) for wi, (_, znormalizowana, _) in tezy.items()}
+    czestosc = Counter(t for ts in tokeny.values() for t in ts)
+    limit = max(CZESTOSC_MIN, CZESTOSC_UDZIAL * len(tezy))
+    indeks = {}
+    for wi, ts in tokeny.items():
+        for t in ts:
+            indeks.setdefault(t, []).append(wi)
+    # --od przed parowaniem: kandydaci tylko dla nowych tez; para obu nowych liczona raz (od mniejszego WI)
+    nowe = {wi for wi, (_, _, dodano) in tezy.items() if od is None or (dodano and dodano >= od)}
+    pary = []
+    for x in sorted(nowe):
+        kolejnosc = sorted(tokeny[x], key=lambda t: (czestosc[t], t))
+        rzadkie = [t for t in kolejnosc if czestosc[t] <= limit]
+        sonda = rzadkie[:SONDA_RZADKIE] if len(rzadkie) >= 3 else kolejnosc[:SONDA_POSPOLITE]
+        kandydaci = {y for t in sonda for y in indeks[t] if y != x and (y not in nowe or y > x)}
+        lx = len(tezy[x][1])
+        wspolne = ((len(tokeny[x] & tokeny[y]), abs(lx - len(tezy[y][1])), y) for y in kandydaci
+                   if 2 * min(lx, len(tezy[y][1])) >= a.prog * (lx + len(tezy[y][1])))
+        for n, _, y in heapq.nlargest(KANDYDACI_NA_TEZE, wspolne, key=lambda p: (p[0], -p[1], -p[2])):
+            if n < 3:
+                break
+            p, q = min(x, y), max(x, y)
+            miara = difflib.SequenceMatcher(None, tezy[p][1], tezy[q][1])
+            if miara.quick_ratio() >= a.prog:  # górne ograniczenie ratio – tańsze odsianie
+                r = miara.ratio()
+                if r >= a.prog:
+                    pary.append((r, p, q))
+    pary.sort(key=lambda p: (-p[0], p[1], p[2]))
+    if a.json:
+        wypisz_json({"stan": stan, "prog": a.prog, "od": a.od, "pary": [
+            {"wi_a": x, "wi_b": y, "ratio": round(r, 4), "teza_a": tezy[x][0], "teza_b": tezy[y][0],
+             "zrodla_a": zrodla.get(x, []), "zrodla_b": zrodla.get(y, [])} for r, x, y in pary]})
+        return 0
+    print(f"# indeks: stan {lokalnie(stan)} · duplikaty: próg {a.prog}" + (f" · od {a.od}" if a.od else "")
+          + (f" · temat: {a.temat}" if a.temat is not None else ""))
+    for r, x, y in pary:
+        zr = [", ".join(f"ZRD-{n}" for n in zrodla.get(w, [])) or "–" for w in (x, y)]
+        print(f"WI-{x} ↔ WI-{y} · {r:.2f} · {skroc(tezy[x][0], 80)} | {skroc(tezy[y][0], 80)} · "
+              f"źródła: {zr[0]} / {zr[1]}")
+    print(f"# par: {len(pary)}")
+    return 0
+
+
+def cmd_stan(a) -> int:
+    sciezka = sciezka_bazy(a)
+    fts5 = sprawdz_fts5()
+    with contextlib.closing(otworz_db(sciezka, zapis=False)) as conn:
+        liczniki = {t: conn.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0]
+                    for t in ("informacje", "tematy", "zrodla", "sprzecznosci")}
+        liczniki["fts"] = conn.execute("SELECT COUNT(*) FROM informacje_fts").fetchone()[0] if fts5 else None
+        sync = sorted(({"baza": b, "ostatnie_zmieniono": o, "wierszy": w, "zsynchronizowano": z}
+                       for b, o, w, z in conn.execute("SELECT * FROM sync_stan")),
+                      key=lambda s: list(BAZY).index(s["baza"]) if s["baza"] in BAZY else len(BAZY))
+        meta = meta_bazy(conn)
+        # nigdy nie opublikowano → brak opublikowano_sha → kopia nieaktualna
+        aktualna = meta.get("opublikowano_sha") == hash_danych(conn)
+        schemat = conn.execute("PRAGMA user_version").fetchone()[0]
+    dane = {"liczniki": liczniki, "sync_stan": sync, "zbudowano": meta.get("zbudowano"),
+            "ostatni_pelny": meta.get("ostatni_pelny"), "opublikowano_kiedy": meta.get("opublikowano_kiedy"),
+            "publikacje_liczba": int(meta.get("publikacje_liczba") or 0),
+            "historia_mb": round(float(meta.get("historia_mb") or 0), 1), "kopia_aktualna": aktualna,
+            "rozmiar_mb": round(sciezka.stat().st_size / MB, 2), "sqlite": sqlite3.sqlite_version,
+            "fts5": fts5, "schemat": schemat}
+    if a.json:
+        wypisz_json(dane)
+        return 0
+    rozmiar, historia = (str(dane[k]).replace(".", ",") for k in ("rozmiar_mb", "historia_mb"))
+    print(f"# indeks wiedzy: {sciezka.name} · {rozmiar} MB · schemat {schemat} · "
+          f"SQLite {dane['sqlite']} · FTS5: {'tak' if fts5 else 'nie'}")
+    print(f"liczniki: informacje {liczniki['informacje']} · tematy {liczniki['tematy']} · źródła {liczniki['zrodla']}"
+          f" · SP {liczniki['sprzecznosci']} · FTS {'–' if liczniki['fts'] is None else liczniki['fts']}")
+    for s in sync:
+        print(f"sync {s['baza']}: wierszy {s['wierszy']} · ostatnia zmiana {lokalnie(s['ostatnie_zmieniono'])} · "
+              f"zsynchronizowano {lokalnie(s['zsynchronizowano'])}")
+    print(f"zbudowano: {lokalnie(dane['zbudowano'])} · ostatni pełny sync: {lokalnie(dane['ostatni_pelny'])}")
+    print(f"publikacja: {lokalnie(dane['opublikowano_kiedy'])} · publikacji {dane['publikacje_liczba']} · "
+          f"historia ok. {historia} MB · kopia aktualna: {'tak' if aktualna else 'nie'}")
+    if dane["historia_mb"] > LIMIT_HISTORII_MB:
+        ostrzez(f"historia prywatnego repo ponad {LIMIT_HISTORII_MB} MB – uruchom publikuj --reset "
+                "(jeden commit z bieżącymi plikami zamiast całej historii)")
+    return 0
+
+
+def zbuduj_parser() -> argparse.ArgumentParser:
+    wspolne = argparse.ArgumentParser(add_help=False)
+    wspolne.add_argument("--db", type=Path, help="plik indeksu (domyślnie .dom/wiedza/wiedza.sqlite w hubie)")
+    wspolne.add_argument("--cicho", action="store_true", help="tylko zmiany i błędy")
+    wspolne.add_argument("--json", action="store_true", help="wynik jako JSON")
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest="polecenie", metavar="POLECENIE", required=True)
+    p = sub.add_parser("sync", parents=[wspolne], help="pobierz zmiany z Notion do indeksu")
+    p.add_argument("--pelny", action="store_true", help="pełny listing i usunięcie wierszy nieobecnych w Notion")
+    p.add_argument("--publikuj", action="store_true",
+                   help="po udanym syncu publikacja jak `publikuj` (pod tą samą blokadą; z --cicho w limicie czasu)")
+    p = sub.add_parser("szukaj", parents=[wspolne],
+                       help=f"szukanie w Informacjach (AND; poniżej {DOPELNIJ_PONIZEJ} trafień dopełnione przez OR)")
+    p.add_argument("zapytanie", help='słowa (prefiks*), "fraza" albo OR między słowami')
+    p.add_argument("--etap", help="równy Etap")
+    p.add_argument("--istotnosc", help="równa Istotność (włącza też ciekawostki)")
+    p.add_argument("--status", help="równy Status (włącza też nieaktualne)")
+    p.add_argument("--rodzaj", help="równy Rodzaj")
+    p.add_argument("--temat", help="część nazwy tematu")
+    p.add_argument("--ciekawostki", action="store_true", help="pokaż też Istotność „Ciekawostka”")
+    p.add_argument("--limit", type=int, default=12, help="najwyżej tyle linii (domyślnie 12)")
+    p = sub.add_parser("temat", parents=[wspolne], help="stan wiedzy, liczniki, Kluczowe i otwarte SP tematu")
+    p.add_argument("nazwa", help="nazwa tematu albo jej część")
+    p = sub.add_parser("duplikaty", parents=[wspolne], help="pary informacji o bardzo podobnych tezach")
+    p.add_argument("--od", help="RRRR-MM-DD: co najmniej jedna z pary dodana od tej daty (lokalnie)")
+    p.add_argument("--prog", type=float, default=0.82, help="minimalne podobieństwo tez (domyślnie 0.82)")
+    p.add_argument("--temat", help="tylko informacje tematu (część nazwy)")
+    sub.add_parser("stan", parents=[wspolne], help="liczniki, daty synchronizacji i publikacji, wersje")
+    p = sub.add_parser("publikuj", parents=[wspolne],
+                       help="kopia indeksu, wiedza.py i synonimów do prywatnego repo z GITHUB_REPO")
+    p.add_argument("--teraz", action="store_true",
+                   help=f"bez odstępu {PUBLIKACJA_CO_MIN} min (plik indeksu i tak tylko po zmianie danych)")
+    p.add_argument("--wymus", action="store_true",
+                   help="plik indeksu i README także bez zmiany danych (np. po odtworzeniu prywatnego repo)")
+    p.add_argument("--reset", action="store_true",
+                   help="historia repo od nowa: jeden commit bez rodzica z czterema plikami (gdy `stan` ostrzega)")
+    return ap
+
+
+# nazwa podkomendy → cmd_*(args) -> kod wyjścia
+POLECENIA = {"sync": cmd_sync, "szukaj": cmd_szukaj, "temat": cmd_temat, "duplikaty": cmd_duplikaty,
+             "stan": cmd_stan, "publikuj": cmd_publikuj}
+
+
+def linia_bledu(e: BaseException) -> int:
+    """Ostatnia linia tego pliku na ścieżce wyjątku."""
+    tb, linia = e.__traceback__, 0
+    while tb is not None:
+        if tb.tb_frame.f_code.co_filename == __file__:
+            linia = tb.tb_lineno
+        tb = tb.tb_next
+    return linia
+
+
+def main(argv=None) -> int:
+    a = zbuduj_parser().parse_args(argv)
+    try:
+        return POLECENIA[a.polecenie](a)
+    except (BladIndeksu, BladMapowania) as e:
+        blad(str(e))
+        return 1
+    except Exception as e:  # noqa: BLE001 – treść wyjątku i traceback mogą nieść wartości pól
+        if uszkodzony(e):
+            blad("indeks uszkodzony – uruchom sync (na Macu)")
+        else:
+            zglos_wyjatek(e, cicho=getattr(a, "cicho", False))
+        return 0 if a.polecenie == "sync" and a.cicho else 1  # hook startu nie może blokować sesji
+
+
+if __name__ == "__main__":
+    sys.exit(main())

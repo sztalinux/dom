@@ -51,7 +51,12 @@ Pobierz w jak najmniejszej liczbie zapytań:
       lub decyzjom; Informacje „Sporne” bez wpisu w Rejestrze;
     - sprawy blokujące bieżący etap bez Priorytetu „Krytyczne” (np. termin przed startem etapu, a Priorytet „Ważne”) –
       nie widać ich w „🔴 Do zamknięcia” na DOM;
-    - Dziennik: problemy bez wpisu w Notatniku/TASKS; TASKS „DONE”, a powiązany wpis Notatnika otwarty.
+    - Dziennik: problemy bez wpisu w Notatniku/TASKS; TASKS „DONE”, a powiązany wpis Notatnika otwarty;
+    - indeks wiedzy (`wiedza/references/indeks.md`): `python3 tools/wiedza.py stan --json` i `python3 tools/wiedza.py duplikaty --od <data sprzed 7 dni> --json`
+      → lista kandydatów na duplikaty do DECYZJI inwestora (nie scalaj bez zgody); `zbudowano` starsze niż 7 dni albo `ostatni_pelny`
+      starszy niż 14 dni → zaproponuj ręczny `sync --pelny`; `liczniki.informacje` porównaj z liczbą Informacji w Notion, gdy jest znana
+      (duża rozbieżność → `sync --pelny`); `kopia_aktualna` = false → zaproponuj `publikuj --teraz`. Na claude.ai nie ma `tools/`:
+      użyj kanału czatu z `indeks.md` (daty kopii tylko informacyjnie); bez dostępu napisz „indeks niedostępny” i czytaj Notion.
 11. **Zamówienia z wyprzedzeniem**: pozycje na najbliższe dwa etapy, których termin zamówienia (`zakupy/references/wyprzedzenia.md`)
    wypada w ciągu 14 dni; **płatności** – Wydatki „Planowane” z datą w 14 dni i transze po odbiorach, jeśli Excel jest
    dostępny w tym miejscu (inaczej napisz, że to wymaga aktualnego pliku).
@@ -83,7 +88,8 @@ Pobierz w jak najmniejszej liczbie zapytań:
 ## Porządki (raz w tygodniu, max 10 pozycji)
 
 Znajdź i zaproponuj – nie wykonuj bez zgody; po „tak” wykonaj wsadowo (zasada 6):
-- duplikaty w Notatniku i TASKS (to samo zagadnienie dwa razy) → scal w starszy wpis;
+- duplikaty w Notatniku i TASKS (to samo zagadnienie dwa razy) → scal w starszy wpis; kandydatów na duplikaty
+  Informacji bierz z listy `duplikaty --od` (punkt „Spójność”);
 - wpisy bez Etapu lub Priorytetu → uzupełnij;
 - sprawy po terminie albo bez zmian od 30 dni → zamknąć, przesunąć termin czy zostawić (pytanie zbiorcze);
 - Informacje „Nowe” starsze niż 30 dni → „Przejrzane” albo „Nieaktualne”;

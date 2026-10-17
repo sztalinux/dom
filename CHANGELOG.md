@@ -4,6 +4,27 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## dom-budowa [2.4.0] – 2026-10-17
+
+- Nowe narzędzie `tools/wiedza.py` – indeks Bazy wiedzy: lokalna kopia czterech baz Notion w SQLite z wyszukiwaniem
+  pełnotekstowym, tylko do odczytu (Notion zostaje jedynym miejscem zapisu). Polecenia: `sync`, `szukaj`, `temat`,
+  `duplikaty`, `stan`, `publikuj`; kopia dla czatu trafia do prywatnego repo. Synonimy budowlane w `tools/wiedza_synonimy.txt`.
+- Nowy `wiedza/references/indeks.md` – trzy kanały użycia indeksu: Claude Code, czat/telefon i przebieg nocny; `szukaj --json` zwraca też `pelnych` (liczba trafień pełnych, reszta to dopełnienie częściowe).
+- Odporność kopii indeksu: `publikuj --wymus` i `--reset`, kontrola, że repo kopii jest prywatne, samonaprawa uszkodzonego
+  indeksu i uprawnienia 700/600; nowy `wiedza/references/indeks-awarie.md` opisuje komunikaty, odnowienie tokenów i odtworzenie repo.
+- `wiedza`: A.5 szukanie w indeksie, A.7 synchronizacja po zapisie, E odczyt przez indeks; `notion-wiedza.md`: krok 7 planu
+  zapisu, typy pól Rejestru sprzeczności i dopasowanie pola „Pytanie do” po prefiksie.
+- `budowa` (zasady 6 i 10): indeks jako pierwszy sposób szukania w wiedzy; `przeglad-tygodnia` (Spójność): stan indeksu
+  i duplikaty; mapy Notion (`budowa/references/notion-mapa.md`, `zrodla.md`) opisują indeks.
+- `.claude/settings.json`: drugi hook startu (`sync --publikuj --cicho`) i zezwolenie dla `tools/wiedza.py`.
+- Utwardzenie repo: `tools/build.py` pomija katalog `.maister` w kontroli prywatności i traktuje rozszerzenia SQLite jako
+  pliki binarne; `.gitignore` i hook `pre-commit` blokują pliki SQLite.
+
+## ja [1.4.3] – 2026-10-17
+
+- Mapa Notion (`ja/references/notion-mapa.md`): podstrona „🔑 Asystent – dostęp” pod „🤖 Asystent AI” (dostęp czatu do indeksu
+  wiedzy). PATCH – poprawka mapy.
+
 ## ja [1.4.2] – 2026-10-17
 
 - `przeglad-dnia`, tryb szybki: zawsze trzy odczyty (Dziennik, „📝 Wpisy”, strony z widgetu); reguła 15 minut

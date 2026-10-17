@@ -31,7 +31,8 @@ DOM
 └─ 🤖 Dla asystenta (toggle) → 📑 Przewodnik po dokumentach i Notion, odnośnik do 🤖 Asystent AI, nagłówek
       „📐 Dane projektu (ściąga)” – JEDYNE źródło ściągi
 Poza DOM (najwyższy poziom Private, plugin `ja`): 🤖 Asystent AI – wersja pluginów, skrzynka Zmiany do harnessu,
-baza Pomysły na rozwój (widok „💡 Tablica”) – także dla zmian i pomysłów dotyczących budowy.
+baza Pomysły na rozwój (widok „💡 Tablica”) – także dla zmian i pomysłów dotyczących budowy;
+pod nią 🔑 Asystent – dostęp (dostęp do kopii indeksu wiedzy dla czatu).
 ```
 
 | Czego szukasz | Gdzie (strona / baza → widok/sekcja) | ID | Najważniejsze pola |
@@ -55,6 +56,7 @@ baza Pomysły na rozwój (widok „💡 Tablica”) – także dla zmian i pomys
 | Pojedyncze fakty ze źródeł | Baza wiedzy → Informacje; zakładki „🆕 Do przejrzenia”, „⭐ Kluczowe i ważne”, „💬 Z moim komentarzem”, „🎯 Na teraz – [bieżący etap]” (`view://3f7f5982-09e7-81bf-a377-000c19ce62cc`); niżej blok „🗂 Wiedza wg etapu” z zakładką na każdy etap | `collection://f78bb02d-6da5-46fb-bea9-c25e15f93117`, `view://3f4f5982-09e7-8124-95b3-000c5c02a4a2`, `view://3f7f5982-09e7-8141-80df-000c6d072a1e`, `view://3f7f5982-09e7-81cc-a5ff-000cd6d89601` | Status, **Istotność** (Kluczowe/Ważne/Ciekawostka), **Mój komentarz** (inwestora), Dotyczy nas, **Etap** (kiedy potrzebne), Pokazano, Potwierdzenia, Tematy, **Źródła** (ZRD) lub **Notatnik** (ustalenie) |
 | Kto i kiedy coś powiedział | Baza wiedzy → Rozmowy i źródła | `collection://35453d82-e38d-4797-840c-d19677c71b54` | Data, Forma, Z kim, Typ autora, Wiarygodność |
 | Sprzeczności do decyzji (SP-n) | Rejestr sprzeczności → „⏳ Czeka na Twoją decyzję” | `collection://7589d5f5-2d22-4b85-9138-72cd34d4a1f8`, `view://3f4f5982-09e7-8152-92b1-000c4785d478` | ID, Status, Priorytet, Tematy, Decyzja |
+| Szukanie wiedzy (indeks) – które informacje, co o temacie, sprzeczności, duplikaty | Indeks wiedzy: lokalna kopia czterech baz wiedzy tylko do odczytu (SQLite FTS5). Claude Code: `python3 tools/wiedza.py szukaj` / `temat` / `duplikaty` / `stan` (plik w `.dom/wiedza/` poza repo). Czat, telefon, zaplanowane zadania: kopia w prywatnym repo GitHub, dostęp wg strony 🔑 Asystent – dostęp. Procedura: `wiedza/references/indeks.md`; szczegóły i decyzje – nadal Notion | `3fcf5982-09e7-810e-aaca-f2b582438924` (strona dostępu) | numery WI/SP/ZRD, Istotność, Etap, Status |
 | Co się działo na budowie | Dziennik budowy → „📓 Ostatnie 7 dni”, „⚠️ Otwarte problemy” | `collection://cc113d57-3eaa-4f52-80f6-e4b39a4b4c92`, `view://3f5f5982-09e7-8192-847e-000c8ff6aba3`, `view://3f5f5982-09e7-8122-8524-000cb554728c` | Data, Etap, Krok, Problemy / usterki, Roboty dodatkowe, Przed zakryciem OK |
 | Bramki „bez odwrotu” | Stan zero – punkty bez odwrotu (Bramki 0–6) | `3f4f5982-09e7-81d2-bcae-ee5500a80c20` | – |
 | Przepusty, rury, trasy instalacji | Plan przepustów i tras instalacji | `3f4f5982-09e7-81fd-a382-dd14ab860ca2` | – |
@@ -63,6 +65,7 @@ baza Pomysły na rozwój (widok „💡 Tablica”) – także dla zmian i pomys
 | Ostatni przegląd tygodnia | Przeglądy tygodniowe | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` | – |
 | Przegląd dnia budowy (dziś / jutro, „rozkminki”; ręczne przebiegi z dopiskiem „(ręczne)”) | 📆 Przeglądy dzienne – budowa (strona na dole DOM, wzmianka w zakładce Więcej); przeglądy osobiste – pod 📓 Dziennikiem (plugin `ja`) | `3f8f5982-09e7-815e-8b03-eacaa74db190` | – |
 | Zasady asystenta, wersja harnessu | 🤖 Asystent AI (najwyższy poziom Private, plugin `ja`) | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` | – |
+| Dostęp do indeksu wiedzy z czatu (ścieżka kopii, token odczytu, blok poleceń) | 🔑 Asystent – dostęp (podstrona 🤖 Asystent AI; tylko dla asystenta, tokenu nie kopiuj nigdzie indziej) | `3fcf5982-09e7-810e-aaca-f2b582438924` | GITHUB_REPO, Token odczytu (ważny do 2027-01-14), blok poleceń |
 | Zgłoszone poprawki harnessu | Zmiany do harnessu | `collection://e217448a-60ec-4af6-8584-8f368315109c` | Status, Procedura, Rodzaj |
 | Pomysły na rozwój harnessu i setupu (do analizy, nie wchodzą same) | 🤖 Asystent AI → „💡 Pomysły na rozwój” → „💡 Tablica” | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3`, `view://3f7f5982-09e7-81f6-97bf-000cb7996ef0` | ID (POM-n), Status, Obszar, Nakład, Wymaga ode mnie; analiza w treści strony |
 | Stare notatki sprzed systemu | Archiwum – stare notatki (tylko do wglądu; przydatne rzeczy są w Notatniku) | `3f3f5982-09e7-817c-bab8-f439d883e6ce` | – (nie zapisuj tam) |

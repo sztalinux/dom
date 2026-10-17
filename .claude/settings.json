@@ -10,6 +10,7 @@
       "Bash(git push:*)",
       "Bash(python3 tools/build.py:*)",
       "Bash(python3 tools/dokumenty.py:*)",
+      "Bash(python3 tools/wiedza.py:*)",
       "Bash(git config core.hooksPath:*)",
       "Bash(claude plugin validate:*)"
     ]
@@ -28,6 +29,12 @@
             "command": "python3 \"$CLAUDE_PROJECT_DIR/tools/dokumenty.py\"",
             "timeout": 120,
             "statusMessage": "Sprawdzam dokumenty budowy…"
+          },
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/tools/wiedza.py\" sync --publikuj --cicho",
+            "timeout": 120,
+            "statusMessage": "Synchronizuję indeks wiedzy…"
           }
         ]
       }

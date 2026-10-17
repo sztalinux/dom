@@ -12,5 +12,19 @@ dane/
 *.doc
 *.docx
 *.zip
-# ustawienia lokalne Claude Code (prywatne dla danego komputera)
+# ustawienia lokalne Claude Code (prywatne dla danego komputera) i kopie robocze sesji równoległych
 .claude/settings.local.json
+.claude/worktrees/
+# lokalne bazy SQLite (indeks wiedzy) – nigdy w repo
+*.sqlite
+*.sqlite3
+*.db
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+*.sqlite3-wal
+*.sqlite3-shm
+*.sqlite3-journal
+*.db-wal
+*.db-shm
+*.db-journal

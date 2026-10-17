@@ -78,9 +78,13 @@ Temat ma być na tyle szeroki, by zebrać kilka-kilkanaście informacji.
 
 Pola: Dylemat (tytuł), Status (Czeka na decyzję, Do sprawdzenia u projektanta, Rozstrzygnięte, Zastąpione,
 Nieaktualne), Rodzaj (Źródło vs źródło, Źródło vs projekt, Źródło vs nasza decyzja, Źródło vs oferta wykonawcy,
-Dylemat bez sprzeczności), Branża, Etap, Priorytet (Krytyczne, Ważne, Zwykłe), Stanowisko A, Stanowisko B,
-Kontekst naszej budowy, Opcje, Rekomendacja asystenta, Pytanie do inwestora, Decyzja, Uzasadnienie, Konsekwencje,
-Data decyzji, Informacje (relacja), Źródła (relacja → Rozmowy i źródła), Tematy (relacja), Zgłoszono (auto).
+Dylemat bez sprzeczności), Branża (multi-select), Etap (select), Priorytet (Krytyczne, Ważne, Zwykłe), Stanowisko A,
+Stanowisko B, Kontekst naszej budowy, Opcje, Rekomendacja asystenta, Pytanie do inwestora, Decyzja, Uzasadnienie,
+Konsekwencje, Data decyzji (data), Informacje (relacja), Źródła (relacja → Rozmowy i źródła), Tematy (relacja), Zgłoszono (auto).
+Długie pola tekstowe (Stanowisko A/B, Kontekst naszej budowy, Opcje, Rekomendacja asystenta, Uzasadnienie, Konsekwencje,
+Decyzja) to rich_text. Numer (WI-n, ZRD-n, SP-n) niesie właściwość `ID` (unique_id); Tematy jej nie mają.
+W Notion właściwość opisana tu jako „Pytanie do inwestora” ma w rzeczywistej nazwie imię inwestora – przed zapisem
+pobierz schemat bazy i dopasuj ją po prefiksie „Pytanie do”.
 
 ## Plan zapisu jednego źródła (minimum zatwierdzeń, pełna jakość)
 
@@ -94,6 +98,9 @@ Najpierw wszystkie odczyty (tematy, podobne informacje, sprzeczności, decyzje),
    informacji – **nie aktualizuj potwierdzonych wierszy pojedynczo**.
 5. **Notatnik budowy – jedno wywołanie** ze wszystkimi wpisami do działania (jeśli są).
 6. **Tematy – aktualizacja „W skrócie”/treści** tylko dla tematów spełniających próg z SKILL.md (krok 8), po jednym na temat.
+7. **Indeks wiedzy** (po zapisach 1–6, szczegóły: `references/indeks.md`): w sesji interaktywnej Claude Code w repo uruchom
+   `python3 tools/wiedza.py sync --publikuj`; w przebiegu nocnym pomiń (sync robi skrypt); w czacie pomiń i napisz wprost,
+   że indeks dogoni przy najbliższym sync na Macu.
 
 Rozstrzygnięcie sprzeczności (po decyzji): wpis SP (1) + wiersze Informacji, którym zmienia się status (po 1 na wiersz)
 + ewentualnie Notatnik (1) + temat (1).

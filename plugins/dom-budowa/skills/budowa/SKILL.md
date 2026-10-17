@@ -115,7 +115,9 @@ własny przegląd, żeby nie zasłaniała spraw osobistych.
    Jakość ma pierwszeństwo: nie skracaj treści, nie pomijaj pól, nie łącz niepowiązanych informacji
    w jeden wpis, nie pomijaj sprawdzenia duplikatów i sprzeczności tylko po to, żeby zaoszczędzić wywołanie.
    Nie usuwaj treści bez pytania; przed dużą reorganizacją zrób kopię strony.
-   **Odczyt baz a limit Notion:** zapytania do baz (`query_data_sources`) w trybach **sql i rows** mają w planie Notion
+   **Odczyt baz a limit Notion:** wiedzę (Informacje, Tematy, Rozmowy i źródła, sprzeczności) czytaj **najpierw z indeksu**
+   (`wiedza/references/indeks.md`, zasada 10) – nie zużywa limitu Notion. Limit dotyczy tylko odczytu z Notion:
+   zapytania do baz (`query_data_sources`) w trybach **sql i rows** mają w planie Notion
    inwestora wspólny limit dla całego workspace'u (SQL wyczerpany 12.10.2026, rows – 15.10.2026; termin odnowienia nieznany).
    Tryb **view** (zapisany widok z filtrem) limitu nie ma. Czytaj w tej kolejności: **view** (istniejący widok; brak
    pasującego → utwórz widok z filtrem, to nie zmienia danych) → wyszukiwarka z parametrem bazy (duplikaty, pojedyncze
@@ -135,7 +137,9 @@ własny przegląd, żeby nie zasłaniała spraw osobistych.
    danych („Firma A”, „Jan Kowalski”).
 10. **Kolejność szukania odpowiedzi** (pytania o naszą budowę i wiedzę budowlaną):
     1) **materiały inwestora** – Baza wiedzy (Tematy, Informacje), ustalenia i decyzje w Notatniku, ściąga i dokumenty
-       projektu (przewodnik; dokument – poproś o niego, zasada 7);
+       projektu (przewodnik; dokument – poproś o niego, zasada 7); wiedzy szukaj **najpierw w indeksie**
+       (`python3 tools/wiedza.py szukaj "2–4 słowa"`; kanały czatu i przebiegu nocnego: `wiedza/references/indeks.md`),
+       do Notion sięgaj po szczegóły, przed decyzją i przed zapisem wiedzy; indeks niedostępny → od razu Notion;
     2) **miejsca, gdzie temat się pojawił, ale nie jest rozstrzygnięty** – otwarte Pytania/Doczytać/Do omówienia
        w Notatniku, Rejestr sprzeczności, Rozmowy i źródła, Dziennik budowy, „Co już wiem z rozmów i ofert”, archiwum
        starych notatek – pokaż je jako otwarte, nie jako ustalenie;

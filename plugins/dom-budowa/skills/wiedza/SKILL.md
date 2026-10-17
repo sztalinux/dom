@@ -10,7 +10,7 @@ oznaczyć co nowe, co potwierdzone, a co sprzeczne – i niczego spornego nie ro
 
 Struktura Notion, ID baz, pola i plan zapisu: `references/notion-wiedza.md`.
 Ocena źródła: `references/ocena-zrodla.md`. Sprzeczności (ADR): `references/sprzecznosci.md`.
-Zapisy wsadowe: `budowa`, zasada 6.
+Szukanie w bazie (indeks lokalny, trzy kanały dostępu): `references/indeks.md`. Zapisy wsadowe: `budowa`, zasada 6.
 
 **Każda informacja ma źródło** – relację Źródła (wpis w Rozmowach i źródłach: film, rozmowa, dokument, notatki własne)
 albo relację Notatnik (ustalenie lub decyzja naszej budowy, sekcja F). Informacji bez źródła nie zapisuj. Źródło nieznane
@@ -51,7 +51,9 @@ w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej inform
    „Cała budowa” tylko dla zasad bez konkretnego momentu (organizacja, budżet, umowy).
 5. **Porównanie z tym, co wiemy** – dla każdej jednostki przeszukaj: Informacje (te same Tematy + słowa kluczowe),
    „W skrócie” tematów, Rejestr sprzeczności (także rozstrzygnięte), decyzje w Notatniku budowy, ściągę projektu
-   (`budowa/references/projekt.md`). Sklasyfikuj:
+   (`budowa/references/projekt.md`). Informacje sprawdzaj poleceniem `szukaj` z tezą jednostki: 2–4 słowa kluczowe, bez zdania
+   i słów pomocniczych (końcówki fleksyjne obcina narzędzie; `*` = prefiks, np. `drena*`), nie przeglądaniem bazy; wynik niesie
+   „Kto” do reguły „ten sam autor” (niżej). Polecenie i kanał: `references/indeks.md` (przebieg nocny – bezwzględna ścieżka z promptu). Sklasyfikuj:
    | Wynik | Działanie |
    |---|---|
    | NOWE | nowy wiersz, Status „Nowe” |
@@ -67,7 +69,8 @@ w odpowiedzi zaznacz, że wymaga potwierdzenia. Dzięki temu przy każdej inform
    `budowa/references/projekt.md`); ustaw propozycję **Istotności** (wyżej – „Dotyczy nas = Nie” to zwykle Ciekawostka). Wymaga działania (pytanie do konstruktora, ryzyko,
    rzecz do pilnowania na budowie) → wpis w Notatniku budowy (procedura `notatka`, Źródło = „ZRD-x <tytuł>, <minuta>”).
 7. **Zapis do Notion** – kolejność i grupowanie wg „Plan zapisu” w `references/notion-wiedza.md` (zwykle 4–6 zatwierdzeń).
-   Wiedza bez konfliktu zapisuje się od razu.
+   Wiedza bez konfliktu zapisuje się od razu. Po zapisie: w sesji interaktywnej Claude Code w repo uruchom
+   `python3 tools/wiedza.py sync --publikuj`; w przebiegu nocnym pomiń (sync robi skrypt); w czacie pomiń i napisz to wprost.
 8. **Tematy – podsumowanie:** aktualizuj „W skrócie” i treść strony tematu tylko gdy temat dostał ≥ 3 nowe informacje,
    rozstrzygnięcie albo informacja zmienia „co obowiązuje dziś”. Pozostałe są widoczne w relacji Informacje tematu.
 
@@ -102,7 +105,9 @@ podaje ocenę albo uwagę („WI-12 ciekawostka”, „do WI-20: nie zgadzam si�
 
 ## E. Pytanie do bazy („co wiemy o drenażu?”)
 
-1. Znajdź temat(y) w Tematach (nazwa i „W skrócie”); pobierz ich Informacje (Status ≠ Nieaktualne) i wpisy Rejestru
+1. Zacznij od indeksu: `szukaj` i `temat` (`references/indeks.md`); Notion czytaj dopiero po szczegóły, przed decyzją
+   i przed zapisem. Stan indeksu starszy niż 24 h – podaj jego datę w odpowiedzi. Indeks niedostępny → dotychczasowa droga:
+   znajdź temat(y) w Tematach (nazwa i „W skrócie”); pobierz ich Informacje (Status ≠ Nieaktualne) i wpisy Rejestru
    (Status ≠ Zastąpione) – jednym zapytaniem na bazę. Dodaj decyzje z Notatnika (Typ „Decyzja”) o tej branży.
    Gdy dwa tematy pokrywają ten sam zakres, nie łącz ich wiedzy po cichu – zgłoś to inwestorowi jako sprawę porządkową.
 2. Kolejność w obrębie stanu wiedzy: Kluczowe → Ważne → nieocenione; Ciekawostki tylko jako licznik („+ n ciekawostek –

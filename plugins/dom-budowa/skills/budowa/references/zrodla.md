@@ -20,6 +20,7 @@ Zasada podziału: **harness = JAK pracujemy** (procedury, formaty, zasady) – t
 | Porównanie wykonawców (jakość, zakres, knock-out) | Notion → Wybór wykonawcy – stan zero → baza „Porównanie wykonawców” | agent (`oferta`) |
 | Wiedza: tematy, informacje, rozmowy i filmy | Notion → DOM → Baza wiedzy (Tematy, Informacje, Rozmowy i źródła) | agent (`wiedza`), inwestor przegląda |
 | Sprzeczności i dylematy (ADR) | Notion → Baza wiedzy → Rejestr sprzeczności | agent zgłasza, **decyduje inwestor** |
+| Indeks wiedzy (SQLite, kopia w prywatnym repo wskazanym w zmiennej `GITHUB_REPO`, strona dostępu w Notion) | Lokalnie w `.dom/wiedza/` (poza repo), tylko do odczytu; kopia dla czatu w prywatnym repo GitHub; ścieżka repo i token odczytu – Notion → 🤖 Asystent AI → 🔑 Asystent – dostęp; procedura `wiedza/references/indeks.md` | agent odtwarza z Notion (`python3 tools/wiedza.py sync`), nigdy nie zapisuje do niego wiedzy; Notion zostaje źródłem prawdy |
 | Przeglądy tygodniowe | Notion → DOM → Przeglądy tygodniowe | agent (`przeglad-tygodnia`) |
 | Dziennik inwestora (dni na budowie, dostawy, usterki, godziny własne) | Notion → DOM → Dziennik budowy (schemat: `dziennik/references/notion-dziennik.md`); zdjęcia w folderze budowy `Zdjęcia/` | inwestor + agent (`dziennik`) |
 | Bramki i odbiory etapów | Notion → DOM → 🏗 Etap → zakładki etapów (przewodnik, checklista), „Stan zero – punkty bez odwrotu”; protokoły w folderze budowy | agent przygotowuje (`etap`), odbiera inwestor z kierownikiem |
@@ -43,6 +44,7 @@ Pełna mapa z perspektywy „czego szukasz” (widoki, pola, słowniki): `notion
 | Tematy / Informacje / Rozmowy i źródła / Rejestr sprzeczności | `wiedza/references/notion-wiedza.md` |
 | Przeglądy tygodniowe (strona) | `3f4f5982-09e7-8144-af5e-f9521a52ea9d` |
 | 🤖 Asystent AI (wersje obu pluginów, skrzynka, pomysły) | `3f4f5982-09e7-81f5-b7f9-d6cf5d79bb34` |
+| 🔑 Asystent – dostęp (strona pod 🤖 Asystent AI: dostęp do indeksu wiedzy dla czatu) | `3fcf5982-09e7-810e-aaca-f2b582438924` |
 | 📓 Dziennik (strona wpisów) / 📆 Przeglądy dzienne – budowa (na DOM) | `3f8f5982-09e7-80c8-a154-c59aeb844e8f` / `3f8f5982-09e7-815e-8b03-eacaa74db190` |
 | Zmiany do harnessu (data source) | `collection://e217448a-60ec-4af6-8584-8f368315109c` |
 | Pomysły na rozwój (data source) | `collection://fdee4f05-8f43-4be4-a0d5-2b88642fa6d3` |

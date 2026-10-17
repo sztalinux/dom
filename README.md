@@ -21,6 +21,7 @@ Dom/                              ← folder budowy (centrum dokumentów, poza g
   Zdjęcia/                        ← zdjęcia z budowy (RRRR-MM-DD_<krok>/), poza indeksem i paczką
   Ściąga projektu.md              ← kopia ściągi z Notion („📐 Dane projektu”) do paczki awaryjnej
   .dom/                           ← indeks dokumentów, stan wgrania, lista słów zakazanych w repo
+    wiedza/                       ← dane indeksu wiedzy (.dom/wiedza/) – poza repo, nigdy w git
   … foldery tematyczne (projekt, konstrukcja, instalacje, wyceny…)
   AI/dom/                         ← to repozytorium
     CLAUDE.md, AGENTS.md, GEMINI.md   ← punkty wejścia agentów
@@ -28,10 +29,11 @@ Dom/                              ← folder budowy (centrum dokumentów, poza g
     plugins/ja/skills/                ← procedury osobiste (Dziennik, zadania, emocje, dziecko, suple, przegląd dnia, harness)
     plugins/dom-budowa/skills/        ← procedury budowy
     .claude/skills/, .agents/skills/  ← dowiązania na każdy skill obu pluginów (odtwarza tools/build.py)
-    .claude/settings.json             ← zezwolenia + hook startowy (tools/dokumenty.py)
+    .claude/settings.json             ← zezwolenia + dwa hooki startowe (tools/dokumenty.py, tools/wiedza.py sync --publikuj --cicho)
     .githooks/                        ← pre-commit (pliki, autor), commit-msg (wiadomość), pre-push (każdy wysyłany commit)
     tools/build.py                    ← walidacja (w tym dane osobowe) + dowiązania skilli + paczki dist/ (po jednej na plugin)
     tools/dokumenty.py                ← indeks folderu budowy i paczka dla claude.ai
+    tools/wiedza.py                   ← indeks Bazy wiedzy (SQLite FTS5 z Notion, tylko do odczytu)
 ```
 
 ## Jak to działa
@@ -40,7 +42,8 @@ Dom/                              ← folder budowy (centrum dokumentów, poza g
 Telefon / czat ── poprawka sposobu pracy ──► Notion „Zmiany do harnessu” (obowiązuje od razu)
                                                    │
 Claude Code (komputer, start sesji) ◄──────────────┘
-   ├─ hook: skan folderu budowy → paczka `_Do claude.ai/` + lista „do wgrania”
+   ├─ hook 1 (tools/dokumenty.py): skan folderu budowy → paczka `_Do claude.ai/` + lista „do wgrania”
+   ├─ hook 2 (tools/wiedza.py sync --publikuj --cicho): odświeża indeks Bazy wiedzy z Notion i publikuje kopię dla czatu
    ├─ klasyfikuje nowe dokumenty (procedura `dokumenty`)
    └─ wdraża zmiany harnessu → wersja → commit → push ──► GitHub sztalinux/notion-plugin
                                                                │ ręczne odświeżenie pluginów (claude-ai-projekt.md)
@@ -74,7 +77,7 @@ claude.ai (telefon, czat, Cowork) ◄── pluginy ja + dom-budowa ─┘   (ka
 | `koszty` | Excel, wydatek, faktura, „ile wydaliśmy” | plan / umówione / wydane, wiersze do wklejenia, płatności i transze |
 | `notatka` | „zapisz”, „ustaliliśmy”, „decyzja” | Notatnik budowy, TASKS (Obszar Dom), „Do zamknięcia” |
 | `analiza-techniczna` | projekt, rysunek, umowa, pytanie techniczne, „jak to zrobić samemu” | [projekt]/[szacunek]/[opinia], pytania do projektanta, instrukcja pracy własnej |
-| `wiedza` | transkrypcja, artykuł, „dzwoniłem do…”, „SP-n: …”, „co wiemy o…” | Baza wiedzy, sprzeczności (ADR), odczyt stanu wiedzy |
+| `wiedza` | transkrypcja, artykuł, „dzwoniłem do…”, „SP-n: …”, „co wiemy o…” | Baza wiedzy, sprzeczności (ADR), odczyt stanu wiedzy; szukanie i duplikaty przez indeks `tools/wiedza.py` |
 | `dokumenty` | nowe pliki, „wgrałem”, „gdzie jest…” | folder budowy, indeks, paczka dla claude.ai, przewodnik w Notion |
 | `etap` | „zaczynamy etap”, „jutro betonowanie”, odbiór, usterki | plan etapu, bramki „bez odwrotu”, protokół odbioru |
 | `dziennik` | „dziś na budowie…”, zdjęcia, godziny własne, roboty dodatkowe | Dziennik budowy w Notion, przekazanie kosztów/zadań |
@@ -82,6 +85,14 @@ claude.ai (telefon, czat, Cowork) ◄── pluginy ja + dom-budowa ─┘   (ka
 | `zakupy` | „co kupić na…”, „kiedy zamawiać”, oferta hurtowni, dostawa | lista z kosztorysu, wyprzedzenia, porównanie dostawców |
 | `przygotowanie` | „jutro spotkanie z…”, „o co zapytać”, „kogo wybrać z kilku” | karta przygotowania: pytania, czerwone flagi, macierz decyzji, zapis po spotkaniu |
 | `przeglad-tygodnia` | poniedziałek / „co nowego” | decyzje, nowa wiedza, terminy, budowa, zamówienia, porządki |
+
+## Indeks wiedzy
+
+`tools/wiedza.py` trzyma lokalną kopię czterech baz Bazy wiedzy z Notion w SQLite z wyszukiwaniem pełnotekstowym (tylko do odczytu –
+zapisy idą wyłącznie do Notion). Polecenia: `sync`, `szukaj`, `temat`, `duplikaty`, `stan`, `publikuj`. Dane leżą w `.dom/wiedza/` poza repo
+i nigdy nie trafiają do git. Konfiguracja – plik `.dom/sekrety.env` (tryb 600, poza repo), cztery zmienne: `NOTION_TOKEN` (odczyt Notion),
+`GITHUB_REPO` (prywatne repo kopii dla czatu na telefonie), `GITHUB_TOKEN_SYNC` (zapis kopii na Macu), `GITHUB_TOKEN_SEARCH` (odczyt kopii w czacie).
+Trzy kanały użycia i ograniczenia: `plugins/dom-budowa/skills/wiedza/references/indeks.md`.
 
 ## Start
 
