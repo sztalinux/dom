@@ -4,6 +4,16 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.4.0] – 2026-10-17
+
+- Strona ✅ Zadania w zakładkach (📅 Dziś i tydzień z przełączanymi widokami, 🛒 Zakupy, 🏠 Prywatne, 🏗 Budowa, 👪 Dziecko);
+  `zadania`, sekcja C i mapa Notion `ja` z ID widoków; `ja`, zasada 10: zakładki zamiast długich stron.
+- HZ-7: zakupy do bazy 🛒 Zakupy (nie do TASKS); zadanie tylko przy terminie lub pilne – `zadania`, sekcja „Zakupy”;
+  liczniki zakupów w przeglądach dnia i tygodnia; baza w mapie Notion.
+- HZ-8: research RES-n robiony wieczorem (`przeglad-dnia`, krok B.6), odpowiedzi „RES-n” i sprzątanie „❓” (`wpisy`); baza 🔎 Research w mapie.
+- HZ-9: format pytań w „❓” – osobny checkbox na pytanie, kontekst w „Szczegółach” (`wpisy/references/pytania.md`);
+  zaznaczony checkbox liczy się jako odpowiedź.
+
 ## ja [1.3.4] – 2026-10-16
 
 - HZ-5: książka, film/serial i pomysł na prezent to nie zadanie – idą do Books, 🎬 Films i na stronę osoby; zadanie tylko

@@ -38,6 +38,7 @@ Podział wpisów na obszary **nie jest w harnessie** – jest w bazie Notion „
 | „przerób dziennik”, „co mam w dzienniku”, wkleja kilka luźnych notatek naraz, „odpowiedziałem w dzienniku” | `wpisy` |
 | opisuje emocję („czułem złość na 7…”), dzień w pracy, prosi o podsumowanie emocji | `emocje` |
 | „muszę…”, „przypomnij mi…”, „zrobiłem X”, „czekam na…”, „co mam jutro / w tym tygodniu” (sprawy pozabudowlane) | `zadania` |
+| „kupić X”, link do produktu, „kupiłem X”, „co kupić” (nie suplementy, nie materiały budowy) | `zadania` (sekcja „Zakupy”) |
 | mówi o dziecku: obserwacja, „porozmawiać z nią o…”, prezent, zabawa, zalecenie specjalisty | `dziecko` |
 | „kończy się X”, „kupiłem X”, „zaczynam / przerwa od” (suplement) | `suple` |
 | „przegląd dnia”, wieczorne zaplanowane zadanie | `przeglad-dnia` |
@@ -58,7 +59,9 @@ zapisuj wprost według pól „Gdzie” i „Jak zapisać” w bazie Obszary.
    (zapisany widok) limitu nie ma. Kolejność: widok (brak pasującego → utwórz go z filtrem) → wyszukiwarka z parametrem bazy
    (duplikaty, pojedyncze wiersze) → rows → SQL. Błąd „usage limit” → bez ponawiania, przejdź na widok/wyszukiwarkę.
 4. **Nie zgaduj:** niejasny wpis, brak daty przy terminie, nie wiadomo czego dotyczy → pytanie (w Dzienniku „❓”, w rozmowie
-   wprost). Słowa względne („wczoraj”, „w piątek”) licz od daty we wpisie, nie od daty przetwarzania.
+   wprost). Słowa względne („wczoraj”, „w piątek”) licz od daty we wpisie, nie od daty przetwarzania. Każde pytanie do
+   inwestora zapisane w Notion (Dziennik, strony RES-n, pomysłów) ma format z `wpisy/references/pytania.md`: osobny checkbox
+   na pytanie, kontekst w zwiniętych „Szczegółach”.
 5. **Prywatność:** strona **„🔒 Prywatne”** (`3faf5982-09e7-816b-92ab-d8b79c61ad92`) i wszystko pod nią jest poza zasięgiem
    asystenta – nie czytaj, nie przeszukuj (wyniki wyszukiwania z niej pomijaj), nie cytuj, nie przenoś tam i stamtąd niczego
    bez wyraźnego polecenia. Lista stron najwyższego poziomu Private (odczyt wpisów z widgetu) pokazuje też tę stronę –
@@ -85,6 +88,13 @@ zapisuj wprost według pól „Gdzie” i „Jak zapisać” w bazie Obszary.
    dodatkowo zadanie w TASKS (`zadania`): „Porozmawiać z <dzieckiem / partnerką> o <temat>”, Obszar Dziecko albo Prywatne,
    When = data wpisu + 3 dni, w treści odnośnik do strony osoby – inaczej rozmowa na świeżo przepada. Temat ogólny → tylko
    strona. Nie da się ocenić, czy to świeże zdarzenie → pytanie (w Dzienniku „❓”).
+10. **Zakładki zamiast długich stron.** Budując lub porządkując stronę w Notion, używaj zakładek (blok z zakładkami, jak na DOM,
+    DASHBOARD i ✅ Zadania), gdy treść dzieli się na równoległe części: obszary, etapy, rodzaje list. Najpierw zakładka
+    przekrojowa (np. dziś i tydzień dla wszystkich obszarów), potem zakładka na obszar. Jedna baza z kilkoma widokami to
+    **jeden blok z przełączanymi widokami**, nie kilka bloków pod sobą. Inwestor korzysta z telefonu – krótka strona
+    z zakładkami czyta się lepiej niż przewijana. Technika: strony zmieniaj punktowo (zasada 8); istniejące bloki baz
+    wstaw w zakładkę tym samym znacznikiem (inaczej zostaną usunięte); nowy blok widoku bazy skonfiguruj po utworzeniu
+    (domyślnie pokazuje wszystko) i nie zmieniaj widoków samej bazy źródłowej – ich ID są w mapach.
 
 ## Domknięcie rozmowy
 

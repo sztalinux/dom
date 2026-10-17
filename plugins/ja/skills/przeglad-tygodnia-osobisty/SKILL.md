@@ -37,7 +37,8 @@ przeglad-tygodnia-osobisty z pluginu ja)”. Ręcznie: „przegląd tygodnia”.
      średnia ocena, najczęstsze przeszkadzajki;
    - strona dziecka: nowe punkty w „💬 Do przegadania” i „🎁 Prezenty” z tygodnia (licznik + tytuły tematów);
    - strona „💍 Wesele”: nowe punkty i zadania „Wesele:” z terminem w 30 dni;
-   - Suple: Buy = tak (licznik, nazwy).
+   - Suple: Buy = tak (licznik, nazwy);
+   - Zakupy: 🛒 Zakupy „Do kupienia” (licznik, najstarsze) i z Terminem w 7 dni (wymień).
 3. **Dziennik i harness** (odczyt): wpisy w „❓” starsze niż 7 dni bez odpowiedzi (wymień wpis i pytanie – sprawy budowy
    tylko licznikiem, są w przeglądzie budowy); skrzynka „Zmiany do harnessu” – wpisy do wdrożenia starsze niż 7 dni
    (przypomnienie: uruchom Claude Code); „Pomysły na rozwój” – nowe bez analizy i „Pytania do mnie”.
@@ -45,7 +46,7 @@ przeglad-tygodnia-osobisty z pluginu ja)”. Ręcznie: „przegląd tygodnia”.
    ```
    **Zrobione:** 3–6 punktów (prywatne / dziecko / praca)
    **Zaległe i po terminie:** zadanie – od kiedy → zamknąć, przesunąć czy odpuścić?
-   **Najbliższy tydzień:** zadania z terminem wg dni, wesele (30 dni), „kupić: n suplementów”
+   **Najbliższy tydzień:** zadania z terminem wg dni, wesele (30 dni), „kupić: n suplementów, n pozycji z zakupów (z terminem: …)”
    **Emocje i praca (liczby):** n wpisów emocji, najczęściej: …, śr. intensywność x; praca: n dni, śr. ocena y; wzorzec: …
    **Dziecko:** n nowych tematów do przegadania, n pomysłów na prezent
    **Czeka na Ciebie:** n pytań w ❓ (najstarsze: …), HZ-x do wdrożenia, POM-x z pytaniami

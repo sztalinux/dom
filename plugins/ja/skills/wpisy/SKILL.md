@@ -51,8 +51,8 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
 1. **Pobierz** stronę Dziennik, stronę „📝 Wpisy” (jej podstrony) i listę stron najwyższego poziomu Private (odczyt
    listy stron prywatnych; strony spoza listy stałych otwórz, żeby mieć treść i czas ostatniej edycji – tylko je). Brak
    narzędzia do listy stron prywatnych → pomiń to źródło i dopisz w linii „🤖”: „strony z widgetu – brak odczytu”.
-   Nowe wpisy oraz wpisy z „❓”, pod których ostatnim pytaniem inwestor coś dopisał (albo
-   poprawił wpis) – te oceń ponownie. Wpisy w „❓” bez odpowiedzi pomiń. Brak obu → „Dziennik pusty” (+ liczba czekających w „❓”).
+   Nowe wpisy oraz wpisy z „❓”, pod których ostatnim pytaniem inwestor coś dopisał, zaznaczył checkbox (albo
+   poprawił wpis) – te oceń ponownie; odczyt odpowiedzi: `references/pytania.md`. Wpisy w „❓” bez odpowiedzi pomiń. Brak obu → „Dziennik pusty” (+ liczba czekających w „❓”).
 2. **Pobierz Obszary** – zapisany widok „🤖 Aktywne (dla asystenta)” (`view://3faf5982-09e7-817b-a060-000c05f26c6a`, tryb view:
    Aktywny = tak, sort Kolejność; baza `collection://253b7564-00ac-45b2-a3f4-956275e3a7e0`).
 3. **Dla każdego wpisu ustal** (razem z dialogiem pod nim):
@@ -65,8 +65,8 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
      w treści → data jej ostatniej edycji (z odczytu strony), z dopiskiem w śladzie. Słowo względne bez daty przy terminie lub
      zdarzeniu z budowy → zapytaj („czy »wczoraj« to 11.10?”); przy emocji bez daty – data przetwarzania z dopiskiem
      „(data przetworzenia)”.
-4. **Niejednoznaczny albo bez obszaru → nie przetwarzaj.** Przenieś do „❓” i dopisz pod nim „❓ asystent (data): …” z 1–3
-   pytaniami i propozycją („Czy to zadanie prywatne na ten tydzień?”). Podstrona lub strona z widgetu zostaje na miejscu –
+4. **Niejednoznaczny albo bez obszaru → nie przetwarzaj.** Przenieś do „❓” i dopisz pod nim pytania w formacie z
+   `references/pytania.md` (osobny checkbox na pytanie z propozycją – „Zadanie prywatne na ten tydzień”, kontekst w „Szczegółach”). Podstrona lub strona z widgetu zostaje na miejscu –
    w „❓” idzie punkt z jej wzmianką i pytaniem; strona wymieniona w „❓” nie jest nowym wpisem, dopóki inwestor nie odpowie
    pod pytaniem albo nie zmieni strony po dacie pytania. Wpis z odpowiedzią – połącz i oceń ponownie.
    Odpowiedź opisuje rodzaj wpisu, którego nie ma w Obszarach → przetwórz go i **zaproponuj nowy wiersz Obszarów**
@@ -108,6 +108,12 @@ do jednego bloku dnia w „Przetworzone”.
 - Nigdy nie zgaduj znaczenia skrótowego wpisu i nie zapisuj go „na wszelki wypadek” – lepiej jedno pytanie niż zagadka
   w bazie. Wyjątek: w docelowej bazie jest już wpis, który go wyjaśnia – wtedy dopisz uzupełnienie tam.
 - Źródło (kto powiedział, skąd) przepisuj dosłownie, gdy procedura docelowa ma na nie pole.
+- **Research (RES-n):** odpowiedź „RES-n: …” (w Dzienniku albo pod pytaniami na stronie researchu) → dopisz ją pod pytaniami
+  na stronie RES-n z datą i ustaw Status „Do zrobienia” (wieczór dokończy); „RES-n niepotrzebny” albo zakup już Kupione →
+  Status „Zamknięty”.
+- **Sprzątanie „❓”:** pytanie (RES-n, SP-n, zadanie, wpis), które inwestor rozstrzygnął w rozmowie, zamknij w tej samej pracy:
+  dopisz wynik i odpowiedzi tam, gdzie żyje sprawa (strona RES-n z nowym Statusem itd.), a jego linię przenieś z „❓” do bloku
+  dnia w „Przetworzone” jako `~~RES-n: …~~ → rozwiązane w rozmowie (data): <wzmianka>`. Nie usuwaj.
 - Zdjęcia we wpisie: budowa → `dziennik` (plugin dom-budowa); inne – zostaw w treści docelowej strony.
 - Dziennik to skrzynka wejściowa, nie archiwum: wpis żyje w docelowym miejscu, „Przetworzone” to ślad na kilka dni.
 - Inwestor woli pisać niż wypełniać pola – nie proponuj zamiany Dziennika na bazę.

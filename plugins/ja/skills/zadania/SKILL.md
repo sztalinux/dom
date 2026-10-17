@@ -1,6 +1,6 @@
 ---
 name: zadania
-description: Zadania inwestora poza budową (prywatne, dziecko, praca) we wspólnej bazie TASKS w Notion – nowe zadanie z terminem albo „kiedyś”, zmiana statusu po wpisie „zrobiłem X”, „zacząłem”, „czekam na”, „odpuszczam”, odczyt „co mam dziś / jutro / w tym tygodniu”. Używaj, gdy użytkownik mówi „muszę…”, „trzeba…”, „przypomnij mi…”, „kupić…”, „umówić…”, „zrobiłem…”, „zrobione”, „co mam jutro”, wkleja link do rzeczy do kupienia, albo gdy wpis z Dziennika ma obszar Zadanie, Status zadania lub Zakup. Zadania budowy prowadzą procedury notatka i harmonogram (plugin dom-budowa).
+description: Zadania inwestora poza budową (prywatne, dziecko, praca) we wspólnej bazie TASKS w Notion oraz lista zakupów (baza 🛒 Zakupy) – nowe zadanie z terminem albo „kiedyś”, nowa rzecz do kupienia, zmiana statusu po wpisie „zrobiłem X”, „kupiłem X”, „zacząłem”, „czekam na”, „odpuszczam”, odczyt „co mam dziś / jutro / w tym tygodniu”, „co kupić”. Używaj, gdy użytkownik mówi „muszę…”, „trzeba…”, „przypomnij mi…”, „kupić…”, „umówić…”, „zrobiłem…”, „zrobione”, „kupiłem…”, „co mam jutro”, wkleja link do rzeczy do kupienia, albo gdy wpis z Dziennika ma obszar Zadanie, Status zadania lub Zakup. Zadania budowy prowadzą procedury notatka i harmonogram (plugin dom-budowa).
 ---
 
 # Zadania (wszystkie obszary poza budową)
@@ -8,7 +8,8 @@ description: Zadania inwestora poza budową (prywatne, dziecko, praca) we wspól
 Jedna baza **TASKS** (`collection://2a9f5982-09e7-81be-91e8-000b0e10a05e`) dla domu i spraw prywatnych; obszar rozróżnia
 pole **Obszar** (Dom / Prywatne / Dziecko / Praca; puste = Dom – stare wiersze). Zadania budowy i domu (Obszar = Dom)
 tworzą procedury `notatka` i `harmonogram` z pluginu `dom-budowa` – tu ich nie dubluj; zmianę statusu („zrobiłem”) obsługujesz
-dla wszystkich obszarów.
+dla wszystkich obszarów. Rzeczy do kupienia (poza suplementami – `suple` – i materiałami budowy – `zakupy` z `dom-budowa`)
+idą do osobnej bazy **🛒 Zakupy** (sekcja „Zakupy” niżej), nie do TASKS.
 
 ## A. Nowe zadanie
 
@@ -29,12 +30,27 @@ Bez tej kontroli takie wpisy lądowały w TASKS zamiast na listach i stronach os
    | Name | krótko, bezokolicznik („Umówić stomatologa”) |
    | Obszar | Dziecko – gdy dotyczy dziecka; Praca – sprawy zawodowe; inaczej Prywatne. Budowa/działka/dom → nie tu, `budowa` |
    | When | termin z wpisu; „do piątku” licz od daty wpisu; brak terminu → puste |
-   | PLANNED | z terminem lub „na dniach” → TO DO; „kiedyś”, link do produktu do sprawdzenia (nie film), zakup bez terminu → SOMEDAY |
-   | Priority | domyślnie Medium; „pilne”, „koniecznie” → High; drobiazg / zakup bez terminu → Low |
-   | Kategoria | Zakup / Zdrowie / Nauka / Inne |
+   | PLANNED | z terminem lub „na dniach” → TO DO; „kiedyś” → SOMEDAY (zakup i link do produktu → baza Zakupy, nie zadanie) |
+   | Priority | domyślnie Medium; „pilne”, „koniecznie” → High; drobiazg → Low |
+   | Kategoria | Zakup (tylko zadanie dołożone do pozycji Zakupów, sekcja niżej) / Zdrowie / Nauka / Inne |
    | Kto | Ja; ktoś inny ma coś zrobić → jego rola opisowo w Desc, Kto = Inny, PLANNED WAITING |
    | Desc | jedno zdanie (skąd, po co); linki, listy, szczegóły – w treści strony |
 3. Termin względny bez daty wpisu (np. „w piątek” w wpisie bez @today) → pytanie, nie zgaduj.
+
+## Zakupy (baza 🛒 Zakupy)
+
+Baza `collection://3747d532-a49b-44a4-b36f-b3196f917243` na stronie ✅ Zadania. Zapisuj według wiersza „Zakup” w bazie
+Obszary (nadrzędny wobec poniższego opisu pól), **nie jako zadanie** – lista zakupów nie ma zaśmiecać TASKS.
+1. Sprawdź duplikat (wyszukiwarka z parametrem bazy, 1–2 słowa, wśród „Do kupienia” i „Zamówione”); jest → uzupełnij.
+2. Pola: Rzecz (krótko), Status (Do kupienia / Zamówione / Kupione / Odpuszczone), Gdzie (link we wpisie = Internet; inaczej
+   Sklep albo Obojętnie), Sklep / serwis (gdy wynika z wpisu), Ilość, Termin (tylko gdy wpis go ma), Obszar, Link, Cena, Uwagi
+   (jedno zdanie: po co, wariant, rozmiar; reszta w treści strony).
+3. **Zadanie w TASKS dołóż tylko** przy terminie, „na już”, „pilnie”, „szybko” albo gdy skończyło się coś codziennego:
+   Name „Kupić X”, Kategoria Zakup, Obszar jak w zakupie, relacja Zadanie w Zakupach.
+4. „Kupiłem X” → Zakupy: Status Kupione + Kupione dnia; powiązane zadanie DONE (sekcja B). „Zamówiłem X” → Zamówione.
+   „Odpuszczam X” → Odpuszczone (powiązane zadanie ARCHIVED).
+5. Odczyt „co kupić”: widok „🛒 Do kupienia” (grupy wg Gdzie), „📦 Zamówione – czekam”, „✅ Kupione” (ID w `ja/references/notion-mapa.md`).
+   Zakup z Termin lub pilny wymień osobno na górze.
 
 ## B. Status istniejącego zadania
 
@@ -54,9 +70,11 @@ Bez tej kontroli takie wpisy lądowały w TASKS zamiast na listach i stronach os
 
 ## C. Odczyt
 
-„Co mam dziś / jutro / w tym tygodniu” → TASKS: widok „Today” (wszystkie obszary), „📅 Jutro – wszystko”, „🏠 Prywatne”
-(prywatne, dziecko, praca), „🏗 ToDo/Doing – Dom” (budowa). Pokaż w tabeli: zadanie | obszar | termin | status; zadania po
-terminie osobno na górze. SOMEDAY pokazuj tylko licznikiem, chyba że pyta o nie wprost.
+Strona ✅ Zadania ma zakładki: 📅 Dziś i tydzień (wszystkie obszary; widoki „📅 Dziś” – po terminie i na dziś, „🗓 Tydzień (7 dni)”),
+🛒 Zakupy, 🏠 Prywatne (z pracą), 🏗 Budowa, 👪 Dziecko. „Co mam dziś / w tym tygodniu” → widoki „📅 Dziś” i „🗓 Tydzień (7 dni)”;
+jutro → „📅 Jutro – wszystko”; sprawy jednego obszaru → widok jego zakładki (ID: `ja/references/notion-mapa.md`).
+Pokaż w tabeli: zadanie | obszar | termin | status; zadania po terminie osobno na górze. SOMEDAY pokazuj tylko licznikiem,
+chyba że pyta o nie wprost.
 
 ## Zasady
 

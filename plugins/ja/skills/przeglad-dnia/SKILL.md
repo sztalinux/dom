@@ -29,8 +29,8 @@ Ręcznie w rozmowie: „przerób dziennik” = tryb szybki, „przegląd dnia”
    (`3faf5982-09e7-80b2-9b33-c48745d67a4f` – lista jej podstron) i listę stron najwyższego poziomu Private (porównaj ID
    z listą stałych stron w `ja/references/notion-mapa.md`; 🔒 Prywatne nie otwieraj). Otwórz tylko strony spoza listy.
    Nie pobieraj jeszcze Obszarów, przewodnika ani baz. Brak narzędzia do listy stron prywatnych → to źródło pomiń (`wpisy`, krok 1).
-2. **Nic nowego → koniec.** Brak bloków na pierwszym poziomie, podstron w „Wpisach” i nowych stron w Private (definicja w `wpisy`) i brak odpowiedzi inwestora pod
-   pytaniami w „❓” → odpowiedz jedną linią „Dziennik: nic nowego (<godzina>)” i zakończ. **Zero zapisów** – nie dopisuj linii
+2. **Nic nowego → koniec.** Brak bloków na pierwszym poziomie, podstron w „Wpisach” i nowych stron w Private (definicja w `wpisy`) i brak odpowiedzi inwestora
+   (dopisek albo zaznaczony checkbox, `wpisy/references/pytania.md`) pod pytaniami w „❓” → odpowiedz jedną linią „Dziennik: nic nowego (<godzina>)” i zakończ. **Zero zapisów** – nie dopisuj linii
    „🤖”, nie zmieniaj strony.
 3. **Inwestor może jeszcze pisać:** strona edytowana mniej niż 15 minut temu (czas ostatniej edycji strony), a najnowszy wpis
    nie ma jeszcze kropki, wygląda na urwany albo jest pusty → „Dziennik: pomijam, świeże wpisy (<godzina>)” i zakończ.
@@ -56,26 +56,37 @@ dzienne” pod Dziennikiem, z jedną linią odsyłającą do przeglądu budowy z
    liczby per obszar), TASKS zamknięte dziś z Obszarem Prywatne / Dziecko / Praca (widok, ostatnia edycja dziś), dzień pracy
    z Dziennika produktywności, liczba wpisów emocji z dziś (bez treści), nowe punkty na stronie dziecka, wpisy w „❓”.
 5. **Jutro – sprawy osobiste** (tylko odczyt): TASKS „📅 Jutro – wszystko” bez Obszaru Dom i zadania prywatne po terminie
-   (When < dziś, niezakończone), suplementy z Buy = tak (licznik). Na stronie przewodnika (`3f6f5982-09e7-81f5-bade-ec877d8d936a`)
+   (When < dziś, niezakończone), suplementy z Buy = tak (licznik), zakupy z 🛒 Zakupy: „Do kupienia” (licznik) i z Terminem
+   do jutra (wymień; widok „🛒 Do kupienia”). Na stronie przewodnika (`3f6f5982-09e7-81f5-bade-ec877d8d936a`)
    sprawdź ID, jeśli któryś odczyt się nie powiedzie.
-6. **Wpis w „📆 Przeglądy dzienne”** (`3faf5982-09e7-81df-a361-cc65fddb81f4`, pod Dziennikiem) – **codziennie**, także
+6. **Research** (baza 🔎 Research, RES-n; widok „🔎 Do zrobienia” – ID w `ja/references/notion-mapa.md`): weź max 2 najstarsze.
+   Dla każdego przeczytaj zlecenie i powiązany zakup / zadanie, zrób research w sieci (aktualne źródła, ceny i sklepy w Polsce)
+   i dopisz w treści strony „## Wynik (asystent, data)”: Rekomendacja (1–2 zdania), Opcje (tabela: co, cena orientacyjna,
+   plusy, minusy, link), Na co uważać, Źródła. Pole Rekomendacja = jedno zdanie, Status „Gotowy”, Zrobiono = data; w Uwagach
+   zakupu albo Desc zadania dopisz „Research RES-n gotowy”. Brak kluczowej informacji (budżet, wymiar, zastosowanie) → zrób,
+   co się da, dopisz „### ❓ Pytania (data)” z 1–3 pytaniami (format: `wpisy/references/pytania.md`) i propozycją domyślną,
+   Status „Pytania do mnie”, a w Dzienniku „❓” linię „RES-n: <pytanie> (wzmianka)”. Research nie podejmuje decyzji i nie
+   zmienia statusów zakupów ani zadań. **Zabezpieczenie** (tylko wieczorem – szybki ma być tani): każda linia RES-n w „❓”,
+   której research nie ma już Statusu „Pytania do mnie”, idzie do „Przetworzone” z dopiskiem „→ rozwiązane poza Dziennikiem”.
+7. **Wpis w „📆 Przeglądy dzienne”** (`3faf5982-09e7-81df-a361-cc65fddb81f4`, pod Dziennikiem) – **codziennie**, także
    w spokojny dzień: zwijany nagłówek „Przegląd dnia – <dzień tygodnia> <data>” na górze strony (najnowszy pierwszy):
    ```
    **Dziś:** 3–6 punktów – prywatne / dziecko / praca (bez treści emocji – tylko „emocje: n wpisów”)
    **Czeka na Ciebie:** n pytań w ❓ (rozwiń w Dzienniku)
-   **Jutro – plan:** zadania z terminem wg priorytetu, po terminie na górze, „kupić: n suplementów”
+   **Jutro – plan:** zadania z terminem wg priorytetu, po terminie na górze, „kupić: n suplementów, n pozycji z zakupów (z terminem: …)”
+   **Research:** n gotowych, m czeka na Ciebie – wzmianki stron RES-n (brak researchu → pomiń linię)
    **🏗 Budowa:** <1 linia skrótu> → <wzmianka wpisu z przeglądu budowy z tego dnia>   (brak dnia budowy → „bez zmian”)
    **Rozkminka** (tylko gdy inwestor prosił we wpisie albo dzień przyniósł decyzję do przemyślenia): 2–5 zdań
    ```
    **Ręczny przebieg** (prośba w rozmowie) = osobny wpis z tą samą datą i dopiskiem „(ręczne)”, kolejne „(ręczne 2)”… –
    tak samo w przeglądzie budowy. Nigdy nie nadpisuj wcześniejszego wpisu – sprostowanie to jedna linia kursywą na jego
    górze z odesłaniem.
-7. **Linia „🤖”** – na górze dzisiejszego bloku w „Przetworzone”, w tej samej edycji Dziennika co krok 1:
+8. **Linia „🤖”** – na górze dzisiejszego bloku w „Przetworzone”, w tej samej edycji Dziennika co krok 1:
    ```
-   🤖 15.10 wieczór: dziś przetworzono 6 (budowa 3) · czeka na Ciebie 1 · pomysły – 1 · jutro: 2 prywatne, 3 budowa → przeglądy
+   🤖 15.10 wieczór: dziś przetworzono 6 (budowa 3) · czeka na Ciebie 1 · pomysły – 1 · research: 1 gotowy · jutro: 2 prywatne, 3 budowa → przeglądy
    	- jutro: <sprawa – kto – kiedy>      ← max 3 punkty: najpierw prywatne, potem 1 najważniejszy budowy
    ```
-8. **Odpowiedź** (log zadania): linia „🤖” + lista zapisów (gdzie, link) i błędów.
+9. **Odpowiedź** (log zadania): linia „🤖” + lista zapisów (gdzie, link) i błędów.
 
 ## Koszt i częstotliwość
 
