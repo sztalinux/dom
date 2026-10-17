@@ -4,6 +4,14 @@ Od 15.10.2026 repo ma dwa pluginy – nagłówek wpisu: `## <plugin> [wersja] �
 Starsze wpisy `## [wersja]` dotyczą `dom-budowa`. Wersjonowanie semver osobno dla każdego pluginu:
 PATCH = poprawka treści, MINOR = nowa procedura/pole, MAJOR = zmiana struktury danych.
 
+## ja [1.4.2] – 2026-10-17
+
+- `przeglad-dnia`, tryb szybki: zawsze trzy odczyty (Dziennik, „📝 Wpisy”, strony z widgetu); reguła 15 minut
+  ocenia każde źródło osobno – świeża strona nie zatrzymuje już całego przebiegu; sam brak kropki to nie urwany wpis;
+  odpowiedź podaje nowe wpisy per źródło („Dziennik n · Wpisy n · widget n”).
+- `wpisy`: bloki pisane wprost w treści „📝 Wpisy” to nowe wpisy (ślad `(Wpisy)`, po przetworzeniu treść strony pusta);
+  mapa Notion `ja` – opis „📝 Wpisy”. PATCH – poprawka treści.
+
 ## ja [1.4.0] – 2026-10-17
 
 - Strona ✅ Zadania w zakładkach (📅 Dziś i tydzień z przełączanymi widokami, 🛒 Zakupy, 🏠 Prywatne, 🏗 Budowa, 👪 Dziecko);

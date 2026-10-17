@@ -25,20 +25,27 @@ Ręcznie w rozmowie: „przerób dziennik” = tryb szybki, „przegląd dnia”
 
 ## A. Tryb szybki – ma być tani
 
-1. **Trzy odczyty:** pobierz tylko stronę Dziennik (`3f8f5982-09e7-80c8-a154-c59aeb844e8f`), stronę „📝 Wpisy”
-   (`3faf5982-09e7-80b2-9b33-c48745d67a4f` – lista jej podstron) i listę stron najwyższego poziomu Private (porównaj ID
-   z listą stałych stron w `ja/references/notion-mapa.md`; 🔒 Prywatne nie otwieraj). Otwórz tylko strony spoza listy.
-   Nie pobieraj jeszcze Obszarów, przewodnika ani baz. Brak narzędzia do listy stron prywatnych → to źródło pomiń (`wpisy`, krok 1).
-2. **Nic nowego → koniec.** Brak bloków na pierwszym poziomie, podstron w „Wpisach” i nowych stron w Private (definicja w `wpisy`) i brak odpowiedzi inwestora
-   (dopisek albo zaznaczony checkbox, `wpisy/references/pytania.md`) pod pytaniami w „❓” → odpowiedz jedną linią „Dziennik: nic nowego (<godzina>)” i zakończ. **Zero zapisów** – nie dopisuj linii
-   „🤖”, nie zmieniaj strony.
-3. **Inwestor może jeszcze pisać:** strona edytowana mniej niż 15 minut temu (czas ostatniej edycji strony), a najnowszy wpis
-   nie ma jeszcze kropki, wygląda na urwany albo jest pusty → „Dziennik: pomijam, świeże wpisy (<godzina>)” i zakończ.
-   Następny przebieg je weźmie. Podstronę lub stronę z widgetu edytowaną mniej niż 15 minut temu pomiń w tym przebiegu
-   (pozostałe wpisy przetwórz); pusta strona z widgetu starsza niż 15 minut → pominięta (`wpisy`, krok 6).
+1. **Trzy odczyty – zawsze wszystkie trzy, także gdy pierwszy coś dał:** strona Dziennik
+   (`3f8f5982-09e7-80c8-a154-c59aeb844e8f`), strona „📝 Wpisy” (`3faf5982-09e7-80b2-9b33-c48745d67a4f` – bloki w jej treści
+   i lista podstron) i lista stron najwyższego poziomu Private (narzędzie listy stron prywatnych; porównaj ID z listą
+   stałych stron w `ja/references/notion-mapa.md`; 🔒 Prywatne nie otwieraj). Otwórz tylko strony spoza listy.
+   Nie pobieraj jeszcze Obszarów, przewodnika ani baz. Brak narzędzia do listy stron prywatnych → to źródło pomiń
+   i napisz „widget – brak odczytu” w odpowiedzi i w linii „🤖” (`wpisy`, krok 1).
+2. **Nic nowego → koniec.** Brak bloków na pierwszym poziomie Dziennika i w treści „Wpisów”, podstron w „Wpisach” i nowych
+   stron w Private (definicja w `wpisy`) i brak odpowiedzi inwestora (dopisek albo zaznaczony checkbox,
+   `wpisy/references/pytania.md`) pod pytaniami w „❓” → odpowiedz jedną linią „Dziennik: nic nowego (<godzina>; widget: 0)”
+   i zakończ. **Zero zapisów** – nie dopisuj linii „🤖”, nie zmieniaj strony.
+3. **Inwestor może jeszcze pisać – oceniaj każde źródło osobno** (treść Dziennika, treść „Wpisów”, każda podstrona,
+   każda strona z widgetu). Źródło edytowane mniej niż 15 minut temu (czas ostatniej edycji strony), którego najnowszy wpis
+   jest pusty albo urwany w pół zdania, pomiń w tym przebiegu – następny je weźmie; **pozostałe źródła przetwórz**. Sam
+   brak kropki to nie urwanie (z telefonu inwestor pisze bez kropek). Tylko gdy pominąłeś wszystko, co nowe →
+   „Dziennik: pomijam, świeże wpisy (<godzina>)” i zakończ. Pusta strona z widgetu starsza niż 15 minut → pominięta
+   (`wpisy`, krok 6).
 4. **Są wpisy:** procedura `wpisy`, kroki 2–7, bez pytań w rozmowie (wyjątki z zasad wyżej). Linia „🤖” w bloku dnia –
-   krótka, z godziną: `🤖 11:00: przetworzono 2 (zadania 1, emocje 1), czeka na Ciebie 1`. Kolejne przebiegi tego dnia
-   dopisują swoje linie pod spodem w tym samym bloku; tytuł bloku pokazuje sumę dnia.
+   krótka, z godziną: `🤖 11:00: przetworzono 2 (zadania 1, emocje 1), czeka na Ciebie 1, świeże pominięte 1`. Kolejne
+   przebiegi tego dnia dopisują swoje linie pod spodem w tym samym bloku; tytuł bloku pokazuje sumę dnia. W odpowiedzi
+   podaj nowe wpisy per źródło – „Dziennik n · Wpisy n · widget n” (albo „widget – brak odczytu”) – żeby było widać,
+   że przebieg sprawdził wszystkie trzy.
 5. Bez analizy pomysłów, bez „jutra”, bez wpisów w przeglądach – to robi wieczór.
 
 ## B. Tryb wieczorny – podsumowanie i plan

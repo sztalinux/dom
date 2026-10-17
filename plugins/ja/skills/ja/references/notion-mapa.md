@@ -10,7 +10,7 @@ Strona **📓 Dziennik** `3f8f5982-09e7-80c8-a154-c59aeb844e8f` (najwyższy pozi
 📓 Dziennik
 ├─ Jak używać (toggle)
 ├─ nowe wpisy inwestora – bloki 1. poziomu (po przebiegu pusto)
-├─ 📝 Wpisy (podstrona) – wpisy pisane jako osobne strony (jej podstrony; po przetworzeniu pusto)
+├─ 📝 Wpisy (podstrona) – wpisy pisane wprost w treści albo jako osobne strony (bloki i podstrony; po przetworzeniu pusto)
 │   (drugie wejście: strony na najwyższym poziomie Private, np. z widgetu „nowa strona” w telefonie – lista stałych stron niżej)
 ├─ ### ❓ Czeka na Twoją odpowiedź (toggle) – wpisy z pytaniem asystenta, odpowiedź pod pytaniem
 ├─ ### Przetworzone (toggle) – zwijany blok na każdy dzień: linia „🤖” + ślad „~~wpis~~ → gdzie”

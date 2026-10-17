@@ -25,15 +25,16 @@ jeszcze nie widział):
 			🤖 13.10 wieczór: dziennik – przetworzono 3 (emocje 1, zadania 2), … (pełna linia)
 			- ~~wpis~~ → Wpisy emocji: <link>
 	### 🧭 Dla asystenta {toggle}  ← baza Obszary; nie ruszaj
-	📝 Wpisy (podstrona) ← tu inwestor zakłada wpisy jako osobne strony; jej podstrony = nowe wpisy
+	📝 Wpisy (podstrona) ← inwestor pisze tu wprost w treści albo zakłada wpisy jako osobne strony; bloki i podstrony = nowe wpisy
 	🗃 Przetworzone podstrony, 📆 Przeglądy dzienne (podstrony) ← nie są wpisami
 Private (najwyższy poziom)
 	📌 DASHBOARD, 🛖 DOM, 📓 Dziennik, … 🔒 Prywatne   ← stałe strony (lista w ja/references/notion-mapa.md)
 	nowa strona z widgetu w telefonie                 ← NOWY wpis; po przetworzeniu przeniesiona pod 🗃
 ```
 
-**Nowy wpis** = każdy blok pierwszego poziomu (akapit, punkt), **każda podstrona strony „📝 Wpisy”**
-(`3faf5982-09e7-80b2-9b33-c48745d67a4f`; tytuł + treść = wpis), podstrona Dziennika założona poza „Wpisami”, z wyjątkiem
+**Nowy wpis** = każdy blok pierwszego poziomu (akapit, punkt), **każdy blok w treści strony „📝 Wpisy”**
+(`3faf5982-09e7-80b2-9b33-c48745d67a4f`; inwestor często pisze tam wprost, bez zakładania podstrony), **każda jej
+podstrona** (tytuł + treść = wpis), podstrona Dziennika założona poza „Wpisami”, z wyjątkiem
 „Jak używać”, pustych linii, trzech zwijanych nagłówków i stałych podstron „📝 Wpisy”, „📆 Przeglądy dzienne”
 i „🗃 Przetworzone podstrony”, **oraz każda strona na najwyższym poziomie Private spoza listy stałych stron**
 (lista z ID: `ja/references/notion-mapa.md`, „Struktura najwyższego poziomu”) – tam widget „nowa strona” w telefonie
@@ -48,7 +49,7 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
 
 ## Procedura
 
-1. **Pobierz** stronę Dziennik, stronę „📝 Wpisy” (jej podstrony) i listę stron najwyższego poziomu Private (odczyt
+1. **Pobierz** stronę Dziennik, stronę „📝 Wpisy” (bloki w treści i podstrony) i listę stron najwyższego poziomu Private (odczyt
    listy stron prywatnych; strony spoza listy stałych otwórz, żeby mieć treść i czas ostatniej edycji – tylko je). Brak
    narzędzia do listy stron prywatnych → pomiń to źródło i dopisz w linii „🤖”: „strony z widgetu – brak odczytu”.
    Nowe wpisy oraz wpisy z „❓”, pod których ostatnim pytaniem inwestor coś dopisał, zaznaczył checkbox (albo
@@ -80,12 +81,15 @@ wpisów inwestora – tylko dopisuj pod nimi i przenoś między strefami.
    - Procedura = `ogólna` → zapisz według „Gdzie” i „Jak zapisać” z wiersza; najpierw szukaj duplikatu (2–3 słowa).
 6. **Zamknij wpis:** przenieś go (z dialogiem) do „Przetworzone”, do **zwijanego bloku dzisiejszego dnia** (`<details>`,
    tytuł „📅 <dd.mm> <dzień> · <skrót linii 🤖>”; brak – utwórz na górze), jako `~~wpis~~ → <gdzie>: <link>`
-   (podstrona: `~~tytuł~~ (podstrona → <wzmianka>) → <gdzie>: <link>`, strona z widgetu: `(widget → <wzmianka>)`, po
+   (blok z treści „Wpisów”: `~~wpis~~ (Wpisy) → <gdzie>: <link>`;
+   podstrona: `~~tytuł~~ (podstrona → <wzmianka>) → <gdzie>: <link>`, strona z widgetu: `(widget → <wzmianka>)`, po
    przeniesieniu jej pod „🗃 Przetworzone podstrony”). Zdublowane / nieprzydatne / testowe / pusta strona z widgetu (bez
    tytułu i treści) → `~~wpis~~ → pominięte: <jedno zdanie>`. Nie usuwaj.
 7. **Zapisy wsadowo** (`ja`, zasada 2): odczyty, potem jedno wywołanie na bazę docelową, na końcu **jedna** edycja strony
    Dziennik (przeniesienia do „❓”, do „Przetworzone”, linia „🤖”) – podstrony i strony z widgetu przenosisz
    jednym osobnym wywołaniem przed nią; po nim na najwyższym poziomie Private zostają tylko stałe strony (i te czekające w „❓”).
+   Bloki z treści „📝 Wpisy” idą w tej edycji Dziennika do „Przetworzone” albo „❓”, a z „Wpisów” zdejmij je osobną edycją
+   tej strony (podstron nie ruszaj) – po niej treść „Wpisów” to tylko podstrony i 1 pusta linia.
    Po niej **pierwszy poziom jest pusty** – poza „Jak używać”, trzema nagłówkami, dwiema stałymi podstronami i 1–2 pustymi
    liniami do pisania. Linia „🤖” idzie na górę bloku dnia:
    ```
